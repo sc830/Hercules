@@ -2,13 +2,15 @@
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
-### What is this repository for? ###
+### Hercules App ###
 
-*Beta*
+#### Pre-Build ####
 * Julio Cantu, Kaleb Perez
 * What you’re creating?
 * Who you’re doing it for, your audience (may be same as the previous question)?
 * Why you’re doing this, the impact or change you hope to make?
+
+### View ###
 
 ### How do I get set up? ###
 
