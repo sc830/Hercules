@@ -5,10 +5,10 @@ This README would normally document whatever steps are necessary to get your app
 ### What is this repository for? ###
 
 *Beta*
-Julio Cantu, Kaleb Perez
-What you’re creating?
-Who you’re doing it for, your audience (may be same as the previous question)?
-Why you’re doing this, the impact or change you hope to make?
+* Julio Cantu, Kaleb Perez
+* What you’re creating?
+* Who you’re doing it for, your audience (may be same as the previous question)?
+* Why you’re doing this, the impact or change you hope to make?
 
 ### How do I get set up? ###
 
