@@ -20,6 +20,12 @@ Workout Buddy App
 **General Information**
 The Workout Buddy App is a mobile application developed using React Native and Visual Studio Code. It serves as a comprehensive fitness and wellness tool, allowing users to track their workouts, store workout data, visualize their progress, monitor nutrition and food intake, and engage in mindfulness activities. This app aims to make fitness and wellness management more convenient and accessible.
 
+# Technologies #
+* React.Native - prebuild
+* Javascript - prebuild
+* CSS - prebuild
+* Firebase - prebuild
+
 **What problem does it (intend to) solve?**
 The Workout Buddy App addresses the need for individuals to have a single platform for tracking their fitness progress, managing their nutrition, and practicing mindfulness. It simplifies the process of managing one's health and fitness goals by providing a consolidated solution.
 
