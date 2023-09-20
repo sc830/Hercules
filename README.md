@@ -2,7 +2,7 @@
 
 
 #### Pre-Build ####
-designers: Julio Cantu, Kaleb Perez, Kacy Metcalf, Aaron Parks
+designers: Julio Cantu, Kaleb Perez, Kacy Metcalf, Aaron Parks, Shelby ___
 
 ### Project Name ###
 #### Hurcules App ####
@@ -12,15 +12,14 @@ designers: Julio Cantu, Kaleb Perez, Kacy Metcalf, Aaron Parks
 2. Technologies Used
 3. Features
 4. Screenshots
-5. Setup
-6. Usage
-7. Project Status
-8. Room for Improvement
-9. Acknowledgements
-10. Contact
+5. Usage
+6. Project Status
+7. Room for Improvement
+8. Acknowledgements
+9. Contact
 
 ### General Information ###
-The Workout Buddy App is a mobile application developed using React Native and Visual Studio Code. 
+The Hercules App is a mobile application developed using React Native and Visual Studio Code. 
 It serves as a comprehensive fitness and wellness tool, allowing users to track their workouts, store workout data, visualize their progress, 
 monitor nutrition and food intake, and engage in mindfulness activities. This app aims to make fitness and wellness management more convenient and accessible.
 
@@ -31,7 +30,7 @@ monitor nutrition and food intake, and engage in mindfulness activities. This ap
 * Firebase - prebuild
 
 ### What problem does it (intend to) solve? ###
-The Workout Buddy App addresses the need for individuals to have a single platform for tracking their fitness progress, 
+The Hercules App addresses the need for individuals to have a single platform for tracking their fitness progress, 
 managing their nutrition, and practicing mindfulness. It simplifies the process of managing one's health and fitness goals by providing a consolidated solution.
 
 ### What is the purpose of your project? ###
@@ -48,9 +47,8 @@ We undertook this project to empower individuals to take control of their health
 that combines workout tracking, nutrition monitoring, and mindfulness practices.
 
 ### Technologies Used ###
-- React Native - version X.X
-- Visual Studio Code - version X.X
-- [List any other technologies and their versions used in your project]
+- React Native - version 0.72
+- Visual Studio Code - version 1.82
 
 ### Features ###
 List of ready features:
@@ -75,11 +73,10 @@ Areas for improvement:
 - Improved user interface and user experience.
 
 To-do:
-- Implement feature to sync with fitness wearables. 
-
-- Add social sharing functionality. 
-
-- Enhance UI/UX design. 
+- Create UI.
+- Create FireBase database to store workouts/nutrution.
+- Integrate existing public database for nutritional facts.
+- Create different tabs for workouts/nutrition/mindfulness.
 
 
 ### Acknowledgements ### 
@@ -87,7 +84,7 @@ This project was inspired by the need for a comprehensive fitness and wellness a
 We would like to thank the open-source community and contributors for their valuable resources and support.
 
 ### Contacts ###
-[Professional Email]
+amp421@txstate.edu
 
 
 
