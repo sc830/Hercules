@@ -2,10 +2,9 @@
 
 
 #### Pre-Build ####
-designers: Julio Cantu, Kaleb Perez, Kacy Metcalf, Aaron Parks, Shelby ___
+designers: Julio Cantu, Kaleb Perez, Kacy Metcalf, Aaron Parks, Shelby Cumings
 
-### Project Name ###
-#### Hurcules App ####
+### Project Name: Hercules ###
 
 ### Table of Contents ###
 1. General Info
@@ -46,10 +45,6 @@ The purpose of this project is to create a user-friendly and feature-rich workou
 We undertook this project to empower individuals to take control of their health and fitness goals by providing them with a versatile tool 
 that combines workout tracking, nutrition monitoring, and mindfulness practices.
 
-### Technologies Used ###
-- React Native - version 0.72
-- Visual Studio Code - version 1.82
-
 ### Features ###
 List of ready features:
 - Track workouts throughout the day, week, and month.
@@ -61,8 +56,6 @@ List of ready features:
 ### Screenshots ###
 [Insert relevant screenshots here]
 
-
-
 ### Project Status ###
 Project is: In progress
 
@@ -72,7 +65,7 @@ Areas for improvement:
 - Enhanced social sharing features.
 - Improved user interface and user experience.
 
-To-do:
+### To do: ###
 - Create UI.
 - Create FireBase database to store workouts/nutrution.
 - Integrate existing public database for nutritional facts.
@@ -85,6 +78,7 @@ We would like to thank the open-source community and contributors for their valu
 
 ### Contacts ###
 amp421@txstate.edu
+s_c830@txstate.edu
 
 
 
