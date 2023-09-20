@@ -2,7 +2,7 @@
 
 
 #### Pre-Build ####
-designers: Julio Cantu, Kaleb Perez
+designers: Julio Cantu, Kaleb Perez, Kacy Metcalf
 
 ### Project Name ###
 #### Hurcules App ####
