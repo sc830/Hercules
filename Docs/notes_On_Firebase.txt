@@ -1,0 +1,29 @@
+Code Languages best used in:
+- JavaScript
+- Swift
+- Kotlin
+- Java
+
+Found difference in types of databases, deciding on firestore database as we will have more
+hierarchial data that is less on the complexity scale.
+
+Link to useful docs to know how to do different functions and example codes:
+https://www.javatpoint.com/firebase-read-and-write-in-firestore
+https://firebase.google.com/docs/database/web/read-and-write?hl=en&authuser=0
+
+After assignment10 I have a better understanding on how to use firebase to create a working webpage that stays open.
+
+Firebase is free to use and scales with users/data, one passes a certain point will need to start to pay, but I doubt we will reach that point.
+
+In firebase on different sections (eg. Firestore database) you can set security limitations 
+to who can read or write to the data, will be testing to see if you can limit certain words/data that is uploaded (eg. restricting innapropriate words).
+
+You can limit access to individuals information by giving users a uniqe UID and when logged in only that UID can access their own private information (can add extra security but for now this will suffice)
+
+Found a video explaining on how to pull data into firebase database:
+https://youtu.be/YK5HxEavL44?si=xs7S8i5XjrMbS3bx
+
+Using javascript read/write function you can create a/n account and when logged in pull the users information, and have to where only the user can edit their own information.
+(more information found out will be added here)
+
+
