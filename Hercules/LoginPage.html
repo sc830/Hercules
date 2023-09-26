@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="Login_Style.css" />
+    <title>Hurcules Fitness</title>
+    
+</head>
+<body>
+
+    <main>
+        <!-- Div to login <need to add when clicked checks login information> -->
+        <div id="login_Div" class="login" style="display: block;">
+            <h1>Login</h1>
+              <form method="post">
+                <input type="text" name="u" placeholder="Username" required="required" />
+                <input type="password" name="p" placeholder="Password" required="required" />
+                <!-- need to add javascript to check data on click, and if succesful sends to next page
+                or div depending on build direction -->
+                <button type="submit" class="btn btn-primary btn-block btn-large">
+                    Login
+                </button>
+                <!-- Planning to have signup btn change the div to the signup div -->
+                <button class="btn btn-primary btn-block btn-large" onclick="">
+                    Signup
+                </button>
+              </form>
+          </div>
+
+          <!-- Div to signup, will have email, user, and pass saved to database on btn click, 
+            then taken to first page -->
+          <div id="Signup_Div" class="login" style="display: none;">
+            <h1>Login</h1>
+              <form method="post">
+                <input type="text" name="u" placeholder="Username" required="required" />
+                <input type="text" name="u" placeholder="Email" required="required" />
+                <input type="password" name="p" placeholder="Password" required="required" />
+                <button type="submit" class="btn btn-primary btn-block btn-large">
+                    Signup
+                </button>
+              </form>
+          </div>
+    </main>
+</body>
+</html>
