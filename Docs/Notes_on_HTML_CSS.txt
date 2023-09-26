@@ -1,0 +1,18 @@
+I am using code I have made in the past as refrence and to help understand how I used to create webpages to login.
+
+I have found a link to a tutorial on how to create a login form:
+https://www.w3schools.com/howto/howto_css_login_form.asp
+
+Using both examples along with example code for firebase: 
+https://www.javatpoint.com/firebase-read-and-write-in-firestore
+https://firebase.google.com/docs/database/web/read-and-write?hl=en&authuser=0
+
+I am confident in creating a login page using a email and password that will let users access public information yet not other users information.
+
+Using html "HREF" if a succesful login has occured I can send user information to second page or depending on route we build close login div and open the starting page div with access to the logged in users information.
+
+CSS is still a little weak for me and ahrd to understand, but I have the basics.
+
+(more information to be added here)
+
+
