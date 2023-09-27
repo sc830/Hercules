@@ -1,0 +1,97 @@
+The first major hurtle while starting to build this gym app "Hercules" was learning React Native. Since I decided to go into CyberSecurity I told myself there was no need to learn other langauges that are used in front end developement. Although, I have realized that I should take an interest in other languages instead of just Python. There will always be new injection attacks and new ways to hack into a website, app, or any front facing software.
+
+So far I have learned numerous things about React Native and it's direct application to our project. I know that Dr. Lehr mentioned Props in our class but I felt that I really struggled keeping up with the amount of information, until today.
+
+Exploring React Native for My Gym App
+
+I've been diving into the world of React Native to create a Gym App for a class project, and the journey so far has been quite enlightening. Here are some key takeaways and insights that have helped me tackle various aspects of building this app:
+
+1. Getting Acquainted with React Native
+
+React Native isn't just another framework; it's a fascinating approach to mobile app development. It's like the Swiss Army knife of app creation, allowing us to build for both iOS and Android using a single codebase.
+
+Components Are Building Blocks: React Native is all about components. These are like Lego bricks that we assemble to create our app's user interface. It's been incredible to see how breaking down the UI into these modular pieces makes development more manageable.
+
+State Management: Managing state is crucial. React Native provides tools to keep track of changing data, which is essential for updating workout logs and ensuring our app responds dynamically.
+
+Navigation Magic: React Navigation, the navigation library, has been a game-changer. It's like having a well-organized roadmap for our app's screens. This will be instrumental in implementing the forward and back buttons seamlessly.
+
+2. Unpacking Props in React Native
+
+Props initially sounded like jargon to me, but now I appreciate their role. Props, or properties, let us pass data and functionality between components, giving them the ability to communicate.
+
+Props in Action: It's like sending a parcel. We can package up information and send it to different parts of our app. For instance, we can use props to customize workout details for specific dates, making the app dynamic and adaptable.
+3. Playing with Code and Props
+
+One of the most exciting parts of this journey has been experimenting with code and seeing how props come into play, this is what GPT and I have come up with so far:
+
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button } from 'react-native';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
+const Hercules = () => {
+  // Define state variables using the useState hook
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [workoutData, setWorkoutData] = useState({});
+
+  // useEffect is a hook that runs code when the component mounts or when specific dependencies change
+  useEffect(() => {
+    // Firebase initialization
+    const db = firebase.firestore();
+
+    // Format the current date to match your database structure
+    const formattedDate = currentDate.toISOString().split('T')[0]; // Assuming your date format is YYYY-MM-DD
+
+    // Create a reference to the workout data for the current date in Firebase Firestore
+    const workoutsRef = db.collection('gyms').doc('your_gym_id').collection('workouts').doc(formattedDate);
+
+    // Fetch the workout data for the current date
+    workoutsRef.get().then((doc) => {
+      if (doc.exists) {
+        // If data exists for the specified date, set it in the state variable
+        const data = doc.data();
+        setWorkoutData(data);
+      } else {
+        // If no data is found, set an empty object in the state variable
+        setWorkoutData({});
+      }
+    }).catch((error) => {
+      // Handle errors if fetching data fails
+      console.error('Error getting workout data:', error);
+    });
+  }, [currentDate]); // This effect runs whenever 'currentDate' changes
+
+  // Function to handle moving to the next date
+  const handleForward = () => {
+    const nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + 1);
+    setCurrentDate(nextDate); // Update 'currentDate' state with the next date
+  };
+
+  // Function to handle moving to the previous date
+  const handleBack = () => {
+    const previousDate = new Date(currentDate);
+    previousDate.setDate(currentDate.getDate() - 1);
+    setCurrentDate(previousDate); // Update 'currentDate' state with the previous date
+  };
+
+  return (
+    <View>
+      <Button title="Back" onPress={handleBack} />
+      <Text>{currentDate.toDateString()}</Text>
+      <Button title="Forward" onPress={handleForward} />
+      
+      {/* Display workout data */}
+      <Text>Workout Data for {currentDate.toDateString()}</Text>
+      <Text>Weight: {workoutData.weight || 'N/A'}</Text>
+      <Text>Reps: {workoutData.reps || 'N/A'}</Text>
+      {/* Add more workout details as needed */}
+    </View>
+  );
+};
+
+export default Hercules;
+
+
+This code is essentially pulling data from the Firebase Database that we will create, it will store the data in past days so when the "gym goer" decides to look back at previous days you can see the workouts, weights, and reps that you performed on that day.
