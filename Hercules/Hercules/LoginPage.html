@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="Login_Style.css" />
+    <script type="text/javascript" src="Login_Function.js"></script>
     <title>Hurcules Fitness</title>
     
 </head>
@@ -21,15 +22,16 @@
                 <button type="submit" class="btn btn-primary btn-block btn-large">
                     Login
                 </button>
-                <!-- Planning to have signup btn change the div to the signup div -->
-                <button class="btn btn-primary btn-block btn-large" onclick="">
-                    Signup
-                </button>
+                <!-- when clicked signup changes div to signup div-->                
               </form>
+              <button class="btn btn-primary btn-block btn-large" onclick="switchToSignup()">
+                Signup
+            </button>
           </div>
 
           <!-- Div to signup, will have email, user, and pass saved to database on btn click, 
-            then taken to first page -->
+            then taken to first page 
+          need to add firebase functionality-->
           <div id="Signup_Div" class="login" style="display: none;">
             <h1>Login</h1>
               <form method="post">
