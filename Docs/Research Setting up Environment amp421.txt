@@ -1,0 +1,23 @@
+Set up environment for React Native:
+
+
+Go to top level directory:
+npm install 
+install node
+expo init -g 
+
+Go to project level directory:
+expo start 
+Scan QR code that is provided when you ran the previous command.
+
+Had problems getting the Expo Go app working with the QR code provided here. Communicated with GPT to see what changes or commands I can run to fix the issue.
+Cannot be using LAN (disconnected my LAN from my computer)
+Connected to same WIFI on mobile device and computer 
+
+Fixed the issue by running the following commands:
+expo start -c
+ctrl c (stop)
+expo start --tunnel (create a tunnel using port 80 vs port 190)
+
+Now the app is working and I can see current changes after I save in VS code on my mobile device via the Expo Go App.
+
