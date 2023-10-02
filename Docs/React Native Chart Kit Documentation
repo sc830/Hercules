@@ -1,0 +1,63 @@
+In this file, I will be reviewing the documentation for the React Native Chart Kit library,
+which is the library used to create data for the graphs that we are using as buttons.
+
+https://github.com/indiespirit/react-native-chart-kit
+
+This youtube video goes over the information in this document very nicely:
+https://www.youtube.com/watch?v=7ALfQXNrab8&t=30s&ab_channel=TheWhiz
+
+Line Styling
+// Bezier causes the lines to come out slightly curved. It looks a little weird with data points in 
+// a straight line, but it helps give varying valued graphs a clean curve between data points 
+// rather than harsh corners.
+
+bezier
+    style={{
+      marginVertical: 8,
+      borderRadius: 16
+    }}
+
+// It's important that the number of data points and labels either match up evenly, or have a nice ratio
+// between them. For example, for every label, you have 3 pieces of data. This helps the graph
+// line up in a way that matches the labels.
+// X-AXIS AND DATA POINTS BELOW
+
+    data={{
+      labels: ["January", "February", "March", "April", "May", "June"],
+      datasets: [
+        {
+          data: [
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100
+          ]
+        }
+      ]
+    }}
+
+    // Y AXIS BELOW 
+    yAxisLabel="$"      // adds a prefix (in this case a dollar sign) to the y-axis label
+    yAxisSuffix="k"     // adds a suffix after the y-axis label
+    yAxisInterval={1} // optional, defaults to 1
+
+    // CHOOSE YOUR GRAPH COLORS AND GRADIENT 
+
+    chartConfig={{
+      backgroundColor: "#e26a00", // if you change this value, you must either delete the next two lines or adjust them because they'll cover it
+      backgroundGradientFrom: "#fb8c00", // use this line and the next to cause a fading pattern across the graph
+      backgroundGradientTo: "#ffa726",
+      decimalPlaces: 2, // optional, defaults to 2dp. Creates decimal places for the y axis labels
+      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      style: {
+        borderRadius: 16
+      },
+      propsForDots: {
+        r: "6",
+        strokeWidth: "2",
+        stroke: "#ffa726"
+      }
+    }}
