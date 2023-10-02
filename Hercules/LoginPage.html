@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="Login_Style.css" />
+    <script type="text/javascript" src="Login_Function.js"></script>
+    <script type="text/javascript" src="firebase_Functions.js"></script>
+    <title>Hurcules Fitness</title>
+    
+</head>
+<body>
+
+    <main>
+        <!-- Div to login <need to add when clicked checks login information> -->
+        <div id="login_Div" class="login" style="display: block;">
+            <h1>Login</h1>
+                <input id="login_User" type="text" name="u" placeholder="Email" required="required" />
+                <input id="login_Pass" type="password" name="p" placeholder="Password" required="required" />
+                <!-- need to add javascript to check data on click, and if succesful sends to next page
+                or div depending on build direction -->
+                <button type="submit" class="btn btn-primary btn-block btn-large">
+                    Login
+                </button>
+                <!-- when clicked signup changes div to signup div-->                
+              <button class="btn btn-primary btn-block btn-large" onclick="switchToSignup()">
+                Signup
+            </button>
+          </div>
+
+          <!-- Div to signup, will have email, user, and pass saved to database on btn click, 
+            then taken to first page 
+          need to add firebase functionality-->
+          <div id="Signup_Div" class="login" style="display: none;">
+            <h1>Login</h1>
+                <input id="signup_User" type="text" name="u" placeholder="Username" required="required" />
+                <input id="signup_Email" type="text" name="u" placeholder="Email" required="required" />
+                <input id="signup_Pass" type="password" name="p" placeholder="Password" required="required" />
+              <button class="btn btn-primary btn-block btn-large" onclick="checkSignup()">
+                Signup
+            </button>
+          </div>
+    </main>
+</body>
+
+</html>
