@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="Login_Style.css" />
     <script type="text/javascript" src="Login_Function.js"></script>
-    <script type="text/javascript" src="firebase_Functions.js"></script>
     <title>Hurcules Fitness</title>
     
 </head>
@@ -15,13 +14,14 @@
         <!-- Div to login <need to add when clicked checks login information> -->
         <div id="login_Div" class="login" style="display: block;">
             <h1>Login</h1>
-                <input id="login_User" type="text" name="u" placeholder="Email" required="required" />
-                <input id="login_Pass" type="password" name="p" placeholder="Password" required="required" />
+                <input id="login_Email" type="text" name="login_Email" placeholder="Email" required="required" />
+                <input id="login_Pass" type="password" name="login_Pass" placeholder="Password" required="required" />
                 <!-- need to add javascript to check data on click, and if succesful sends to next page
                 or div depending on build direction -->
-                <button type="submit" class="btn btn-primary btn-block btn-large">
+                <input type="submit" id="loginMail" name="loginMail" value="Login" class="btn btn-primary btn-block btn-large"/>
+                <!--<button type="submit" class="btn btn-primary btn-block btn-large"> 
                     Login
-                </button>
+                </button> -->
                 <!-- when clicked signup changes div to signup div-->                
               <button class="btn btn-primary btn-block btn-large" onclick="switchToSignup()">
                 Signup
@@ -33,14 +33,18 @@
           need to add firebase functionality-->
           <div id="Signup_Div" class="login" style="display: none;">
             <h1>Login</h1>
-                <input id="signup_User" type="text" name="u" placeholder="Username" required="required" />
-                <input id="signup_Email" type="text" name="u" placeholder="Email" required="required" />
-                <input id="signup_Pass" type="password" name="p" placeholder="Password" required="required" />
-              <button class="btn btn-primary btn-block btn-large" onclick="checkSignup()">
+                <input id="signup_User" type="text" name="signup_User" placeholder="Username" required="required" />
+                <input id="signup_Email" type="text" name="signup_Email" placeholder="Email" required="required" />
+                <input id="signup_Pass" type="password" name="signup_Pass" placeholder="Password" required="required" />
+                <input type="submit" id="signUpMail" name="signUpMail" value="Sign Up"/>
+                <!--<button class="btn btn-primary btn-block btn-large" onclick="checkSignup()">
                 Signup
-            </button>
+            </button> -->
           </div>
     </main>
 </body>
+
+<script src="firebase_Functions.js" type="module"></script>
+
 
 </html>
