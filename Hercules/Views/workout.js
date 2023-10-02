@@ -4,9 +4,23 @@ import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput 
 const WorkoutView = () => {
   const [showModal, setShowModal] = useState(false);
   const [splitName, setSplitName] = useState('');
+  const [splits, setSplits] = useState([]);
+
+  const addSplit = () => {
+    if (splitName) {
+      setSplits(prevSplits => [splitName, ...prevSplits]);
+      setSplitName('');
+      setShowModal(false);
+    }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container} style={styles.scrollView}>
+      {splits.map((split, index) => (
+        <TouchableOpacity key={index} style={styles.splitButton}>
+          <Text style={styles.splitText}>{split}</Text>
+        </TouchableOpacity>
+      ))}
       <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
         <Text style={styles.buttonText}>+</Text>
       </TouchableOpacity>
@@ -18,8 +32,8 @@ const WorkoutView = () => {
             onChangeText={setSplitName}
             placeholder="Enter Split Name"
           />
-          <TouchableOpacity style={styles.addButtonModal} onPress={() => setShowModal(false)}>
-            <Text style={styles.buttonText}>Confirm</Text>
+          <TouchableOpacity style={styles.addButtonModal} onPress={addSplit}>
+            <Text style={styles.buttonText}>Add Split</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -50,6 +64,19 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 24,
+  },
+  splitButton: {
+    backgroundColor: 'gray',
+    width: 340,
+    height: 300,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  splitText: {
+    color: 'black',
+    fontSize: 20,
   },
   modalView: {
     flex: 1,
