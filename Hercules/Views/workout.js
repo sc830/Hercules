@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const WorkoutView = () => {
   const navigation = useNavigation();
   const [showModal, setShowModal] = useState(false);
   const [splitName, setSplitName] = useState('');
   const [splits, setSplits] = useState([]);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const addSplit = () => {
     if (splitName) {
@@ -16,8 +19,33 @@ const WorkoutView = () => {
     }
   };
 
+  const handleForward = () => {
+    const nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + 1);
+    setCurrentDate(nextDate);
+  };
+
+  const handleBack = () => {
+    const previousDate = new Date(currentDate);
+    previousDate.setDate(currentDate.getDate() - 1);
+    setCurrentDate(previousDate);
+  };
+
+  const onDateChange = (event, selectedDate) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      setCurrentDate(selectedDate);
+    }
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container} style={styles.scrollView}>
+      <View style={styles.dateContainer}>
+        <Button title="<" onPress={handleBack} />
+        <Button title={currentDate.toDateString()} onPress={() => setShowDatePicker(true)} />
+        <Button title=">" onPress={handleForward} />
+      </View>
+
       {splits.map((split, index) => (
         <TouchableOpacity
           key={index}
@@ -27,26 +55,40 @@ const WorkoutView = () => {
           <Text style={styles.splitText}>{split}</Text>
         </TouchableOpacity>
       ))}
+
       <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
-        <Text style={styles.buttonText}>+</Text>
+        <Text style={styles.buttonText}>+ Add Workout Day</Text>
       </TouchableOpacity>
+
       <Modal animationType="slide" transparent={true} visible={showModal}>
         <View style={styles.modalView}>
           <TextInput
             style={styles.input}
             value={splitName}
             onChangeText={setSplitName}
-            placeholder="Enter Split Name"
+            placeholder="Enter Workout Day Name"
           />
           <TouchableOpacity style={styles.addButton} onPress={addSplit}>
-            <Text style={styles.buttonText}>Add Split</Text>
+            <Text style={styles.buttonText}>Add Workout Day</Text>
           </TouchableOpacity>
+          <Button title="Close" onPress={() => setShowModal(false)} />
+        </View>
+      </Modal>
+
+      <Modal animationType="slide" transparent={true} visible={showDatePicker}>
+        <View style={styles.datePickerModal}>
+          <DateTimePicker
+            value={currentDate}
+            mode="date"
+            display="default"
+            onChange={onDateChange}
+          />
+          <Button title="Close" onPress={() => setShowDatePicker(false)} />
         </View>
       </Modal>
     </ScrollView>
   );
 };
-
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -59,9 +101,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 100,
   },
+  dateContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: 20,
+  },
   addButton: {
     backgroundColor: 'purple',
-    width: 100,
+    width: 200,
     height: 50,
     borderRadius: 25,
     justifyContent: 'center',
@@ -70,7 +118,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontSize: 24,
+    fontSize: 20,
   },
   splitButton: {
     backgroundColor: 'gray',
@@ -89,7 +137,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  datePickerModal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   input: {
     width: '80%',
@@ -99,14 +153,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: 20,
   },
-  addButton: {
-    backgroundColor: 'purple',
-    width: '80%',
-    height: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
 });
 
 export default WorkoutView;
