@@ -1,0 +1,51 @@
+# Purpose
+The purpose of this research is to familiarize myself with Firebase's functionality and how it stores data.
+
+# Goals:
+Upon completion of my research, I hope to be able to
+- Launch a Firebase webpage
+- Understand Firestore data
+- Create a data structure compatible with Firestore
+
+# Research
+Firebase
+    Creating a Firebase project:
+    - npm install firebase-tools -g   (adds command line Firebase tools)
+    - Create project from Firebase console
+    - In terminal, firebase init
+    - firebase serve  -  local testing
+    - firebase deploy  -  live!
+
+    Files
+    firebase.rc contains project identification
+    firebase.json contains hosting roles
+
+    User Authentication:
+    googleLogin() allows users to log in with Google account
+    This code prevents button from being clicked before page has loaded, preventing issues:
+        document.addEventListener("DOMContentLoaded", event => {
+            const app = firebase.app()
+            console.log(app)
+        });
+    User authentication methods can modified in console > Authentication
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider)
+    
+
+Firestore
+- Works in conjunction with Firebase and Google Cloud
+- Stores documents in hierarchy (collections)
+- Connects directly to Firebase app to manage data
+- NEAR realtime
+
+Enable Firestore on Firebase console
+Each collection is a SPECIFIC data type
+Each document has:
+    a path: ex. /exercises/row
+    fields: custom variables with set types
+Add documents with import addDocs, document.querySelector('.add'), addDoc(collection, { variable1, variable2, etc. })
+
+# References
+Firebase introduction: https://www.youtube.com/watch?v=9kRgVxULbag&ab_channel=Fireship
+Firestore introduction: https://www.youtube.com/watch?v=2yNyiW_41H8&ab_channel=NetNinja
+Firestore documents: https://www.youtube.com/watch?v=s1frrNxq4js&ab_channel=NetNinja
