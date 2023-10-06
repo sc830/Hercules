@@ -83,3 +83,8 @@ s_c830@txstate.edu
 
 
 
+
+
+
+Additionally, Kacy offered to help Aaron resolve the merge conflicts he was experiencing
+because he had no prior experience resolving them.
