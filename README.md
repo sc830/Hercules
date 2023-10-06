@@ -83,3 +83,9 @@ s_c830@txstate.edu
 
 
 
+### Assisting Teammates ###
+Kacy Metcalf is the only team member with experience using GitKraken so she spent several hours helping her 
+teammates resolve errors with it and to adjust to the GitKraken user interface. Kacy helped Kaleb who was
+having an error whenever he would try to checkout a different branch or delete the branch he was on.
+After a lot of extensive trouble shooting, it turned out that the computer needed to be restarted and that
+it should have been working to begin with.
