@@ -83,3 +83,20 @@ s_c830@txstate.edu
 
 
 
+
+
+
+
+
+
+
+### Road Blocks ###
+Kacy was supposed to create the graph and the graph button for the app. However, in order
+to see the changes she is making, she needed to use Expo to see the app. Kacy hit a 
+road block at this point and after spending several hours of following ChatGPT's instructions
+and her teammates' instructions, she was not able to resolve the errors she was getting.
+Without being able to see if her code is work, she could not continue with the graphs.
+The team has pivoted and will be focusing on resolving roadblocks for the rest of this sprint
+and has already started discussing tasks for the next sprint to pick up what we couldn't complete
+this time. Dr. Lehr instructed Kacy to update her tasks on Jira so they show the work completed
+and intended to complete rather than the work that was inaccessible due to the road block.
