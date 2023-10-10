@@ -83,16 +83,6 @@ s_c830@txstate.edu
 ### Team Meeting Times ###
 Sundays from 4:00-5:00pm
 
-
-
-
-
-
-
-
-
-
-
 ### Road Blocks ###
 Kacy was supposed to create the graph and the graph button for the app. However, in order
 to see the changes she is making, she needed to use Expo to see the app. Kacy hit a 
@@ -101,7 +91,15 @@ and her teammates' instructions, she was not able to resolve the errors she was 
 Without being able to see if her code is work, she could not continue with the graphs.
 The team has pivoted and will be focusing on resolving roadblocks for the rest of this sprint
 and has already started discussing tasks for the next sprint to pick up what we couldn't complete
-this time. Dr. Lehr instructed Kacy to update her tasks on Jira so they show the work completed and intended to complete rather than the work that was inaccessible due to the road block.
+this time. Dr. Lehr instructed Kacy to update her tasks on Jira so they show the work completed 
+and intended to complete rather than the work that was inaccessible due to the road block.
 
 Additionally, Kacy offered to help Aaron resolve the merge conflicts he was experiencing
 because he had no prior experience resolving them.
+
+### Assisting Teammates ###
+Kacy Metcalf is the only team member with experience using GitKraken so she spent several hours helping her 
+teammates resolve errors with it and to adjust to the GitKraken user interface. Kacy helped Kaleb who was
+having an error whenever he would try to checkout a different branch or delete the branch he was on.
+After a lot of extensive trouble shooting, it turned out that the computer needed to be restarted and that
+it should have been working to begin with.
