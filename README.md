@@ -80,6 +80,9 @@ We would like to thank the open-source community and contributors for their valu
 amp421@txstate.edu
 s_c830@txstate.edu
 
+### Team Meeting Times ###
+Sundays from 4:00-5:00pm
+
 
 
 
