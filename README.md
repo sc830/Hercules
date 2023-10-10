@@ -101,5 +101,7 @@ and her teammates' instructions, she was not able to resolve the errors she was 
 Without being able to see if her code is work, she could not continue with the graphs.
 The team has pivoted and will be focusing on resolving roadblocks for the rest of this sprint
 and has already started discussing tasks for the next sprint to pick up what we couldn't complete
-this time. Dr. Lehr instructed Kacy to update her tasks on Jira so they show the work completed
-and intended to complete rather than the work that was inaccessible due to the road block.
+this time. Dr. Lehr instructed Kacy to update her tasks on Jira so they show the work completed and intended to complete rather than the work that was inaccessible due to the road block.
+
+Additionally, Kacy offered to help Aaron resolve the merge conflicts he was experiencing
+because he had no prior experience resolving them.
