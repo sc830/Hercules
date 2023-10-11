@@ -172,6 +172,10 @@ This task does not have a commit/branch because although I initially believed we
 
 Photos of Firestore organization and Firebase Setup: https://docs.google.com/document/d/1Lwe-VPmXzECMJ1wqAEnN2HDNPIg67Cmxv9qcbqJ-A8k/edit?usp=sharing
 
+### What went well (or not)? ###
+I'm very happy that our team is communicative and I was often able to receive assistance from or help other team members. Personally, I think that my research went very well and I found a lot of resources, but it was difficult to implement them (which is unsurprising). I think my next steps forward are troubleshooting our Firebase deployment as soon as possible.
+
+
 
 ### Retrospective ###
 
