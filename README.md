@@ -130,17 +130,47 @@ https://bitbucket.org/cs3398f23changelings/hercules/commits/0f24dad65fde9a7a3876
 https://bitbucket.org/cs3398f23changelings/hercules/commits/c4642ff9aca5fb1f87a5c8c6232237785fe86428
 https://bitbucket.org/cs3398f23changelings/hercules/commits/c4642ff9aca5fb1f87a5c8c6232237785fe86428
 
+### Kacy Metcalf Sprint 1 ###
+In the development of the Hercules app, I was tasked with creating the graph of the workouts and creating the button to generate
+more graphs for each individual type of workout. Additionally, I was tasked with researching React Native. Along the way, I hit
+a roadblock with running expo. Expo is what allows us to see the mobile app that we are creating. Because it doesn't work on my
+phone, I could not see the changes I was making so I was unable to continue working on the graphs since I can't see what I'm 
+doing. This work will be continued in Sprint 2. I did devise a plan to have the graph with a button over it and the button be
+transparent so that the user just sees the graph. Additionally, I spent a lot of time helping my teammates with GitKraken errors
+since I'm the only one with experience using GitKraken. Due to this, I adjusted my tasks accordingly. I also set up a weekly 
+meeting time because our team felt it would be beneficial.
+
+### Sprint 2 Goals ###
+The next steps for sprint 2 is going to be finishing the front end and back end of our app. We were discussing this as a team and
+I will likely be responsible for connecting the front end and back end work. We want to have a much more complete demo ready by 
+the end of the second sprint so that the third sprint can be for adding extra features and fixing any bugs that come up.
+More specifically, in sprint 2 we will be fixing Expo Go errors and then completing the graphs.
+
+### Here are the links for Kacy's Branches: ###
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-59
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-62
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-66
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-67
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-100
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-101
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-103
 
 ### Retrospective ###
 
 ### What went well (TEAM): ###
 -we were able to make significant progress in the UI
 -we were able to create and set up firebase and firestore
+-we were very good at keeping our work up-to-date with the main branch
+-we communicated well as a team and were willing to help each other
 ### What did not go well(TEAM): ###
 -could not fully integrate firebase and firestore into program
 -had issues with Expo Go that are still ongoing
+-we  were not able to complete all of our tasks because of the previously mentioned errors creating roadblocks
 ### What Might Be Impeding Us from Performing Better? ###
 -Expo Go having issues deploying to see edits in real-time
+-Not having a more regular team meeting time from the beginning of the project impeded us because the time in/after class was no sufficient to resolve roadblocks
 ### What can I do to Improve (Aaron): ###
 -I can work on creating branches with every task and making sure that I do pull requests.
--Work on when,where,how I create branches and using the effects of "Tags" to reference other commits.
+-Work on when, where, how I create branches and using the effects of "Tags" to reference other commits.
+### What can I do to Improve (Kacy): ###
+-I can work on researching Expo Go to help understand what the errors are and help my teammates and I overcome them
