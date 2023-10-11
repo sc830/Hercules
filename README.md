@@ -129,3 +129,18 @@ https://bitbucket.org/cs3398f23changelings/hercules/commits/21f5ae97db425c9ce2a3
 https://bitbucket.org/cs3398f23changelings/hercules/commits/0f24dad65fde9a7a3876183275668a461464f664
 https://bitbucket.org/cs3398f23changelings/hercules/commits/c4642ff9aca5fb1f87a5c8c6232237785fe86428
 https://bitbucket.org/cs3398f23changelings/hercules/commits/c4642ff9aca5fb1f87a5c8c6232237785fe86428
+
+
+### Retrospective ###
+
+### What went well (TEAM): ###
+-we were able to make significant progress in the UI
+-we were able to create and set up firebase and firestore
+### What did not go well(TEAM): ###
+-could not fully integrate firebase and firestore into program
+-had issues with Expo Go that are still ongoing
+### What Might Be Impeding Us from Performing Better? ###
+-Expo Go having issues deploying to see edits in real-time
+### What can I do to Improve (Aaron): ###
+-I can work on creating branches with every task and making sure that I do pull requests.
+-Work on when,where,how I create branches and using the effects of "Tags" to reference other commits.
