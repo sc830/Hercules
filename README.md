@@ -160,11 +160,17 @@ https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1
 ### What went well (TEAM): ###
 -we were able to make significant progress in the UI
 -we were able to create and set up firebase and firestore
+-we were very good at keeping our work up-to-date with the main branch
+-we communicated well as a team and were willing to help each other
 ### What did not go well(TEAM): ###
 -could not fully integrate firebase and firestore into program
 -had issues with Expo Go that are still ongoing
+-we  were not able to complete all of our tasks because of the previously mentioned errors creating roadblocks
 ### What Might Be Impeding Us from Performing Better? ###
 -Expo Go having issues deploying to see edits in real-time
+-Not having a more regular team meeting time from the beginning of the project impeded us because the time in/after class was no sufficient to resolve roadblocks
 ### What can I do to Improve (Aaron): ###
 -I can work on creating branches with every task and making sure that I do pull requests.
 -Work on when, where, how I create branches and using the effects of "Tags" to reference other commits.
+### What can I do to Improve (Kacy): ###
+-I can work on researching Expo Go to help understand what the errors are and help my teammates and I overcome them
