@@ -69,7 +69,7 @@ Areas for improvement:
 - Create UI for munchies and mind screens
 - Create FireBase database to store workouts/nutrution.
 - Integrate existing public api for nutritional facts.
-
+- Fix the date to be able to view workouts from a specific day (stored in firebase).
 
 
 ### Acknowledgements ### 
@@ -102,13 +102,15 @@ Kacy Metcalf is the only team member with experience using GitKraken so she spen
 teammates resolve errors with it and to adjust to the GitKraken user interface. Kacy helped Kaleb who was
 having an error whenever he would try to checkout a different branch or delete the branch he was on.
 After a lot of extensive trouble shooting, it turned out that the computer needed to be restarted and that
-it should have been working to begin with.
+it should have been working to begin with. 
+Aaron assisted multiple team members with Expo Go and helped resolve
+some debugging issues associated to others code
 
 ### Kaleb Perez Sprint 1 ###
 
 In the development of the hercules application, I successfully integrated a bottom navigation bar. This navigation bar serves as a central navigational tool, directing users to different sections of the application. Key features I implemented was the "Workout", "Mind", and "Munchies" screens. On the workout screen, I added functionality so that users can interact with and create dynamically generated buttons that represent different workout "splits". I designed a system where users can add new splits through a modal dialog. After entering the desired split name, a corresponding button is created on the Workout screen. I also set up the main file tree and starting files including all of the files to run the code. I also did the research to figure out how to set up expo and run the app. I spent time with each teamate helping them run it.
 
-Here are the link for my major commits: 
+### Here are the links for my major commits: ### 
 https://bitbucket.org/cs3398f23changelings/hercules/commits/e5f66e1aab94e8d0020eaf189686650d673347e1
 https://bitbucket.org/cs3398f23changelings/hercules/commits/c1db86c27f04514ac933852a8297f79c0eab8934
 https://bitbucket.org/cs3398f23changelings/hercules/commits/cc7bc55534ec258388004fcc33393e154de3b308
@@ -116,3 +118,14 @@ https://bitbucket.org/cs3398f23changelings/hercules/commits/6b30cc91464fa305d653
 https://bitbucket.org/cs3398f23changelings/hercules/commits/45a5103b553be4dbcd5ca23bc82215445ca8d447
 https://bitbucket.org/cs3398f23changelings/hercules/commits/2e71a2d008af7643dfbf4c09cebfa5018fda70d4
 
+### Aaron Parks Sprint 1 ###
+In the developement of the Hercules app, I was tasked with 3 main features of the workout app. Such as: Creating the Date above the workouts, adding forward and back buttons on the date to choose a close date, and 
+creating a calendar drop down to choose a date to view workouts. 
+Also aided Kaleb in debugging, and helped other group members set up Expo Go.
+
+### Here are the links for my major commits: ###
+https://bitbucket.org/cs3398f23changelings/hercules/commits/b18fe204f219da0ad48060dc4c2f91e0e8487489
+https://bitbucket.org/cs3398f23changelings/hercules/commits/21f5ae97db425c9ce2a3352de8e6350021fb957f
+https://bitbucket.org/cs3398f23changelings/hercules/commits/0f24dad65fde9a7a3876183275668a461464f664
+https://bitbucket.org/cs3398f23changelings/hercules/commits/c4642ff9aca5fb1f87a5c8c6232237785fe86428
+https://bitbucket.org/cs3398f23changelings/hercules/commits/c4642ff9aca5fb1f87a5c8c6232237785fe86428
