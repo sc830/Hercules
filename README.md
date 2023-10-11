@@ -134,6 +134,7 @@ https://bitbucket.org/cs3398f23changelings/hercules/commits/c4642ff9aca5fb1f87a5
 In the developement of the Hercules app, I was tasked with making the login page, setting up user authentication, button functionalities to save data to firebase database, and integrating firebase into the application, and having a database to store information with, I made a sample html code that used firebase authentication and a small ammount of database storage as a testing platform for functionalities and how we wanted the 
 Dataabse to be setup, yet I hit a major road block. When trying to integrate firebase database it doesnt seem to want to import propperly after going to many online sources and even the firebase page itself and testing multiple different sollutions, problems arrise either it be not being able to import firebase or the importation of firebase
 causes other parts of the code to go awire.
+For the first sprint I made branches and pull requests on bitbucket, and gitkracken instead of using jira, but from here on that will be fixed
 
 ### Here are the links for my major commits: ###
 https://bitbucket.org/cs3398f23changelings/hercules/commits/79c84df252992ce7a7616b0632d7e80b53aa5ac1
