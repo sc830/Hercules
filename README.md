@@ -155,6 +155,22 @@ https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1
 https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-101
 https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-103
 
+
+### Shelby Cumings Sprint 1 ###
+At the beginning of this sprint, although I had 10 hours of tasks assigned, I had sort of added whatever was available that I thought I could do because I wasn't sure what would be helpful or what my teammates would be doing during this sprint. Shortly thereafter, I was thankfully able to get a better idea of what would be helpful to our group and replaced some of my UI/frontend tasks with backend Firebase and Firestore creation/setup/integration that had been overlooked. I was able to set up Firebase and Firestore, but have not yet been able to integrate them with the application so that we can have real-time development models, partially due to a lack of understanding about my teammates' work and how all of our pieces integrate with each other. Hopefully this is very good experience and practice for professional scenarios which may be the same way.
+
+### Tasks: ###
+Firebase research: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-91
+This branch includes two issues, SCRUM-91 and SCRUM-103. I initially researched firebase, but my research
+led me to researching how to include Firestore compatibility in our app, so I researched that as well. I created
+a new task in Jira (SCRUM-103) to better reflect my time spent during this sprint.
+
+Basic Exercise Data: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-95
+This task does not have a commit/branch because although I initially believed we needed a coded class to store exercises, I have a better understanding of Firebase/Firestore now and instead created this data structure in Firestore.
+
+Photos of Firestore organization and Firebase Setup: https://docs.google.com/document/d/1Lwe-VPmXzECMJ1wqAEnN2HDNPIg67Cmxv9qcbqJ-A8k/edit?usp=sharing
+
+
 ### Retrospective ###
 
 ### What went well (TEAM): ###
@@ -169,8 +185,12 @@ https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1
 ### What Might Be Impeding Us from Performing Better? ###
 -Expo Go having issues deploying to see edits in real-time
 -Not having a more regular team meeting time from the beginning of the project impeded us because the time in/after class was no sufficient to resolve roadblocks
+-current methods/technologies might be feasible but not easiest or best path forward
 ### What can I do to Improve (Aaron): ###
 -I can work on creating branches with every task and making sure that I do pull requests.
 -Work on when, where, how I create branches and using the effects of "Tags" to reference other commits.
 ### What can I do to Improve (Kacy): ###
 -I can work on researching Expo Go to help understand what the errors are and help my teammates and I overcome them
+### What can I do to improve (Shelby): ###
+Now that I have a better idea of my role in the group and what would be helpful in our development process,
+I can more effectively organize my time and tasks in a manner that helps my teammates progress in their work.
