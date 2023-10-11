@@ -130,6 +130,20 @@ https://bitbucket.org/cs3398f23changelings/hercules/commits/0f24dad65fde9a7a3876
 https://bitbucket.org/cs3398f23changelings/hercules/commits/c4642ff9aca5fb1f87a5c8c6232237785fe86428
 https://bitbucket.org/cs3398f23changelings/hercules/commits/c4642ff9aca5fb1f87a5c8c6232237785fe86428
 
+### Julio Cantu Sprint 1 ###
+In the developement of the Hercules app, I was tasked with making the login page, setting up user authentication, button functionalities to save data to firebase database, and integrating firebase into the application, and having a database to store information with, I made a sample html code that used firebase authentication and a small ammount of database storage as a testing platform for functionalities and how we wanted the 
+Dataabse to be setup, yet I hit a major road block. When trying to integrate firebase database it doesnt seem to want to import propperly after going to many online sources and even the firebase page itself and testing multiple different sollutions, problems arrise either it be not being able to import firebase or the importation of firebase
+causes other parts of the code to go awire.
+
+### Here are the links for my major commits: ###
+https://bitbucket.org/cs3398f23changelings/hercules/commits/79c84df252992ce7a7616b0632d7e80b53aa5ac1
+https://bitbucket.org/cs3398f23changelings/hercules/commits/fc51b0b596619703aa7f27846b22f1938b532311
+https://bitbucket.org/cs3398f23changelings/hercules/commits/2cb61f54bb79e3ddd037f2ad818256b62880b44f
+https://bitbucket.org/cs3398f23changelings/hercules/commits/5b7b32380bfc207160336ea632403f78ca3b5d10
+https://bitbucket.org/cs3398f23changelings/hercules/commits/ae01e68f6316ba38ad21662ca02c02ed86bde078
+https://bitbucket.org/cs3398f23changelings/hercules/commits/f7c3de62c56d29f9069d9a699f16e612b4c003d4
+
+
 ### Kacy Metcalf Sprint 1 ###
 In the development of the Hercules app, I was tasked with creating the graph of the workouts and creating the button to generate
 more graphs for each individual type of workout. Additionally, I was tasked with researching React Native. Along the way, I hit
@@ -198,3 +212,6 @@ Now that I have a better idea of my role in the group and what would be helpful 
 I can more effectively organize my time and tasks in a manner that helps my teammates progress in their work.
 ### What can I do to improve (Kaleb): ###
 I could have communicated the ideas I have for the app better and commented on my code so my teamates can read it and know how to extend upon it. I also need to make sure that I approve merge reqests rather than assuming someone else will.
+### What can I do to improve (Julio): ###
+-I can work on properly branching my tasks and giving them the propper allocated hours as they were severly under estemated. I can also look for different methods if one is taking too long 
+for example how firebase integration is taking so long, I can look for other methods to integrate databases.
