@@ -196,3 +196,5 @@ Photos of Firestore organization and Firebase Setup: https://docs.google.com/doc
 ### What can I do to improve (Shelby): ###
 Now that I have a better idea of my role in the group and what would be helpful in our development process,
 I can more effectively organize my time and tasks in a manner that helps my teammates progress in their work.
+### What can I do to improve (Kaleb): ###
+I could have communicated the ideas I have for the app better and commented on my code so my teamates can read it and know how to extend upon it. I also need to make sure that I approve merge reqests rather than assuming someone else will.
