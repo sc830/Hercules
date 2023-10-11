@@ -160,6 +160,8 @@ https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1
 At the beginning of this sprint, although I had 10 hours of tasks assigned, I had sort of added whatever was available that I thought I could do because I wasn't sure what would be helpful or what my teammates would be doing during this sprint. Shortly thereafter, I was thankfully able to get a better idea of what would be helpful to our group and replaced some of my UI/frontend tasks with backend Firebase and Firestore creation/setup/integration that had been overlooked. I was able to set up Firebase and Firestore, but have not yet been able to integrate them with the application so that we can have real-time development models, partially due to a lack of understanding about my teammates' work and how all of our pieces integrate with each other. Hopefully this is very good experience and practice for professional scenarios which may be the same way.
 
 ### Tasks: ###
+React Native Reserch: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-54
+
 Firebase research: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=63c607e6417bef6fc906ae75&selectedIssue=SCRUM-91
 This branch includes two issues, SCRUM-91 and SCRUM-103. I initially researched firebase, but my research
 led me to researching how to include Firestore compatibility in our app, so I researched that as well. I created
