@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 const WorkoutView = () => {
   const navigation = useNavigation();
@@ -10,13 +9,19 @@ const WorkoutView = () => {
   const [splits, setSplits] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showDeleteOption, setShowDeleteOption] = useState(-1); // -1 means no split is showing delete option
 
   const addSplit = () => {
     if (splitName) {
       setSplits(prevSplits => [splitName, ...prevSplits]);
       setSplitName('');
       setShowModal(false);
+      setShowDeleteOption(-1); 
     }
+  };
+
+  const deleteSplit = (indexToDelete) => {
+    setSplits(splits.filter((_, index) => index !== indexToDelete));
   };
 
   const handleForward = () => {
@@ -47,13 +52,25 @@ const WorkoutView = () => {
       </View>
 
       {splits.map((split, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.splitButton}
-          onPress={() => navigation.navigate('workoutList', { splitName: split })}
-        >
-          <Text style={styles.splitText}>{split}</Text>
-        </TouchableOpacity>
+        <View key={index} style={styles.splitContainer}>
+          <TouchableOpacity
+            style={styles.splitButton}
+            onPress={() => navigation.navigate('workoutList', { splitName: split })}
+          >
+            <Text style={styles.splitText}>{split}</Text>
+            <TouchableOpacity 
+              style={styles.settingsButton} 
+              onPress={() => setShowDeleteOption(index === showDeleteOption ? -1 : index)}
+            >
+              <Text style={styles.settingsText}>⚙️</Text>
+            </TouchableOpacity>
+          </TouchableOpacity>
+          {showDeleteOption === index && (
+            <TouchableOpacity style={styles.deleteButton} onPress={() => deleteSplit(index)}>
+              <Text style={styles.deleteButtonText}>Delete</Text>
+            </TouchableOpacity>
+          )}
+        </View>
       ))}
 
       <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
@@ -72,18 +89,6 @@ const WorkoutView = () => {
             <Text style={styles.buttonText}>Add Workout Day</Text>
           </TouchableOpacity>
           <Button title="Close" onPress={() => setShowModal(false)} />
-        </View>
-      </Modal>
-
-      <Modal animationType="slide" transparent={true} visible={showDatePicker}>
-        <View style={styles.datePickerModal}>
-          <DateTimePicker
-            value={currentDate}
-            mode="date"
-            display="default"
-            onChange={onDateChange}
-          />
-          <Button title="Close" onPress={() => setShowDatePicker(false)} />
         </View>
       </Modal>
     </ScrollView>
@@ -120,26 +125,43 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
+  splitContainer: {
+    width: '90%',
+    marginBottom: 10,
+  },
   splitButton: {
     backgroundColor: 'gray',
-    width: 340,
-    height: 300,
+    height: 200,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
+    position: 'relative',
   },
   splitText: {
     color: 'black',
     fontSize: 20,
   },
-  modalView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  settingsButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
   },
-  datePickerModal: {
+  settingsText: {
+    fontSize: 20,
+  },
+  deleteButton: {
+    backgroundColor: 'purple',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 25,
+    marginTop: 10,
+    alignSelf: 'flex-end',
+  },
+  deleteButtonText: {
+    color: 'black',
+    fontSize: 16,
+  },
+  modalView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
