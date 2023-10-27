@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 const WorkoutView = () => {
   const navigation = useNavigation();
@@ -9,15 +8,35 @@ const WorkoutView = () => {
   const [splitName, setSplitName] = useState('');
   const [splits, setSplits] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showRenameModal, setShowRenameModal] = useState(false);
+  const [renameIndex, setRenameIndex] = useState(-1);
+  const [showDeleteOption, setShowDeleteOption] = useState(-1); 
 
   const addSplit = () => {
     if (splitName) {
       setSplits(prevSplits => [splitName, ...prevSplits]);
       setSplitName('');
       setShowModal(false);
+      setShowDeleteOption(-1);
     }
   };
+
+  const deleteSplit = (indexToDelete) => {
+    setSplits(splits.filter((_, index) => index !== indexToDelete));
+  };
+
+  const renameSplit = () => {
+    let updatedSplits = [...splits];
+    updatedSplits[renameIndex] = splitName;
+    setSplits(updatedSplits);
+    setShowRenameModal(false);
+    setSplitName('');
+  };
+  const handleRenameOpen = (index, split) => {
+    setRenameIndex(index);
+    setSplitName(split);
+    setShowRenameModal(true);
+};
 
   const handleForward = () => {
     const nextDate = new Date(currentDate);
@@ -31,29 +50,44 @@ const WorkoutView = () => {
     setCurrentDate(previousDate);
   };
 
-  const onDateChange = (event, selectedDate) => {
-    setShowDatePicker(false);
-    if (selectedDate) {
-      setCurrentDate(selectedDate);
-    }
-  };
-
   return (
     <ScrollView contentContainerStyle={styles.container} style={styles.scrollView}>
       <View style={styles.dateContainer}>
         <Button title="<" onPress={handleBack} />
-        <Button title={currentDate.toDateString()} onPress={() => setShowDatePicker(true)} />
+        <Button title={currentDate.toDateString()} />
         <Button title=">" onPress={handleForward} />
       </View>
 
       {splits.map((split, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.splitButton}
-          onPress={() => navigation.navigate('workoutList', { splitName: split })}
-        >
-          <Text style={styles.splitText}>{split}</Text>
-        </TouchableOpacity>
+        <View key={index} style={styles.splitContainer}>
+          <TouchableOpacity
+            style={styles.splitButton}
+            onPress={() => navigation.navigate('workoutList', { splitName: split })}
+          >
+            <Text style={styles.splitText}>{split}</Text>
+            <TouchableOpacity 
+              style={styles.settingsButton} 
+              onPress={() => {
+                setShowDeleteOption(index === showDeleteOption ? -1 : index);
+                setRenameIndex(index === renameIndex ? -1 : index);
+              }}
+            >
+              <Text style={styles.settingsText}>⚙️</Text>
+            </TouchableOpacity>
+          </TouchableOpacity>
+
+          {showDeleteOption === index && (
+            <View style={styles.buttonRow}>
+             <TouchableOpacity onPress={() => deleteSplit(index)} style={styles.actionButton}>
+                <Text style={styles.actionButtonText}>Delete</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleRenameOpen(index, split)} style={styles.actionButton}>
+                <Text style={styles.actionButtonText}>Rename</Text>
+            </TouchableOpacity>
+        </View>
+        
+          )}
+        </View>
       ))}
 
       <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
@@ -75,15 +109,22 @@ const WorkoutView = () => {
         </View>
       </Modal>
 
-      <Modal animationType="slide" transparent={true} visible={showDatePicker}>
-        <View style={styles.datePickerModal}>
-          <DateTimePicker
-            value={currentDate}
-            mode="date"
-            display="default"
-            onChange={onDateChange}
+      <Modal animationType="slide" transparent={true} visible={showRenameModal}>
+        <View style={styles.modalView}>
+          <TextInput
+            style={styles.input}
+            value={splitName}
+            onChangeText={setSplitName}
+            placeholder="Rename Workout Day"
           />
-          <Button title="Close" onPress={() => setShowDatePicker(false)} />
+          <TouchableOpacity style={styles.addButton} onPress={renameSplit}>
+            <Text style={styles.buttonText}>Rename Workout Day</Text>
+          </TouchableOpacity>
+          <Button title="Close" onPress={() => {
+              setShowRenameModal(false);
+              setSplitName('');
+            }}
+          />
         </View>
       </Modal>
     </ScrollView>
@@ -120,26 +161,75 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
+  splitContainer: {
+    width: '90%',
+    marginBottom: 10,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+},
+
+actionButton: {
+    flex: 1,
+    backgroundColor: 'purple',
+    alignItems: 'center',
+    padding: 10,
+    margin: 5,
+    borderRadius: 5,
+},
+
+actionButtonText: {
+    color: 'black',
+    fontSize: 16,
+},
+
   splitButton: {
     backgroundColor: 'gray',
-    width: 340,
-    height: 300,
+    height: 200,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
+    position: 'relative',
   },
   splitText: {
     color: 'black',
     fontSize: 20,
   },
-  modalView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  settingsButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
   },
-  datePickerModal: {
+  settingsText: {
+    fontSize: 20,
+  },
+  deleteButton: {
+    backgroundColor: 'purple',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 25,
+    marginTop: 10,
+    alignSelf: 'flex-end',
+  },
+  deleteButtonText: {
+    color: 'black',
+    fontSize: 16,
+  },
+  renameButton: {
+    backgroundColor: 'purple',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 25,
+    marginTop: 10,
+    alignSelf: 'flex-end',
+  },
+  renameButtonText: {
+    color: 'black',
+    fontSize: 16,
+  },
+  modalView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -156,3 +246,4 @@ const styles = StyleSheet.create({
 });
 
 export default WorkoutView;
+

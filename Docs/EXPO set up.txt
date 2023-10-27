@@ -1,0 +1,55 @@
+**Setting Up Expo with React Native in VS Code**
+
+
+1. **Install Node.js and npm**:
+   - Download and install Node.js from the official website: https://nodejs.org/
+   - This will also install npm (Node Package Manager) alongside.
+
+2. **Install Expo CLI**:
+   - Open your terminal or command prompt and enter:
+     ```
+     npm install -g expo-cli
+     ```
+
+3. **Install Visual Studio Code**:
+   - Download and install VS Code from the official website: https://code.visualstudio.com/
+
+4. **Install Extensions for VS Code**:
+   - Open VS Code.
+   - Go to Extensions (shortcut: Ctrl+Shift+X).
+   - Search for and install the following extensions:
+     - React Native Tools: Provides debugging, IntelliSense, and other tools for React Native.
+     - ES7 React/Redux/GraphQL/React-Native snippets: Provides code snippets.
+
+5. **Set Up a New Expo Project**:
+   - In your terminal or command prompt, navigate to the directory where you want your project and enter:
+     ```
+     expo init MyNewExpoProject
+     ```
+   - Follow the prompts to choose a template.
+   - Once completed, navigate into your project directory:
+     ```
+     cd MyNewExpoProject
+     ```
+
+6. **Open the Project in VS Code**:
+   - In your terminal or command prompt, while inside the project directory, enter:
+     ```
+     code .
+     ```
+
+7. **Running the App with Expo**:
+   - In the terminal or command prompt, ensure you are in the project directory and enter:
+     ```
+     expo start
+     ```
+   - This will open a new browser window with a QR code. You can scan this QR code with the Expo Go app on your phone to see your app live.
+
+8. **Debugging in VS Code**:
+   - With the 'React Native Tools' extension installed, open the command palette (shortcut: Ctrl+Shift+P).
+   - Type "React Native" and select the relevant options for debugging.
+
+9. **Additional Configurations and Tips**:
+   - Customize your React Native development experience through the settings in VS Code. This includes enabling auto-save, adjusting linting rules, etc.
+   - Consider integrating ESLint or Prettier for consistent code formatting and linting.
+   - Regularly check for updates in Expo, React Native, and the extensions to stay updated with the latest features and fixes.
