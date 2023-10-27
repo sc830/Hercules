@@ -1,2 +1,32 @@
 Author: Kacy Metcalf
 Date: 10/26/23
+
+how to integrate firestore database and pull data into the app so that we can 
+connect our stored data to the user-interface via graphs, custom trackers, and adding reps/weight.
+
+To integrate Firestore:
+
+## NOTE ##
+The below steps are based off the linkedin learning course at https://www.linkedin.com/learning-login/share?account=51086649&forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Fbuilding-an-application-with-svelte-and-firebase%3Ftrk%3Dshare_ent_url%26shareId%3DcCeCYrmZRjuWBgCkJoXYdQ%253D%253D
+
+1. add the import
+import { getFirestore, collection, getDocs } from 'firebase/firestore'
+
+2. Set up configurations
+
+// firestore initialization and config
+const db = getFirestore()
+const colRef = collection(db, 'insert_name_of_collection')
+
+3. Example of how to access stored data from firestore after completing steps 1 and 2 in your file
+getDocs(colRef) // get collection reference
+    .then((snapshot) = {
+        let insert_name_of_collection = []
+        snapshot.docs.forEach((doc) => {
+            insert_name_of_collection.push({...doc.data(), id: doc.id})
+        })
+        console.log(insert_name_of_collection)
+    })
+    .catch(err => {
+        console.log(err.message)
+    })
