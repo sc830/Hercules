@@ -30,3 +30,110 @@ getDocs(colRef) // get collection reference
     .catch(err => {
         console.log(err.message)
     })
+
+I am not a big fan of the above instructions because they are somewhat vague. I asked ChatGPT and it said:
+
+__PREPPING THE CODE BEFORE TRYING TO USE FIREBASE, SOME OF THIS MAY ALREADY BE DONE BY OTHER TEAMMATES__
+1. set up environment. Install:
+    npm install @react-native-firebase/app
+    npm install @react-native-firebase/firestore
+
+2. In your app's entry file (**e.g., App.js**), import and initialize Firebase:
+    import { AppRegistry } from 'react-native';
+    import { App } from './App';
+    import { name as appName } from './app.json';
+
+    import { firebase } from '@react-native-firebase/app';
+
+    // Initialize Firebase
+    firebase.initializeApp();
+
+    AppRegistry.registerComponent(appName, () => App);
+
+    __USING FIRESTORE__
+3. Ready to implement
+    Your file should now be prepped for you to use firestore
+    import firestore from '@react-native-firebase/firestore';
+
+    // Example: Read data from Firestore
+    async function fetchData() {
+    const snapshot = await firestore()
+        .collection('your_collection_name')
+        .get();
+
+    snapshot.forEach((doc) => {
+        console.log(doc.id, '=>', doc.data());
+    });
+    }
+
+# NOTE #
+If you're having errors, some potential causes are:
+
+__React Native Version__
+If you're using React Native version 0.59 or below, you might need to link the native dependencies manually. However, with newer versions of React Native and the @react-native-firebase library, auto-linking should handle this step for you.
+
+## YOUR FIRESTORE SHOULD NOW BE SET UP, BUT IT IS GOOD PRACTICE TO CREATE ERROR HANDLING ##
+
+__Error Handling Methods__ 
+1. Try-Catch Blocks:
+
+Wrap Firestore operations in try-catch blocks to handle exceptions gracefully.
+try {
+  // Firestore operation here
+} catch (error) {
+  console.error("Firestore error:", error);
+}
+
+2. Handle Promises:
+Firestore operations return promises. Handle promise rejections using .catch().
+
+firestore()
+  .collection('your_collection_name')
+  .get()
+  .then((snapshot) => {
+    // Handle data
+  })
+  .catch((error) => {
+    console.error("Firestore error:", error);
+  });
+
+3. User-Friendly Messages:
+Create error messages to display to the user when necessary
+
+try {
+  // Firestore operation here
+} catch (error) {
+  console.error("Firestore error:", error);
+  alert("An error occurred while fetching data. Please try again later.");
+}
+
+
+4. Network Connectivity:
+Check for network connectivity before making Firestore requests. 
+
+import NetInfo from "@react-native-community/netinfo";
+
+NetInfo.fetch().then((state) => {
+  if (state.isConnected) {
+    // Make Firestore request
+  } else {
+    console.warn("No network connection. Please check your internet connection.");
+  }
+});
+
+5. Offline data handling
+Offline Data Handling:
+Firestore has built-in support for offline data persistence, meaning it can cache data on the device and synchronize it with the server when the app is online again. To utilize this feature include this code:
+
+import firestore from '@react-native-firebase/firestore';
+
+// Enable offline data persistence
+firestore().enablePersistence()
+  .catch((error) => {
+    if (error.code === 'failed-precondition') {
+      console.warn("Multiple Firestore instances running.");
+    } else if (error.code === 'unimplemented') {
+      console.warn("Offline data persistence not supported.");
+    }
+  });
+
