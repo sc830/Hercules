@@ -97,6 +97,11 @@ and intended to complete rather than the work that was inaccessible due to the r
 Additionally, Kacy offered to help Aaron resolve the merge conflicts he was experiencing
 because he had no prior experience resolving them.
 
+Kacy hit a massive roadblock with not being able to run expo. This made it so she couldn't test
+what she was programming. She spent a lot of time trying to resolve it but since other team
+members were also struggling, we decided to pivot and cut out expo. Shelby is currently working
+on making it possible for our team to run the project without using expo.
+
 ### Assisting Teammates ###
 Kacy Metcalf is the only team member with experience using GitKraken so she spent several hours helping her 
 teammates resolve errors with it and to adjust to the GitKraken user interface. Kacy helped Kaleb who was
