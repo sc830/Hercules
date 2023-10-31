@@ -15,25 +15,53 @@ const WorkoutStackNavigator = () => (
     <Stack.Screen name="Workout" component={Workout} />
     <Stack.Screen name="workoutList" component={workoutList} />
     <Stack.Screen name="AddBreakfast" component={AddBreakfastScreen} />
+    <Stack.Screen name="AddLunch" component={AddLunchScreen} />
+    <Stack.Screen name="AddDinner" component={AddDinnerScreen} />
   </Stack.Navigator>
 );
 
 const WellnessScreen = ({ navigation }) => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <TouchableOpacity
-      style={{ backgroundColor: 'purple', padding: 10, borderRadius: 5 }}
+      style={{ backgroundColor: 'purple', padding: 10, borderRadius: 5, marginBottom: 10 }}
       onPress={() => navigation.navigate('AddBreakfast')}
     >
       <Text style={{ color: 'white' }}>Add Breakfast</Text>
     </TouchableOpacity>
+    <TouchableOpacity
+      style={{ backgroundColor: 'purple', padding: 10, borderRadius: 5 }}
+      onPress={() => navigation.navigate('AddLunch')}
+    >
+      <Text style={{ color: 'white' }}>Add Lunch</Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      style={{ backgroundColor: 'purple', padding: 10, borderRadius: 5 }}
+      onPress={() => navigation.navigate('AddDinner')}
+    >
+      <Text style={{ color: 'white' }}>Add Dinner</Text>
+    </TouchableOpacity>
   </View>
 );
+
 
 
 const AddBreakfastScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text>Add Breakfast Screen</Text>
     {/* Add the UI for adding breakfast details */}
+  </View>
+);
+
+const AddLunchScreen = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Add Lunch Screen</Text>
+    {/* Further implementation for adding lunch */}
+  </View>
+);
+const AddDinnerScreen = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Add Dinner Screen</Text>
+    {/* Further implementation for adding lunch */}
   </View>
 );
 
