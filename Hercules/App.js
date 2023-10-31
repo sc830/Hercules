@@ -2,32 +2,38 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import Workout from './Views/workout';  // Renamed to Workout
 import workoutList from './Views/workoutList';  // Changed to workoutList
 
 const Tab = createBottomTabNavigator();
-const WorkoutStack = createStackNavigator();  // This is for navigating between Workout and its details
+const Stack = createStackNavigator();  // A new stack for Munchies tab screens
 
-const WorkoutStackNavigator = () => {
-  return (
-    <WorkoutStack.Navigator initialRouteName="Workout" screenOptions={{ headerShown: false }}>
-      <WorkoutStack.Screen name="Workout" component={Workout} />
-      <WorkoutStack.Screen name="workoutList" component={workoutList} />
-    </WorkoutStack.Navigator>
-  );
-};
+const WorkoutStackNavigator = () => (
+  <Stack.Navigator initialRouteName="Workout" screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="Workout" component={Workout} />
+    <Stack.Screen name="workoutList" component={workoutList} />
+    <Stack.Screen name="AddBreakfast" component={AddBreakfastScreen} />
+  </Stack.Navigator>
+);
 
-const NutritionScreen = () => (
+const WellnessScreen = ({ navigation }) => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Nutrition Screen</Text>
+    <TouchableOpacity
+      style={{ backgroundColor: 'purple', padding: 10, borderRadius: 5 }}
+      onPress={() => navigation.navigate('AddBreakfast')}
+    >
+      <Text style={{ color: 'white' }}>Add Breakfast</Text>
+    </TouchableOpacity>
   </View>
 );
 
-const WellnessScreen = () => (
+
+const AddBreakfastScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Wellness Screen</Text>
+    <Text>Add Breakfast Screen</Text>
+    {/* Add the UI for adding breakfast details */}
   </View>
 );
 
@@ -35,7 +41,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Fitness"
+        initialRouteName="Muscles"
         screenOptions={{
           headerShown: false,
           tabBarActiveTintColor: 'gray',
@@ -48,7 +54,7 @@ const App = () => {
         }}
       >
         <Tab.Screen name="Muscles" component={WorkoutStackNavigator} />
-        <Tab.Screen name="Mind" component={NutritionScreen} />
+        <Tab.Screen name="Mind" component={WellnessScreen} />
         <Tab.Screen name="Munchies" component={WellnessScreen} />
       </Tab.Navigator>
     </NavigationContainer>
