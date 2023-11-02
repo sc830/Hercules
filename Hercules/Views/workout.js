@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+/**********************************************************************************************
+ * This file contains all of the programming for the initial page which contains
+ * the +Add Workout Day button. Go to workout.js and addRepsWeights.js for the later screens
+
+**********************************************************************************************/
+
 const WorkoutView = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation(); /* allows us to navigate to the workout.js file and from there the addRepsWeights.js file */
   const [showModal, setShowModal] = useState(false);
   const [splitName, setSplitName] = useState('');
   const [splits, setSplits] = useState([]);
