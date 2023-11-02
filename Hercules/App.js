@@ -1,5 +1,6 @@
 import React from 'react';
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -55,9 +56,8 @@ const MunchiesScreen = () => (
 );
 
 const App = async () => {
-  /* FIRESTORE ADD DOC EXAMPLE
   try {
-    const docRef = await addDoc(collection(db, "userData"), {   // adds docs to collection userData
+    const docRef = await addDoc(collection(db, "users"), {   // adds docs to collection userData
       first: "Ada",                                             // if it doesn't exist, creates collection userData
       last: "Lovelace",                                         // creates new collection with three documents:
       born: 1815                                                // first, last, and born
@@ -66,7 +66,6 @@ const App = async () => {
   } catch (e) {
     console.error("Error adding document: ", e);
   }
-  */
   return (
     <NavigationContainer>
       <Tab.Navigator
