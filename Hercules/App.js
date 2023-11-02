@@ -6,6 +6,7 @@ import { View, Text } from 'react-native';
 
 import Workout from './Views/workout'; // Renamed to Workout
 import workoutList from './Views/workoutList'; // Changed to workoutList
+import addRepsWeights from './Views/addRepsWeights';
 
 import Munchies from './Views/Munchies'; // Renamed to Workout
 import BreakfastScreen from './Views/BreakfastScreen';
@@ -19,6 +20,7 @@ const WorkoutStackNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="Workout" component={Workout} />
     <Stack.Screen name="workoutList" component={workoutList} />
+    <Stack.Screen name="addRepsWeights" component={addRepsWeights} />
   </Stack.Navigator>
 );
 
