@@ -58,7 +58,7 @@ const MunchiesScreen = () => (
   </Stack.Navigator>
 );
 
-const App = async () => {
+const App = () => {
   /* try {
     const docRef = await addDoc(collection(db, "users"), {   // adds docs to collection userData
       first: "Ada",                                             // if it doesn't exist, creates collection userData
