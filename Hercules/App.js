@@ -55,16 +55,18 @@ const MunchiesScreen = () => (
 );
 
 const App = async () => {
+  /* FIRESTORE ADD DOC EXAMPLE
   try {
-    const docRef = await addDoc(collection(db, "users"), {
-      first: "Ada",
-      last: "Lovelace",
-      born: 1815
-    });
+    const docRef = await addDoc(collection(db, "userData"), {   // adds docs to collection userData
+      first: "Ada",                                             // if it doesn't exist, creates collection userData
+      last: "Lovelace",                                         // creates new collection with three documents:
+      born: 1815                                                // first, last, and born
+    });                                                         // docRef is auto-generated 
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
+  */
   return (
     <NavigationContainer>
       <Tab.Navigator
