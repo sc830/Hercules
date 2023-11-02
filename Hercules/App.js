@@ -1,4 +1,5 @@
 import React from 'react';
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -40,7 +41,17 @@ const MunchiesScreen = () => (
   </Stack.Navigator>
 );
 
-const App = () => {
+const App = async () => {
+  try {
+    const docRef = await addDoc(collection(db, "users"), {
+      first: "Ada",
+      last: "Lovelace",
+      born: 1815
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
   return (
     <NavigationContainer>
       <Tab.Navigator
