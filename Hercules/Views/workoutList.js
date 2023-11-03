@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const WorkoutList = ({ route }) => {
   const { splitName } = route.params;
-
+  const navigation = useNavigation();
   const [workouts, setWorkouts] = useState([]);
   const [workoutName, setWorkoutName] = useState('');
   const [showRenameModal, setShowRenameModal] = useState(false);
@@ -43,7 +44,9 @@ const WorkoutList = ({ route }) => {
 
       {workouts.map((workout, index) => (
         <View key={index} style={styles.workoutContainer}>
-          <TouchableOpacity style={styles.workoutButton}>
+              
+          <TouchableOpacity style={styles.workoutButton} 
+            onPress={() => navigation.navigate('addRepsWeights', { workoutName: workout })}>
             <Text style={styles.workoutText}>{workout}</Text>
             <TouchableOpacity 
               style={styles.settingsButton} 
