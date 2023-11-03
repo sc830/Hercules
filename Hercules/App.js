@@ -58,9 +58,10 @@ const MunchiesScreen = () => (
   </Stack.Navigator>
 );
 
-const App = async () => {
-  /* try {
-    const docRef = await addDoc(collection(db, "users"), {   // adds docs to collection userData
+const App = () => {
+  /*
+  try {
+    const docRef = addDoc(collection(db, "users"), {   // adds docs to collection userData
       first: "Ada",                                             // if it doesn't exist, creates collection userData
       last: "Lovelace",                                         // creates new collection with three documents:
       born: 1815                                                // first, last, and born
@@ -68,7 +69,8 @@ const App = async () => {
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
-  } */
+  }
+  */
   return (
     <NavigationContainer>
       <Tab.Navigator
