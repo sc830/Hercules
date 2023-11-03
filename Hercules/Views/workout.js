@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import DraggableFlatList from 'react-native-draggable-flatlist';
 
 /**********************************************************************************************
  * This file contains all of the programming for the initial page which contains
@@ -18,43 +17,6 @@ const WorkoutView = () => {
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
   const [showDeleteOption, setShowDeleteOption] = useState(-1); 
-
-  
-  const renderItem = ({ item, index, drag, isActive }) => {
-    return (
-      <TouchableOpacity
-        onLongPress={drag} // Assign the drag function to the onLongPress event
-        disabled={isActive}
-        style={[
-          styles.splitButton,
-          isActive ? { backgroundColor: 'blue' } : {}, // Optional: change the style if the item is active (being dragged)
-        ]}
-      >
-        <Text style={styles.splitText}>{item}</Text>
-
-        <TouchableOpacity 
-          style={styles.settingsButton} 
-          onPress={() => {
-            setShowDeleteOption(index === showDeleteOption ? -1 : index);
-            setRenameIndex(index === renameIndex ? -1 : index);
-          }}
-        >
-          <Text style={styles.settingsText}>⚙️</Text>
-        </TouchableOpacity>
-  
-        {showDeleteOption === index && (
-          <View style={styles.buttonRow}>
-            <TouchableOpacity onPress={() => deleteSplit(index)} style={styles.actionButton}>
-              <Text style={styles.actionButtonText}>Delete</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleRenameOpen(index, item)} style={styles.actionButton}>
-              <Text style={styles.actionButtonText}>Rename</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </TouchableOpacity>
-    );
-  };
 
   const addSplit = () => {
     if (splitName) {
@@ -102,14 +64,37 @@ const WorkoutView = () => {
         <Button title=">" onPress={handleForward} />
       </View>
 
-      <DraggableFlatList
-        data={splits}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => `draggable-item-${index}`}
-        onDragEnd={({ data }) => setSplits(data)}
-      />
+      {splits.map((split, index) => (
+        <View key={index} style={styles.splitContainer}>
+          <TouchableOpacity
+            style={styles.splitButton}
+            onPress={() => navigation.navigate('workoutList', { splitName: split })}
+          >
+            <Text style={styles.splitText}>{split}</Text>
+            <TouchableOpacity 
+              style={styles.settingsButton} 
+              onPress={() => {
+                setShowDeleteOption(index === showDeleteOption ? -1 : index);
+                setRenameIndex(index === renameIndex ? -1 : index);
+              }}
+            >
+              <Text style={styles.settingsText}>⚙️</Text>
+            </TouchableOpacity>
+          </TouchableOpacity>
 
-      
+          {showDeleteOption === index && (
+            <View style={styles.buttonRow}>
+             <TouchableOpacity onPress={() => deleteSplit(index)} style={styles.actionButton}>
+                <Text style={styles.actionButtonText}>Delete</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleRenameOpen(index, split)} style={styles.actionButton}>
+                <Text style={styles.actionButtonText}>Rename</Text>
+            </TouchableOpacity>
+        </View>
+        
+          )}
+        </View>
+      ))}
 
       <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
         <Text style={styles.buttonText}>+ Add Workout Day</Text>
