@@ -23,7 +23,8 @@
     "react-native-web": "~0.19.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@types/react-native-draggable-flatlist": "^2.0.0"
   },
   "private": true
 }
