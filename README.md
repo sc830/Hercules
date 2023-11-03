@@ -102,6 +102,13 @@ what she was programming. She spent a lot of time trying to resolve it but since
 members were also struggling, we decided to pivot and cut out expo. Shelby is currently working
 on making it possible for our team to run the project without using expo.
 
+
+### Failed Attempts ###
+Kacy tried to create a function for the user to re-order workouts by dragging them but had extensive issues.
+Kacy hit a dead end and the team met and decided it was worth scrapping the idea for now to focus on other more important tasks
+now that others have done the code necessary for Kacy to get more work done. The error was more specifically that
+item was declared but never used (even though it was being used).
+
 ### Assisting Teammates ###
 Kacy Metcalf is the only team member with experience using GitKraken so she spent several hours helping her 
 teammates resolve errors with it and to adjust to the GitKraken user interface. Kacy helped Kaleb who was
