@@ -57,7 +57,7 @@ List of ready features:
 Kacy added a screenshot titled "kalebs code.jpg" to the Docs folder to recap the work she did to make it easier to understand how it runs.
 
 ### Project Status ###
-Project is: In progress
+Project is: In progress.
 
 ### Room for Improvement ###
 Areas for improvement:
