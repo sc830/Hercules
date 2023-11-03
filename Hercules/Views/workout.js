@@ -3,6 +3,7 @@ import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput,
 import { useNavigation } from '@react-navigation/native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 
+
 /**********************************************************************************************
  * This file contains all of the programming for the initial page which contains
  * the +Add Workout Day button. Go to workout.js and addRepsWeights.js for the later screens
