@@ -50,8 +50,8 @@ const MainTabs = () => {
       }}
     >
       <Tab.Screen name="Muscles" component={WorkoutStackNavigator} />
-      <Tab.Screen name="Munchies" component={MunchiesScreen} />
       <Tab.Screen name="Mind" component={MindScreen} />
+      <Tab.Screen name="Munchies" component={MunchiesScreen} />
     </Tab.Navigator>
   );
 };
