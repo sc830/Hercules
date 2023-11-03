@@ -22,6 +22,12 @@ const WorkoutStackNavigator = () => (
   </Stack.Navigator>
 );
 
+const MindScreen = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'black' }}>
+    <Text style={{ color: 'white' }}>Mind Screen</Text>
+  </View>
+);
+        
 const MunchiesScreen = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="Munchies" component={Munchies} />
@@ -45,6 +51,7 @@ const MainTabs = () => {
     >
       <Tab.Screen name="Muscles" component={WorkoutStackNavigator} />
       <Tab.Screen name="Munchies" component={MunchiesScreen} />
+      <Tab.Screen name="Mind" component={MindScreen} />
     </Tab.Navigator>
   );
 };
