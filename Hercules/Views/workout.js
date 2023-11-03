@@ -3,7 +3,6 @@ import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput,
 import { useNavigation } from '@react-navigation/native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 
-
 /**********************************************************************************************
  * This file contains all of the programming for the initial page which contains
  * the +Add Workout Day button. Go to workout.js and addRepsWeights.js for the later screens
@@ -19,6 +18,26 @@ const WorkoutView = () => {
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
   const [showDeleteOption, setShowDeleteOption] = useState(-1); 
+
+  const renderItem = ({ item, index, drag, isActive }) => {
+    return (
+      <TouchableOpacity
+        style={{
+          height: 100,
+          backgroundColor: isActive ? 'blue' : 'grey',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+        onLongPress={drag}
+      >
+        <Text style={{ fontWeight: 'bold', color: 'white' }}>{item}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const drag = () => {
+    // Define drag functionality or leave it to the DraggableFlatList to handle.
+  };
 
   const addSplit = () => {
     if (splitName) {
@@ -66,11 +85,25 @@ const WorkoutView = () => {
         <Button title=">" onPress={handleForward} />
       </View>
 
-      {splits.map((split, index) => (
+      <DraggableFlatList
+        data={splits}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => `draggable-item-${index}`}
+        onDragEnd={({ data }) => setSplits(data)}
+      />
+
+      {/* {splits.map((split, index) => (
         <View key={index} style={styles.splitContainer}>
+          <DraggableFlatList
+            data={splits}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => `draggable-item-${index}`}
+            onDragEnd={({ data }) => setSplits(data)}
+          />
           <TouchableOpacity
             style={styles.splitButton}
             onPress={() => navigation.navigate('workoutList', { splitName: split })}
+            onLongPress={drag}
           >
             <Text style={styles.splitText}>{split}</Text>
             <TouchableOpacity 
@@ -96,7 +129,7 @@ const WorkoutView = () => {
         
           )}
         </View>
-      ))}
+      ))} */}
 
       <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
         <Text style={styles.buttonText}>+ Add Workout Day</Text>
