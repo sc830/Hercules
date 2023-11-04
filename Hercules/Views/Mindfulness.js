@@ -7,11 +7,7 @@ import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 
 
 const Mindfulness = ({ navigation }) => {
-  const handleWater = () => {
-    navigation.navigate('waterScreen');
-  };
-
-  const handleTrackIntake = (itemType) => {
+    const handleTrackIntake = (itemType) => {
     navigation.navigate('TrackIntakeScreen', { itemType });
   };
 
@@ -19,7 +15,7 @@ const Mindfulness = ({ navigation }) => {
     <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: 'black' }}>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-      {/* Update the onPress for Water to pass the 'Water' string */}
+      {/* the three below texts add various trackers using TrackIntakeScreen.js*/}
         <TouchableOpacity onPress={() => handleTrackIntake('Creatine')} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%'  }}>
           <Text style={{ color: 'white', textAlign: 'center' }}>Creatine</Text>
         </TouchableOpacity>
