@@ -12,6 +12,8 @@ import Munchies from './Munchies';
 import BreakfastScreen from './BreakfastScreen';
 import LunchScreen from './LunchScreen';
 import DinnerScreen from './DinnerScreen';
+import Mindfulness from './Mindfulness'
+import TrackIntakeScreen from './TrackIntakeScreen' // used in Mindfulness
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -25,9 +27,13 @@ const WorkoutStackNavigator = () => (
 );
 
 const MindScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'black' }}>
-    <Text style={{ color: 'white' }}>Mind Screen</Text>
-  </View>
+  // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'black' }}>
+  //   <Text style={{ color: 'white' }}>Mind Screen</Text>
+  // </View>
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="Mindfulness" component={Mindfulness} />
+    <Stack.Screen name="TrackIntakeScreen" component={TrackIntakeScreen} />
+  </Stack.Navigator>
 );
         
 const MunchiesScreen = () => (
