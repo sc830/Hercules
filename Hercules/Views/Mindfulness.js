@@ -1,35 +1,51 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-
-// GOAL: add water, sleep, and creatine intake trackers
-
-
-
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 
 const Mindfulness = ({ navigation }) => {
     const handleTrackIntake = (itemType) => {
-    navigation.navigate('TrackIntakeScreen', { itemType });
-  };
+        navigation.navigate('TrackIntakeScreen', { itemType });
+    };
 
-  return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: 'black' }}>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    return (
+        <ScrollView contentContainerStyle={styles.container}>
+            <View style={styles.innerContainer}>
+                <TouchableOpacity onPress={() => handleTrackIntake('Creatine')} style={styles.button}>
+                    <Text style={styles.buttonText}>Creatine</Text>
+                </TouchableOpacity>
 
-      {/* the three below texts add various trackers using TrackIntakeScreen.js*/}
-        <TouchableOpacity onPress={() => handleTrackIntake('Creatine')} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%'  }}>
-          <Text style={{ color: 'white', textAlign: 'center' }}>Creatine</Text>
-        </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleTrackIntake('Sleep hours')} style={styles.button}>
+                    <Text style={styles.buttonText}>Sleep</Text>
+                </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handleTrackIntake('Sleep hours')} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%'  }}>
-          <Text style={{ color: 'white', textAlign: 'center' }}>Sleep</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleTrackIntake('Water Ounces')} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%'  }}>
-          <Text style={{ color: 'white', textAlign: 'center' }}>Water</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
-  );
+                <TouchableOpacity onPress={() => handleTrackIntake('Water Ounces')} style={styles.button}>
+                    <Text style={styles.buttonText}>Water</Text>
+                </TouchableOpacity>
+            </View>
+        </ScrollView>
+    );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flexGrow: 1,
+        backgroundColor: 'black'
+    },
+    innerContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    button: {
+        backgroundColor: 'purple',
+        padding: 20,
+        margin: 10,
+        borderRadius: 15,
+        width: '90%'
+    },
+    buttonText: {
+        color: 'white',
+        textAlign: 'center'
+    }
+});
 
 export default Mindfulness;
