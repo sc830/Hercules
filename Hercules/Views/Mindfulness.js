@@ -3,10 +3,21 @@ import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 
 // GOAL: add water, sleep, and creatine intake trackers
 
+
+
+
 const Mindfulness = ({ navigation }) => {
   const handleWater = () => {
     navigation.navigate('waterScreen');
   };
+
+  const handleTrackIntake = (itemType) => {
+    navigation.navigate('TrackIntakeScreen', { itemType });
+  };
+
+  // const handleTrackIntake = () => {
+  //   navigation.navigate('TackIntake');
+  // };
 
   const handleLunch = () => {
     navigation.navigate('LunchScreen');
@@ -19,6 +30,11 @@ const Mindfulness = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: 'black' }}>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+
+      {/* Update the onPress for Water to pass the 'Water' string */}
+        <TouchableOpacity onPress={() => handleTrackIntake('Creatine')} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%'  }}>
+          <Text style={{ color: 'white', textAlign: 'center' }}>Creatine</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity onPress={handleWater} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%' }}>
           <Text style={{ color: 'white', textAlign: 'center' }}>Water</Text>
