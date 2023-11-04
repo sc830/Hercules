@@ -13,6 +13,7 @@ import BreakfastScreen from './BreakfastScreen';
 import LunchScreen from './LunchScreen';
 import DinnerScreen from './DinnerScreen';
 import Mindfulness from './Mindfulness'
+import waterScreen from './waterScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -31,7 +32,7 @@ const MindScreen = () => (
   // </View>
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="Mindfulness" component={Mindfulness} />
-    <Stack.Screen name="BreakfastScreen" component={BreakfastScreen} />
+    <Stack.Screen name="waterScreen" component={waterScreen} />
     <Stack.Screen name="LunchScreen" component={LunchScreen} />
     <Stack.Screen name="DinnerScreen" component={DinnerScreen} />
   </Stack.Navigator>
