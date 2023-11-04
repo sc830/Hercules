@@ -40,6 +40,8 @@ const Mindfulness = ({ navigation }) => {
                     <Text style={styles.buttonText}>Add a Custom Tracker</Text>
                 </TouchableOpacity>
 
+                {/* User can add their own trackers */}
+
                 <Modal
                     animationType="slide"
                     transparent={true}
