@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Alert, Modal, TextInput  } from 'react-native';
 
 const Mindfulness = ({ navigation }) => {
 
@@ -7,23 +7,18 @@ const Mindfulness = ({ navigation }) => {
       navigation.navigate('TrackIntakeScreen', { itemType });
   };
 
-  const handleAddCustomTracker = () => {
-      Alert.prompt(
-          'New Custom Tracker',
-          'What do you want to track?',
-          [
-              {
-                  text: 'Cancel',
-                  style: 'cancel'
-              },
-              {
-                  text: 'Add',
-                  onPress: trackerName => handleTrackIntake(trackerName)
-              }
-          ],
-          'plain-text'
-      );
-  };
+  const [modalVisible, setModalVisible] = React.useState(false);
+    const [customTrackerName, setCustomTrackerName] = React.useState('');
+
+    const handleAddCustomTracker = () => {
+        setModalVisible(true);
+    };
+
+    const submitCustomTracker = () => {
+        handleTrackIntake(customTrackerName);
+        setModalVisible(false);
+        setCustomTrackerName('');
+    };
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -44,8 +39,33 @@ const Mindfulness = ({ navigation }) => {
                 <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
                     <Text style={styles.buttonText}>Add a Custom Tracker</Text>
                 </TouchableOpacity>
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => setModalVisible(false)}
+                >
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <TextInput
+                                style={styles.modalText}
+                                onChangeText={setCustomTrackerName}
+                                value={customTrackerName}
+                                placeholder="Enter custom tracker name"
+                            />
+                            <TouchableOpacity
+                                style={{ ...styles.button, backgroundColor: 'grey' }}
+                                onPress={submitCustomTracker}
+                            >
+                                <Text style={styles.buttonText}>Submit</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </Modal>
             </View>
         </ScrollView>
+
     );
 };
 
@@ -69,7 +89,34 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         textAlign: 'center'
-    }
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+      },
+      modalView: {
+        margin: 20,
+        backgroundColor: "purple",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5
+      },
+      modalText: {
+        marginBottom: 15,
+        color: 'white',
+        textAlign: "center"
+      }
+
 });
 
 export default Mindfulness;
