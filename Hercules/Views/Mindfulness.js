@@ -114,9 +114,18 @@ const styles = StyleSheet.create({
         elevation: 5
       },
       modalText: {
-        marginBottom: 15,
-        color: 'white',
-        textAlign: "center"
+        height: 40, // Set a fixed height for the text input
+        marginTop: 20, // Add some space at the top if needed
+        marginBottom: 15, // Keep your bottom margin to space things out
+        paddingHorizontal: 10, // Add some horizontal padding
+        paddingVertical: 5, // Add some vertical padding if needed
+        borderColor: 'black', // A border color to make the text input stand out
+        borderWidth: 1, // Width of the border to make it visible
+        borderRadius: 5, // Round the corners of the text input
+        color: 'white', // Color of the input text
+        fontSize: 16, // Increase font size if needed
+        width: '100%', // Set width to occupy 80% of the modal view width or adjust as needed
+        textAlign: "center", // Center the placeholder and input text
       }
 
 });
