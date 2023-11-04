@@ -10,7 +10,7 @@ const TrackIntakeScreen = ({ navigation, route }) => {
   // Extract itemType from route parameters
   const { itemType } = route.params;
 
-  const handleAdd = () => {
+  const handleAddItem = () => {
     setModalVisible(true);
     setSelectedItem(null);
   };
@@ -44,7 +44,7 @@ const TrackIntakeScreen = ({ navigation, route }) => {
     <View style={{ flex: 1, backgroundColor: 'black' }}>
       <ScrollView>
         <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity onPress={handleAdd} style={{ backgroundColor: 'purple', padding: 20, margin: 20, width: '80%' }}>
+          <TouchableOpacity onPress={handleAddItem} style={{ backgroundColor: 'purple', padding: 20, margin: 20, width: '80%' }}>
             <Text style={{ color: 'white', textAlign: 'center' }}>Add {itemType} Intake</Text>
           </TouchableOpacity>
         </View>

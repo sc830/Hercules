@@ -15,18 +15,6 @@ const Mindfulness = ({ navigation }) => {
     navigation.navigate('TrackIntakeScreen', { itemType });
   };
 
-  // const handleTrackIntake = () => {
-  //   navigation.navigate('TackIntake');
-  // };
-
-  const handleLunch = () => {
-    navigation.navigate('LunchScreen');
-  };
-
-  const handleDinner = () => {
-    navigation.navigate('DinnerScreen');
-  };
-
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: 'black' }}>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -36,16 +24,12 @@ const Mindfulness = ({ navigation }) => {
           <Text style={{ color: 'white', textAlign: 'center' }}>Creatine</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleWater} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%' }}>
+        <TouchableOpacity onPress={() => handleTrackIntake('Sleep hours')} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%'  }}>
+          <Text style={{ color: 'white', textAlign: 'center' }}>Sleep</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handleTrackIntake('Water Ounces')} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%'  }}>
           <Text style={{ color: 'white', textAlign: 'center' }}>Water</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={handleLunch} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%' }}>
-          <Text style={{ color: 'white', textAlign: 'center' }}>Lunch</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={handleDinner} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%' }}>
-          <Text style={{ color: 'white', textAlign: 'center' }}>Dinner</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
