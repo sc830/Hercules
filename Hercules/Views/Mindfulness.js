@@ -1,10 +1,29 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native';
 
 const Mindfulness = ({ navigation }) => {
-    const handleTrackIntake = (itemType) => {
-        navigation.navigate('TrackIntakeScreen', { itemType });
-    };
+
+  const handleTrackIntake = (itemType) => {
+      navigation.navigate('TrackIntakeScreen', { itemType });
+  };
+
+  const handleAddCustomTracker = () => {
+      Alert.prompt(
+          'New Custom Tracker',
+          'What do you want to track?',
+          [
+              {
+                  text: 'Cancel',
+                  style: 'cancel'
+              },
+              {
+                  text: 'Add',
+                  onPress: trackerName => handleTrackIntake(trackerName)
+              }
+          ],
+          'plain-text'
+      );
+  };
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -19,6 +38,11 @@ const Mindfulness = ({ navigation }) => {
 
                 <TouchableOpacity onPress={() => handleTrackIntake('Water Ounces')} style={styles.button}>
                     <Text style={styles.buttonText}>Water</Text>
+                </TouchableOpacity>
+
+                {/* Add custom tracker button */}
+                <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
+                    <Text style={styles.buttonText}>Add a Custom Tracker</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
