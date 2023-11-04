@@ -8,7 +8,8 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome to Your App!</Text>
+      <Text style={styles.text}>Welcome to Hercules</Text>
+      <Text style={styles.text}>Become The Better Version Of You</Text>
       <Button title="Get Started" onPress={navigateToApp} />
     </View>
   );
