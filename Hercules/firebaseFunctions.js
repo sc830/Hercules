@@ -15,11 +15,35 @@ const signUp = async (email, password, username) => {
       last_login: dt.toISOString(),
     });
 
+        // made basic format for saving data here, 
+        // can access buttons and add more for each day and whatnot
+        // thinking a collection for each day can add in a function for days
+        // calls day checks if a collection for day is made already if so
+        // add the data to that day collection, if not crates a new day 
+        // under that collection
+        // or we can have a string with it as (food, calories, day)
+        // and just split the string at the commas and work with that
+    const workoutsData = {
+      exampleField: 'Example Workouts Data'
+    };
+    await setDoc(doc(db, 'workouts', user.uid), workoutsData);
+
+    const mindData = {
+      exampleField: 'Example Mind Data'
+    };
+    await setDoc(doc(db, 'mind', user.uid), mindData);
+
+    const munchiesData = {
+      exampleField: 'Example Moooonchies Data'
+    };
+    await setDoc(doc(db, 'munchies', user.uid), munchiesData);
+
     return user;
   } catch (error) {
     throw new Error(error.message);
   }
 };
+
 
 const login = async (email, password) => {
   try {
