@@ -232,3 +232,9 @@ I could have communicated the ideas I have for the app better and commented on m
 ### What can I do to improve (Julio): ###
 -I can work on properly branching my tasks and giving them the propper allocated hours as they were severly under estemated. I can also look for different methods if one is taking too long 
 for example how firebase integration is taking so long, I can look for other methods to integrate databases.
+
+
+### Julio Cantu Sprint 2 ###
+In the developement of the Hercules app durring the second sprint, I was first tasked with making the back end for saving data and reading the data yet there was some miscommunication and i was waiting on my tasks until a certain task was done so i could complete mine, and after a while of having the road block and talking my task was switched to local storage, then again to personal user accounts, another issue I was having was that expo would not run on my phone and this wasnt fixed until near the end of the sprint where i was told to use the web version, after such i was able to get my tasks completed. What I have done is revised the app.js to make it look more clean and better support multiple screens so I could make a landing page for the login function for the users, then I went about making the 2 functions "signup and login" where when you sign up it makes your own location in the database for "mind, munchies, and workouts", following that I made it to where the user has to create a "strong password" which must consist of 1 upper and lower case letter, a number, a special character, and must be atleast 8 characters long.
+
+### Here are the links for my major commits: ###
