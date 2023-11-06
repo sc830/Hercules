@@ -54,10 +54,10 @@ List of ready features:
 - Mindfulness section for tracking meditation and water intake.
 
 ### Screenshots ###
-[Insert relevant screenshots here]
+Kacy added a screenshot titled "kalebs code.jpg" to the Docs folder to recap the work she did to make it easier to understand how it runs.
 
 ### Project Status ###
-Project is: In progress
+Project is: In progress.
 
 ### Room for Improvement ###
 Areas for improvement:
@@ -101,6 +101,13 @@ Kacy hit a massive roadblock with not being able to run expo. This made it so sh
 what she was programming. She spent a lot of time trying to resolve it but since other team
 members were also struggling, we decided to pivot and cut out expo. Shelby is currently working
 on making it possible for our team to run the project without using expo.
+
+
+### Failed Attempts ###
+Kacy tried to create a function for the user to re-order workouts by dragging them but had extensive issues.
+Kacy hit a dead end and the team met and decided it was worth scrapping the idea for now to focus on other more important tasks
+now that others have done the code necessary for Kacy to get more work done. The error was more specifically that
+item was declared but never used (even though it was being used).
 
 ### Assisting Teammates ###
 Kacy Metcalf is the only team member with experience using GitKraken so she spent several hours helping her 
@@ -225,3 +232,9 @@ I could have communicated the ideas I have for the app better and commented on m
 ### What can I do to improve (Julio): ###
 -I can work on properly branching my tasks and giving them the propper allocated hours as they were severly under estemated. I can also look for different methods if one is taking too long 
 for example how firebase integration is taking so long, I can look for other methods to integrate databases.
+
+
+### Julio Cantu Sprint 2 ###
+In the developement of the Hercules app durring the second sprint, I was first tasked with making the back end for saving data and reading the data yet there was some miscommunication and i was waiting on my tasks until a certain task was done so i could complete mine, and after a while of having the road block and talking my task was switched to local storage, then again to personal user accounts, another issue I was having was that expo would not run on my phone and this wasnt fixed until near the end of the sprint where i was told to use the web version, after such i was able to get my tasks completed. What I have done is revised the app.js to make it look more clean and better support multiple screens so I could make a landing page for the login function for the users, then I went about making the 2 functions "signup and login" where when you sign up it makes your own location in the database for "mind, munchies, and workouts", following that I made it to where the user has to create a "strong password" which must consist of 1 upper and lower case letter, a number, a special character, and must be atleast 8 characters long.
+
+### Here are the links for my major commits: ###

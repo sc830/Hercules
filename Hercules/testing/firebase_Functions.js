@@ -1,8 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
-import { getDatabase, set, ref, child,onValue, get, update } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-database.js";
-import { getAuth, RecaptchaVerifier, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-auth.js";
-
-
+import { getFirestore } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
