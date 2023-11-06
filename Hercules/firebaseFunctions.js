@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
 import { db, authInstance } from './firebaseConfig';
+import { Alert } from 'react-native';
 
 // where all valid special characters are held for password useage
 function containsSpecialChars(str) {
@@ -9,32 +10,20 @@ function containsSpecialChars(str) {
 }
 
 const signUp = async (email, password, username) => {
+  
+  
   try {
-    const passwordCandidate = password.toISOString();
-    if(passwordCandidate.length<8)
-    {
-        alert("Must be at least 8 characters")
-        return
+    console.log("Password:", password);
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]).{8,}$/;
+    console.log("Regex Test Result:", passwordRegex.test(password));
+    if (!passwordRegex.test(password)) {
+      const errorMessage = "Password must be at least 8 characters, contain one lowercase letter, one uppercase letter, one number, and one special character.";
+      Alert.alert("Error", errorMessage);
+      throw new Error(errorMessage);
     }
-    // to have password contain atleast one capital letter
-    if(passwordCandidate.toLowerCase()==passwordCandidate)
-    {
-        alert("Must contain one Capital Letter")
-        return
-    }
-    // to have password contain on elowercase letter
-    if(passwordCandidate.toUpperCase()==passwordCandidate)
-    {
-        alert("Must contain one Lowercase Letter")
-        return
-    }
-    // to require password to contain one special character
-    if(!containsSpecialChars(passwordCandidate))
-    {
-        alert("Must Contain One Special Character !@#$%+")
-        return
-    }
+    
     const userCredential = await createUserWithEmailAndPassword(authInstance, email, password);
+    Alert.alert("Signup Succesfull!");
     const user = userCredential.user;
 
     const dt = new Date();
