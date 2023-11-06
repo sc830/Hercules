@@ -2,8 +2,38 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
 import { db, authInstance } from './firebaseConfig';
 
+// where all valid special characters are held for password useage
+function containsSpecialChars(str) {
+  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  return specialChars.test(str);
+}
+
 const signUp = async (email, password, username) => {
   try {
+    const passwordCandidate = password.toISOString();
+    if(passwordCandidate.length<8)
+    {
+        alert("Must be at least 8 characters")
+        return
+    }
+    // to have password contain atleast one capital letter
+    if(passwordCandidate.toLowerCase()==passwordCandidate)
+    {
+        alert("Must contain one Capital Letter")
+        return
+    }
+    // to have password contain on elowercase letter
+    if(passwordCandidate.toUpperCase()==passwordCandidate)
+    {
+        alert("Must contain one Lowercase Letter")
+        return
+    }
+    // to require password to contain one special character
+    if(!containsSpecialChars(passwordCandidate))
+    {
+        alert("Must Contain One Special Character !@#$%+")
+        return
+    }
     const userCredential = await createUserWithEmailAndPassword(authInstance, email, password);
     const user = userCredential.user;
 
