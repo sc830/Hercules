@@ -1,10 +1,29 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
 import { db, authInstance } from './firebaseConfig';
+import { Alert } from 'react-native';
+
+// where all valid special characters are held for password useage
+function containsSpecialChars(str) {
+  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  return specialChars.test(str);
+}
 
 const signUp = async (email, password, username) => {
+  
+  
   try {
+    console.log("Password:", password);
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]).{8,}$/;
+    console.log("Regex Test Result:", passwordRegex.test(password));
+    if (!passwordRegex.test(password)) {
+      const errorMessage = "Password must be at least 8 characters, contain one lowercase letter, one uppercase letter, one number, and one special character.";
+      Alert.alert("Error", errorMessage);
+      throw new Error(errorMessage);
+    }
+    
     const userCredential = await createUserWithEmailAndPassword(authInstance, email, password);
+    Alert.alert("Signup Succesfull!");
     const user = userCredential.user;
 
     const dt = new Date();
