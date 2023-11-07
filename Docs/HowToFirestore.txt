@@ -1,10 +1,5 @@
 
-
-To reference a specific document:
-    DocumentReference documentRef = db.Document("users/alovelace");
-
-    
-const db = getFirestore(app);
+How to find a user's folder:
 
 db.collection("users").doc("name@xxx.com").get().then(function (doc) {
     if (doc && doc.exists) {
@@ -16,3 +11,49 @@ db.collection("users").doc("name@xxx.com").get().then(function (doc) {
         });
     }
 });
+
+
+To reference a specific document:
+    DocumentReference documentRef = db.Document("userData/alovelace");
+    In this example, "userData" is a collection (folder) and "alovelace" is also a collection(folder)
+    with subcollections and documents inside of it that can be accessed.
+
+READING DOCUMENTS:
+    
+const db = getFirestore(app);      must be declared before referencing Firestore docs or collections
+It gets our Firestore info - then collections can be referenced by:
+
+const docRef = doc(db, "user1", "muscles", "Bench Press");    where db has been declared as Firestore reference, "user1" is a collection for a particular user, 
+                                                              "muscles" is a subcollection within "user1," and "Bench Press" is a document within the "muscles" subcollection
+const docSnap = await getDoc(docRef);      now docSnap is a reference to the collection "muscles" for "user1." must use "await" to and "if docSnap.exists()" to prevent errors.
+                                           docRef and docSnap can use other names, such as exerciseFolderReference or userReference
+if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data());    
+} else {
+  // docSnap.data() will be undefined in this case
+  console.log("No such document!");
+}
+
+
+WRITING OR CHANGING DOCS:
+
+// if this document doesn't already exist, it will create it
+// if it does exist, it will be completely overwritten: make sure to specify all values,
+// even if only one is being changed
+await setDoc(doc(db, "user1", "muscles", "Deadlift"), {
+  weight: 160,
+  reps: 6,
+  sets: 3,
+  split: "Back",
+});
+
+DELETING DOCUMENTS:
+
+await deleteDoc(doc(db, "user1"));      // deletes all of user1's data
+
+await deleteDoc(doc(db, "user1", "muscles", "Bench Press));      // deletes user1's copy of "Bench Press"
+
+
+
+Additional documentation/references:
+https://cloud.google.com/firestore/docs/query-data/get-data

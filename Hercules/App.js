@@ -1,4 +1,9 @@
 import React from 'react';
+import { getFirestore } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { initializeApp } from "firebase/app";
+import { AppRegistry } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './Views/Login';
