@@ -48,7 +48,7 @@ const signUp = async (email, password, username) => {
     userid = user.uid;
     const dt = new Date();
 
-    await setDoc(doc(db, 'users', user.uid), {
+    await setDoc(doc(db, 'userData', user.uid), {
       username: username,
       email: email,
       last_login: dt.toISOString(),
@@ -93,7 +93,7 @@ const login = async (email, password) => {
 
     const dt = new Date();
 
-    await setDoc(doc(db, 'users', user.uid), {
+    await setDoc(doc(db, 'userData', user.uid), {
       last_login: dt.toISOString(),
     });
 
