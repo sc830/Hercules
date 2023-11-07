@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
+import { saveMeal } from '../firebaseFunctions';
 
 const BreakfastScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -12,16 +13,28 @@ const BreakfastScreen = ({ navigation }) => {
     setSelectedMeal(null);
   };
 
+  const handleSaveMealFirebase = async () => {
+    try {
+      const mealData = { meal: meal };
+      const response = await saveMeal( mealData, 'breakfeast');
+      console.log(response);
+    } catch (error) {
+      console.log('Save meal Error:', error);
+    }
+  };
+
   const handleSaveMeal = () => {
     if (selectedMeal !== null) {
       const updatedList = mealList.map((m) => (m === selectedMeal ? meal : m));
       setMealList(updatedList);
       setModalVisible(false);
       setSelectedMeal(null);
+      handleSaveMealFirebase();
     } else {
       setMealList([...mealList, meal]);
       setMeal('');
       setModalVisible(false);
+      handleSaveMealFirebase();
     }
   };
 

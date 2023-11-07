@@ -1,8 +1,27 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
-import { db, authInstance } from './firebaseConfig';
+import { collection, addDoc, doc, setDoc, getDoc } from 'firebase/firestore';
+//import { db, authInstance } from './firebaseConfig';
 import { Alert } from 'react-native';
 
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCoxkZvQiNLd-wZrqSJB8dKE2EyHJ11O8U",
+  authDomain: "hercules-fc42e.firebaseapp.com",
+  projectId: "hercules-fc42e",
+  storageBucket: "hercules-fc42e.appspot.com",
+  messagingSenderId: "501456721475",
+  appId: "1:501456721475:web:7cc30d4a6c8f34320826f6"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const authInstance = getAuth();
+
+let userid = '';
 // where all valid special characters are held for password useage
 function containsSpecialChars(str) {
   const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -25,7 +44,8 @@ const signUp = async (email, password, username) => {
     const userCredential = await createUserWithEmailAndPassword(authInstance, email, password);
     Alert.alert("Signup Succesfull!");
     const user = userCredential.user;
-
+    
+    userid = user.uid;
     const dt = new Date();
 
     await setDoc(doc(db, 'users', user.uid), {
@@ -69,6 +89,8 @@ const login = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(authInstance, email, password);
     const user = userCredential.user;
 
+    userid = user.uid;
+
     const dt = new Date();
 
     await setDoc(doc(db, 'users', user.uid), {
@@ -81,4 +103,17 @@ const login = async (email, password) => {
   }
 };
 
-export { signUp, login };
+const saveMeal = async (mealData, mealType) => {
+  try {
+    const dt = new Date();
+    const mealsCollectionRef = collection(db, 'userData', userid, 'munchies', mealType, dt.toISOString());
+    await addDoc(mealsCollectionRef, mealData);
+    return "Meal saved successfully";
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+
+
+export { signUp, login, saveMeal };
