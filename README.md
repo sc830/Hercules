@@ -244,15 +244,84 @@ In the developement of the Hercules app durring the second sprint, I was first t
 Much of this sprint was spent troubleshooting our web application in order to make it functional; this took an extremely long time, despite my references to official documentation, ChatGPT, and even contacting an expert in Firebase and ReactNative integration. Unfortunately, in the end, we decided to abandon the idea of Firebase hosting for a website and instead are relying on Expo, as before, for our web application. After this, my tasks were re-evaluated and I began working on our Firestore setup and creating templates and documentation for my teammates on the frontend side of things to use when reading data from Firestore to display in the app. A major issue in this sprint for me is that I failed to initially name my branches with Jira's naming convention for task tracking and making new branches for every task. This was worsened by having to revise my tasks based on how long they actually took me/create new tasks for step-by-step troubleshooting with each individual file. While I attempted to change the names of the branches when able and to add the task identifier to the commit messages, I had major problems with this as well and ended up adding tags to the Git graph and notes in Jira to show where my work is located.
 
 ### Tasks: ###
-Web App Creation: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-98
-***Related to this branch, FirebaseTestingSetup: https://bitbucket.org/cs3398f23changelings/hercules/branch/FirebaseTestingSetup
-and this initial creation/commit of ExtremeFirebaseTesting: https://bitbucket.org/cs3398f23changelings/hercules/commits/a3a5bfc27384acd9153268392c471340af03472b
+SCRUM-98 Reset project to empty Firebase
+- Examined each project file and emptied project of all but essential files
+- Created and configured new Firebase project in console
+- Acquired configuration info for next task
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-98
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/commits/a3a5bfc27384acd9153268392c471340af03472b
 
-Web App Troubleshooting:
-https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-149
-https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-106
-https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-107
-***These tasks are related to commits in ExtremeFirebaseTesting: https://bitbucket.org/cs3398f23changelings/hercules/branch/ExtremeFirebaseTesting
+SCRUM-106 Add in App.js file to empty Firebase branch
+- Added old App.js file into new Firebase branch and modify to integrate with new project
+- Implemented Firebase config data, initialized Firebase hosting and Firestore storage
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-106
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/commits/66cee211e8eec26b6e26c3ab878c93bcb051cf17
 
-Firestore revision/setup: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c8
+SCRUM-107 Add in index.js file to empty Firebase branch
+- Added old index.js file into new Firebase branch and modified it to integrate with new project and modified App.js
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-107
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/commits/ffda5881cf7bbbe0d5fbd3a28946b1c3aada0109
+
+SCRUM-149 Make literally anything show up on web version
+- Conduct research, read documentation, examine errors, and make modifications to code to make simple "Hello World" display on a local web host
+- Included difficulties in configuring index.js, application entry point for web, routing errors within App.js
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-149
+**No associated commit because this task was a prerequisite for SCRUM-150 and committed there (see below)
+**(I didn't want to create a commit that only displayed "Hello World" in case it caused confusion later)
+
+SCRUM-150 Display old version on web
+- Replaced basic Hello World testing file with group-written App.js file
+- Examined errors within App.js and troubleshoot (included missing imports, improper references to docs, and modifying directory organization)
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&selectedIssue=SCRUM-150
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/commits/d233cb9feaf157bbf18a4286ca83a2c4f221b77e
+
+SCRUM-151 Update web app to newest version 
+- Merged updated main into fixed Firebase branch and thoroughly error-tested
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&selectedIssue=SCRUM-151
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/commits/448e27ff7458d4fa9391c44c558f807b049d74a1
+
+SCRUM-96 Set up user folders in Firestore
+Evaluate, optimize, and re-organize Firestore layout to most efficiently save/organize/read user info.
+- Separated storage for each set, allowing each set to have a different number of weights/reps compatible with frontend dev
+- Organized exercises into collections for each "split," compatible with frontend (arms, legs, etc.)
+- Added documents to example user's folder for preferred weight units and unique userID
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-96
+Screenshots: https://docs.google.com/document/d/1m1fQJ33TjmlPJa3884SDdGtL08XW-6r8vYVUvxGLjhs/edit?usp=sharing
+
+SCRUM-155 Be able to write docs in Firestore
+- Found and modified Firestore documentation to fit project and provide annotated examples
+- Created HowToFirestore.txt document for group reference about how to read/write Firestore data
+- Successfully implemented example document creation upon app initialization
+- Patched document creation code to prevent error causing GUI to not be displayed
+- Explained to group members how to use Firestore layout
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-155
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/pull-requests/63
+Photo of testing: https://docs.google.com/document/d/1LUYrOjIuovRgE-hxvsI37a7wsaH4i05W2PEbYbMdTsE/edit?usp=sharing
+
+### What Went Well? ###
+- Firebase troubleshooting/experience
+- Firestore management, research, and integration
+Although I had an extremely frustrating start, by the end of this sprint I've learned a lot about reading/writing to Firestore, which I think is really cool! I have a pretty good understanding of how to manage a Firestore database and how to integrate different parts of it with our application. Even though we didn't end up using Firebase hosting, I did gain a lot of experience in common issues with Firebase/React Native integration and learned from an expert regarding the organization, structure, and function of Firestore features and configuration.
+
+### What Didn't Go Well? ###
+- Work wasted ):
+- Still not great team communication (at least for backend)
+I jumped the gun on creating my Firebase testing branch a few days before the sprint actually started, and continued working on that branch rather than creating branches with my task names so that they could be tracked in Jira. This was an oversight on my part as I didn't anticipate that the Firebase testing would take up so much of my time and so many tasks (my tasks were modified a week into the sprint to better reflect this) and it has caused me a lot of grief in terms of being able to track down my old work both to show my team and for our standup/retrospective. Additionally, I spent a ton of time on the Firebase testing and we didn't end up using it, as we abandoned the idea of Firebase hosting once it became clear that troubleshooting the web display every time a new feature is integrated would make us unable to complete the app's functionality in our last sprint.
+
+### What Can I Do to Improve? ###
+- Commit more often for better work tracking
+- Ensure branches are named correctly and separate branches are made for each task
+- Meet more often with group
+I will know I am doing this better when my work is apparent in the Jira board and it is easier to find/organize in next sprint's retrospective. We will know communication is better when our team is able to integrate our features in a timely manner when they are completed, and when each team member understands and is able to explain each component of the project.
+
+### Next Steps ###
+In the next sprint, I hope to add in the backend storage functionality for each of the buttons so that data can be saved between sessions in the correct place. Additionally, I hope to create the access rules for Firestore in order to switch our app off of testing mode, work with Julio to initialize users' folders with preset workouts and foods, and flesh out the organization scheme for our "Mindfulness" habit tracker, as the group hasn't thoroughly discussed how this feature will work or be tracked.
+
+
+
+### TEAM PORTION ###
+What Went Well (or not)?
+- Spent a lot of time working on branches/features that were incompatible, caused degradation of other features, or was decided not to be implemented
+What might be impeding us from doing better?
+- Could use better communication, but our schedules aren't very compatible
 
