@@ -478,34 +478,43 @@ Integrate the API for the Munchies section to pull info from a database in the r
 We were able to accomplish a faily decent amount of UI design during sprint 2, even after running into multiple blocks that we were able to overcome.
 Once we were able to decide on doing local storage we were able to get Firestore setup and running at the very end of the sprint.
 
-Aaron and Kaleb work well together on the front end. Julio and Shelby got a lot done on the backend. They've been working on it this whole time
-but this happened to be when their work paid off so we could see the results of it. Kacy did well at being a floater/neutral party who could help as needed. (Kacy)
+Aaron and Kaleb work well together on the front end. Julio and Shelby got a lot done on the backend. They've been working on it this whole time but this happened to be when their work paid off so we could see the results of it. Kacy did well at being a floater/neutral party who could help as needed. (Kacy)
 
-we were able to get the application testing on all team members devices near the end of the sprint, so now all team members can now do their work in an orderly fashion.
+We were able to get the application testing on all team members devices near the end of the sprint, so now all team members can now do their work in an orderly fashion.
+
+
 
 ### What did not go well(TEAM): ###
 It took us till the end of sprint 2 to get any of the backend working, although, now it does seem to be working and we can move forward.
 
+Still experienced some difficult in this sprint with team members being able to have a development/testing version of the application that runs on their devices, which was thankfully resolved about halfway through the sprint. Unfortunately it's still a tiny bit finicky - a single syntax error can make the site fail to display and is time-consuming to troubleshoot.
 
-There was often extreme lack of understanding and miscommunication. I believe people let their frustrations and own experiences cloud
-their ability to understand other's perspectives. Not all the work we do is the same, and even if it were, different people have different strong suits.
+Being unfamiliar with frontend React Native code and being unable to contact frontend developers made it difficult to implement backend functionality in GUI. Code should be documented and/or explained to team.
+
+There was often extreme lack of understanding and miscommunication. I believe people let their frustrations and own experiences cloud their ability to understand other's perspectives. Not all the work we do is the same, and even if it were, different people have different strong suits.
 We would do much better if we all took a breath and tried to understand the other person and be supportive rather than condescending. 
 Having reminders of the deadline can be helpful but having our struggles dismissed and our accomplished work minimized creates a toxic work environment.
 Additionally, Julio, Shelby, and Kacy had extensive problems with Expo and couldn't run the project half of the time which made it very difficult to get
-tasks done since we couldn't see what we were doing. It's also vital people not leave our team meetings early because when we vocalized that we were
-struggling with different aspects, no one who knew how to do it was there to help. As is said in class, we need great team members more than we need 
-great programmers. (Kacy)
+tasks done since we couldn't see what we were doing. It's also vital people not leave our team meetings early because when we vocalized that we were struggling with different aspects, no one who knew how to do it was there to help. As is said in class, we need great team members more than we need great programmers. (Kacy)
 
-Communication still needs to get better as its detremental to the whole group.
+Communication still needs to get better as its detremental to the whole group. Very few team meetings because members often had to leave early when we had time during/after class or didn't show during our scheduled Sunday meetings. Communication between front and back end is not great and a bit tense. We could do well with more respect for each other within the team and improving our understanding that we're working toward a common goal, and should ALL be involved in communicating about, planning for, and reaching it. The work that we do enables each other to do their best work as well.
 
 ### What Might Be Impeding Us from Performing Better? ###
 Difficulties communicating between teammates.
+Communication and procrastination. Once we can all finally sit down and work on what we are doing, we made strides.
+Team respect, understanding, and cohesiveness.
+
 ### What can I do to Improve (Aaron): ###
 I learned a lot from sprint 1 from a GitKraken standpoint, however, I did make a few mistakes this sprint that resulted in merge conflicts. I need to improve this, as it halts us from working for a little bit.
 ### What can I do to Improve (Kacy): ###
 Communicate more when I have a roadblock to find out if I can help someone else. I only asked one person if they needed help before Dr. Lehr suggested
 I take a different person's tasks. Had I communicated more I would have known that even though that person declined, there were still others I could assist.
+
 ### What can I do to improve (Shelby): ###
+- Commit more often for better work tracking
+- Ensure branches are named correctly and separate branches are made for each task
+- Meet more often with group
+I will know I am doing this better when my work is apparent in the Jira board and it is easier to find/organize in next sprint's retrospective. We will know communication is better when our team is able to integrate our features in a timely manner when they are completed, and when each team member understands and is able to explain each component of the project.
 
 ### What can I do to improve (Kaleb): ###
 Help keep the team motivated and working on tasks, schedule more meetings, be more vocal about the work that needs to get done and when.
