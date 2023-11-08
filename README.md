@@ -308,6 +308,9 @@ SCRUM-85
 - fix app.js for authentication
 https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/pull-requests/54
 
+### Next Steps ###
+I will be working with shelby in integrating and getting the backend functions working, and to hopefully get the final product launched.
+
 ### Shelby Cumings Sprint 2 ###
 Much of this sprint was spent troubleshooting our web application in order to make it functional; this took an extremely long time, despite my references to official documentation, ChatGPT, and even contacting an expert in Firebase and ReactNative integration. Unfortunately, in the end, we decided to abandon the idea of Firebase hosting for a website and instead are relying on Expo, as before, for our web application. After this, my tasks were re-evaluated and I began working on our Firestore setup and creating templates and documentation for my teammates on the frontend side of things to use when reading data from Firestore to display in the app. A major issue in this sprint for me is that I failed to initially name my branches with Jira's naming convention for task tracking and making new branches for every task. This was worsened by having to revise my tasks based on how long they actually took me/create new tasks for step-by-step troubleshooting with each individual file. While I attempted to change the names of the branches when able and to add the task identifier to the commit messages, I had major problems with this as well and ended up adding tags to the Git graph and notes in Jira to show where my work is located.
 
