@@ -491,11 +491,13 @@ Still experienced some difficult in this sprint with team members being able to 
 
 Being unfamiliar with frontend React Native code and being unable to contact frontend developers made it difficult to implement backend functionality in GUI. Code should be documented and/or explained to team.
 
-There was often extreme lack of understanding and miscommunication. I believe people let their frustrations and own experiences cloud their ability to understand other's perspectives. Not all the work we do is the same, and even if it were, different people have different strong suits.
+There was often extreme lack of understanding and miscommunication. I believe people let their frustrations and own experiences cloud their ability to 
+understand other's perspectives. Not all the work we do is the same, and even if it were, different people have different strong suits.
 We would do much better if we all took a breath and tried to understand the other person and be supportive rather than condescending. 
 Having reminders of the deadline can be helpful but having our struggles dismissed and our accomplished work minimized creates a toxic work environment.
 Additionally, Julio, Shelby, and Kacy had extensive problems with Expo and couldn't run the project half of the time which made it very difficult to get
-tasks done since we couldn't see what we were doing. It's also vital people not leave our team meetings early because when we vocalized that we were struggling with different aspects, no one who knew how to do it was there to help. As is said in class, we need great team members more than we need great programmers. (Kacy)
+tasks done since we couldn't see what we were doing. It's also vital people not leave our team meetings early because when we vocalized that we were 
+struggling with different aspects, no one who knew how to do it was there to help.  (Kacy)
 
 Communication still needs to get better as its detremental to the whole group. Very few team meetings because members often had to leave early when we had time during/after class or didn't show during our scheduled Sunday meetings. Communication between front and back end is not great and a bit tense. We could do well with more respect for each other within the team and improving our understanding that we're working toward a common goal, and should ALL be involved in communicating about, planning for, and reaching it. The work that we do enables each other to do their best work as well.
 
