@@ -233,7 +233,7 @@ I could have communicated the ideas I have for the app better and commented on m
 -I can work on properly branching my tasks and giving them the propper allocated hours as they were severly under estemated. I can also look for different methods if one is taking too long 
 for example how firebase integration is taking so long, I can look for other methods to integrate databases.
 
-### SPRINT 2 REVIEW AND RETROSPECTIVE ###
+# SPRINT 2 REVIEW AND RETROSPECTIVE #
 
 ### Kacy Metcalf's Sprint 2 ###
 # Sprint 3 Goals #
@@ -279,14 +279,6 @@ SCRUM-156 Studied Workout.js and WorkoutList.js
 https://cs3398f23changelings.atlassian.net/browse/SCRUM-156
 commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/55f5a2419361fa34bb326cf821721d3c79e8779f
 
-# What Kacy thought went well as a team #
-Aaron and Kaleb work well together on the front end. Julio and Shelby got a lot done on the backend. They've been working on it this whole time
-but this happened to be when their work paid off. Kacy did well at being a floater/neutral party who could help as needed.
-
-# What Kacy thought did not go well as a team #
-There are often extreme lack of understanding and miscommunication. I believe people let their frustrations and own experiences cloud
-their ability to understand other's perspectives. We would do much better if we all took a breath and tried to understand the other person. 
-
 # What Kacy thought went well as an individual #
 I try very hard to make it known that no one is alone in this project and that we'll figure things out. If I think someone is being skipped over
 or the work they done is being minimized I try to speak up for them because that's not cool. I also have told almost every team member at some point 
@@ -296,15 +288,6 @@ am therefore limited in my ability to help, but I try to none-the-less.
 # What Kacy thought did not go well as an individual #
 When we decided our tasks, I should have had the foresight to realize having all my tasks be dependent on others finishing their work early
 was a recipe for disaster. In doing so, I completely blocked myself for well over half of this sprint.
-
-# What Kacy thought impedes in the team #
-Not being able to meet each work day to recap what we are doing. There was a lot of miscommunication especially once
-we started swapping tasks. This could have been avoided with regular team meetings which is not reasonable as college students.
-
-# What Kacy thinks she can do to improve #
-Communicate more when I am stuck to find out if I can help someone else. I only asked one person if they needed help before Dr. Lehr suggested
-I take a different person's tasks. Had I communicated more I would have known that even though that person declined, there were still others
-I could assist.
 
 ### Julio Cantu Sprint 2 ###
 In the developement of the Hercules app durring the second sprint, I was first tasked with making the back end for saving data and reading the data yet there was some miscommunication and i was waiting on my tasks until a certain task was done so i could complete mine, and after a while of having the road block and talking my task was switched to local storage, then again to personal user accounts, another issue I was having was that expo would not run on my phone and this wasnt fixed until near the end of the sprint where i was told to use the web version, after such i was able to get my tasks completed. What I have done is revised the app.js to make it look more clean and better support multiple screens so I could make a landing page for the login function for the users, then I went about making the 2 functions "signup and login" where when you sign up it makes your own location in the database for "mind, munchies, and workouts", following that I made it to where the user has to create a "strong password" which must consist of 1 upper and lower case letter, a number, a special character, and must be atleast 8 characters long.
@@ -478,18 +461,31 @@ Integrate the API for the Munchies section to pull info from a database in the r
 ### What went well (TEAM): ###
 We were able to accomplish a faily decent amount of UI design during sprint 2, even after running into multiple blocks that we were able to overcome.
 Once we were able to decide on doing local storage we were able to get Firestore fully setup and running at the very end of the sprint.
+
+Aaron and Kaleb work well together on the front end. Julio and Shelby got a lot done on the backend. They've been working on it this whole time
+but this happened to be when their work paid off so we could see the results of it. Kacy did well at being a floater/neutral party who could help as needed. (Kacy)
+
 ### What did not go well(TEAM): ###
 It took us till the end of sprint 2 to get any of the backend working, although, now it does seem to be working and we can move forward.
+
+There was often extreme lack of understanding and miscommunication. I believe people let their frustrations and own experiences cloud
+their ability to understand other's perspectives. Not all the work we do is the same, and even if it were, different people have different strong suits.
+We would do much better if we all took a breath and tried to understand the other person and be supportive rather than condescending. (Kacy)
+
 ### What Might Be Impeding Us from Performing Better? ###
 Difficulties communicating between teammates.
 ### What can I do to Improve (Aaron): ###
 I learned a lot from sprint 1 from a GitKraken standpoint, however, I did make a few mistakes this sprint that resulted in merge conflicts. I need to improve this, as it halts us from working for a little bit.
 ### What can I do to Improve (Kacy): ###
-
+Communicate more when I have a roadblock to find out if I can help someone else. I only asked one person if they needed help before Dr. Lehr suggested
+I take a different person's tasks. Had I communicated more I would have known that even though that person declined, there were still others I could assist.
 ### What can I do to improve (Shelby): ###
 
 ### What can I do to improve (Kaleb): ###
 Help keep the team motivated and working on tasks, schedule more meetings, be more vocal about the work that needs to get done and when.
 ### What can I do to improve (Julio): ###
+
+
+
 
 
