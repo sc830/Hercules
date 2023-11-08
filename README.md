@@ -390,10 +390,46 @@ I will know I am doing this better when my work is apparent in the Jira board an
 In the next sprint, I hope to add in the backend storage functionality for each of the buttons so that data can be saved between sessions in the correct place. Additionally, I hope to create the access rules for Firestore in order to switch our app off of testing mode, work with Julio to initialize users' folders with preset workouts and foods, and flesh out the organization scheme for our "Mindfulness" habit tracker, as the group hasn't thoroughly discussed how this feature will work or be tracked.
 
 
+### Kaleb Perez Sprint 2: ###
+During this sprint, the majority of my contributions were focused on enhancing the workout screen functionality. I implemented several key features to improve the overall user experience. I introduced the ability to delete workouts from the list of workouts, making it easier for users to manage their workout routines. Additionally, I created the 'Add Workouts' button to simplify the process of adding new exercises. To enhance user customization, I added a drop-down menu to name workouts when initially added. The 'Settings' button was introduced, providing quick access to options for deleting and renaming both workouts and splits. Within the workout screen, I enabled users to add reps, weights lifted, and sets, and it now calculates percentage value increase recommendations. Furthermore, I worked collaboratively with Aaron to modularize his code, ensuring a more organized and efficient project structure."
 
-### TEAM PORTION ###
-What Went Well (or not)?
-- Spent a lot of time working on branches/features that were incompatible, caused degradation of other features, or was decided not to be implemented
-What might be impeding us from doing better?
-- Could use better communication, but our schedules aren't very compatible
+### Tasks: ###
+Title: add ability to delete workout from lists
+ID: SCRUM-116
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-116
+Title: create add workouts button
+ID: SCRUM-113
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-113
+Title: add ability to name workout
+ID: SCRUM-114
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-114
+Title: add ability to add reps and weights lifted in workout screen
+ID: SCRUM-120
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-120
+Title: add logic to recommend different amounts to lift or different possible workouts to try in workout screen
+ID: SCRUM-121
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-121
+Title: add ability to delete workout split
+ID: SCRUM-139
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-139
+Title: add ability to rename workout split
+ID: SCRUM-126
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-126
+Title: Assist Aaron with GitHub issues and modularizing breakfast buttons
+ID: SCRUM-147
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-147
 
+
+### What Went Well? ###
+Team:
+We really came togther in the end and got a lot of work done fast. I think next sprint will go better since we are over the major roadblocks.
+Personal:
+Adding a lot of functionality in a short time and helping aaron modularize his code quickly
+### What Didn't Go Well? ###
+Our teamwork and communication is not the best, it leads to lots of standstills while waiting on help or a task to get done
+### What is impeding us ###
+Lack of communication and procrastination. These two factors are deadlocking us when some of us try to work.
+### What Can I Do to Improve? ###
+Help keep the team motivated and working on tasks, schedule more meetings, be more vocal about the work that needs to get done and when.
+### Next Steps ###
+I plan to add the final bits of UI functionality and then work on making it look as nice as possible for our final presentation. I will use a cohesive theme to beautify the app
