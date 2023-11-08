@@ -483,9 +483,15 @@ we were able to get the application testing on all team members devices near the
 ### What did not go well(TEAM): ###
 It took us till the end of sprint 2 to get any of the backend working, although, now it does seem to be working and we can move forward.
 
+
 There was often extreme lack of understanding and miscommunication. I believe people let their frustrations and own experiences cloud
 their ability to understand other's perspectives. Not all the work we do is the same, and even if it were, different people have different strong suits.
-We would do much better if we all took a breath and tried to understand the other person and be supportive rather than condescending. (Kacy)
+We would do much better if we all took a breath and tried to understand the other person and be supportive rather than condescending. 
+Having reminders of the deadline can be helpful but having our struggles dismissed and our accomplished work minimized creates a toxic work environment.
+Additionally, Julio, Shelby, and Kacy had extensive problems with Expo and couldn't run the project half of the time which made it very difficult to get
+tasks done since we couldn't see what we were doing. It's also vital people not leave our team meetings early because when we vocalized that we were
+struggling with different aspects, no one who knew how to do it was there to help. As is said in class, we need great team members more than we need 
+great programmers. (Kacy)
 
 Communication still needs to get better as its detremental to the whole group.
 
