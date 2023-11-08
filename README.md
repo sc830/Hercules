@@ -204,7 +204,7 @@ I'm very happy that our team is communicative and I was often able to receive as
 
 
 
-### Retrospective ###
+### Retrospective 1 ###
 
 ### What went well (TEAM): ###
 -we were able to make significant progress in the UI
@@ -433,3 +433,23 @@ Lack of communication and procrastination. These two factors are deadlocking us 
 Help keep the team motivated and working on tasks, schedule more meetings, be more vocal about the work that needs to get done and when.
 ### Next Steps ###
 I plan to add the final bits of UI functionality and then work on making it look as nice as possible for our final presentation. I will use a cohesive theme to beautify the app
+
+### Retrospective 2 ###
+
+### What went well (TEAM): ###
+
+### What did not go well(TEAM): ###
+
+### What Might Be Impeding Us from Performing Better? ###
+
+### What can I do to Improve (Aaron): ###
+
+### What can I do to Improve (Kacy): ###
+
+### What can I do to improve (Shelby): ###
+
+### What can I do to improve (Kaleb): ###
+Help keep the team motivated and working on tasks, schedule more meetings, be more vocal about the work that needs to get done and when.
+### What can I do to improve (Julio): ###
+
+
