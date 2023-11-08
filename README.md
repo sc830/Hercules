@@ -349,9 +349,14 @@ https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1
 
 
 ### What Went Well? ###
+Team:
+We really came togther in the end and got a lot of work done fast. I think next sprint will go better since we are over the major roadblocks.
+Personal:
 Adding a lot of functionality in a short time and helping aaron modularize his code quickly
 ### What Didn't Go Well? ###
 Our teamwork and communication is not the best, it leads to lots of standstills while waiting on help or a task to get done
+### What is impeding us ###
+Lack of communication and procrastination. These two factors are deadlocking us when some of us try to work.
 ### What Can I Do to Improve? ###
 Help keep the team motivated and working on tasks, schedule more meetings, be more vocal about the work that needs to get done and when.
 ### Next Steps ###
