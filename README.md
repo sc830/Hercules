@@ -233,6 +233,78 @@ I could have communicated the ideas I have for the app better and commented on m
 -I can work on properly branching my tasks and giving them the propper allocated hours as they were severly under estemated. I can also look for different methods if one is taking too long 
 for example how firebase integration is taking so long, I can look for other methods to integrate databases.
 
+### SPRINT 2 REVIEW AND RETROSPECTIVE ###
+
+### Kacy Metcalf's Sprint 2 ###
+# Sprint 3 Goals #
+Next sprint, I will be once again focusing on integrating graphs into the project now that expo works, the UI is set, and the backend runs.
+There are graphs for both the workout day and the workout buttons. Making the graphs will require me to work with the front end and backend
+and I expect it to be very time consuming to fit all of the pieces together. I currently plan on using the react-native-chart-kit to 
+complete these tasks.
+
+My tasks were a little muddled this sprint due to roadblocks. I was unable to complete any of my integration tasks without the front end and
+back end being finished so I couldn't work most of this sprint. Dr. Lehr advised I pick up other teammates' tasks which was the turning point
+when I started completing work for this project.
+
+### Kacy's Tasks ###
+Scrum-102 Resolve Roadblock with Expo
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-102 
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/136ebd9b6ef5d7555755feb40f9fd560b50eb11c
+
+Scrum-115 add ability to move workout up and down on list
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-115 
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/e79cfee705e18f518a256a702df89f2127fbe33c
+
+SCRUM-117 add screen when workout button is clicked
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-117
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/4d4aa120c9117067d1e10dff5fa2efe5efc5d28c
+ 
+SCRUM-122 add button to mind screen to add a new graphical tracker
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-122
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/dec023ec0c9eeec1d44312638fb42757b797a055
+
+SCRUM-123 add drop down screen to ask for input to graphical tracker when clicked
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-123
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/daccccd1eda8fc04c26f157e9eb02f2ebb311694
+
+SCRUM-125 Research integration of firestore
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-125
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/322f37ed1d9f352d66f8f4bf13c145d0a55c5f01
+
+SCRUM-131 add pre made trackers in mind section
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-131
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/f575ab5b45f5002fe3a771755038b91c70dd71a5
+
+SCRUM-156 Studied Workout.js and WorkoutList.js
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-156
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/55f5a2419361fa34bb326cf821721d3c79e8779f
+
+# What Kacy thought went well as a team #
+Aaron and Kaleb work well together on the front end. Julio and Shelby got a lot done on the backend. They've been working on it this whole time
+but this happened to be when their work paid off. Kacy did well at being a floater/neutral party who could help as needed.
+
+# What Kacy thought did not go well as a team #
+There are often extreme lack of understanding and miscommunication. I believe people let their frustrations and own experiences cloud
+their ability to understand other's perspectives. We would do much better if we all took a breath and tried to understand the other person. 
+
+# What Kacy thought went well as an individual #
+I try very hard to make it known that no one is alone in this project and that we'll figure things out. If I think someone is being skipped over
+or the work they done is being minimized I try to speak up for them because that's not cool. I also have told almost every team member at some point 
+that I can help them when they vocalize that they are struggling. My offer often is not taken since I often don't know anything about the topic and
+am therefore limited in my ability to help, but I try to none-the-less.
+
+# What Kacy thought did not go well as an individual #
+When we decided our tasks, I should have had the foresight to realize having all my tasks be dependent on others finishing their work early
+was a recipe for disaster. In doing so, I completely blocked myself for well over half of this sprint.
+
+# What Kacy thought impedes in the team #
+Not being able to meet each work day to recap what we are doing. There was a lot of miscommunication especially once
+we started swapping tasks. This could have been avoided with regular team meetings which is not reasonable as college students.
+
+# What Kacy thinks she can do to improve #
+Communicate more when I am stuck to find out if I can help someone else. I only asked one person if they needed help before Dr. Lehr suggested
+I take a different person's tasks. Had I communicated more I would have known that even though that person declined, there were still others
+I could assist.
 
 ### Julio Cantu Sprint 2 ###
 In the developement of the Hercules app durring the second sprint, I was first tasked with making the back end for saving data and reading the data yet there was some miscommunication and i was waiting on my tasks until a certain task was done so i could complete mine, and after a while of having the road block and talking my task was switched to local storage, then again to personal user accounts, another issue I was having was that expo would not run on my phone and this wasnt fixed until near the end of the sprint where i was told to use the web version, after such i was able to get my tasks completed. What I have done is revised the app.js to make it look more clean and better support multiple screens so I could make a landing page for the login function for the users, then I went about making the 2 functions "signup and login" where when you sign up it makes your own location in the database for "mind, munchies, and workouts", following that I made it to where the user has to create a "strong password" which must consist of 1 upper and lower case letter, a number, a special character, and must be atleast 8 characters long.
