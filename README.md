@@ -290,10 +290,23 @@ When we decided our tasks, I should have had the foresight to realize having all
 was a recipe for disaster. In doing so, I completely blocked myself for well over half of this sprint.
 
 ### Julio Cantu Sprint 2 ###
-In the developement of the Hercules app durring the second sprint, I was first tasked with making the back end for saving data and reading the data yet there was some miscommunication and i was waiting on my tasks until a certain task was done so i could complete mine, and after a while of having the road block and talking my task was switched to local storage, then again to personal user accounts, another issue I was having was that expo would not run on my phone and this wasnt fixed until near the end of the sprint where i was told to use the web version, after such i was able to get my tasks completed. What I have done is revised the app.js to make it look more clean and better support multiple screens so I could make a landing page for the login function for the users, then I went about making the 2 functions "signup and login" where when you sign up it makes your own location in the database for "mind, munchies, and workouts", following that I made it to where the user has to create a "strong password" which must consist of 1 upper and lower case letter, a number, a special character, and must be atleast 8 characters long.
-
+In the developement of the Hercules app durring the second sprint, I was first tasked with making the back end for saving data and reading the data yet there was some miscommunication and i was waiting on my tasks until a certain task was done so i could complete mine, and after a while of having the road block and talking my task was switched to local storage, then again to personal user accounts, another issue I was having was that expo would not run on my phone and this wasnt fixed until near the end of the sprint where i was told to use the web version, after such i was able to get my tasks completed. What I have done is revised the app.js to make it look more clean and better support multiple screens so I could make a landing page for the login function for the users, then I went about making the 2 functions "signup and login" where when you sign up it makes your own location in the database for "mind, munchies, and workouts", following that I made it to where the user has to create a "strong password" which must consist of 1 upper and lower case letter, a number, a special character, and must be atleast 8 characters long. Then after I implimented a little save function for saving the breakfeast data to the firestore database, from there I will build on it further and get it more integrated into our current project.
 ### Here are the links for my major commits: ###
 
+SCRUM-20
+- make basic outside code for database to show functionality (originally made a pull request without using jira so when made from jira had troubles merging
+https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/pull-requests/47
+SCRUM-119
+- create signup with "strong password" required
+https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/pull-requests/62
+SCRUM-14
+- setup user signup
+SCRUM-135
+- Setup login and database storage paths together with signup (worked with signup)
+https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/pull-requests/61
+SCRUM-85
+- fix app.js for authentication
+https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/pull-requests/54
 
 ### Shelby Cumings Sprint 2 ###
 Much of this sprint was spent troubleshooting our web application in order to make it functional; this took an extremely long time, despite my references to official documentation, ChatGPT, and even contacting an expert in Firebase and ReactNative integration. Unfortunately, in the end, we decided to abandon the idea of Firebase hosting for a website and instead are relying on Expo, as before, for our web application. After this, my tasks were re-evaluated and I began working on our Firestore setup and creating templates and documentation for my teammates on the frontend side of things to use when reading data from Firestore to display in the app. A major issue in this sprint for me is that I failed to initially name my branches with Jira's naming convention for task tracking and making new branches for every task. This was worsened by having to revise my tasks based on how long they actually took me/create new tasks for step-by-step troubleshooting with each individual file. While I attempted to change the names of the branches when able and to add the task identifier to the commit messages, I had major problems with this as well and ended up adding tags to the Git graph and notes in Jira to show where my work is located.
@@ -460,10 +473,12 @@ Integrate the API for the Munchies section to pull info from a database in the r
 
 ### What went well (TEAM): ###
 We were able to accomplish a faily decent amount of UI design during sprint 2, even after running into multiple blocks that we were able to overcome.
-Once we were able to decide on doing local storage we were able to get Firestore fully setup and running at the very end of the sprint.
+Once we were able to decide on doing local storage we were able to get Firestore setup and running at the very end of the sprint.
 
 Aaron and Kaleb work well together on the front end. Julio and Shelby got a lot done on the backend. They've been working on it this whole time
 but this happened to be when their work paid off so we could see the results of it. Kacy did well at being a floater/neutral party who could help as needed. (Kacy)
+
+we were able to get the application testing on all team members devices near the end of the sprint, so now all team members can now do their work in an orderly fashion.
 
 ### What did not go well(TEAM): ###
 It took us till the end of sprint 2 to get any of the backend working, although, now it does seem to be working and we can move forward.
@@ -471,6 +486,8 @@ It took us till the end of sprint 2 to get any of the backend working, although,
 There was often extreme lack of understanding and miscommunication. I believe people let their frustrations and own experiences cloud
 their ability to understand other's perspectives. Not all the work we do is the same, and even if it were, different people have different strong suits.
 We would do much better if we all took a breath and tried to understand the other person and be supportive rather than condescending. (Kacy)
+
+Communication still needs to get better as its detremental to the whole group.
 
 ### What Might Be Impeding Us from Performing Better? ###
 Difficulties communicating between teammates.
@@ -484,6 +501,7 @@ I take a different person's tasks. Had I communicated more I would have known th
 ### What can I do to improve (Kaleb): ###
 Help keep the team motivated and working on tasks, schedule more meetings, be more vocal about the work that needs to get done and when.
 ### What can I do to improve (Julio): ###
+After leanrning how to run expo, what I can do better is talk more with my group members to find out the routs for the projects.
 
 
 
