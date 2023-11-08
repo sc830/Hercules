@@ -434,16 +434,56 @@ Help keep the team motivated and working on tasks, schedule more meetings, be mo
 ### Next Steps ###
 I plan to add the final bits of UI functionality and then work on making it look as nice as possible for our final presentation. I will use a cohesive theme to beautify the app
 
+
+### Aaron Parks Sprint 2 ###
+During sprint 2 I added functionality for the "Munchies" section of the code, creating buttons where users can input food choices. I ran into a lot of issues that I was able to figure out close to the end of the sprint.
+Including: How to add a button inside of another button, figure out how Kaleb managed to add the "gear" or settings icon laid ontop of another button, and creation of the 3rd button at the deepest level.
+
+### Tasks - Aaron ###
+ID: SCRUM 140
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-140
+Title: Create Breakfast Button
+ID: SCRUM 141
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-141
+Title: Create Lunch Button
+ID: SCRUM 142
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-142
+Title: Create Dinner Button
+ID: SCRUM 143
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-143
+Title: Add Meal Button Inside Breakfast/Lunch/Dinner
+ID: SCRUM 148
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-148
+Title: Modularize Meal Assets
+In addition, keep in mind that the SCRUM 141 and 142 will have branches but no pull requests due to merge conflicts. All of the code from the 2 tasks are implemented into SCRUM 148 (Modularize Meal Assets).
+SCRUM 74 and 144 were tasks from the first sprint that rolled over into the second sprint, these tasks were disregarded and moved to "Done" with notes added in the description for what changes were made.
+
+### What Went Well? ###
+Team:
+We were finally able to overcome the issues regarding backend and storage.
+Personal:
+I was able to take a lot of the modularity and functionality that Kaleb had previously added for his work, and use a similarly formatted code to produce similar formatted output.
+### What Didn't Go Well? ###
+Communication seemed to be lacking a lot on the backend of the code, HOWEVER, this did change at the end of the sprint.
+### What is impeding us ###
+Communication and procrastination. Once we can all finally sit down and work on what we are doing, we made strides.
+### What Can I Do to Improve? ###
+Fix having merge conflicts that impede us on being able to continue production.
+### Next Steps ###
+Integrate the API for the Munchies section to pull info from a database in the regards to foods, beautify, and also fix/finish the UI design for the munchies section.
+
+
 ### Retrospective 2 ###
 
 ### What went well (TEAM): ###
-
+We were able to accomplish a faily decent amount of UI design during sprint 2, even after running into multiple blocks that we were able to overcome.
+Once we were able to decide on doing local storage we were able to get Firestore fully setup and running at the very end of the sprint.
 ### What did not go well(TEAM): ###
-
+It took us till the end of sprint 2 to get any of the backend working, although, now it does seem to be working and we can move forward.
 ### What Might Be Impeding Us from Performing Better? ###
-
+Difficulties communicating between teammates.
 ### What can I do to Improve (Aaron): ###
-
+I learned a lot from sprint 1 from a GitKraken standpoint, however, I did make a few mistakes this sprint that resulted in merge conflicts. I need to improve this, as it halts us from working for a little bit.
 ### What can I do to Improve (Kacy): ###
 
 ### What can I do to improve (Shelby): ###
