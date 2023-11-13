@@ -1,4 +1,11 @@
 // BackButton.js
+// To call the back button, complete the following steps:
+
+// 1. import it: import BackButton from '../components/backButton';
+// 2. Call the default: <BackButton />
+// 3. Call and pass a title to replace the default: <BackButton title="Cancel" />
+
+
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
