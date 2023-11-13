@@ -36,7 +36,7 @@ const Mindfulness = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* Back button to navigate back from this screen */}
-      <BackButton title="Go Back" />
+      <BackButton />
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.innerContainer}>
@@ -68,8 +68,6 @@ const Mindfulness = ({ navigation }) => {
                 >
                   <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>
-                {/* Back button to dismiss the modal */}
-                <BackButton />
               </View>
             </View>
           </Modal>

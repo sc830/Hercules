@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
+import BackButton from '../components/backButton';
 
 const TrackIntakeScreen = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -42,6 +43,8 @@ const TrackIntakeScreen = ({ navigation, route }) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: 'black' }}>
+      {/* Back button to navigate back from this screen */}
+      <BackButton />
       <ScrollView>
         <View style={{ alignItems: 'center' }}>
           <TouchableOpacity onPress={handleAddItem} style={{ backgroundColor: 'purple', padding: 20, margin: 20, width: '80%' }}>
@@ -77,6 +80,9 @@ const TrackIntakeScreen = ({ navigation, route }) => {
                 <Text style={{ color: 'white', textAlign: 'center' }}>Delete</Text>
               </TouchableOpacity>
             )}
+
+            {/* Back button to dismiss the modal */}
+            <BackButton title="Cancel" />
           </View>
         </View>
       </Modal>

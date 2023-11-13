@@ -1,15 +1,22 @@
 // BackButton.js
 import React from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons'; // Import Ionicons or any other suite of icons
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons'; // Import Ionicons or any other suite of icons
 
-const BackButton = () => {
+// Modify the component to accept a title prop
+const BackButton = ({ title }) => {
   const navigation = useNavigation();
+
+  const content = title ? (
+    <Text style={styles.text}>{title}</Text> // Display text if title prop is provided
+  ) : (
+    <Icon name="arrow-back" size={25} color="#fff" /> // Otherwise, display the default back arrow icon
+  );
 
   return (
     <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
-      <Icon name="arrow-back" size={25} color="#fff" /> {/* Customize color and size as needed */}
+      {content}
     </TouchableOpacity>
   );
 };
@@ -20,10 +27,12 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 5,
     backgroundColor: "purple", // Use any color that fits your app theme
+    alignItems: 'center', // Center icon/text horizontally
+    justifyContent: 'center', // Center icon/text vertically
   },
   text: {
-    color: '#333', // Use any color that fits your app theme
-    textAlign: "white",
+    color: '#fff', // Use a color that contrasts with the button background
+    fontSize: 16, // Set a font size that fits your design
     // Add other styling as needed
   },
 });
