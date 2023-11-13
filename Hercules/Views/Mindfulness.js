@@ -1,12 +1,18 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Modal, TextInput } from 'react-native';
 import BackButton from '../components/backButton';
+import useCustomTracker from './useCustomTracker'; // Adjust the path as necessary
 
 const Mindfulness = ({ navigation }) => {
-  // State to hold the list of trackers
-  const [trackers, setTrackers] = React.useState(['Creatine', 'Sleep hours', 'Water Ounces']);
+  const {
+    trackers,
+    setTrackers,
+    customTrackerName,
+    setCustomTrackerName,
+    addTracker
+  } = useCustomTracker(['Creatine', 'Sleep hours', 'Water Ounces']);
+  
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [customTrackerName, setCustomTrackerName] = React.useState('');
 
   const handleTrackIntake = (itemType) => {
     navigation.navigate('TrackIntakeScreen', { itemType });
@@ -16,12 +22,10 @@ const Mindfulness = ({ navigation }) => {
     setModalVisible(true);
   };
 
+  // This function will be called when the submit button is pressed
   const submitCustomTracker = () => {
-    if (customTrackerName) {
-      setTrackers([...trackers, customTrackerName]); // Add the custom tracker to the list
-      setModalVisible(false);
-      setCustomTrackerName('');
-    }
+    addTracker();
+    setModalVisible(false);
   };
 
   // Render the tracker buttons dynamically
@@ -31,6 +35,7 @@ const Mindfulness = ({ navigation }) => {
         <Text style={styles.buttonText}>{tracker}</Text>
       </TouchableOpacity>
     ));
+  
   };
 
   return (
@@ -68,6 +73,7 @@ const Mindfulness = ({ navigation }) => {
                 >
                   <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>
+                <BackButton />
               </View>
             </View>
           </Modal>
