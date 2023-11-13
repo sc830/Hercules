@@ -12,8 +12,8 @@ import Munchies from './Munchies';
 import BreakfastScreen from './BreakfastScreen';
 import LunchScreen from './LunchScreen';
 import DinnerScreen from './DinnerScreen';
-import Mindfulness from './Mindfulness'
-import TrackIntakeScreen from './TrackIntakeScreen' // used in Mindfulness
+import Mindfulness from './mindFolder/Mindfulness'
+import TrackIntakeScreen from './mindFolder/TrackIntakeScreen' // used in Mindfulness
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

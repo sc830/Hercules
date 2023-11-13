@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
-import BackButton from '../components/backButton';
+import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput, Button } from 'react-native';
+import BackButton from '../../components/backButton';
 
 const TrackIntakeScreen = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [trackedItem, setItem] = useState('');
   const [itemList, setItemList] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+
 
   // Extract itemType from route parameters
   const { itemType } = route.params;
@@ -80,9 +81,14 @@ const TrackIntakeScreen = ({ navigation, route }) => {
                 <Text style={{ color: 'white', textAlign: 'center' }}>Delete</Text>
               </TouchableOpacity>
             )}
+{/*             
+            <Button title="Cancel" onPress={() => {
+              setShowRenameModal(false);
+            }}
+          /> */}
 
-            {/* Back button to dismiss the modal */}
-            <BackButton title="Cancel" />
+            <Button title="Close" onPress={() => setModalVisible(false)} />
+
           </View>
         </View>
       </Modal>
