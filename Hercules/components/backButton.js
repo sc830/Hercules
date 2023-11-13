@@ -5,6 +5,10 @@
 // 2. Call the default: <BackButton />
 // 3. Call and pass a title to replace the default: <BackButton title="Cancel" />
 
+// VITAL NOTE: This will not work on modals. It will navigate too far back. You have to
+// use a button to close those instead. Please see the mindfulness section for an example
+// on how to do all of the above.
+
 
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
