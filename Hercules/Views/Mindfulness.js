@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Modal, TextInput } from 'react-native';
+import BackButton from '../components/backButton';
 
 const Mindfulness = ({ navigation }) => {
   // State to hold the list of trackers
@@ -33,41 +34,48 @@ const Mindfulness = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.innerContainer}>
-        {renderTrackers()}
-        {/* Add custom tracker button */}
-        <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
-          <Text style={styles.buttonText}>Add a Custom Tracker</Text>
-        </TouchableOpacity>
+    <View style={styles.container}>
+      {/* Back button to navigate back from this screen */}
+      <BackButton title="Go Back" />
 
-        {/* Modal for adding a custom tracker */}
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => setModalVisible(false)}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <TextInput
-                style={styles.modalText}
-                onChangeText={setCustomTrackerName}
-                value={customTrackerName}
-                placeholder="Enter custom tracker name"
-                autoFocus={true} // Automatically focus the input when the modal is opened
-              />
-              <TouchableOpacity
-                style={{ ...styles.button, backgroundColor: 'grey' }}
-                onPress={submitCustomTracker}
-              >
-                <Text style={styles.buttonText}>Submit</Text>
-              </TouchableOpacity>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.innerContainer}>
+          {renderTrackers()}
+          {/* Add custom tracker button */}
+          <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
+            <Text style={styles.buttonText}>Add a Custom Tracker</Text>
+          </TouchableOpacity>
+
+          {/* Modal for adding a custom tracker */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <TextInput
+                  style={styles.modalText}
+                  onChangeText={setCustomTrackerName}
+                  value={customTrackerName}
+                  placeholder="Enter custom tracker name"
+                  autoFocus={true}
+                />
+                <TouchableOpacity
+                  style={{ ...styles.button, backgroundColor: 'grey' }}
+                  onPress={submitCustomTracker}
+                >
+                  <Text style={styles.buttonText}>Submit</Text>
+                </TouchableOpacity>
+                {/* Back button to dismiss the modal */}
+                <BackButton />
+              </View>
             </View>
-          </View>
-        </Modal>
-      </View>
-    </ScrollView>
+          </Modal>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
