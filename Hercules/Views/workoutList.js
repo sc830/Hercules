@@ -1,7 +1,8 @@
+//WorkoutList.js
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import BackButton from '../components/BackButton'; // Importing the BackButton component
 const WorkoutList = ({ route }) => {
   const { splitName } = route.params;
   const navigation = useNavigation();
@@ -39,8 +40,14 @@ const WorkoutList = ({ route }) => {
   };
 
   return (
+    
     <View style={styles.container}>
-      <Text style={styles.text}>Workouts for {splitName}</Text>
+      <View style={styles.container}>
+        <BackButton title="Back" /> {/* Added the BackButton with a title */}
+       
+      {/* ...rest of your existing WorkoutList component code... */}
+    </View>
+
 
       {workouts.map((workout, index) => (
         <View key={index} style={styles.workoutContainer}>
