@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import BackButton from '../components/BackButton'; // Make sure this import path is correct
 
 const AddRepsWeights = ({ route, navigation }) => {
@@ -19,6 +26,12 @@ const AddRepsWeights = ({ route, navigation }) => {
       setCurrentReps('');
       setCurrentWeight('');
     }
+  };
+
+  const deleteSet = (index) => {
+    const updatedSets = [...sets];
+    updatedSets.splice(index, 1);
+    setSets(updatedSets);
   };
 
   const calculateRecommendedIncrease = () => {
@@ -63,14 +76,24 @@ const AddRepsWeights = ({ route, navigation }) => {
       </TouchableOpacity>
       {sets.map((set, index) => (
         <View key={index} style={styles.setContainer}>
-          <Text style={styles.setText}>Set {index + 1}: {set.reps} reps at {set.weight} lbs</Text>
+          <Text style={styles.setText}>
+            Set {index + 1}: {set.reps} reps at {set.weight} lbs
+          </Text>
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={() => deleteSet(index)}
+          >
+            <Text style={styles.deleteButtonText}>🗑️</Text> {/* Trash can emoji */}
+          </TouchableOpacity>
         </View>
       ))}
       <TouchableOpacity style={styles.button} onPress={calculateRecommendedIncrease}>
         <Text style={styles.buttonText}>Calculate Increase</Text>
       </TouchableOpacity>
       {recommendedIncrease.map((increase, index) => (
-        <Text key={index} style={styles.recommendedText}>{increase}</Text>
+        <Text key={index} style={styles.recommendedText}>
+          {increase}
+        </Text>
       ))}
     </ScrollView>
   );
@@ -118,6 +141,9 @@ const styles = StyleSheet.create({
     padding: 15,
     marginVertical: 5,
     width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   setText: {
     color: 'white',
@@ -127,6 +153,17 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     marginTop: 10,
+  },
+  deleteButton: {
+    backgroundColor: 'transparent', // Make the button transparent
+    padding: 10,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  deleteButtonText: {
+    color: 'white',
+    fontSize: 24,
   },
 });
 
