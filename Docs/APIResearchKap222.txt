@@ -1,0 +1,25 @@
+//adding a comment for github issues, this is the research document
+I researched the Edamam Food Database API for integration into your workout app, focusing on its features and capabilities that would enhance the app's functionality. Here's a detailed report:
+
+API Overview:
+
+The Edamam Food Database API is designed to search for nutrition and diet information within a vast food database. It's particularly useful for sourcing nutrition facts for various foods, including macro and micro-nutrients, allergen labels, and lifestyle and health labels​​.
+Functionality and Use Cases:
+
+This API is REST-based and provides extensive data on nutrition and diet for a wide range of food products. It's capable of handling data for generic foods, packaged foods, and restaurant meals, making it versatile for different use cases in a workout app​​.
+A key feature includes the ability to search for a food item using keywords, its name, or UPC/Barcode. This functionality would allow users of the workout app to easily find nutritional information for the foods they consume or plan to consume​​.
+Advanced Features:
+
+The API employs Natural Language Processing (NLP), which enables the extraction of food entities from unstructured text. This advanced feature can significantly enhance user experience by allowing more natural, conversational input methods when searching for food items​​.
+It also offers a full analysis of food recipes in real time, including entity extraction, measure and quantity extraction. This is complemented by the computation of applicable nutrition for the recipe, along with health and diet labels, and recipe classification by cuisine, meal type, and dish types​​.
+Integration Benefits for Workout App:
+
+Implementing this API in your workout app could provide users with easy access to detailed nutritional information, aiding them in making informed dietary choices aligned with their fitness goals.
+The NLP feature could enhance user engagement by simplifying how users interact with the app, allowing for more natural and intuitive searches.
+The comprehensive data available through the API, including details on allergens and lifestyle labels, would be particularly beneficial for users with specific dietary requirements or preferences.
+Overall, the Edamam Food Database API appears to be a robust and versatile tool that could significantly enhance the value of your workout app by providing detailed, user-friendly access to a wealth of nutritional information. Integrating this API could be a strategic move to increase user engagement and satisfaction.
+
+
+
+
+
