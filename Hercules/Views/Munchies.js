@@ -29,6 +29,7 @@ const Munchies = ({ navigation }) => {
         <TouchableOpacity onPress={handleDinner} style={{ backgroundColor: 'purple', padding: 20, margin: 10, borderRadius: 15, width: '90%' }}>
           <Text style={{ color: 'white', textAlign: 'center' }}>Dinner</Text>
         </TouchableOpacity>
+
       </View>
     </ScrollView>
   );

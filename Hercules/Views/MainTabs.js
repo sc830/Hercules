@@ -14,6 +14,8 @@ import LunchScreen from './LunchScreen';
 import DinnerScreen from './DinnerScreen';
 import Mindfulness from './mindFolder/Mindfulness'
 import TrackIntakeScreen from './mindFolder/TrackIntakeScreen' // used in Mindfulness
+import IngredientsScreen from './Ingredients';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -42,6 +44,7 @@ const MunchiesScreen = () => (
     <Stack.Screen name="BreakfastScreen" component={BreakfastScreen} />
     <Stack.Screen name="LunchScreen" component={LunchScreen} />
     <Stack.Screen name="DinnerScreen" component={DinnerScreen} />
+    <Stack.Screen name="IngredientsScreen" component={IngredientsScreen} /> 
   </Stack.Navigator>
 );
 

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
+import searchMeal from './API'; // Adjust the import path as necessary
+
 
 const DinnerScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
