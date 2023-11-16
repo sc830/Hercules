@@ -32,9 +32,9 @@ const signUp = async (email, password, username) => {
   
   
   try {
-    console.log("Password:", password);
+    //console.log("Password:", password);
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]).{8,}$/;
-    console.log("Regex Test Result:", passwordRegex.test(password));
+    //console.log("Regex Test Result:", passwordRegex.test(password));
     const isPasswordValid = passwordRegex.test(password);
 
     if (!isPasswordValid) {

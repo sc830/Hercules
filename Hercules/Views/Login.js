@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { login, signUp } from '../firebaseFunctions';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [passwordRequirements, setPasswordRequirements] = useState(
+    'Password must contain:' +
+    ' \n - At least 8 characters'+
+    ' \n- At least one lowercase letter'+
+    ' \n- At least one uppercase letter'+
+    ' \n- At least one number'+
+    ' \n- At least one special character'  );
 
   const handleLogin = async () => {
     try {
@@ -13,7 +21,7 @@ const Login = ({ navigation }) => {
       navigation.navigate('Main');
     } catch (error) {
       // Handle login error here
-      console.log('Login Error:', error);
+      setError(error.message || 'Login failed');
     }
   };
 
@@ -25,9 +33,26 @@ const Login = ({ navigation }) => {
       navigation.navigate('Main');
     } catch (error) {
       // Handle signup error here
-      console.log('Signup Error:', error);
+      setError(error.message || 'Signup failed');
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      // If there's an error, update the password requirements text
+      setPasswordRequirements(error);
+    } else {
+      // If no error, display the default password requirements text
+      setPasswordRequirements(
+        'Password must contain:' +
+        ' \n - At least 8 characters'+
+        ' \n- At least one lowercase letter'+
+        ' \n- At least one uppercase letter'+
+        ' \n- At least one number'+
+        ' \n- At least one special character'
+      );
+    }
+  }, [error]);
 
   return (
     <View style={styles.container}>
@@ -46,8 +71,8 @@ const Login = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
       />
-      <Text style={styles.passwordRequirementText}>
-        Password must be at least 8 characters, have at least one special character, one number, and one upper and lower case character
+      <Text id="passerror" style={styles.passwordRequirementText}>
+        {passwordRequirements}
       </Text>
       <View style={styles.buttonContainer}>
         <Button title="Login" onPress={handleLogin} />
