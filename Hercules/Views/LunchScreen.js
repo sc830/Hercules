@@ -1,107 +1,62 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
-import searchMeal from './API'; // Adjust the import path as necessary
-
+import { View, Text, TouchableOpacity, ScrollView, TextInput, Button } from 'react-native';
+import searchMeal from './API'; // Make sure this import path is correct
 
 const LunchScreen = ({ navigation }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [meal, setMeal] = useState('');
+  const [mealName, setMealName] = useState('');
   const [mealList, setMealList] = useState([]);
-  const [selectedMeal, setSelectedMeal] = useState(null);
 
-  const handleAddMeal = () => {
-    setModalVisible(true);
-    setSelectedMeal(null);
+  const handleAddMeal = async () => {
+    if (!mealName.trim()) {
+      alert('Please enter a meal name.');
+      return;
+    }
+    setMealList([...mealList, { name: mealName, data: null }]);
+    setMealName('');
   };
 
-  const handleSaveMeal = () => {
-    if (selectedMeal !== null) {
-      const updatedList = mealList.map((m) => (m === selectedMeal ? meal : m));
-      setMealList(updatedList);
-      setModalVisible(false);
-      setSelectedMeal(null);
+  const handleMealPress = async (mealItem, index) => {
+    if (mealItem.data) {
+      navigation.navigate('IngredientsScreen', { mealData: mealItem.data });
     } else {
-      setMealList([...mealList, meal]);
-      setMeal('');
-      setModalVisible(false);
-    }
-  };
-
-  const handleDelete = () => {
-    if (selectedMeal !== null) {
-      const updatedList = mealList.filter((m) => m !== selectedMeal);
-      setMealList(updatedList);
-      setModalVisible(false);
-      setSelectedMeal(null);
-    }
-  };
-
-  const handleEdit = (m) => {
-    setModalVisible(true);
-    setSelectedMeal(m);
-    setMeal(m);
-  };
-
-  const handleViewIngredients = () => {
-    if (selectedMeal) {
-      navigation.navigate('AddIngredientsScreen', { meal: selectedMeal });
+      try {
+        const fetchedMealData = await searchMeal(mealItem.name);
+        const topFiveMeals = fetchedMealData.hints.slice(0, 5);
+        const newMealList = [...mealList];
+        newMealList[index].data = { ...fetchedMealData, hints: topFiveMeals };
+        setMealList(newMealList);
+        navigation.navigate('IngredientsScreen', { mealData: newMealList[index].data });
+      } catch (error) {
+        alert('Failed to fetch meal data.');
+        console.error('Error fetching meal info:', error);
+      }
     }
   };
 
   return (
     <View style={{ flex: 1, backgroundColor: 'black' }}>
+      <TextInput
+        value={mealName}
+        onChangeText={setMealName}
+        placeholder="Enter meal name"
+        placeholderTextColor="gray"
+        style={{ color: 'white', borderColor: 'gray', borderWidth: 1, borderRadius: 5, padding: 10, margin: 20, width: '80%' }}
+      />
+      <TouchableOpacity onPress={handleAddMeal} style={{ backgroundColor: 'purple', padding: 20, margin: 20, width: '80%' }}>
+        <Text style={{ color: 'white', textAlign: 'center' }}>Add Meal</Text>
+      </TouchableOpacity>
       <ScrollView>
-        <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity onPress={handleAddMeal} style={{ backgroundColor: 'purple', padding: 20, margin: 20, width: '80%' }}>
-            <Text style={{ color: 'white', textAlign: 'center' }}>Add Meal</Text>
-          </TouchableOpacity>
-        </View>
-        {mealList.map((meal, index) => (
-          <TouchableOpacity
-            key={index}
-            style={{ backgroundColor: 'lightgrey', padding: 10, margin: 5, width: '80%', borderRadius: 5, flexDirection: 'row', justifyContent: 'space-between' }}
-            onPress={() => handleEdit(meal)}
-          >
-            <Text style={{ color: 'black' }}>{meal}</Text>
-            <Text style={{ fontSize: 20 }}>⚙️</Text>
+        {mealList.map((mealItem, index) => (
+          <TouchableOpacity key={index} style={{ backgroundColor: 'lightgrey', padding: 10, margin: 5, borderRadius: 5 }} onPress={() => handleMealPress(mealItem, index)}>
+            <Text style={{ color: 'black' }}>{mealItem.name}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
-
-      <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-          <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, width: '80%' }}>
-            {selectedMeal !== null && (
-              <View>
-                <TextInput
-                  style={{ borderWidth: 1, borderColor: 'black', borderRadius: 5, padding: 5 }}
-                  value={meal}
-                  onChangeText={(text) => setMeal(text)}
-                />
-                <TouchableOpacity onPress={handleSaveMeal} style={{ backgroundColor: 'purple', padding: 10, marginTop: 10, borderRadius: 5 }}>
-                  <Text style={{ color: 'white', textAlign: 'center' }}>Save Meal</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleDelete} style={{ backgroundColor: 'red', padding: 10, marginTop: 10, borderRadius: 5 }}>
-                  <Text style={{ color: 'white', textAlign: 'center' }}>Delete</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-            {selectedMeal === null && (
-              <View>
-                <Text>Enter your meal:</Text>
-                <TextInput
-                  style={{ borderWidth: 1, borderColor: 'black', borderRadius: 5, padding: 5 }}
-                  value={meal}
-                  onChangeText={(text) => setMeal(text)}
-                />
-                <TouchableOpacity onPress={handleSaveMeal} style={{ backgroundColor: 'purple', padding: 10, marginTop: 10, borderRadius: 5 }}>
-                  <Text style={{ color: 'white', textAlign: 'center' }}>Save Meal</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-          </View>
-        </View>
-      </Modal>
+      <Button 
+        title="Back" 
+        onPress={() => navigation.goBack()}
+        color="purple"
+      />
     </View>
   );
 };
