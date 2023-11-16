@@ -1,114 +1,102 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
-import { saveMeal } from '../firebaseFunctions';
+import { View, Text, TouchableOpacity, ScrollView, TextInput, Button, StyleSheet } from 'react-native';
+import searchMeal from './API'; // Make sure this path is correct
 
 const BreakfastScreen = ({ navigation }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [meal, setMeal] = useState('');
+  const [mealName, setMealName] = useState('');
   const [mealList, setMealList] = useState([]);
-  const [selectedMeal, setSelectedMeal] = useState(null);
 
-  const handleAddMeal = () => {
-    setModalVisible(true);
-    setSelectedMeal(null);
-  };
-
-  const handleSaveMealFirebase = async () => {
-    try {
-      const mealData = { meal: meal };
-      const response = await saveMeal( mealData, 'breakfeast');
-      console.log(response);
-    } catch (error) {
-      console.log('Save meal Error:', error);
+  const handleAddMeal = async () => {
+    if (!mealName.trim()) {
+      alert('Please enter a meal name.');
+      return;
     }
+    setMealList([...mealList, { name: mealName, data: null }]);
+    setMealName('');
   };
 
-  const handleSaveMeal = () => {
-    if (selectedMeal !== null) {
-      const updatedList = mealList.map((m) => (m === selectedMeal ? meal : m));
-      setMealList(updatedList);
-      setModalVisible(false);
-      setSelectedMeal(null);
-      handleSaveMealFirebase();
+  const handleMealPress = async (mealItem, index) => {
+    if (mealItem.data) {
+      navigation.navigate('IngredientsScreen', { mealData: mealItem.data });
     } else {
-      setMealList([...mealList, meal]);
-      setMeal('');
-      setModalVisible(false);
-      handleSaveMealFirebase();
+      try {
+        const fetchedMealData = await searchMeal(mealItem.name);
+        // Assuming fetchedMealData.hints contains your meals
+        // Modify this line to match the structure of your actual API response
+        const topFiveMeals = fetchedMealData.hints.slice(0, 5);
+        const newMealList = [...mealList];
+        newMealList[index].data = { ...fetchedMealData, hints: topFiveMeals };
+        setMealList(newMealList);
+        navigation.navigate('IngredientsScreen', { mealData: newMealList[index].data });
+      } catch (error) {
+        alert('Failed to fetch meal data.');
+        console.error('Error fetching meal info:', error);
+      }
     }
-  };
-
-  const handleDelete = () => {
-    if (selectedMeal !== null) {
-      const updatedList = mealList.filter((m) => m !== selectedMeal);
-      setMealList(updatedList);
-      setModalVisible(false);
-      setSelectedMeal(null);
-    }
-  };
-
-  const handleEdit = (m) => {
-    setModalVisible(true);
-    setSelectedMeal(m);
-    setMeal(m);
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'black' }}>
+    <View style={styles.container}>
+      <TextInput
+        value={mealName}
+        onChangeText={setMealName}
+        placeholder="Enter meal name"
+        placeholderTextColor="gray"
+        style={styles.input}
+      />
+      <TouchableOpacity onPress={handleAddMeal} style={styles.addButton}>
+        <Text style={styles.addButtonText}>Add Meal</Text>
+      </TouchableOpacity>
       <ScrollView>
-        <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity onPress={handleAddMeal} style={{ backgroundColor: 'purple', padding: 20, margin: 20, width: '80%' }}>
-            <Text style={{ color: 'white', textAlign: 'center' }}>Add Meal</Text>
-          </TouchableOpacity>
-        </View>
-        {mealList.map((meal, index) => (
-          <TouchableOpacity
-            key={index}
-            style={{ backgroundColor: 'lightgrey', padding: 10, margin: 5, width: '80%', borderRadius: 5, flexDirection: 'row', justifyContent: 'space-between' }}
-            onPress={() => handleEdit(meal)}
-          >
-            <Text style={{ color: 'black' }}>{meal}</Text>
-            <Text style={{ fontSize: 20 }}>⚙️</Text>
+        {mealList.map((mealItem, index) => (
+          <TouchableOpacity key={index} onPress={() => handleMealPress(mealItem, index)} style={styles.mealItem}>
+            <Text style={styles.mealItemText}>{mealItem.name}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
-
-      <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-          <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, width: '80%' }}>
-            {selectedMeal !== null && (
-              <View>
-                <TextInput
-                  style={{ borderWidth: 1, borderColor: 'black', borderRadius: 5, padding: 5 }}
-                  value={meal}
-                  onChangeText={(text) => setMeal(text)}
-                />
-                <TouchableOpacity onPress={handleSaveMeal} style={{ backgroundColor: 'purple', padding: 10, marginTop: 10, borderRadius: 5 }}>
-                  <Text style={{ color: 'white', textAlign: 'center' }}>Save Meal</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleDelete} style={{ backgroundColor: 'red', padding: 10, marginTop: 10, borderRadius: 5 }}>
-                  <Text style={{ color: 'white', textAlign: 'center' }}>Delete</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-            {selectedMeal === null && (
-              <View>
-                <Text>Enter your meal:</Text>
-                <TextInput
-                  style={{ borderWidth: 1, borderColor: 'black', borderRadius: 5, padding: 5 }}
-                  value={meal}
-                  onChangeText={(text) => setMeal(text)}
-                />
-                <TouchableOpacity onPress={handleSaveMeal} style={{ backgroundColor: 'purple', padding: 10, marginTop: 10, borderRadius: 5 }}>
-                  <Text style={{ color: 'white', textAlign: 'center' }}>Save Meal</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-          </View>
-        </View>
-      </Modal>
+      <Button 
+        title="Back" 
+        onPress={() => navigation.goBack()} 
+        color="purple" 
+      />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+  input: {
+    color: 'white',
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    margin: 20,
+    width: '80%',
+  },
+  addButton: {
+    backgroundColor: 'purple',
+    padding: 20,
+    margin: 20,
+    width: '80%',
+  },
+  addButtonText: {
+    color: 'white',
+    textAlign: 'center',
+  },
+  mealItem: {
+    backgroundColor: 'lightgrey',
+    padding: 10,
+    margin: 5,
+    borderRadius: 5,
+  },
+  mealItemText: {
+    color: 'black',
+  },
+  // Add any additional styles you need here
+});
 
 export default BreakfastScreen;

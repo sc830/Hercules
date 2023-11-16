@@ -1,0 +1,47 @@
+Comprehensive Report on Expo Issues with Mobile and Web-Based Solution
+Background:
+During the development of our application, I faced a significant challenge with Expo not running effectively on mobile devices. This issue was a major roadblock, as it hindered both development and testing processes.
+
+Troubleshooting Steps and Commands:
+
+Initial Testing on Mobile Devices:
+
+Attempts to run the app using Expo on various cell phones consistently resulted in failure, with the app not loading or functioning properly.
+Switching to Web-Based Testing:
+
+As a workaround, I switched to running the app through a web browser using Expo. This approach was successful – the app loaded correctly and was fully operational in the web environment.
+Using QR Codes for Mobile Testing:
+
+To facilitate mobile testing, I employed the QR code scanning feature. After running the app on a web browser, scanning the second QR code with a mobile device allowed me to access and test the app on mobile successfully.
+Investigating the Root Cause:
+
+I explored potential causes, such as network problems, compatibility issues, and possible code bugs affecting mobile performance.
+Seeking Community Assistance:
+
+I engaged with the Expo community and checked various forums for similar issues faced by other developers.
+Commands for Troubleshooting and Running the App:
+
+Update Expo CLI:
+npm install -g expo-cli
+Ensuring the latest version of the Expo CLI.
+Start Expo in Web-Only Mode:
+sql
+expo start --web
+Running the app in a web browser, which has been working well.
+Clearing the Cache:
+r
+expo start -c
+Clears the Expo cache which can sometimes solve issues.
+Running on a Specific Mobile Device:
+Scan the QR code with your phone's camera or Expo Go app after starting Expo (ensure the same network connection).
+Checking Network Issues:
+Ensure the computer and mobile device are on the same network, or use:
+
+expo start --tunnel
+Checking for Errors:
+Look for any error messages in the terminal or console.
+Consulting Documentation:
+
+I also referred to the Expo documentation for more in-depth troubleshooting steps.
+Conclusion:
+The workaround of running the app on a web browser and then using the second QR code for mobile testing has been effective. While this doesn’t resolve the initial problem with Expo on mobile devices, it enables continued development and testing. Further investigation is needed to identify and rectify the root cause of the mobile issues.
