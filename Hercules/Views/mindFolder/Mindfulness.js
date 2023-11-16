@@ -35,7 +35,20 @@ const Mindfulness = ({ navigation }) => {
       <BackButton />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {renderTrackers()}
-        <GraphWithButton data={graphData} />
+        
+        {/* testing graph */}
+        {/* This commented section shows how to use the graph component. Kacy needs to
+          adjust it to display correctly. This was just the first goal in creating it
+        <GraphWithButton
+          data={graphData}
+          labels={['Leg', 'Push', 'Pull', 'Arm']} // Custom labels for x-axis
+          buttonText="Add Reps/Sets" // Custom button text
+          onButtonPress={() => {
+              // Custom function to handle button press
+              alert('Navigate to the next page');
+          }}
+      /> */}
+
         <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
           <Text style={styles.buttonText}>Add a Custom Tracker</Text>
         </TouchableOpacity>
