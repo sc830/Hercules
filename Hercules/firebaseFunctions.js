@@ -35,8 +35,27 @@ const signUp = async (email, password, username) => {
     console.log("Password:", password);
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]).{8,}$/;
     console.log("Regex Test Result:", passwordRegex.test(password));
-    if (!passwordRegex.test(password)) {
-      const errorMessage = "Password must be at least 8 characters, contain one lowercase letter, one uppercase letter, one number, and one special character.";
+    const isPasswordValid = passwordRegex.test(password);
+
+    if (!isPasswordValid) {
+      let errorMessage = "Password must contain:";
+      
+      if (password.length < 8) {
+        errorMessage += "\n- At least 8 characters";
+      }
+      if (!/(?=.*[a-z])/.test(password)) {
+        errorMessage += "\n- At least one lowercase letter";
+      }
+      if (!/(?=.*[A-Z])/.test(password)) {
+        errorMessage += "\n- At least one uppercase letter";
+      }
+      if (!/(?=.*\d)/.test(password)) {
+        errorMessage += "\n- At least one number";
+      }
+      if (!/(?=.*[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~])/.test(password)) {
+        errorMessage += "\n- At least one special character";
+      }
+
       Alert.alert("Error", errorMessage);
       throw new Error(errorMessage);
     }
