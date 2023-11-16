@@ -16,8 +16,6 @@ const LunchScreen = ({ navigation }) => {
   };
 
   const handleSaveMeal = async () => {
-    console.log(pullDocData("testFolder/subcollection"))
-
     if (selectedMeal !== null) {
       const updatedList = mealList.map((m) => (m === selectedMeal ? meal : m));
       setMealList(updatedList);

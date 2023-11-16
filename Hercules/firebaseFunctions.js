@@ -103,7 +103,7 @@ const login = async (email, password) => {
   }
 };
 
-export const pullDocData = async(docPath) => {
+export const pullDocData = async(docPath, fieldName) => {
   try {
     console.log(docPath);
     const docRef = doc(db, docPath)
@@ -111,15 +111,13 @@ export const pullDocData = async(docPath) => {
 
     if (docPoint.exists()) {
       console.log("Document data:", docPoint.data());
+      let fieldData = docPoint.get(fieldName);
+      return fieldData;
     }
-    else {
-      console.log("No such document");
-    }
-
-    return docPoint.data();
   }
   catch (error) {
     throw new Error(error.message);
+    return null;
   }
 }
 
