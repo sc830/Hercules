@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Button, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import BackButton from '../components/BackButton'; // Make sure this import path is correct
 
-const AddRepsWeights = ({ route }) => {
+const AddRepsWeights = ({ route, navigation }) => {
   const { workoutName } = route.params;
   const [sets, setSets] = useState([]);
   const [currentReps, setCurrentReps] = useState('');
@@ -9,13 +17,21 @@ const AddRepsWeights = ({ route }) => {
   const [recommendedIncrease, setRecommendedIncrease] = useState([]);
 
   const addSet = () => {
-    const newSet = {
-      reps: currentReps,
-      weight: currentWeight,
-    };
-    setSets([...sets, newSet]);
-    setCurrentReps('');
-    setCurrentWeight('');
+    if (currentReps && currentWeight) {
+      const newSet = {
+        reps: currentReps,
+        weight: currentWeight,
+      };
+      setSets([...sets, newSet]);
+      setCurrentReps('');
+      setCurrentWeight('');
+    }
+  };
+
+  const deleteSet = (index) => {
+    const updatedSets = [...sets];
+    updatedSets.splice(index, 1);
+    setSets(updatedSets);
   };
 
   const calculateRecommendedIncrease = () => {
@@ -37,61 +53,48 @@ const AddRepsWeights = ({ route }) => {
     }
   };
 
-  const updateData = () => {
-    // Your logic to update data
-    calculateRecommendedIncrease();
-  };
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.text}>{workoutName}</Text>
-
-      {sets.map((set, index) => (
-        <View key={index} style={styles.inputContainer}>
-          <Text style={styles.setInputText}>Set {index + 1}</Text>
-          <TextInput
-            style={styles.input}
-            value={set.reps}
-            onChangeText={(text) => {
-              const updatedSets = [...sets];
-              updatedSets[index].reps = text;
-              setSets(updatedSets);
-            }}
-            placeholder="Reps"
-            keyboardType="numeric"
-          />
-          <TextInput
-            style={styles.input}
-            value={set.weight}
-            onChangeText={(text) => {
-              const updatedSets = [...sets];
-              updatedSets[index].weight = text;
-              setSets(updatedSets);
-            }}
-            placeholder="Weight"
-            keyboardType="numeric"
-          />
-        </View>
-      ))}
-
-      <TouchableOpacity style={styles.addButton} onPress={addSet}>
+      <BackButton onPress={() => navigation.goBack()} />
+      <Text style={styles.headerText}>{workoutName}</Text>
+      <TextInput
+        style={styles.input}
+        value={currentReps}
+        onChangeText={setCurrentReps}
+        placeholder="Reps"
+        keyboardType="numeric"
+      />
+      <TextInput
+        style={styles.input}
+        value={currentWeight}
+        onChangeText={setCurrentWeight}
+        placeholder="Weight (lbs)"
+        keyboardType="numeric"
+      />
+      <TouchableOpacity style={styles.button} onPress={addSet}>
         <Text style={styles.buttonText}>Add Set</Text>
       </TouchableOpacity>
-
-      {recommendedIncrease && recommendedIncrease.length > 0 && (
-        <View style={styles.recommendedContainer}>
-          <Text style={styles.recommendedLabel}>Recommended Increases:</Text>
-          {recommendedIncrease.map((recommendation, index) => (
-            <Text key={index} style={styles.recommendedText}>
-              {recommendation}
-            </Text>
-          ))}
+      {sets.map((set, index) => (
+        <View key={index} style={styles.setContainer}>
+          <Text style={styles.setText}>
+            Set {index + 1}: {set.reps} reps at {set.weight} lbs
+          </Text>
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={() => deleteSet(index)}
+          >
+            <Text style={styles.deleteButtonText}>🗑️</Text> {/* Trash can emoji */}
+          </TouchableOpacity>
         </View>
-      )}
-
-      <TouchableOpacity style={styles.button} onPress={updateData}>
-        <Text style={styles.buttonText}>Update</Text>
+      ))}
+      <TouchableOpacity style={styles.button} onPress={calculateRecommendedIncrease}>
+        <Text style={styles.buttonText}>Calculate Increase</Text>
       </TouchableOpacity>
+      {recommendedIncrease.map((increase, index) => (
+        <Text key={index} style={styles.recommendedText}>
+          {increase}
+        </Text>
+      ))}
     </ScrollView>
   );
 };
@@ -99,68 +102,99 @@ const AddRepsWeights = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    justifyContent: 'center',
+    backgroundColor: '#FFF7E0', // Light gold background
+    padding: 20,
     alignItems: 'center',
-    backgroundColor: 'black',
   },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  headerText: {
+    color: '#303030', // Dark text for readability
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 20,
   },
-  setInputText: {
-    color: 'white',
-    fontSize: 18,
-    marginRight: 10,
+  backButton: {
+    backgroundColor: '#D4AF37', // Gold background color
+    paddingHorizontal: 20, // Horizontal padding
+    paddingVertical: 10, // Vertical padding
+    borderRadius: 10, // Rounded corners
+    flexDirection: 'row', // Layout for icon and text
+    alignItems: 'center', // Center items vertically
+    justifyContent: 'center', // Center items horizontally
+    elevation: 2, // Shadow for Android
+    shadowColor: '#000', // Shadow color for iOS
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+    shadowRadius: 4, // Shadow blur radius for iOS
+    shadowOpacity: 0.25, // Shadow opacity for iOS
+    alignSelf: 'flex-start', // Align to the left
+    marginLeft: 10, // Margin from the left
+  },
+  backButtonText: {
+    color: '#fff', // White color for the text
+    fontSize: 18, // Font size for the text
+    marginLeft: 8, // Space between icon and text if both are present
   },
   input: {
-    flex: 1,
-    height: 50,
     backgroundColor: 'white',
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    fontSize: 20,
+    color: '#303030', // Dark text for readability
+    paddingHorizontal: 15,
+    paddingVertical: 10,
     borderRadius: 10,
-  },
-  text: {
-    color: 'white',
-    fontSize: 24,
-    marginBottom: 20,
-  },
-  recommendedContainer: {
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  recommendedLabel: {
-    color: 'white',
     fontSize: 18,
-  },
-  recommendedText: {
-    color: 'white',
-    fontSize: 16,
-    marginTop: 5,
-  },
-  addButton: {
-    backgroundColor: 'purple',
-    width: 200,
-    height: 50,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
+    marginVertical: 10,
+    width: '80%',
+    borderWidth: 1,
+    borderColor: '#D4AF37', // Gold color border
   },
   button: {
-    backgroundColor: 'purple',
-    width: 200,
-    height: 50,
+    backgroundColor: '#D4AF37', // Gold color
+    padding: 10,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginVertical: 10,
+    width: '80%',
+    elevation: 3, // Adds a drop shadow on Android
+    shadowColor: '#000', // Adds a shadow on iOS
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
   buttonText: {
     color: 'white',
     fontSize: 18,
+    fontWeight: '600', // Semi-bold
+  },
+  setContainer: {
+    backgroundColor: '#FFFFFF', // White background for sets
+    borderRadius: 10,
+    padding: 15,
+    marginVertical: 5,
+    width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#D4AF37', // Gold color border
+  },
+  setText: {
+    color: '#303030', // Dark text for readability
+    fontSize: 18,
+  },
+  recommendedText: {
+    color: '#303030', // Dark text for readability
+    fontSize: 16,
+    marginTop: 10,
+  },
+  deleteButton: {
+    backgroundColor: '#D4AF37', // Gold color
+    padding: 10,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  deleteButtonText: {
+    color: 'white',
+    fontSize: 24,
   },
 });
 

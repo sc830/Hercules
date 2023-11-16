@@ -54,10 +54,10 @@ List of ready features:
 - Mindfulness section for tracking meditation and water intake.
 
 ### Screenshots ###
-[Insert relevant screenshots here]
+Kacy added a screenshot titled "kalebs code.jpg" to the Docs folder to recap the work she did to make it easier to understand how it runs.
 
 ### Project Status ###
-Project is: In progress
+Project is: In progress.
 
 ### Room for Improvement ###
 Areas for improvement:
@@ -204,7 +204,7 @@ I'm very happy that our team is communicative and I was often able to receive as
 
 
 
-### Retrospective ###
+### Retrospective 1 ###
 
 ### What went well (TEAM): ###
 -we were able to make significant progress in the UI
@@ -232,3 +232,298 @@ I could have communicated the ideas I have for the app better and commented on m
 ### What can I do to improve (Julio): ###
 -I can work on properly branching my tasks and giving them the propper allocated hours as they were severly under estemated. I can also look for different methods if one is taking too long 
 for example how firebase integration is taking so long, I can look for other methods to integrate databases.
+
+# SPRINT 2 REVIEW AND RETROSPECTIVE #
+
+### Kacy Metcalf's Sprint 2 ###
+# Sprint 3 Goals #
+Next sprint, I will be once again focusing on integrating graphs into the project now that expo works, the UI is set, and the backend runs.
+There are graphs for both the workout day and the workout buttons. Making the graphs will require me to work with the front end and backend
+and I expect it to be very time consuming to fit all of the pieces together. I currently plan on using the react-native-chart-kit to 
+complete these tasks.
+
+My tasks were a little muddled this sprint due to roadblocks. I was unable to complete any of my integration tasks without the front end and
+back end being finished so I couldn't work most of this sprint. Dr. Lehr advised I pick up other teammates' tasks which was the turning point
+when I started completing work for this project.
+
+### Kacy's Tasks ###
+Scrum-102 Resolve Roadblock with Expo
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-102 
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/136ebd9b6ef5d7555755feb40f9fd560b50eb11c
+
+Scrum-115 add ability to move workout up and down on list
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-115 
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/e79cfee705e18f518a256a702df89f2127fbe33c
+
+SCRUM-117 add screen when workout button is clicked
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-117
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/4d4aa120c9117067d1e10dff5fa2efe5efc5d28c
+ 
+SCRUM-122 add button to mind screen to add a new graphical tracker
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-122
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/dec023ec0c9eeec1d44312638fb42757b797a055
+
+SCRUM-123 add drop down screen to ask for input to graphical tracker when clicked
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-123
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/daccccd1eda8fc04c26f157e9eb02f2ebb311694
+
+SCRUM-125 Research integration of firestore
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-125
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/322f37ed1d9f352d66f8f4bf13c145d0a55c5f01
+
+SCRUM-131 add pre made trackers in mind section
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-131
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/f575ab5b45f5002fe3a771755038b91c70dd71a5
+
+SCRUM-156 Studied Workout.js and WorkoutList.js
+https://cs3398f23changelings.atlassian.net/browse/SCRUM-156
+commit: https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/commits/55f5a2419361fa34bb326cf821721d3c79e8779f
+
+# What Kacy thought went well as an individual #
+I try very hard to make it known that no one is alone in this project and that we'll figure things out. If I think someone is being skipped over
+or the work they done is being minimized I try to speak up for them because that's not cool. I also have told almost every team member at some point 
+that I can help them when they vocalize that they are struggling. My offer often is not taken since I often don't know anything about the topic and
+am therefore limited in my ability to help, but I try to none-the-less.
+
+# What Kacy thought did not go well as an individual #
+When we decided our tasks, I should have had the foresight to realize having all my tasks be dependent on others finishing their work early
+was a recipe for disaster. In doing so, I completely blocked myself for well over half of this sprint.
+
+### Julio Cantu Sprint 2 ###
+In the developement of the Hercules app durring the second sprint, I was first tasked with making the back end for saving data and reading the data yet there was some miscommunication and i was waiting on my tasks until a certain task was done so i could complete mine, and after a while of having the road block and talking my task was switched to local storage, then again to personal user accounts, another issue I was having was that expo would not run on my phone and this wasnt fixed until near the end of the sprint where i was told to use the web version, after such i was able to get my tasks completed. What I have done is revised the app.js to make it look more clean and better support multiple screens so I could make a landing page for the login function for the users, then I went about making the 2 functions "signup and login" where when you sign up it makes your own location in the database for "mind, munchies, and workouts", following that I made it to where the user has to create a "strong password" which must consist of 1 upper and lower case letter, a number, a special character, and must be atleast 8 characters long. Then after I implimented a little save function for saving the breakfeast data to the firestore database, from there I will build on it further and get it more integrated into our current project.
+### Here are the links for my major commits: ###
+
+SCRUM-20
+- make basic outside code for database to show functionality (originally made a pull request without using jira so when made from jira had troubles merging
+https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/pull-requests/47
+SCRUM-119
+- create signup with "strong password" required
+https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/pull-requests/62
+SCRUM-14
+- setup user signup
+SCRUM-135
+- Setup login and database storage paths together with signup (worked with signup)
+https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/pull-requests/61
+SCRUM-85
+- fix app.js for authentication
+https://bitbucket.org/cs3398f23changelings/%7Bde7af554-b9f0-4a03-a2b0-3074ff0d0b1c%7D/pull-requests/54
+
+### Next Steps ###
+I will be working with shelby in integrating and getting the backend functions working, and to hopefully get the final product launched.
+
+### Shelby Cumings Sprint 2 ###
+Much of this sprint was spent troubleshooting our web application in order to make it functional; this took an extremely long time, despite my references to official documentation, ChatGPT, and even contacting an expert in Firebase and ReactNative integration. Unfortunately, in the end, we decided to abandon the idea of Firebase hosting for a website and instead are relying on Expo, as before, for our web application. After this, my tasks were re-evaluated and I began working on our Firestore setup and creating templates and documentation for my teammates on the frontend side of things to use when reading data from Firestore to display in the app. A major issue in this sprint for me is that I failed to initially name my branches with Jira's naming convention for task tracking and making new branches for every task. This was worsened by having to revise my tasks based on how long they actually took me/create new tasks for step-by-step troubleshooting with each individual file. While I attempted to change the names of the branches when able and to add the task identifier to the commit messages, I had major problems with this as well and ended up adding tags to the Git graph and notes in Jira to show where my work is located.
+
+### Tasks: ###
+SCRUM-98 Reset project to empty Firebase
+- Examined each project file and emptied project of all but essential files
+- Created and configured new Firebase project in console
+- Acquired configuration info for next task
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-98
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/commits/a3a5bfc27384acd9153268392c471340af03472b
+
+SCRUM-106 Add in App.js file to empty Firebase branch
+- Added old App.js file into new Firebase branch and modify to integrate with new project
+- Implemented Firebase config data, initialized Firebase hosting and Firestore storage
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-106
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/commits/66cee211e8eec26b6e26c3ab878c93bcb051cf17
+
+SCRUM-107 Add in index.js file to empty Firebase branch
+- Added old index.js file into new Firebase branch and modified it to integrate with new project and modified App.js
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-107
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/commits/ffda5881cf7bbbe0d5fbd3a28946b1c3aada0109
+
+SCRUM-149 Make literally anything show up on web version
+- Conduct research, read documentation, examine errors, and make modifications to code to make simple "Hello World" display on a local web host
+- Included difficulties in configuring index.js, application entry point for web, routing errors within App.js
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-149
+**No associated commit because this task was a prerequisite for SCRUM-150 and committed there (see below)
+**(I didn't want to create a commit that only displayed "Hello World" in case it caused confusion later)
+
+SCRUM-150 Display old version on web
+- Replaced basic Hello World testing file with group-written App.js file
+- Examined errors within App.js and troubleshoot (included missing imports, improper references to docs, and modifying directory organization)
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&selectedIssue=SCRUM-150
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/commits/d233cb9feaf157bbf18a4286ca83a2c4f221b77e
+
+SCRUM-151 Update web app to newest version 
+- Merged updated main into fixed Firebase branch and thoroughly error-tested
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&selectedIssue=SCRUM-151
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/commits/448e27ff7458d4fa9391c44c558f807b049d74a1
+
+SCRUM-96 Set up user folders in Firestore
+Evaluate, optimize, and re-organize Firestore layout to most efficiently save/organize/read user info.
+- Separated storage for each set, allowing each set to have a different number of weights/reps compatible with frontend dev
+- Organized exercises into collections for each "split," compatible with frontend (arms, legs, etc.)
+- Added documents to example user's folder for preferred weight units and unique userID
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-96
+Screenshots: https://docs.google.com/document/d/1m1fQJ33TjmlPJa3884SDdGtL08XW-6r8vYVUvxGLjhs/edit?usp=sharing
+
+SCRUM-155 Be able to write docs in Firestore
+- Found and modified Firestore documentation to fit project and provide annotated examples
+- Created HowToFirestore.txt document for group reference about how to read/write Firestore data
+- Successfully implemented example document creation upon app initialization
+- Patched document creation code to prevent error causing GUI to not be displayed
+- Explained to group members how to use Firestore layout
+Jira: https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJwIjoiYWRtaW4iLCJpIjoiZmZhMDA4MDg1YWQ3NGRkM2I4Njk3ZTdiYzJkYmU2ODkifQ%3D%3D&cloudId=d4f29c87-9d1e-472e-833b-a50053536073&customFilter=05596667-c06a-494b-bf06-c71f0e686764&selectedIssue=SCRUM-155
+Bitbucket: https://bitbucket.org/cs3398f23changelings/hercules/pull-requests/63
+Photo of testing: https://docs.google.com/document/d/1LUYrOjIuovRgE-hxvsI37a7wsaH4i05W2PEbYbMdTsE/edit?usp=sharing
+
+### What Went Well? ###
+- Firebase troubleshooting/experience
+- Firestore management, research, and integration
+Although I had an extremely frustrating start, by the end of this sprint I've learned a lot about reading/writing to Firestore, which I think is really cool! I have a pretty good understanding of how to manage a Firestore database and how to integrate different parts of it with our application. Even though we didn't end up using Firebase hosting, I did gain a lot of experience in common issues with Firebase/React Native integration and learned from an expert regarding the organization, structure, and function of Firestore features and configuration.
+
+### What Didn't Go Well? ###
+- Work wasted ):
+- Still not great team communication (at least for backend)
+I jumped the gun on creating my Firebase testing branch a few days before the sprint actually started, and continued working on that branch rather than creating branches with my task names so that they could be tracked in Jira. This was an oversight on my part as I didn't anticipate that the Firebase testing would take up so much of my time and so many tasks (my tasks were modified a week into the sprint to better reflect this) and it has caused me a lot of grief in terms of being able to track down my old work both to show my team and for our standup/retrospective. Additionally, I spent a ton of time on the Firebase testing and we didn't end up using it, as we abandoned the idea of Firebase hosting once it became clear that troubleshooting the web display every time a new feature is integrated would make us unable to complete the app's functionality in our last sprint.
+
+### What Can I Do to Improve? ###
+- Commit more often for better work tracking
+- Ensure branches are named correctly and separate branches are made for each task
+- Meet more often with group
+I will know I am doing this better when my work is apparent in the Jira board and it is easier to find/organize in next sprint's retrospective. We will know communication is better when our team is able to integrate our features in a timely manner when they are completed, and when each team member understands and is able to explain each component of the project.
+
+### Next Steps ###
+In the next sprint, I hope to add in the backend storage functionality for each of the buttons so that data can be saved between sessions in the correct place. Additionally, I hope to create the access rules for Firestore in order to switch our app off of testing mode, work with Julio to initialize users' folders with preset workouts and foods, and flesh out the organization scheme for our "Mindfulness" habit tracker, as the group hasn't thoroughly discussed how this feature will work or be tracked.
+
+
+### Kaleb Perez Sprint 2: ###
+During this sprint, the majority of my contributions were focused on enhancing the workout screen functionality. I implemented several key features to improve the overall user experience. I introduced the ability to delete workouts from the list of workouts, making it easier for users to manage their workout routines. Additionally, I created the 'Add Workouts' button to simplify the process of adding new exercises. To enhance user customization, I added a drop-down menu to name workouts when initially added. The 'Settings' button was introduced, providing quick access to options for deleting and renaming both workouts and splits. Within the workout screen, I enabled users to add reps, weights lifted, and sets, and it now calculates percentage value increase recommendations. Furthermore, I worked collaboratively with Aaron to modularize his code, ensuring a more organized and efficient project structure."
+
+### Tasks: ###
+Title: add ability to delete workout from lists
+ID: SCRUM-116
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-116
+Title: create add workouts button
+ID: SCRUM-113
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-113
+Title: add ability to name workout
+ID: SCRUM-114
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-114
+Title: add ability to add reps and weights lifted in workout screen
+ID: SCRUM-120
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-120
+Title: add logic to recommend different amounts to lift or different possible workouts to try in workout screen
+ID: SCRUM-121
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-121
+Title: add ability to delete workout split
+ID: SCRUM-139
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-139
+Title: add ability to rename workout split
+ID: SCRUM-126
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-126
+Title: Assist Aaron with GitHub issues and modularizing breakfast buttons
+ID: SCRUM-147
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-147
+
+
+### What Went Well? ###
+Team:
+We really came togther in the end and got a lot of work done fast. I think next sprint will go better since we are over the major roadblocks.
+Personal:
+Adding a lot of functionality in a short time and helping aaron modularize his code quickly
+### What Didn't Go Well? ###
+Our teamwork and communication is not the best, it leads to lots of standstills while waiting on help or a task to get done
+### What is impeding us ###
+Lack of communication and procrastination. These two factors are deadlocking us when some of us try to work.
+### What Can I Do to Improve? ###
+Help keep the team motivated and working on tasks, schedule more meetings, be more vocal about the work that needs to get done and when.
+### Next Steps ###
+I plan to add the final bits of UI functionality and then work on making it look as nice as possible for our final presentation. I will use a cohesive theme to beautify the app
+
+
+### Aaron Parks Sprint 2 ###
+During sprint 2 I added functionality for the "Munchies" section of the code, creating buttons where users can input food choices. I ran into a lot of issues that I was able to figure out close to the end of the sprint.
+Including: How to add a button inside of another button, figure out how Kaleb managed to add the "gear" or settings icon laid ontop of another button, and creation of the 3rd button at the deepest level.
+
+### Tasks - Aaron ###
+ID: SCRUM 140
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-140
+Title: Create Breakfast Button
+ID: SCRUM 141
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-141
+Title: Create Lunch Button
+ID: SCRUM 142
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-142
+Title: Create Dinner Button
+ID: SCRUM 143
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-143
+Title: Add Meal Button Inside Breakfast/Lunch/Dinner
+ID: SCRUM 148
+https://cs3398f23changelings.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-148
+Title: Modularize Meal Assets
+In addition, keep in mind that the SCRUM 141 and 142 will have branches but no pull requests due to merge conflicts. All of the code from the 2 tasks are implemented into SCRUM 148 (Modularize Meal Assets).
+SCRUM 74 and 144 were tasks from the first sprint that rolled over into the second sprint, these tasks were disregarded and moved to "Done" with notes added in the description for what changes were made.
+
+### What Went Well? ###
+Team:
+We were finally able to overcome the issues regarding backend and storage.
+Personal:
+I was able to take a lot of the modularity and functionality that Kaleb had previously added for his work, and use a similarly formatted code to produce similar formatted output.
+### What Didn't Go Well? ###
+Communication seemed to be lacking a lot on the backend of the code, HOWEVER, this did change at the end of the sprint.
+### What is impeding us ###
+Communication and procrastination. Once we can all finally sit down and work on what we are doing, we made strides.
+### What Can I Do to Improve? ###
+Fix having merge conflicts that impede us on being able to continue production.
+### Next Steps ###
+Integrate the API for the Munchies section to pull info from a database in the regards to foods, beautify, and also fix/finish the UI design for the munchies section.
+
+
+### Retrospective 2 ###
+
+### What went well (TEAM): ###
+We were able to accomplish a faily decent amount of UI design during sprint 2, even after running into multiple blocks that we were able to overcome.
+Once we were able to decide on doing local storage we were able to get Firestore setup and running at the very end of the sprint.
+
+Aaron and Kaleb work well together on the front end. Julio and Shelby got a lot done on the backend. They've been working on it this whole time but this happened to be when their work paid off so we could see the results of it. Kacy did well at being a floater/neutral party who could help as needed. (Kacy)
+
+We were able to get the application testing on all team members devices near the end of the sprint, so now all team members can now do their work in an orderly fashion.
+
+
+
+### What did not go well(TEAM): ###
+It took us till the end of sprint 2 to get any of the backend working, although, now it does seem to be working and we can move forward.
+
+Still experienced some difficult in this sprint with team members being able to have a development/testing version of the application that runs on their devices, which was thankfully resolved about halfway through the sprint. Unfortunately it's still a tiny bit finicky - a single syntax error can make the site fail to display and is time-consuming to troubleshoot.
+
+Being unfamiliar with frontend React Native code and being unable to contact frontend developers made it difficult to implement backend functionality in GUI. Code should be documented and/or explained to team.
+
+There was often extreme lack of understanding and miscommunication. I believe people let their frustrations and own experiences cloud their ability to 
+understand other's perspectives. Not all the work we do is the same, and even if it were, different people have different strong suits.
+We would do much better if we all took a breath and tried to understand the other person and be supportive rather than condescending. 
+Having reminders of the deadline can be helpful but having our struggles dismissed and our accomplished work minimized creates a toxic work environment.
+Additionally, Julio, Shelby, and Kacy had extensive problems with Expo and couldn't run the project half of the time which made it very difficult to get
+tasks done since we couldn't see what we were doing. It's also vital people not leave our team meetings early because when we vocalized that we were 
+struggling with different aspects, no one who knew how to do it was there to help.  (Kacy)
+
+Communication still needs to get better as its detremental to the whole group. Very few team meetings because members often had to leave early when we had time during/after class or didn't show during our scheduled Sunday meetings. Communication between front and back end is not great and a bit tense. We could do well with more respect for each other within the team and improving our understanding that we're working toward a common goal, and should ALL be involved in communicating about, planning for, and reaching it. The work that we do enables each other to do their best work as well.
+
+### What Might Be Impeding Us from Performing Better? ###
+Difficulties communicating between teammates.
+Communication and procrastination. Once we can all finally sit down and work on what we are doing, we made strides.
+Team respect, understanding, and cohesiveness.
+
+### What can I do to Improve (Aaron): ###
+I learned a lot from sprint 1 from a GitKraken standpoint, however, I did make a few mistakes this sprint that resulted in merge conflicts. I need to improve this, as it halts us from working for a little bit.
+### What can I do to Improve (Kacy): ###
+Communicate more when I have a roadblock to find out if I can help someone else. I only asked one person if they needed help before Dr. Lehr suggested
+I take a different person's tasks. Had I communicated more I would have known that even though that person declined, there were still others I could assist.
+
+### What can I do to improve (Shelby): ###
+- Commit more often for better work tracking
+- Ensure branches are named correctly and separate branches are made for each task
+- Meet more often with group
+I will know I am doing this better when my work is apparent in the Jira board and it is easier to find/organize in next sprint's retrospective. We will know communication is better when our team is able to integrate our features in a timely manner when they are completed, and when each team member understands and is able to explain each component of the project.
+
+### What can I do to improve (Kaleb): ###
+Help keep the team motivated and working on tasks, schedule more meetings, be more vocal about the work that needs to get done and when.
+### What can I do to improve (Julio): ###
+After leanrning how to run expo, what I can do better is talk more with my group members to find out the routs for the projects.
+
+
+
+
+

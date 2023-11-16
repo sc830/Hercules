@@ -1,0 +1,18 @@
+Researching a meal API to pull meals and macros/ingredients from a database.
+
+I found one that I believe has all of the necessary tools that we need for this section, called "Edimam". It offers a free developer version.
+
+The goal here:
+- Find an API that has the ability to list ingredients and macros for certain foods.
+- Has auto fill while typing into the text box.
+- Be able to take the information found in the database and transform it into a visual representation (Graphs).
+
+Any issues I possibly forsee:
+- I do not see a way on the website for easy integration.
+
+How will this research help me:
+- Finding a good API will allow me to finish the Munchies section of the code.
+
+
+Ending notes:
+I am hoping that this API will work and suit all of our needs for meals to be imported from the database and be able to visually represent the data that we find, to give users an easy to see and overall great experience when using the Munchies tab.

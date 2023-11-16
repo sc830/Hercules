@@ -1,0 +1,2 @@
+11/16/2023
+the firebase permissions have now been changed to allow only users that are logged in to read and write data to the database.
