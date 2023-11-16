@@ -46,6 +46,9 @@ const Login = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
       />
+      <Text style={styles.passwordRequirementText}>
+        Password must be at least 8 characters, have at least one special character, one number, and one upper and lower case character
+      </Text>
       <View style={styles.buttonContainer}>
         <Button title="Login" onPress={handleLogin} />
         <Button title="Sign Up" onPress={handleSignUp} />
@@ -77,6 +80,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '60%',
+  },
+  passwordRequirementText: {
+    fontSize: 12,
+    color: 'red',
+    marginBottom: 10,
+    textAlign: 'center',
   },
 });
 
