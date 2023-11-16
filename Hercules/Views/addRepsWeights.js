@@ -102,41 +102,70 @@ const AddRepsWeights = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: 'black',
+    backgroundColor: '#FFF7E0', // Light gold background
     padding: 20,
     alignItems: 'center',
   },
   headerText: {
-    color: 'white',
+    color: '#303030', // Dark text for readability
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
   },
+  backButton: {
+    backgroundColor: '#D4AF37', // Gold background color
+    paddingHorizontal: 20, // Horizontal padding
+    paddingVertical: 10, // Vertical padding
+    borderRadius: 10, // Rounded corners
+    flexDirection: 'row', // Layout for icon and text
+    alignItems: 'center', // Center items vertically
+    justifyContent: 'center', // Center items horizontally
+    elevation: 2, // Shadow for Android
+    shadowColor: '#000', // Shadow color for iOS
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+    shadowRadius: 4, // Shadow blur radius for iOS
+    shadowOpacity: 0.25, // Shadow opacity for iOS
+    alignSelf: 'flex-start', // Align to the left
+    marginLeft: 10, // Margin from the left
+  },
+  backButtonText: {
+    color: '#fff', // White color for the text
+    fontSize: 18, // Font size for the text
+    marginLeft: 8, // Space between icon and text if both are present
+  },
   input: {
     backgroundColor: 'white',
-    color: 'black',
+    color: '#303030', // Dark text for readability
     paddingHorizontal: 15,
     paddingVertical: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     fontSize: 18,
     marginVertical: 10,
     width: '80%',
+    borderWidth: 1,
+    borderColor: '#D4AF37', // Gold color border
   },
   button: {
-    backgroundColor: 'purple',
+    backgroundColor: '#D4AF37', // Gold color
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 10,
     width: '80%',
+    elevation: 3, // Adds a drop shadow on Android
+    shadowColor: '#000', // Adds a shadow on iOS
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
   buttonText: {
     color: 'white',
     fontSize: 18,
+    fontWeight: '600', // Semi-bold
   },
   setContainer: {
-    backgroundColor: 'grey',
+    backgroundColor: '#FFFFFF', // White background for sets
     borderRadius: 10,
     padding: 15,
     marginVertical: 5,
@@ -144,18 +173,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#D4AF37', // Gold color border
   },
   setText: {
-    color: 'white',
+    color: '#303030', // Dark text for readability
     fontSize: 18,
   },
   recommendedText: {
-    color: 'white',
+    color: '#303030', // Dark text for readability
     fontSize: 16,
     marginTop: 10,
   },
   deleteButton: {
-    backgroundColor: 'transparent', // Make the button transparent
+    backgroundColor: '#D4AF37', // Gold color
     padding: 10,
     borderRadius: 5,
     justifyContent: 'center',
