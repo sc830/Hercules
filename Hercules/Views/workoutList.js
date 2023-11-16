@@ -1,8 +1,17 @@
-//WorkoutList.js
+// WorkoutList.js
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  TextInput,
+  Button
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import BackButton from '../components/BackButton'; // Importing the BackButton component
+import BackButton from '../components/BackButton'; // Ensure this import is correct
+
 const WorkoutList = ({ route }) => {
   const { splitName } = route.params;
   const navigation = useNavigation();
@@ -40,23 +49,17 @@ const WorkoutList = ({ route }) => {
   };
 
   return (
-    
     <View style={styles.container}>
-      <View style={styles.container}>
-        <BackButton title="Back" /> {/* Added the BackButton with a title */}
-       
-      {/* ...rest of your existing WorkoutList component code... */}
-    </View>
-
-
+      <BackButton title="Back" />
       {workouts.map((workout, index) => (
         <View key={index} style={styles.workoutContainer}>
-              
-          <TouchableOpacity style={styles.workoutButton} 
-            onPress={() => navigation.navigate('addRepsWeights', { workoutName: workout })}>
+          <TouchableOpacity
+            style={styles.workoutButton}
+            onPress={() => navigation.navigate('addRepsWeights', { workoutName: workout })}
+          >
             <Text style={styles.workoutText}>{workout}</Text>
-            <TouchableOpacity 
-              style={styles.settingsButton} 
+            <TouchableOpacity
+              style={styles.settingsButton}
               onPress={() => {
                 setShowDeleteOption(index === showDeleteOption ? -1 : index);
                 setRenameIndex(index === renameIndex ? -1 : index);
@@ -65,24 +68,30 @@ const WorkoutList = ({ route }) => {
               <Text style={styles.settingsText}>⚙️</Text>
             </TouchableOpacity>
           </TouchableOpacity>
-
           {showDeleteOption === index && (
             <View style={styles.buttonRow}>
-              <TouchableOpacity onPress={() => deleteWorkout(index)} style={styles.actionButton}>
+              <TouchableOpacity
+                onPress={() => deleteWorkout(index)}
+                style={styles.actionButton}
+              >
                 <Text style={styles.actionButtonText}>Delete</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleRenameOpen(index, workout)} style={styles.actionButton}>
+              <TouchableOpacity
+                onPress={() => handleRenameOpen(index, workout)}
+                style={styles.actionButton}
+              >
                 <Text style={styles.actionButtonText}>Rename</Text>
               </TouchableOpacity>
             </View>
           )}
         </View>
       ))}
-
-      <TouchableOpacity style={styles.addButton} onPress={() => setShowAddModal(true)}>
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => setShowAddModal(true)}
+      >
         <Text style={styles.buttonText}>+ Add Workout</Text>
       </TouchableOpacity>
-
       <Modal animationType="slide" transparent={true} visible={showRenameModal}>
         <View style={styles.modalView}>
           <TextInput
@@ -91,17 +100,21 @@ const WorkoutList = ({ route }) => {
             onChangeText={setWorkoutName}
             placeholder="Rename Workout"
           />
-          <TouchableOpacity style={styles.addButton} onPress={renameWorkout}>
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={renameWorkout}
+          >
             <Text style={styles.buttonText}>Rename Workout</Text>
           </TouchableOpacity>
-          <Button title="Close" onPress={() => {
+          <Button
+            title="Close"
+            onPress={() => {
               setShowRenameModal(false);
               setWorkoutName('');
             }}
           />
         </View>
       </Modal>
-
       <Modal animationType="slide" transparent={true} visible={showAddModal}>
         <View style={styles.modalView}>
           <TextInput
@@ -110,23 +123,32 @@ const WorkoutList = ({ route }) => {
             onChangeText={setWorkoutName}
             placeholder="Enter Workout Name"
           />
-          <TouchableOpacity style={styles.addButton} onPress={addWorkout}>
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={addWorkout}
+          >
             <Text style={styles.buttonText}>Add Workout</Text>
           </TouchableOpacity>
-          <Button title="Close" onPress={() => {
-            setShowAddModal(false);
-            setWorkoutName('');
-          }} />
+          <Button
+            title="Close"
+            onPress={() => {
+              setShowAddModal(false);
+              setWorkoutName('');
+            }}
+          />
         </View>
       </Modal>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     backgroundColor: '#FFF7E0', // A light gold background
+    paddingTop: 20, // Add padding to avoid content being cut by the status bar
   },
   workoutButton: {
     backgroundColor: '#D4AF37', // Gold color

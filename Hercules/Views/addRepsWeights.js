@@ -112,6 +112,27 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
+  backButton: {
+    backgroundColor: '#D4AF37', // Gold background color
+    paddingHorizontal: 20, // Horizontal padding
+    paddingVertical: 10, // Vertical padding
+    borderRadius: 10, // Rounded corners
+    flexDirection: 'row', // Layout for icon and text
+    alignItems: 'center', // Center items vertically
+    justifyContent: 'center', // Center items horizontally
+    elevation: 2, // Shadow for Android
+    shadowColor: '#000', // Shadow color for iOS
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+    shadowRadius: 4, // Shadow blur radius for iOS
+    shadowOpacity: 0.25, // Shadow opacity for iOS
+    alignSelf: 'flex-start', // Align to the left
+    marginLeft: 10, // Margin from the left
+  },
+  backButtonText: {
+    color: '#fff', // White color for the text
+    fontSize: 18, // Font size for the text
+    marginLeft: 8, // Space between icon and text if both are present
+  },
   input: {
     backgroundColor: 'white',
     color: '#303030', // Dark text for readability

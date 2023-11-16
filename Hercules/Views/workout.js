@@ -69,37 +69,44 @@ const WorkoutView = () => {
       </View>
 
 
-      {splits.map((split, index) => (
-        <View key={index} style={styles.splitContainer}>
-          <TouchableOpacity
-            style={styles.splitButton}
-            onPress={() => navigation.navigate('workoutList', { splitName: split })}
-          >
-            <Text style={styles.splitText}>{split}</Text>
-            <TouchableOpacity 
-              style={styles.settingsButton} 
-              onPress={() => {
-                setShowDeleteOption(index === showDeleteOption ? -1 : index);
-                setRenameIndex(index === renameIndex ? -1 : index);
-              }}
-            >
-              <Text style={styles.settingsText}>⚙️</Text>
-            </TouchableOpacity>
-          </TouchableOpacity>
+      { splits.map((split, index) => (
+  <View key={index} style={styles.splitContainer}>
+    {/* Main button for navigation */}
+    <TouchableOpacity
+      style={styles.splitButton}
+      onPress={() => navigation.navigate('workoutList', { splitName: split })}
+      activeOpacity={0.7}
+    >
+      <Text style={styles.splitText}>{split}</Text>
+    </TouchableOpacity>
+    
+    {/* Absolutely positioned settings button within the split container */}
+    <TouchableOpacity
+      style={styles.settingsButton}
+      onPress={(e) => {
+        // Prevent this button's press from triggering the main button's onPress
+        e.stopPropagation(); 
+        setShowDeleteOption(index === showDeleteOption ? -1 : index);
+        setRenameIndex(index === renameIndex ? -1 : index);
+      }}
+      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} // Increase touchable area for easier interaction
+    >
+      <Text style={styles.settingsText}>⚙️</Text>
+    </TouchableOpacity>
 
-          {showDeleteOption === index && (
-            <View style={styles.buttonRow}>
-             <TouchableOpacity onPress={() => deleteSplit(index)} style={styles.actionButton}>
-                <Text style={styles.actionButtonText}>Delete</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleRenameOpen(index, split)} style={styles.actionButton}>
-                <Text style={styles.actionButtonText}>Rename</Text>
-            </TouchableOpacity>
-        </View>
-        
-          )}
-        </View>
-      ))}
+    {/* Show delete and rename options */}
+    {showDeleteOption === index && (
+      <View style={styles.buttonRow}>
+        <TouchableOpacity onPress={() => deleteSplit(index)} style={styles.actionButton}>
+          <Text style={styles.actionButtonText}>Delete</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleRenameOpen(index, split)} style={styles.actionButton}>
+          <Text style={styles.actionButtonText}>Rename</Text>
+        </TouchableOpacity>
+      </View>
+    )}
+  </View>
+))}
 
       <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
         <Text style={styles.buttonText}>+ Add Workout Day</Text>
