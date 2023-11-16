@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
 import { login, signUp } from '../firebaseFunctions';
 
 const Login = ({ navigation }) => {
@@ -55,51 +55,71 @@ const Login = ({ navigation }) => {
   }, [error]);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Welcome to Hercules</Text>
-      <Text style={styles.text}>Become The Better Version Of You</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <Text id="passerror" style={styles.passwordRequirementText}>
-        {passwordRequirements}
-      </Text>
-      <View style={styles.buttonContainer}>
-        <Button title="Login" onPress={handleLogin} />
-        <Button title="Sign Up" onPress={handleSignUp} />
+    <ImageBackground
+      source={require('../backgrounds/buff.png')} // Set the path to your background image
+      style={styles.background} // Apply styles for the background
+    >
+      <View style={styles.container}>
+        <Text style={styles.text}>Welcome to Hercules</Text>
+        <Text style={styles.text}>Become The Better Version Of You</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="rgba(0, 0, 0, 0.7)" // Placeholder text color
+          value={email}
+          onChangeText={setEmail}
+          color="black" // Text color inside the TextInput
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="rgba(0, 0, 0, 0.7)" // Placeholder text color
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+          color="black" // Text color inside the TextInput
+        />
+        <Text id="passerror" style={styles.passwordRequirementText}>
+          {passwordRequirements}
+        </Text>
+        <View style={styles.buttonContainer}>
+          <Button title="Login" onPress={handleLogin} />
+          <Button title="Sign Up" onPress={handleSignUp} />
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: '100%',
+    height: '100%',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: 'transparent',
   },
   text: {
     fontSize: 24,
     marginBottom: 20,
+    color: 'white', // Text color for better visibility against the background
+    textShadowColor: 'rgba(0, 0, 0, 0.75)', // Text shadow for better visibility
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
   input: {
     width: '80%',
     height: 40,
-    borderColor: 'gray',
+    borderColor: 'rgba(255, 255, 255, 0.8)',
     borderWidth: 1,
     marginBottom: 20,
     padding: 10,
+    color: 'black', // Text color inside the TextInput
   },
   buttonContainer: {
     flexDirection: 'row',
