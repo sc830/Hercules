@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
-import searchMeal from './API'; // Adjust the import path as necessary
-import pullDocData from '../../firebaseFunctions.json'; // Adjust the import path as necessary
-
+import { doc, getFirestore } from 'firebase/firestore';
+import { saveMeal } from '../firebaseFunctions';
 
 const LunchScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -15,13 +14,17 @@ const LunchScreen = ({ navigation }) => {
     setSelectedMeal(null);
   };
 
-  const handleSaveMeal = () => {
+  const handleSaveMeal = async () => {
+    //////////////////console.log(pullDocData())
+    const db = getFirestore();
+    const docRef = doc(db, "testFolder", "subcollection", "variable");
+    const docSnap = await getDoc(docRef);
+    console.log("Document data:", docSnap.data());
     if (selectedMeal !== null) {
       const updatedList = mealList.map((m) => (m === selectedMeal ? meal : m));
       setMealList(updatedList);
       setModalVisible(false);
       setSelectedMeal(null);
-
     } else {
       setMealList([...mealList, meal]);
       setMeal('');
