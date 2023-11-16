@@ -57,12 +57,17 @@ const WorkoutView = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container} style={styles.scrollView}>
+    <ScrollView contentContainerStyle={styles.container} style={styles.scrollView}> 
       <View style={styles.dateContainer}>
-        <Button title="<" onPress={handleBack} />
-        <Button title={currentDate.toDateString()} />
-        <Button title=">" onPress={handleForward} />
+        <TouchableOpacity onPress={handleBack} style={styles.navButton}>
+          <Text style={styles.navButtonText}>{"<"}</Text>
+        </TouchableOpacity>
+        <Text>{currentDate.toDateString()}</Text>
+        <TouchableOpacity onPress={handleForward} style={styles.navButton}>
+          <Text style={styles.navButtonText}>{">"}</Text>
+        </TouchableOpacity>
       </View>
+
 
       {splits.map((split, index) => (
         <View key={index} style={styles.splitContainer}>
@@ -140,68 +145,81 @@ const WorkoutView = () => {
 const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: '#FFF7E0', // A light gold background for the overall app
   },
   container: {
     flexGrow: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingTop: 100,
+    paddingTop: 20,
   },
   dateContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginHorizontal: 20,
+    justifyContent: 'space-around',
+    width: '100%',
+    marginBottom: 20,
   },
   addButton: {
-    backgroundColor: 'purple',
-    width: 200,
+    backgroundColor: '#D4AF37', // Gold color
+    width: '90%',
     height: 50,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 20,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
   buttonText: {
     color: 'white',
     fontSize: 20,
+    fontWeight: '600',
   },
   splitContainer: {
     width: '90%',
+    height: 300,
     marginBottom: 10,
+    backgroundColor: 'white', // Removing the gold border
+    borderRadius: 15,
+    elevation: 2, // Elevation is kept for shadow effect
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   buttonRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     width: '100%',
-},
-
-actionButton: {
-    flex: 1,
-    backgroundColor: 'purple',
+  },
+  actionButton: {
+    backgroundColor: '#D4AF37', // Gold color
+    width: '45%',
     alignItems: 'center',
     padding: 10,
-    margin: 5,
-    borderRadius: 5,
-},
-
-actionButtonText: {
-    color: 'black',
+    borderRadius: 15,
+    marginTop: 10,
+  },
+  actionButtonText: {
+    color: 'white',
     fontSize: 16,
-},
-
+    fontWeight: '600',
+  },
   splitButton: {
-    backgroundColor: 'gray',
-    height: 200,
-    borderRadius: 25,
+    height: 60,
+    borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
+    marginTop: 10,
   },
   splitText: {
-    color: 'black',
+    color: '#303030',
     fontSize: 20,
+    fontWeight: '600',
   },
   settingsButton: {
     position: 'absolute',
@@ -209,37 +227,14 @@ actionButtonText: {
     right: 10,
   },
   settingsText: {
-    fontSize: 20,
-  },
-  deleteButton: {
-    backgroundColor: 'purple',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 25,
-    marginTop: 10,
-    alignSelf: 'flex-end',
-  },
-  deleteButtonText: {
-    color: 'black',
-    fontSize: 16,
-  },
-  renameButton: {
-    backgroundColor: 'purple',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 25,
-    marginTop: 10,
-    alignSelf: 'flex-end',
-  },
-  renameButtonText: {
-    color: 'black',
-    fontSize: 16,
+    fontSize: 24,
+    color: '#D4AF37', // Gold color
   },
   modalView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(255, 247, 224, 0.95)', // Translucent light gold background
   },
   input: {
     width: '80%',
@@ -248,8 +243,26 @@ actionButtonText: {
     marginBottom: 10,
     paddingHorizontal: 10,
     fontSize: 20,
+    borderRadius: 15,
+    // Removing the gold border
+    color: '#303030', // Dark text for readability
+  },
+  // Styles for the gold navigation buttons
+  navButton: {
+    backgroundColor: '#D4AF37',
+    padding: 10,
+    borderRadius: 5,
+    marginHorizontal: 10,
+  },
+  navButtonText: {
+    color: '#FFF',
+    fontSize: 18,
   },
 });
+
+
+// Don't forget to adjust the buttons within the `render` method to use these styles.
+
 
 export default WorkoutView;
 

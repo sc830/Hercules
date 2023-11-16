@@ -102,41 +102,49 @@ const AddRepsWeights = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: 'black',
+    backgroundColor: '#FFF7E0', // Light gold background
     padding: 20,
     alignItems: 'center',
   },
   headerText: {
-    color: 'white',
+    color: '#303030', // Dark text for readability
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
   },
   input: {
     backgroundColor: 'white',
-    color: 'black',
+    color: '#303030', // Dark text for readability
     paddingHorizontal: 15,
     paddingVertical: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     fontSize: 18,
     marginVertical: 10,
     width: '80%',
+    borderWidth: 1,
+    borderColor: '#D4AF37', // Gold color border
   },
   button: {
-    backgroundColor: 'purple',
+    backgroundColor: '#D4AF37', // Gold color
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 10,
     width: '80%',
+    elevation: 3, // Adds a drop shadow on Android
+    shadowColor: '#000', // Adds a shadow on iOS
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
   buttonText: {
     color: 'white',
     fontSize: 18,
+    fontWeight: '600', // Semi-bold
   },
   setContainer: {
-    backgroundColor: 'grey',
+    backgroundColor: '#FFFFFF', // White background for sets
     borderRadius: 10,
     padding: 15,
     marginVertical: 5,
@@ -144,18 +152,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#D4AF37', // Gold color border
   },
   setText: {
-    color: 'white',
+    color: '#303030', // Dark text for readability
     fontSize: 18,
   },
   recommendedText: {
-    color: 'white',
+    color: '#303030', // Dark text for readability
     fontSize: 16,
     marginTop: 10,
   },
   deleteButton: {
-    backgroundColor: 'transparent', // Make the button transparent
+    backgroundColor: '#D4AF37', // Gold color
     padding: 10,
     borderRadius: 5,
     justifyContent: 'center',
