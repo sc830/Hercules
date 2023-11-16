@@ -81,8 +81,8 @@ const signUp = async (email, password, username) => {
         // under that collection
         // or we can have a string with it as (food, calories, day)
         // and just split the string at the commas and work with that
-    const workoutsData = {
-      exampleField: 'Example Workouts Data'
+    /*const workoutsData = {
+     exampleField: 'Example Workouts Data'
     };
     await setDoc(doc(db, 'workouts', user.uid), workoutsData);
 
@@ -95,7 +95,7 @@ const signUp = async (email, password, username) => {
       exampleField: 'Example Moooonchies Data'
     };
     await setDoc(doc(db, 'munchies', user.uid), munchiesData);
-
+    */
     return user;
   } catch (error) {
     throw new Error(error.message);
