@@ -122,6 +122,24 @@ const login = async (email, password) => {
   }
 };
 
+export const pullDocData = async(docPath, fieldName) => {
+  try {
+    console.log(docPath);
+    const docRef = doc(db, docPath)
+    const docPoint = await getDoc(docRef);
+
+    if (docPoint.exists()) {
+      console.log("Document data:", docPoint.data());
+      let fieldData = docPoint.get(fieldName);
+      return fieldData;
+    }
+  }
+  catch (error) {
+    throw new Error(error.message);
+    return null;
+  }
+}
+
 const saveMeal = async (mealData, mealType) => {
   try {
     const dt = new Date();
