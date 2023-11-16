@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import BackButton from '../../components/backButton';
-import useCustomTracker from './useCustomTracker'; // Adjust the path as necessary
+import useCustomTracker from './useCustomTracker'; 
 import CustomTrackerModal from './customTrackerModal';
+import GraphWithButton from '../../components/graph'; 
+
 
 const Mindfulness = ({ navigation }) => {
   const {
@@ -25,11 +27,15 @@ const Mindfulness = ({ navigation }) => {
     ));
   };
 
+  // Dummy data for the graph
+  const graphData = [20, 45, 28, 80, 99]; // Replace with actual data
+
   return (
     <View style={styles.container}>
       <BackButton />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {renderTrackers()}
+        <GraphWithButton data={graphData} />
         <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
           <Text style={styles.buttonText}>Add a Custom Tracker</Text>
         </TouchableOpacity>

@@ -1,19 +1,7 @@
 // Create a graph that functions as a button to the add reps/sets page
-// October 1st
+// October 1st through November 16th
 // Kacy Metcalf
 
-
-/*
-    WARNING!
-    When I run npm install react-native-chart-kit to set up the environment,
-    I get 75 vulnerabilities. I am unsure how to overcome this problem but
-    it invites difficult maintenance, security risks, and other serious
-    issues.
-
-    I've had vulnerabilities in previous projects that were resolved by 
-    directing into a deeper directory before running the command. However,
-    this approach has not made a difference while debugging this error.
-*/
 
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
