@@ -15,11 +15,8 @@ const LunchScreen = ({ navigation }) => {
   };
 
   const handleSaveMeal = async () => {
-    //////////////////console.log(pullDocData())
-    const db = getFirestore();
-    const docRef = doc(db, "testFolder", "subcollection");
-    const docSnap = await getDoc(docRef);
-    console.log("Document data:", docSnap.data());
+    console.log(pullDocData("testFolder/subcollection"))
+
     if (selectedMeal !== null) {
       const updatedList = mealList.map((m) => (m === selectedMeal ? meal : m));
       setMealList(updatedList);

@@ -104,11 +104,14 @@ const login = async (email, password) => {
 };
 
 const pullDocData = async(docPath) => {
+
+    console.log("Document data:", docSnap.data());
   parts = docPath.split('/');
   ePath = "db,";
   for (let i = 0; i < parts.length; i++) {
     ePath = ePath + " " + parts[i] + ",";
   }
+  console.log(ePath);
   try {
     const docRef = doc(eval(ePath))
     const doc = await getDoc(docRef);
