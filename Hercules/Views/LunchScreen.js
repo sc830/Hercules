@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
 import searchMeal from './API'; // Adjust the import path as necessary
+import pullDocData from '../../firebaseFunctions.json'; // Adjust the import path as necessary
 
 
 const LunchScreen = ({ navigation }) => {
@@ -20,6 +21,7 @@ const LunchScreen = ({ navigation }) => {
       setMealList(updatedList);
       setModalVisible(false);
       setSelectedMeal(null);
+
     } else {
       setMealList([...mealList, meal]);
       setMeal('');
