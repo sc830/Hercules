@@ -1,16 +1,7 @@
-// WorkoutList.js
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Modal,
-  TextInput,
-  Button,
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import BackButton from '../components/BackButton'; // Ensure this import is correct
+import BackButton from '../components/BackButton'; // Importing the BackButton component
 
 const WorkoutList = ({ route }) => {
   const { splitName } = route.params;
@@ -50,7 +41,7 @@ const WorkoutList = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <BackButton />
+      <BackButton onPress={() => navigation.goBack()} />
       {workouts.map((workout, index) => (
         <View key={index} style={styles.workoutContainer}>
           <TouchableOpacity
@@ -70,26 +61,17 @@ const WorkoutList = ({ route }) => {
           </TouchableOpacity>
           {showDeleteOption === index && (
             <View style={styles.buttonRow}>
-              <TouchableOpacity
-                onPress={() => deleteWorkout(index)}
-                style={styles.actionButton}
-              >
+              <TouchableOpacity onPress={() => deleteWorkout(index)} style={styles.actionButton}>
                 <Text style={styles.actionButtonText}>Delete</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => handleRenameOpen(index, workout)}
-                style={styles.actionButton}
-              >
+              <TouchableOpacity onPress={() => handleRenameOpen(index, workout)} style={styles.actionButton}>
                 <Text style={styles.actionButtonText}>Rename</Text>
               </TouchableOpacity>
             </View>
           )}
         </View>
       ))}
-      <TouchableOpacity
-        style={[styles.workoutButton, styles.centeredButtonContainer]}
-        onPress={() => setShowAddModal(true)}
-      >
+      <TouchableOpacity style={styles.addButton} onPress={() => setShowAddModal(true)}>
         <Text style={styles.buttonText}>+ Add Workout</Text>
       </TouchableOpacity>
       <Modal animationType="slide" transparent={true} visible={showRenameModal}>
@@ -100,10 +82,7 @@ const WorkoutList = ({ route }) => {
             onChangeText={setWorkoutName}
             placeholder="Rename Workout"
           />
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={renameWorkout}
-          >
+          <TouchableOpacity style={styles.addButton} onPress={renameWorkout}>
             <Text style={styles.buttonText}>Rename Workout</Text>
           </TouchableOpacity>
           <Button
@@ -112,6 +91,7 @@ const WorkoutList = ({ route }) => {
               setShowRenameModal(false);
               setWorkoutName('');
             }}
+            color="#D4AF37" // Set the color to gold
           />
         </View>
       </Modal>
@@ -123,10 +103,7 @@ const WorkoutList = ({ route }) => {
             onChangeText={setWorkoutName}
             placeholder="Enter Workout Name"
           />
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={addWorkout}
-          >
+          <TouchableOpacity style={styles.addButton} onPress={addWorkout}>
             <Text style={styles.buttonText}>Add Workout</Text>
           </TouchableOpacity>
           <Button
@@ -135,6 +112,7 @@ const WorkoutList = ({ route }) => {
               setShowAddModal(false);
               setWorkoutName('');
             }}
+            color="#D4AF37" // Set the color to gold
           />
         </View>
       </Modal>
@@ -181,9 +159,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
     marginBottom: 20,
-  },
-  centeredButtonContainer: {
-    alignSelf: 'center', // Center-align the button within the container
   },
   modalView: {
     flex: 1,

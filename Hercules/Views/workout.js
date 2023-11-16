@@ -16,7 +16,7 @@ const WorkoutView = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
-  const [showDeleteOption, setShowDeleteOption] = useState(-1); 
+  const [showDeleteOption, setShowDeleteOption] = useState(-1);
 
   const addSplit = () => {
     if (splitName) {
@@ -38,11 +38,12 @@ const WorkoutView = () => {
     setShowRenameModal(false);
     setSplitName('');
   };
+
   const handleRenameOpen = (index, split) => {
     setRenameIndex(index);
     setSplitName(split);
     setShowRenameModal(true);
-};
+  };
 
   const handleForward = () => {
     const nextDate = new Date(currentDate);
@@ -57,7 +58,7 @@ const WorkoutView = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container} style={styles.scrollView}> 
+    <ScrollView contentContainerStyle={styles.container} style={styles.scrollView}>
       <View style={styles.dateContainer}>
         <TouchableOpacity onPress={handleBack} style={styles.navButton}>
           <Text style={styles.navButtonText}>{"<"}</Text>
@@ -68,45 +69,44 @@ const WorkoutView = () => {
         </TouchableOpacity>
       </View>
 
+      {splits.map((split, index) => (
+        <View key={index} style={styles.splitContainer}>
+          {/* Main button for navigation */}
+          <TouchableOpacity
+            style={styles.splitButton}
+            onPress={() => navigation.navigate('workoutList', { splitName: split })}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.splitText}>{split}</Text>
+          </TouchableOpacity>
 
-      { splits.map((split, index) => (
-  <View key={index} style={styles.splitContainer}>
-    {/* Main button for navigation */}
-    <TouchableOpacity
-      style={styles.splitButton}
-      onPress={() => navigation.navigate('workoutList', { splitName: split })}
-      activeOpacity={0.7}
-    >
-      <Text style={styles.splitText}>{split}</Text>
-    </TouchableOpacity>
-    
-    {/* Absolutely positioned settings button within the split container */}
-    <TouchableOpacity
-      style={styles.settingsButton}
-      onPress={(e) => {
-        // Prevent this button's press from triggering the main button's onPress
-        e.stopPropagation(); 
-        setShowDeleteOption(index === showDeleteOption ? -1 : index);
-        setRenameIndex(index === renameIndex ? -1 : index);
-      }}
-      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} // Increase touchable area for easier interaction
-    >
-      <Text style={styles.settingsText}>⚙️</Text>
-    </TouchableOpacity>
+          {/* Absolutely positioned settings button within the split container */}
+          <TouchableOpacity
+            style={styles.settingsButton}
+            onPress={(e) => {
+              // Prevent this button's press from triggering the main button's onPress
+              e.stopPropagation();
+              setShowDeleteOption(index === showDeleteOption ? -1 : index);
+              setRenameIndex(index === renameIndex ? -1 : index);
+            }}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} // Increase touchable area for easier interaction
+          >
+            <Text style={styles.settingsText}>⚙️</Text>
+          </TouchableOpacity>
 
-    {/* Show delete and rename options */}
-    {showDeleteOption === index && (
-      <View style={styles.buttonRow}>
-        <TouchableOpacity onPress={() => deleteSplit(index)} style={styles.actionButton}>
-          <Text style={styles.actionButtonText}>Delete</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleRenameOpen(index, split)} style={styles.actionButton}>
-          <Text style={styles.actionButtonText}>Rename</Text>
-        </TouchableOpacity>
-      </View>
-    )}
-  </View>
-))}
+          {/* Show delete and rename options */}
+          {showDeleteOption === index && (
+            <View style={styles.buttonRow}>
+              <TouchableOpacity onPress={() => deleteSplit(index)} style={styles.actionButton}>
+                <Text style={styles.actionButtonText}>Delete</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleRenameOpen(index, split)} style={styles.actionButton}>
+                <Text style={styles.actionButtonText}>Rename</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+      ))}
 
       <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
         <Text style={styles.buttonText}>+ Add Workout Day</Text>
@@ -123,7 +123,7 @@ const WorkoutView = () => {
           <TouchableOpacity style={styles.addButton} onPress={addSplit}>
             <Text style={styles.buttonText}>Add Workout Day</Text>
           </TouchableOpacity>
-          <Button title="Close" onPress={() => setShowModal(false)} />
+          <Button title="Close" color="#D4AF37" onPress={() => setShowModal(false)} />
         </View>
       </Modal>
 
@@ -138,11 +138,10 @@ const WorkoutView = () => {
           <TouchableOpacity style={styles.addButton} onPress={renameSplit}>
             <Text style={styles.buttonText}>Rename Workout Day</Text>
           </TouchableOpacity>
-          <Button title="Close" onPress={() => {
-              setShowRenameModal(false);
-              setSplitName('');
-            }}
-          />
+          <Button title="Close" color="#D4AF37" onPress={() => {
+            setShowRenameModal(false);
+            setSplitName('');
+          }} />
         </View>
       </Modal>
     </ScrollView>
@@ -267,9 +266,4 @@ const styles = StyleSheet.create({
   },
 });
 
-
-// Don't forget to adjust the buttons within the `render` method to use these styles.
-
-
 export default WorkoutView;
-
