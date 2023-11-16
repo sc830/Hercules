@@ -103,6 +103,29 @@ const login = async (email, password) => {
   }
 };
 
+const pullDocData = async(docPath) => {
+  parts = docPath.split('/');
+  ePath = "db,";
+  for (let i = 0; i < parts.length; i++) {
+    ePath = ePath + " " + parts[i] + ",";
+  }
+  try {
+    const docRef = doc(eval(ePath))
+    const doc = await getDoc(docRef);
+
+    if (doc.exists()) {
+      console.log("Document data:", doc.data());
+    }
+    else {
+      console.log("No such document");
+    }
+  }
+  catch (error) {
+    throw new Error(error.message);
+  }
+  return doc.data();
+}
+
 const saveMeal = async (mealData, mealType) => {
   try {
     const dt = new Date();
