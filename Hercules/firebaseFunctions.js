@@ -103,30 +103,24 @@ const login = async (email, password) => {
   }
 };
 
-const pullDocData = async(docPath) => {
-
-    console.log("Document data:", docSnap.data());
-  parts = docPath.split('/');
-  ePath = "db,";
-  for (let i = 0; i < parts.length; i++) {
-    ePath = ePath + " " + parts[i] + ",";
-  }
-  console.log(ePath);
+export const pullDocData = async(docPath) => {
   try {
-    const docRef = doc(eval(ePath))
-    const doc = await getDoc(docRef);
+    console.log(docPath);
+    const docRef = doc(db, docPath)
+    const docPoint = await getDoc(docRef);
 
-    if (doc.exists()) {
-      console.log("Document data:", doc.data());
+    if (docPoint.exists()) {
+      console.log("Document data:", docPoint.data());
     }
     else {
       console.log("No such document");
     }
+
+    return docPoint.data();
   }
   catch (error) {
     throw new Error(error.message);
   }
-  return doc.data();
 }
 
 const saveMeal = async (mealData, mealType) => {

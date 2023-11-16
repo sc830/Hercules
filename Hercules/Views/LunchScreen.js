@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { saveMeal } from '../firebaseFunctions';
+import { pullDocData } from '../firebaseFunctions';
 
 const LunchScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
