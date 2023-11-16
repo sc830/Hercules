@@ -107,19 +107,20 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     marginBottom: 20,
-    color: 'white', // Text color for better visibility against the background
-    textShadowColor: 'rgba(0, 0, 0, 0.75)', // Text shadow for better visibility
+    color: 'white',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
   },
   input: {
     width: '80%',
     height: 40,
+    backgroundColor: 'rgba(255, 255, 255, 0.5)', // Background color for input fields
     borderColor: 'rgba(255, 255, 255, 0.8)',
     borderWidth: 1,
     marginBottom: 20,
     padding: 10,
-    color: 'black', // Text color inside the TextInput
+    color: 'black',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -131,6 +132,9 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 10,
     textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.4)', // Adding shadow behind the text
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
 });
 
