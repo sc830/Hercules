@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Modal,
   TextInput,
-  Button
+  Button,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import BackButton from '../components/BackButton'; // Ensure this import is correct
@@ -50,7 +50,7 @@ const WorkoutList = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <BackButton title="Back" />
+      <BackButton />
       {workouts.map((workout, index) => (
         <View key={index} style={styles.workoutContainer}>
           <TouchableOpacity
@@ -87,7 +87,7 @@ const WorkoutList = ({ route }) => {
         </View>
       ))}
       <TouchableOpacity
-        style={styles.addButton}
+        style={[styles.workoutButton, styles.centeredButtonContainer]}
         onPress={() => setShowAddModal(true)}
       >
         <Text style={styles.buttonText}>+ Add Workout</Text>
@@ -145,10 +145,8 @@ const WorkoutList = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     backgroundColor: '#FFF7E0', // A light gold background
-    paddingTop: 20, // Add padding to avoid content being cut by the status bar
   },
   workoutButton: {
     backgroundColor: '#D4AF37', // Gold color
@@ -183,6 +181,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
     marginBottom: 20,
+  },
+  centeredButtonContainer: {
+    alignSelf: 'center', // Center-align the button within the container
   },
   modalView: {
     flex: 1,
