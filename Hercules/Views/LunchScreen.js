@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
-import { doc, getFirestore } from 'firebase/firestore';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { saveMeal } from '../firebaseFunctions';
 
 const LunchScreen = ({ navigation }) => {
@@ -17,7 +17,7 @@ const LunchScreen = ({ navigation }) => {
   const handleSaveMeal = async () => {
     //////////////////console.log(pullDocData())
     const db = getFirestore();
-    const docRef = doc(db, "testFolder", "subcollection", "variable");
+    const docRef = doc(db, "testFolder", "subcollection");
     const docSnap = await getDoc(docRef);
     console.log("Document data:", docSnap.data());
     if (selectedMeal !== null) {
