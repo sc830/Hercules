@@ -5,7 +5,6 @@ import useCustomTracker from './useCustomTracker';
 import CustomTrackerModal from './customTrackerModal';
 import GraphWithButton from '../../components/graph'; 
 
-
 const Mindfulness = ({ navigation }) => {
   const {
     trackers,
@@ -17,57 +16,79 @@ const Mindfulness = ({ navigation }) => {
     submitCustomTracker,
   } = useCustomTracker(['Creatine', 'Sleep hours', 'Water Ounces']);
 
+    const handleAddTrackerButtonPress = () => {
+      handleAddCustomTracker();
+    };
 
-  // Render the tracker buttons dynamically
-  const renderTrackers = () => {
-    return trackers.map((tracker, index) => (
-      <TouchableOpacity key={index} onPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })} style={styles.button}>
-        <Text style={styles.buttonText}>{tracker}</Text>
+    const renderTrackers = () => {
+      const trackerData = {
+        'Water Ounces': [64, 72, 68, 80, 76],
+        'Sleep hours': [7, 8, 6, 5, 9],
+        'Creatine': [5, 5, 5, 5, 5]
+      };
+    
+      const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+    
+      return trackers.map((tracker, index) => {
+        if (tracker === 'Add a Custom Tracker') {
+          return null;
+        }
+    
+        const data = trackerData[tracker];
+    
+        return (
+          <View key={index} style={styles.graphContainer}>
+            <Text style={styles.graphLabel}>{tracker}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}>
+              <GraphWithButton
+                data={data}
+                labels={labels}
+                buttonText={tracker}
+                onButtonPress={() => console.log('Navigate to the next page')}
+              />
+            </TouchableOpacity>
+          </View>
+        );
+      });
+    };
+
+return (
+  <View style={{flex: 1, backgroundColor: 'black'}}>
+    <ScrollView style={styles.container}>
+      {renderTrackers()}
+      <TouchableOpacity style={styles.addButton} onPress={handleAddTrackerButtonPress}>
+        <Text style={styles.buttonText}>Add Custom Tracker</Text>
       </TouchableOpacity>
-    ));
-  };
-
-  // Dummy data for the graph
-  const graphData = [20, 45, 28, 80, 99]; // Replace with actual data
-
-  return (
-    <View style={styles.container}>
-      <BackButton />
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {renderTrackers()}
-        
-        {/* testing graph */}
-        {/* This commented section shows how to use the graph component. Kacy needs to
-          adjust it to display correctly. This was just the first goal in creating it
-        <GraphWithButton
-          data={graphData}
-          labels={['Leg', 'Push', 'Pull', 'Arm']} // Custom labels for x-axis
-          buttonText="Add Reps/Sets" // Custom button text
-          onButtonPress={() => {
-              // Custom function to handle button press
-              alert('Navigate to the next page');
-          }}
-      /> */}
-
-        <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
-          <Text style={styles.buttonText}>Add a Custom Tracker</Text>
-        </TouchableOpacity>
-      </ScrollView>
-      <CustomTrackerModal
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-        customTrackerName={customTrackerName}
-        setCustomTrackerName={setCustomTrackerName}
-        submitCustomTracker={submitCustomTracker}
-      />
-    </View>
-  );
+    </ScrollView>
+    <CustomTrackerModal 
+      modalVisible={modalVisible}
+      setModalVisible={setModalVisible}
+      customTrackerName={customTrackerName}
+      setCustomTrackerName={setCustomTrackerName}
+      submitCustomTracker={() => {
+        submitCustomTracker();
+        // Optional: Add logic here to update graphs or data
+      }}
+    />
+  </View>
+);
 };
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     backgroundColor: 'black'
+  },
+  graphContainer: {
+    width: '90%',            // Adjust the width as needed
+    alignItems: 'center',    // Center content of each graph container
+    marginBottom: 20         // Add space between each graph
+  },
+  graphLabel: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 5 // Space above the graph
   },
   innerContainer: {
     flex: 1,
