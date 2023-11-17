@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import BackButton from '../../components/backButton';
-import useCustomTracker from './useCustomTracker'; // Adjust the path as necessary
+import useCustomTracker from './useCustomTracker'; 
 import CustomTrackerModal from './customTrackerModal';
+import GraphWithButton from '../../components/graph'; 
+
 
 const Mindfulness = ({ navigation }) => {
   const {
@@ -25,11 +27,28 @@ const Mindfulness = ({ navigation }) => {
     ));
   };
 
+  // Dummy data for the graph
+  const graphData = [20, 45, 28, 80, 99]; // Replace with actual data
+
   return (
     <View style={styles.container}>
       <BackButton />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {renderTrackers()}
+        
+        {/* testing graph */}
+        {/* This commented section shows how to use the graph component. Kacy needs to
+          adjust it to display correctly. This was just the first goal in creating it
+        <GraphWithButton
+          data={graphData}
+          labels={['Leg', 'Push', 'Pull', 'Arm']} // Custom labels for x-axis
+          buttonText="Add Reps/Sets" // Custom button text
+          onButtonPress={() => {
+              // Custom function to handle button press
+              alert('Navigate to the next page');
+          }}
+      /> */}
+
         <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
           <Text style={styles.buttonText}>Add a Custom Tracker</Text>
         </TouchableOpacity>
