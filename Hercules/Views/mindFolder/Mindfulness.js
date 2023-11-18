@@ -30,7 +30,7 @@ const Mindfulness = ({ navigation }) => {
       'Water Ounces': [18, 22, 28, 32, 36, 40]
     }
   };
-  const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   // Render the tracker graphs dynamically
   const renderTrackers = () => {

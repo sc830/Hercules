@@ -3,23 +3,16 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 
 const GraphWithButton = ({ currentData, previousData, labels, buttonText, onButtonPress }) => {
-    // Ensure currentData and previousData are arrays before setting state
-    const [data, setData] = useState(Array.isArray(currentData) ? currentData : new Array(labels.length).fill(0));
+    // Initialize the state with currentData or an array of zeros if no data
+    const zeroData = new Array(labels.length).fill(0);
+    const [data, setData] = useState(currentData && currentData.length > 0 ? currentData : zeroData);
 
     const toggleData = () => {
-        // Check if currentData and previousData are arrays before toggling
-        if (Array.isArray(currentData) && Array.isArray(previousData)) {
-            setData(data === currentData ? previousData : currentData);
-        } else {
-            // Fallback to an array of zeros if either is not an array
-            setData(data === currentData ? new Array(labels.length).fill(0) : currentData);
-        }
+        // Toggle between current and previous data, defaulting to zeroData if none exist
+        setData(data === currentData || !(currentData && currentData.length > 0)
+                ? (previousData && previousData.length > 0 ? previousData : zeroData)
+                : (currentData && currentData.length > 0 ? currentData : zeroData));
     };
-
-    // Check if data is an array with elements before trying to render the graph
-    if (!Array.isArray(data) || data.length === 0) {
-        return <Text>No data available</Text>;
-    }
 
     return (
         <View style={{ alignItems: 'center' }}>
@@ -34,6 +27,12 @@ const GraphWithButton = ({ currentData, previousData, labels, buttonText, onButt
                     backgroundGradientFrom: '#fff',
                     backgroundGradientTo: '#fff',
                     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                    strokeWidth: 2, // Optional: Set the stroke width of the line (default is 2)
+                    propsForDots: {
+                        r: "6", // Optional: Size of the dots in the line (default is 6)
+                        strokeWidth: "2", // Optional: Width of the dot stroke (default is 2)
+                        stroke: "#ffa726" // Optional: Color of the dot stroke
+                    },
                 }}
             />
             <TouchableOpacity onPress={toggleData}>
