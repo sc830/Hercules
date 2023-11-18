@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
-import BackButton from '../../components/backButton';
+import BackButton from '../../components/backButton'; // this adds the ability to navigate to previous pages
 import useCustomTracker from './useCustomTracker'; 
 import CustomTrackerModal from './customTrackerModal';
-import GraphWithButton from '../../components/graph'; 
+import GraphWithButton from '../../components/graph';
 
 const Mindfulness = ({ navigation }) => {
   const {
@@ -16,101 +16,63 @@ const Mindfulness = ({ navigation }) => {
     submitCustomTracker,
   } = useCustomTracker(['Creatine', 'Sleep hours', 'Water Ounces']);
 
+  // Dummy data and labels for testing
+  const dummyData = {
+    'Creatine': [5, 6, 7, 8, 9, 10],
+    'Sleep hours': [7, 8, 6, 7, 9, 8],
+    'Water Ounces': [20, 25, 30, 35, 40, 45]
+  };
+  const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  // Render the tracker graphs dynamically
   const renderTrackers = () => {
-    const trackerData = {
-      'Water Ounces': [64, 72, 68, 80, 76],
-      'Sleep hours': [7, 8, 6, 5, 9],
-      'Creatine': [5, 5, 5, 5, 5]
-    };
-  
-    const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-  
-    return trackers.map((tracker, index) => {
-      if (tracker === 'Add a Custom Tracker') {
-        return null;
-      }
-  
-      const data = trackerData[tracker];
-  
-      return (
-        <View key={index} style={styles.graphContainer}>
-          <Text style={styles.graphLabel}>{tracker}</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}>
-            <GraphWithButton
-              data={data}
-              labels={labels}
-              buttonText={tracker}
-              onButtonPress={() => console.log('Navigate to the next page')}
-            />
-          </TouchableOpacity>
-        </View>
-      );
-    });
+    return trackers.map((tracker, index) => (
+      <GraphWithButton
+        key={index}
+        data={dummyData[tracker]}
+        labels={labels}
+        buttonText={`Navigate to ${tracker}`}
+        onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}
+      />
+    ));
   };
 
-  const handleAddTrackerButtonPress = () => {
-    handleAddCustomTracker();
-  };
-
-  const onCustomTrackerSubmit = () => {
-    submitCustomTracker();
-    // Make sure the graphs are updated here if necessary.
-    // You might need to set some state that triggers the graphs to re-render.
-  };
+  // Render the tracker buttons dynamically
+  // const renderTrackers = () => {
+  //   return trackers.map((tracker, index) => (
+  //     <TouchableOpacity key={index} onPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })} style={styles.button}>
+  //       <Text style={styles.buttonText}>{tracker}</Text>
+  //     </TouchableOpacity>
+  //   ));
+  // };
 
   return (
-    <View style={{flex: 1, backgroundColor: 'black'}}>
-      <ScrollView style={styles.container}>
+    <View style={styles.container}>
+      <BackButton />
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         {renderTrackers()}
-        <TouchableOpacity style={styles.addButton} onPress={handleAddTrackerButtonPress}>
-          <Text style={styles.buttonText}>Add Custom Tracker</Text>
+        <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
+          <Text style={styles.buttonText}>Add a Custom Tracker</Text>
         </TouchableOpacity>
       </ScrollView>
-      <CustomTrackerModal 
+      <CustomTrackerModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         customTrackerName={customTrackerName}
         setCustomTrackerName={setCustomTrackerName}
-        submitCustomTracker={onCustomTrackerSubmit}
+        submitCustomTracker={submitCustomTracker}
       />
     </View>
   );
 };
 
+// Styles
+
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: '#FFF7E0',
+    backgroundColor: '#FFF7E0'
   },
-  graphContainer: {
-    width: '90%',
-    alignItems: 'center',
-    marginBottom: 20,
-    alignSelf: 'center',
-  },
-  graphLabel: {
-    color: 'white',
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 5,
-  },
-  addButton: {
-    backgroundColor: '#D4AF37',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 25,
-    marginVertical: 10,
-    alignSelf: 'center',
-    width: '80%',
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 18,
-    elevation: 2,
-  },
-
   innerContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -122,6 +84,10 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 15,
     width: '90%'
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center'
   },
   centeredView: {
     flex: 1,

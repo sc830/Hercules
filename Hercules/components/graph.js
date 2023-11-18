@@ -4,16 +4,12 @@ import { LineChart } from 'react-native-chart-kit';
 
 const GraphWithButton = ({ data, labels, buttonText, onButtonPress }) => {
     return (
-        <TouchableOpacity onPress={onButtonPress}>
+        <TouchableOpacity onPress={onButtonPress} style={{ alignItems: 'center' }}>
             <View>
                 <LineChart
                     data={{
-                        labels: labels, // Use the labels passed as a prop
-                        datasets: [
-                            {
-                                data: data, // Graph data passed as a prop
-                            },
-                        ],
+                        labels: labels,
+                        datasets: [{ data: data }],
                     }}
                     width={300}
                     height={200}

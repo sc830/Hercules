@@ -1,3 +1,4 @@
+// this page handles when a user adds a custom tracker
 import React from 'react';
 import { View, Text, TouchableOpacity, Modal, TextInput, StyleSheet } from 'react-native';
 
