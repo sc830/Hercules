@@ -40,7 +40,7 @@ const Mindfulness = ({ navigation }) => {
           currentData={dummyData.currentData[tracker]}
           previousData={dummyData.previousData[tracker]}
           labels={labels}
-          buttonText={`Navigate to ${tracker}`}
+          buttonText={`${tracker}`}
           onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}
         />
       </View>

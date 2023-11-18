@@ -16,6 +16,7 @@ const GraphWithButton = ({ currentData, previousData, labels, buttonText, onButt
 
     return (
         <View style={{ alignItems: 'center' }}>
+            <TouchableOpacity onPress={onButtonPress} style={{ alignItems: 'center' }}>
             <LineChart
                 data={{
                     labels: labels,
@@ -30,11 +31,10 @@ const GraphWithButton = ({ currentData, previousData, labels, buttonText, onButt
                     strokeWidth: 2, // Optional: Set the stroke width of the line (default is 2)
                     propsForDots: {
                         r: "6", // Optional: Size of the dots in the line (default is 6)
-                        strokeWidth: "2", // Optional: Width of the dot stroke (default is 2)
-                        stroke: "#ffa726" // Optional: Color of the dot stroke
                     },
                 }}
             />
+            </TouchableOpacity>
             <TouchableOpacity onPress={toggleData}>
                 <Text>{data === currentData ? 'Show Previous Week' : 'Show Current Week'}</Text>
             </TouchableOpacity>
