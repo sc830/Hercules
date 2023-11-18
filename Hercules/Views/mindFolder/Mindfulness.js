@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
-import BackButton from '../../components/backButton'; // this adds the ability to navigate to previous pages
+import BackButton from '../../components/backButton';
 import useCustomTracker from './useCustomTracker'; 
 import CustomTrackerModal from './customTrackerModal';
 import GraphWithButton from '../../components/graph';
@@ -17,39 +17,40 @@ const Mindfulness = ({ navigation }) => {
   } = useCustomTracker(['Creatine', 'Sleep hours', 'Water Ounces']);
 
   // Dummy data and labels for testing
+  // Assuming 'currentData' and 'previousData' are two different sets of data for each tracker
   const dummyData = {
-    'Creatine': [5, 6, 7, 8, 9, 10],
-    'Sleep hours': [7, 8, 6, 7, 9, 8],
-    'Water Ounces': [20, 25, 30, 35, 40, 45]
+    currentData: {
+      'Creatine': [5, 6, 7, 8, 9, 10],
+      'Sleep hours': [7, 8, 6, 7, 9, 8],
+      'Water Ounces': [20, 25, 30, 35, 40, 45]
+    },
+    previousData: {
+      'Creatine': [4, 5, 6, 5, 6, 7], // Example previous week data
+      'Sleep hours': [6, 7, 5, 6, 7, 8],
+      'Water Ounces': [18, 22, 28, 32, 36, 40]
+    }
   };
   const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   // Render the tracker graphs dynamically
   const renderTrackers = () => {
     return trackers.map((tracker, index) => (
-      <GraphWithButton
-        key={index}
-        data={dummyData[tracker]}
-        labels={labels}
-        buttonText={`Navigate to ${tracker}`}
-        onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}
-      />
+      <View key={index} style={styles.graphContainer}>
+        <GraphWithButton
+          currentData={dummyData.currentData[tracker]}
+          previousData={dummyData.previousData[tracker]}
+          labels={labels}
+          buttonText={`Navigate to ${tracker}`}
+          onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}
+        />
+      </View>
     ));
   };
-
-  // Render the tracker buttons dynamically
-  // const renderTrackers = () => {
-  //   return trackers.map((tracker, index) => (
-  //     <TouchableOpacity key={index} onPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })} style={styles.button}>
-  //       <Text style={styles.buttonText}>{tracker}</Text>
-  //     </TouchableOpacity>
-  //   ));
-  // };
 
   return (
     <View style={styles.container}>
       <BackButton />
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         {renderTrackers()}
         <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
           <Text style={styles.buttonText}>Add a Custom Tracker</Text>
@@ -67,16 +68,18 @@ const Mindfulness = ({ navigation }) => {
 };
 
 // Styles
-
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    backgroundColor: '#FFF7E0'
+    backgroundColor: '#FFF7E0',
+    flex: 1
   },
-  innerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+  contentContainerStyle: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  graphContainer: {
+    marginBottom: 20,
+    alignItems: 'center',
   },
   button: {
     backgroundColor: '#D4AF37',
@@ -89,12 +92,6 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center'
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
-  }
 });
 
 export default Mindfulness;
