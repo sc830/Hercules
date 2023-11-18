@@ -1,3 +1,5 @@
+// This is the screen that comes up after clicking the graphs
+
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput, Button, StyleSheet } from 'react-native';
 import BackButton from '../../components/backButton';
