@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
-import { login, signUp } from '../firebaseFunctions';
+import { login, signUp } from '../../firebase/firebaseFunctions';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
