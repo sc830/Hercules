@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import BackButton from '../components/backButton'; // Importing the BackButton component
+import BackButton from '../../components/backButton'; // Importing the BackButton component
 
 const WorkoutList = ({ route }) => {
   const { splitName } = route.params;

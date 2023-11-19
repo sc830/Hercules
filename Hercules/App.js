@@ -6,8 +6,8 @@ import { initializeApp } from "firebase/app";
 import { AppRegistry } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from './Views/Login';
-import MainTabs from './Views/MainTabs';
+import Login from './Views/main/Login';
+import MainTabs from './Views//main/MainTabs';
 
 const Stack = createStackNavigator();
 

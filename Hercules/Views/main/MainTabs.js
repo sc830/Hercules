@@ -6,16 +6,16 @@ import { View, Text } from 'react-native';
 
 
 // Import your screen components here
-import Workout from './workout';
-import workoutList from './workoutList';
-import addRepsWeights from './addRepsWeights';
-import Munchies from './Munchies';
-import BreakfastScreen from './BreakfastScreen';
-import LunchScreen from './LunchScreen';
-import DinnerScreen from './DinnerScreen';
-import Mindfulness from './mindFolder/Mindfulness'
-import TrackIntakeScreen from './mindFolder/TrackIntakeScreen' // used in Mindfulness
-import IngredientsScreen from './Ingredients';
+import Workout from '../muscles/workout';
+import workoutList from '../muscles/workoutList';
+import addRepsWeights from '../muscles/addRepsWeights';
+import Munchies from '../munchies/Munchies';
+import BreakfastScreen from '../munchies/BreakfastScreen';
+import LunchScreen from '../munchies/LunchScreen';
+import DinnerScreen from '../munchies/DinnerScreen';
+import Mindfulness from '../mind/Mindfulness'
+import TrackIntakeScreen from '../mind/TrackIntakeScreen' // used in Mindfulness
+import IngredientsScreen from '../munchies/Ingredients';
 
 
 const Tab = createBottomTabNavigator();
