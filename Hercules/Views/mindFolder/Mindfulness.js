@@ -14,34 +14,31 @@ const Mindfulness = ({ navigation }) => {
     setCustomTrackerName,
     handleAddCustomTracker,
     submitCustomTracker,
-  } = useCustomTracker(['Creatine', 'Sleep hours', 'Water Ounces']);
+  } = useCustomTracker(['Creatine', 'Sleep', 'Water']);
 
-  // Dummy data and labels for testing
-  // Assuming 'currentData' and 'previousData' are two different sets of data for each tracker
   const dummyData = {
     currentData: {
-      'Creatine': [5, 6, 7, 8, 9, 10],
-      'Sleep hours': [7, 8, 6, 7, 9, 8],
-      'Water Ounces': [20, 25, 30, 35, 40, 45]
+      'Creatine': [5, 6, 7, 8, 9, 10, 2],
+      'Sleep': [7, 8, 6, 7, 9, 8, 9],
+      'Water': [20, 25, 30, 35, 40, 45, 47]
     },
-    previousData: {
-      'Creatine': [4, 5, 6, 5, 6, 7], // Example previous week data
-      'Sleep hours': [6, 7, 5, 6, 7, 8],
-      'Water Ounces': [18, 22, 28, 32, 36, 40]
-    }
+  }
+  
+  const getDataForWeek = (trackerName) => {
+    // Return data for the tracker if it exists, otherwise return an array of zeroes
+    return dummyData.currentData[trackerName] || new Array(labels.length).fill(0);
   };
+  
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  // Render the tracker graphs dynamically
   const renderTrackers = () => {
     return trackers.map((tracker, index) => (
       <View key={index} style={styles.graphContainer}>
         <GraphWithButton
-          currentData={dummyData.currentData[tracker]}
-          previousData={dummyData.previousData[tracker]}
+          initialData={getDataForWeek(tracker)} // Pass the initial data here
           labels={labels}
           onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}
-          trackerTitle={tracker} // This is the new prop
+          trackerTitle={tracker}
         />
       </View>
     ));

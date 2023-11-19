@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import moment from 'moment'; // Make sure to install moment via npm or yarn
 
-const GraphWithButton = ({ currentData, labels, onButtonPress, trackerTitle }) => {
-    // Assuming currentData is for the current week. You'll need to adjust this if you fetch data differently.
-    const [data, setData] = useState(currentData || new Array(labels.length).fill(0));
+const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle }) => {
+    const defaultData = new Array(labels.length).fill(0);
+    const [data, setData] = useState(defaultData);
+  
+    // Using useEffect to set data when initialData changes
+    useEffect(() => {
+      if (initialData && Array.isArray(initialData) && initialData.length === labels.length) {
+        setData(initialData);
+      } else {
+        setData(defaultData); // Fallback to default data in case of error
+      }
+    }, [initialData]);
+    
     const [currentWeekStart, setCurrentWeekStart] = useState(moment().startOf('week'));
 
     const formatDateRange = (start) => {
