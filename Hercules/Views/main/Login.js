@@ -56,7 +56,7 @@ const Login = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require('../backgrounds/buff.png')} // Set the path to your background image
+      source={require('../../assets/buff.png')} // Set the path to your background image
       style={styles.background} // Apply styles for the background
     >
       <View style={styles.container}>
