@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Button, Alert } from 'react-native';
 
 const IngredientsScreen = ({ route, navigation }) => {
-  const { mealData } = route.params;
+  const { mealData, onMealSave } = route.params;
   const [selectedMeal, setSelectedMeal] = useState(null);
 
   const handleSelectMeal = (meal) => {
@@ -11,77 +11,71 @@ const IngredientsScreen = ({ route, navigation }) => {
 
   const handleSaveMeal = () => {
     if (selectedMeal) {
-      // Assume mealData is an object with a 'hints' array
-      const updatedMealData = {
-        ...mealData,
-        hints: [selectedMeal],
-      };
-      setSelectedMeal(updatedMealData.hints[0]);
+      onMealSave(selectedMeal);
+      Alert.alert('Success', 'Meal saved successfully!');
+      navigation.goBack();
     }
   };
-
   const renderIngredients = (meal) => {
-    // Error handling for undefined or null foodContentsLabel
     if (!meal.foodContentsLabel) {
-      Alert.alert('Error', 'No ingredients available.');
-      return null;
+      return <Text style={styles.ingredientText}>No ingredients available.</Text>;
     }
-
     return meal.foodContentsLabel.split(';').map((ingredient, idx) => (
       <Text key={idx} style={styles.ingredientText}>{ingredient.trim()}</Text>
     ));
   };
 
-  // Error handling for undefined or null mealData
   if (!mealData || !mealData.hints) {
-    Alert.alert('Error', 'No meal data available.');
-    return null;
+    return <Text>No meal data available.</Text>;
   }
 
   return (
     <ScrollView style={styles.container}>
-      {mealData.hints.slice(0, 3).map((hint, index) => (
-        // Error handling for undefined or null hint.food
-        hint.food ? (
-          <View key={index} style={styles.mealContainer}>
+      {selectedMeal ? (
+        <View style={styles.mealContainer}>
+          <Text style={styles.mealText}>{selectedMeal.label}</Text>
+          {/* Display macros here */}
+          <View style={styles.ingredientsDropdown}>
+            {renderIngredients(selectedMeal)}
+            <Button 
+              title="Save" 
+              onPress={handleSaveMeal}
+              color="#D4AF37"
+            />
+          </View>
+        </View>
+      ) : (
+        mealData.hints.slice(0, 3).map((hint, index) => (
+          hint.food ? (
             <TouchableOpacity
+              key={index}
               style={styles.mealButton}
               onPress={() => handleSelectMeal(hint.food)}
-              activeOpacity={0.8}
             >
+             <View>
               <Text style={styles.mealText}>{hint.food.label}</Text>
               <Text style={styles.macrosText}>Calories: {hint.food.nutrients.ENERC_KCAL.toFixed(2)}</Text>
               <Text style={styles.macrosText}>Protein: {hint.food.nutrients.PROCNT.toFixed(2)} g</Text>
               <Text style={styles.macrosText}>Fat: {hint.food.nutrients.FAT.toFixed(2)} g</Text>
               <Text style={styles.macrosText}>Carbs: {hint.food.nutrients.CHOCDF.toFixed(2)} g</Text>
+            </View>
             </TouchableOpacity>
-            {selectedMeal === hint.food && (
-              <View style={styles.ingredientsDropdown}>
-                {renderIngredients(hint.food)}
-                <Button 
-                  title="Save" 
-                  onPress={handleSaveMeal}
-                  color="purple"
-                />
-              </View>
-            )}
-          </View>
-        ) : null
-      ))}
-      <Button 
-        title="Back" 
-        onPress={() => navigation.goBack()}
-        color="purple"
-      />
+          ) : null
+        ))
+      )}
+      <Button title="Back" onPress={() => navigation.goBack()}color="#D4AF37" />
+      
     </ScrollView>
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: '#FFF7E0',
+  },
+  scrollView: {
+    flex: 1, // Allows the ScrollView to expand
   },
   mealContainer: {
     margin: 10,
@@ -90,7 +84,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   mealButton: {
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#D4AF37',
     padding: 20,
     marginTop: 10,
     alignItems: 'center',
@@ -98,7 +92,7 @@ const styles = StyleSheet.create({
   },
   mealText: {
     fontSize: 18,
-    color: 'black',
+    color: '#303030',
   },
   macrosText: {
     fontSize: 14,
@@ -111,6 +105,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black',
     padding: 5,
+  },
+  backButton: {
+    position: 'absolute',
+    bottom: 10, 
+    left: 10,
   },
 });
 
