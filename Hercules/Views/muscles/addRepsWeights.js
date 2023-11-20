@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import BackButton from '../components/backButton'; // Make sure this import path is correct
+import BackButton from '../../components/backButton'; // Make sure this import path is correct
 
 const AddRepsWeights = ({ route, navigation }) => {
   const { workoutName } = route.params;
