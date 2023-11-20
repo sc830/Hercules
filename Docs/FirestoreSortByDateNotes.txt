@@ -1,0 +1,101 @@
+### Previous Firestore layout ###
+In this layout, each item within the user's mind, muscles, and munchies folders would be tagged with the date.
+This is suboptimal because every document within the folder must be traversed to find all documents associated with a particular
+date, making it inefficient to find and display them.
+
+Firestore
+|
+|-- userData (Collection)
+|   |
+|   |-- exampleUser (Document)
+|       |
+|       |-- preferredUnits: "lbs"
+|       |-- userID: "ID"
+|       |
+|       |-- mind (Subcollection)
+|       |   |
+|       |   |-- (Documents within "mind" subcollection)
+|       |
+|       |-- munchies (Subcollection)
+|       |   |
+|       |   |-- (Documents within "munchies" subcollection)
+|       |
+|       |-- muscles (Subcollection)
+|           |
+|           |-- (Documents within "muscles" subcollection)
+|
+
+
+### Firestore needs ###
+Our Firestore layout needs to be optimized for pulling each user's daily data efficiently based on their user authentication
+and the date we're looking for. Ideally, each document (ex. each food, each exercise) would also be easily sorted by category to
+enable saved states for splits and meal times. For example, all arm workouts should be able to be searched for and found, as well
+as all breakfast foods, and so on. This is difficult to achieve because if the Firestore hierarchy is organized by category (as above,
+with subcategories in each folder such as "Arms" and "Legs" within muscles collection) it is much more difficult to organize by date;
+either a new "date" field would have to be appended to the document each time the user logs it, or a subcollection within the document
+could contain entries (documents) for each date the exercise is logged. The former scales poorly and is not very organized, while 
+the latter makes it difficult to find all exercises or foods logged on a particular day; every entry would have to be traversed.
+
+### Results/Changes ###
+I decided to structure our database to prioritize date sorting, with the following hierarchy, because our app's primary function
+is recording and displaying logs of data and previous progress. In a different collection under the same user, the user's groups
+will be recorded. Each split's name will be a collection, with documents in that collection that contain only the name of the exercise.
+When that exercise is selected, the app can then use the name to search for its details from the most recent date the user has logged it.
+This layout uses slightly more storage than its last iteration, but doesn't consume the user's local storage, so this should not
+be an issue. Additionally, the additional documents are well-organized, so scalability isn't a concern.
+
+Firestore
+|
+|-- userData (Collection)
+|   |
+|   |-- exampleUser (Document)
+|       |
+|       |-- units: "lbs"
+|       |
+|       |-- logs (Subcollection)
+|       |   |
+|       |   |-- 11.12.2023 (Document)
+|       |   |   |
+|       |   |   |-- mind (Subcollection)
+|       |   |   |   |
+|       |   |   |   |-- (Documents within "mind" subcollection)
+|       |   |   |
+|       |   |   |-- muscles (Subcollection)
+|       |   |   |   |
+|       |   |   |   |-- Bench Press (Document)
+|       |   |   |   |   |
+|       |   |   |   |   |-- sets (Subcollection)
+|       |   |   |   |   |   |
+|       |   |   |   |   |   |-- set1 (Document)
+|       |   |   |   |   |   |   |-- weight: (Number)
+|       |   |   |   |   |   |   |-- reps: (Number)
+|       |   |   |   |   |   |
+|       |   |   |   |   |   |-- set2 (Document)
+|       |   |   |   |   |       |-- weight: (Number)
+|       |   |   |   |   |       |-- reps: (Number)
+|       |   |   |   |
+|       |   |   |   |-- (Other exercises within "muscles" subcollection)
+|       |   |   |
+|       |   |   |-- munchies (Subcollection)
+|       |   |       |
+|       |   |       |-- (Documents within "munchies" subcollection)
+|       |   |
+|       |   |-- 12.12.2023 (Document)
+|       |       |
+|       |       |-- mind (Subcollection)
+|       |       |   |
+|       |       |   |-- (Documents within "mind" subcollection)
+|       |       |
+|       |       |-- muscles (Subcollection)
+|       |       |   |
+|       |       |   |-- (Exercises and sets similar to the structure above)
+|       |       |
+|       |       |-- munchies (Subcollection)
+|       |           |
+|       |           |-- (Documents within "munchies" subcollection)
+|       |
+|       |-- groups (Subcollection)
+|           |
+|           |-- (Documents within "groups" subcollection)
+|
+
