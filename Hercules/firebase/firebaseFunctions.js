@@ -28,6 +28,10 @@ function containsSpecialChars(str) {
   return specialChars.test(str);
 }
 
+export const getUserId = () => {
+  return currentUser ? currentUser.uid : null;
+};
+
 const signUp = async (email, password, username) => {
   
   
