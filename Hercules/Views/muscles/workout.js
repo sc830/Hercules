@@ -19,6 +19,19 @@ const WorkoutView = () => {
   const [renameIndex, setRenameIndex] = useState(-1);
   const [showDeleteOption, setShowDeleteOption] = useState(-1);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userPath = `userData/${getUserID()}`;
+      } catch (error) {
+        console.error('Error fetching data from Firestore:', error);
+      }
+    };
+  
+    fetchData(); // Invoke fetchData immediately
+  
+  }, [currentDate]);
+
   const addSplit = () => {
     if (splitName) {
       setSplits(prevSplits => [splitName, ...prevSplits]);
