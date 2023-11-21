@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { getUserID } from '../../firebase/firebaseFunctions';
+import { getUserID, pullDocData } from '../../firebase/firebaseFunctions';
 
 /**********************************************************************************************
  * This file contains all of the programming for the initial page which contains
@@ -21,16 +21,29 @@ const WorkoutView = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const userPath = `userData/${getUserID()}`;
+
+      const formattedDate = currentDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
+
+      const subPath = `/logs/${formattedDate}`;
+      const dateRef = doc(db, userPath, subPath);
+
       try {
-        const userPath = `userData/${getUserID()}`;
+        const value = pullDocData((userPath+subPath), pullValue);
+        console.log(value);
+        
       } catch (error) {
         console.error('Error fetching data from Firestore:', error);
       }
     };
   
-    fetchData(); // Invoke fetchData immediately
+    fetchData();
   
-  }, [currentDate]);
+  }, [currentDate]);  // date dependency - runs again when date is updated
 
   const addSplit = () => {
     if (splitName) {
