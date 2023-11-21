@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { getUserID } from '../../firebase/firebaseFunctions';
 
 /**********************************************************************************************
  * This file contains all of the programming for the initial page which contains
