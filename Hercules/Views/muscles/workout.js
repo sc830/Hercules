@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
+import { collection, doc, addDoc, getDoc, setDoc } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
 import { getUserID, pullDocData } from '../../firebase/firebaseFunctions';
 
@@ -21,19 +22,25 @@ const WorkoutView = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      let testDate = new Date();
+      testDate.setDate(17);
       const userPath = `userData/${getUserID()}`;
 
-      const formattedDate = currentDate.toLocaleDateString('en-US', {
+      const formattedDate = testDate.toLocaleDateString('en-US', {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
       });
 
       const subPath = `/logs/${formattedDate}`;
-      const dateRef = doc(db, userPath, subPath);
+
+      console.log(`Date: ${formattedDate}`);
+      console.log(`userPath: ${userPath}`);
+      console.log(`subPath: ${subPath}`);
+      console.log(`Full Path: ${userPath + subPath}`);
 
       try {
-        const value = pullDocData((userPath+subPath), pullValue);
+        const value = pullDocData((userPath+subPath), "pullValue");
         console.log(value);
         
       } catch (error) {
