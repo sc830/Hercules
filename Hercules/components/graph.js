@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import moment from 'moment';
 
-const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle }) => {
+const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle, onTitleChange }) => {
   const [dataByWeek, setDataByWeek] = useState({});
   const [currentWeekStart, setCurrentWeekStart] = useState(moment().startOf('week').format('YYYY-MM-DD'));
+  const [isEditing, setIsEditing] = useState(false);
+  const [editableTitle, setEditableTitle] = useState(trackerTitle);
 
-  // This effect sets the initial data for the current week when the component mounts.
   useEffect(() => {
     setDataByWeek(prevData => ({
       ...prevData,
@@ -15,7 +16,7 @@ const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle }) =
         ? initialData
         : new Array(labels.length).fill(0),
     }));
-  }, [initialData, labels.length]); // Removed currentWeekStart from the dependency array
+  }, [initialData, labels.length, currentWeekStart]);
 
   const formatDateRange = (start) => {
     const end = moment(start).endOf('week');
@@ -24,7 +25,6 @@ const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle }) =
 
   const handleWeekChange = (weekStart) => {
     setCurrentWeekStart(weekStart);
-    // If there's no data for the new week, set it to default data.
     setDataByWeek(prevData => ({
       ...prevData,
       [weekStart]: prevData[weekStart] || new Array(labels.length).fill(0),
@@ -41,11 +41,40 @@ const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle }) =
     handleWeekChange(nextWeekStart);
   };
 
-  // Retrieves the data for the current week or defaults to zeroes if none exist.
+  const handleEdit = () => {
+    console.log("Entering edit mode");
+    setIsEditing(true);
+  };
+
+  const handleSubmitEditing = () => {
+    console.log("Submitting new title:", editableTitle);
+    onTitleChange(editableTitle); // Call the passed-in function to update the title
+    setIsEditing(false);
+  };
+
+  const handleCancelEditing = () => {
+    setEditableTitle(trackerTitle); // Reset the editable title to the original
+    setIsEditing(false);
+  };
+
   const currentData = dataByWeek[currentWeekStart] || new Array(labels.length).fill(0);
 
   return (
     <View style={{ alignItems: 'center' }}>
+      {isEditing ? (
+        <TextInput
+          value={editableTitle}
+          onChangeText={setEditableTitle}
+          onEndEditing={handleSubmitEditing}
+          autoFocus={true}
+          style={{ /* Your TextInput styling here */ }}
+        />
+      ) : (
+        <TouchableOpacity onPress={handleEdit}>
+          <Text style={{ marginTop: 8, fontSize: 16, fontWeight: 'bold' }}>{editableTitle}</Text>
+        </TouchableOpacity>
+      )}
+
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
         <TouchableOpacity onPress={handlePreviousWeek}>
           <Text>{"<"}</Text>
@@ -72,10 +101,6 @@ const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle }) =
           }}
         />
       </TouchableOpacity>
-      {/* Graph Title */}
-      <Text style={{ marginTop: 8, fontSize: 16, fontWeight: 'bold' }}>
-        {trackerTitle}
-      </Text>
     </View>
   );
 };

@@ -35,6 +35,19 @@ const useCustomTracker = (initialTrackers) => {
     }
   };
 
+  // Function to rename trackers
+  const [trackerTitles, setTrackerTitles] = useState(initialTrackers.reduce((acc, tracker) => {
+    acc[tracker] = tracker; // Initialize title with the tracker name
+    return acc;
+  }, {}));
+
+  const updateTrackerTitle = (trackerName, newTitle) => {
+    setTrackerTitles(prevTitles => ({
+      ...prevTitles,
+      [trackerName]: newTitle
+    }));
+  };
+
   // Placeholder for data fetching logic, for future Firestore integration.
   useEffect(() => {
     // Your teammate will implement the Firestore logic here.
@@ -52,6 +65,8 @@ const useCustomTracker = (initialTrackers) => {
     submitCustomTracker,
     trackerData,
     setTrackerData,
+    trackerTitles,
+    updateTrackerTitle,
   };
 };
 

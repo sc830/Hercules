@@ -107,6 +107,22 @@ export const styles = StyleSheet.create({
     width: '100%', // Set to 100% of the modalView width
     fontSize: 16,
   },
+  // graph styles
+  textInput: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 16
+  },
+  editableTitle: {
+    marginTop: 8,
+    fontSize: 16,
+  },
+  graphTitle: {
+    marginTop: 8,
+    fontSize: 16,
+    fontWeight: 'bold',
+    // Add any other styling you want for the non-editable title here
+  },
   
 });
 

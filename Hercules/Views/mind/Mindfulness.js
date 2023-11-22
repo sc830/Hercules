@@ -1,52 +1,41 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import BackButton from '../../components/backButton';
-import useCustomTracker from './useCustomTracker'; 
+import useCustomTracker from './useCustomTracker';
 import CustomTrackerModal from './customTrackerModal';
 import GraphWithButton from '../../components/graph';
-import { styles } from './CommonStyles'; 
-
-/*********************************************************************************************** //
- * OVERVIEW OF ALL MINDFULNESS RELATED FILES
- * CommonStyles.js: Holds reusable styling for different parts of the app to look consistent.
- * customTrackerModal.js: Popup for adding new custom health trackers.
- * Mindfulness.js: Displays health tracking graphs and options.
- * TrackIntakeScreen.js: Screen for entering and editing health tracker data.
- * useCustomTracker.js: Hook that handles the logic for creating and managing trackers.
-
-*************************************************************************************************/
+import { styles } from './CommonStyles';
 
 const Mindfulness = ({ navigation }) => {
-  // Custom hook for managing trackers
   const {
     trackers,
     trackerData,
+    trackerTitles, // Ensure this state is returned by useCustomTracker
     modalVisible,
     setModalVisible,
     customTrackerName,
     setCustomTrackerName,
     handleAddCustomTracker,
     submitCustomTracker,
+    updateTrackerTitle, // Ensure this function is provided by useCustomTracker
   } = useCustomTracker(['Creatine', 'Sleep', 'Water']);
 
-  // Labels for the days of the week
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  // Function to render graphs for each tracker
   const renderTrackers = () => {
     return trackers.map((tracker, index) => (
       <View key={index} style={styles.graphContainer}>
         <GraphWithButton
-          initialData={trackerData[tracker] || []} // Use dynamic tracker data
+          initialData={trackerData[tracker] || []}
           labels={labels}
           onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}
-          trackerTitle={tracker}
+          trackerTitle={trackerTitles[tracker]} // Pass the title from trackerTitles
+          onTitleChange={(newTitle) => updateTrackerTitle(tracker, newTitle)} // Pass the function to update the title
         />
       </View>
     ));
   };
 
-  // Main component render
   return (
     <View style={styles.container}>
       <BackButton />
@@ -66,6 +55,5 @@ const Mindfulness = ({ navigation }) => {
     </View>
   );
 };
-
 
 export default Mindfulness;
