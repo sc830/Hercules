@@ -1,0 +1,18 @@
+Firestore rules can be deployed using the following command:
+PS C:\Users\scshe\OneDrive\Desktop\Classes\CS3398\hercules> firebase deploy --only firestore:rules --project hercules-fc42e
+
+=== Deploying to 'hercules-fc42e'...
+
+i  deploying firestore
+i  firestore: reading indexes from firestore.indexes.json...
+i  cloud.firestore: checking firestore.rules for compilation errors...
++  cloud.firestore: rules file firestore.rules compiled successfully
+i  firestore: latest version of firestore.rules already up to date, skipping upload...
++  firestore: released rules firestore.rules to cloud.firestore
+
++  Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/hercules-fc42e/overview
+
+Ensure firestore-tools is installed (npm install -g firebase-tools)
+and run "firebase login" to login to changelings2023@gmail.com
