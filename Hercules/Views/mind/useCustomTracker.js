@@ -26,14 +26,19 @@ const useCustomTracker = (initialTrackers) => {
     setModalVisible(true);
   };
 
-  // Function to submit a new custom tracker.
   const submitCustomTracker = () => {
     if (customTrackerName.trim()) {
       setTrackers(prevTrackers => [...prevTrackers, customTrackerName]);
+      // Update the tracker titles with the new tracker name
+      setTrackerTitles(prevTitles => ({
+        ...prevTitles,
+        [customTrackerName]: customTrackerName
+      }));
       setCustomTrackerName('');
       setModalVisible(false);
     }
   };
+  
 
   // Function to rename trackers
   const [trackerTitles, setTrackerTitles] = useState(initialTrackers.reduce((acc, tracker) => {
