@@ -44,6 +44,29 @@ export const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5
   },
+  // for TrackIntakeScreen
+  listItem: {
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15,
+    marginVertical: 8,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+    width: '90%', // Assuming you want the item to take up 90% of the screen width
+  },
+  listItemText: {
+    fontSize: 18,
+    color: '#333', // A dark color for the text
+  },
+  listItemButton: {
+    padding: 10,
+  },
 });
 
 

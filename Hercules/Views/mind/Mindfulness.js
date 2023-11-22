@@ -4,6 +4,7 @@ import BackButton from '../../components/backButton';
 import useCustomTracker from './useCustomTracker'; 
 import CustomTrackerModal from './customTrackerModal';
 import GraphWithButton from '../../components/graph';
+import { styles } from './CommonStyles'; 
 
 /**
  * Mindfulness.js
@@ -63,31 +64,5 @@ const Mindfulness = ({ navigation }) => {
   );
 };
 
-// Styles for the component
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FFF7E0',
-    flex: 1
-  },
-  contentContainerStyle: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  graphContainer: {
-    marginBottom: 20,
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: '#D4AF37',
-    padding: 20,
-    margin: 10,
-    borderRadius: 15,
-    width: '90%'
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center'
-  },
-});
 
 export default Mindfulness;

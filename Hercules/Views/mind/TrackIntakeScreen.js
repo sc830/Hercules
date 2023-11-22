@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput, StyleSheet } from 'react-native';
 import BackButton from '../../components/backButton';
+import { styles } from './CommonStyles'; 
 
 /**
  * TrackIntakeScreen.js
@@ -56,32 +57,31 @@ const TrackIntakeScreen = ({ navigation, route }) => {
 
   // Main component render
   return (
-    <View style={{ flex: 1, backgroundColor: 'black' }}>
+    <View style={styles.container}>
       <BackButton />
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity onPress={handleAddItem} style={{ backgroundColor: 'purple', padding: 20, margin: 20, width: '80%' }}>
-            <Text style={{ color: 'white', textAlign: 'center' }}>Add {itemType} Intake</Text>
+          <TouchableOpacity onPress={handleAddItem} style={styles.button}>
+            <Text style={styles.buttonText}>Add {itemType} Intake</Text>
           </TouchableOpacity>
+          {itemList.map((item, index) => (
+            <View key={index} style={styles.listItem}>
+              <Text style={styles.listItemText}>{item}</Text>
+              <TouchableOpacity onPress={() => handleEdit(item)} style={styles.listItemButton}>
+                <Text>⚙️</Text> {/* Replace with an edit icon if you have one */}
+              </TouchableOpacity>
+            </View>
+          ))}
         </View>
-        {itemList.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={{ backgroundColor: 'lightgrey', padding: 10, margin: 5, width: '80%', borderRadius: 5, flexDirection: 'row', justifyContent: 'space-between' }}
-            onPress={() => handleEdit(item)}
-          >
-            <Text style={{ color: 'black' }}>{item}</Text>
-            <Text style={{ fontSize: 20 }}>⚙️</Text>
-          </TouchableOpacity>
-        ))}
       </ScrollView>
+  
 
       {/* Modal for adding or editing an item */}
       <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
         <View style={styles.modalContainer}>
           <View style={styles.modalView}>
             <TextInput
-              style={{ borderWidth: 1, borderColor: 'black', borderRadius: 5, padding: 5 }}
+              style={styles.textInput} // Define this style in CommonStyles if needed
               value={trackedItem}
               onChangeText={(text) => setItem(text)}
               placeholder={`Enter ${itemType} intake`}
@@ -103,42 +103,5 @@ const TrackIntakeScreen = ({ navigation, route }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalView: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    width: '60%', // Adjust the width as needed
-    alignItems: 'center',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
-  },
-  button: {
-    backgroundColor: 'purple', // Use the same color for both buttons
-    padding: 10,
-    marginTop: 10,
-    borderRadius: 5,
-    alignSelf: 'stretch', // This will make the button stretch to the width of the modal
-    justifyContent: 'center' // This ensures the text is centered within the button
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 16,
-  },
-});
 
 export default TrackIntakeScreen;
