@@ -24,7 +24,6 @@ const WorkoutView = () => {
     const fetchData = async () => {
       let testDate = new Date();
       testDate.setDate(17);
-      const userPath = `userData/${getUserID()}`;
 
       const formattedDate = testDate.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -32,9 +31,12 @@ const WorkoutView = () => {
         day: '2-digit',
       });
 
-      const subPath = `/logs/${formattedDate}`;
+      const reformattedDate = formattedDate.replace(/\//g, '.');
 
-      console.log(`Date: ${formattedDate}`);
+      const userPath = `userData/${getUserID()}`;
+      const subPath = `/logs/${reformattedDate}`;
+
+      console.log(`Date: ${reformattedDate}`);
       console.log(`userPath: ${userPath}`);
       console.log(`subPath: ${subPath}`);
       console.log(`Full Path: ${userPath + subPath}`);
