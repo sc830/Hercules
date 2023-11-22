@@ -9,6 +9,21 @@ const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle, onT
   const [isEditing, setIsEditing] = useState(false);
   const [editableTitle, setEditableTitle] = useState(trackerTitle);
 
+  // Inline styles for date navigation
+  const navStyle = {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between', // This will space out your elements
+    marginBottom: 5,
+    width: '100%', // Ensure the width takes up the full container
+    paddingHorizontal: 20, // Add padding to prevent text from touching the edges
+  };
+
+  const dateTextStyle = {
+    fontSize: 14, // Adjust the font size as needed
+    fontWeight: 'bold',
+  };
+
   useEffect(() => {
     setDataByWeek(prevData => ({
       ...prevData,
@@ -85,15 +100,18 @@ const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle, onT
         </TouchableOpacity>
       )}
 
-      <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5, width: '100%' }}>
-        <TouchableOpacity onPress={handlePreviousWeek} style={{ flex: 1 }}>
-          <Text style={{ textAlign: 'left' }}>{"<"}</Text>
+      <View style={navStyle}>
+        <TouchableOpacity onPress={handlePreviousWeek}>
+          <Text>{"<"}</Text>
         </TouchableOpacity>
-        <Text style={{ flex: 1, textAlign: 'center' }}>
-          {formatDateRange(currentWeekStart)}
-        </Text>
-        <TouchableOpacity onPress={handleNextWeek} style={{ flex: 1 }}>
-          <Text style={{ textAlign: 'right' }}>{">"}</Text>
+        {/* Ensure that the date range text container has enough space */}
+        <View style={{ flex: 1, paddingHorizontal: 10 }}>
+          <Text style={[dateTextStyle, { textAlign: 'center' }]}>
+            {formatDateRange(currentWeekStart)}
+          </Text>
+        </View>
+        <TouchableOpacity onPress={handleNextWeek}>
+          <Text>{">"}</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={onButtonPress} style={{ alignItems: 'center' }}>
