@@ -42,48 +42,58 @@ const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle, onT
   };
 
   const handleEdit = () => {
-    console.log("Entering edit mode");
     setIsEditing(true);
   };
 
   const handleSubmitEditing = () => {
-    console.log("Submitting new title:", editableTitle);
-    onTitleChange(editableTitle); // Call the passed-in function to update the title
+    onTitleChange(editableTitle);
     setIsEditing(false);
   };
 
-  const handleCancelEditing = () => {
-    setEditableTitle(trackerTitle); // Reset the editable title to the original
-    setIsEditing(false);
+  // Inline styles for editable text input
+  const textInputStyle = {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: 10,
+    minWidth: '80%', // Set a minimum width for the text input
+  };
+
+  // Inline styles for the title text
+  const titleTextStyle = {
+    marginTop: 8,
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center', // Ensure the title is centered
   };
 
   const currentData = dataByWeek[currentWeekStart] || new Array(labels.length).fill(0);
 
   return (
-    <View style={{ alignItems: 'center' }}>
+    <View style={{ alignItems: 'center', width: '100%' }}>
       {isEditing ? (
         <TextInput
           value={editableTitle}
           onChangeText={setEditableTitle}
           onEndEditing={handleSubmitEditing}
           autoFocus={true}
-          style={{ /* Your TextInput styling here */ }}
+          style={textInputStyle}
         />
       ) : (
         <TouchableOpacity onPress={handleEdit}>
-          <Text style={{ marginTop: 8, fontSize: 16, fontWeight: 'bold' }}>{editableTitle}</Text>
+          <Text style={titleTextStyle}>{editableTitle}</Text>
         </TouchableOpacity>
       )}
 
-      <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
-        <TouchableOpacity onPress={handlePreviousWeek}>
-          <Text>{"<"}</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5, width: '100%' }}>
+        <TouchableOpacity onPress={handlePreviousWeek} style={{ flex: 1 }}>
+          <Text style={{ textAlign: 'left' }}>{"<"}</Text>
         </TouchableOpacity>
         <Text style={{ flex: 1, textAlign: 'center' }}>
           {formatDateRange(currentWeekStart)}
         </Text>
-        <TouchableOpacity onPress={handleNextWeek}>
-          <Text>{">"}</Text>
+        <TouchableOpacity onPress={handleNextWeek} style={{ flex: 1 }}>
+          <Text style={{ textAlign: 'right' }}>{">"}</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={onButtonPress} style={{ alignItems: 'center' }}>
