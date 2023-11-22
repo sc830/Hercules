@@ -4,13 +4,17 @@ import BackButton from '../../components/backButton';
 import useCustomTracker from './useCustomTracker'; 
 import CustomTrackerModal from './customTrackerModal';
 import GraphWithButton from '../../components/graph';
+import { styles } from './CommonStyles'; 
 
-/**
- * Mindfulness.js
- * This file defines the Mindfulness component.
- * It utilizes the custom hook 'useCustomTracker' to manage trackers for different metrics like Creatine, Sleep, and Water.
- * It renders graphs for each tracker and provides functionality to add custom trackers.
- */
+/*********************************************************************************************** //
+ * OVERVIEW OF ALL MINDFULNESS RELATED FILES
+ * CommonStyles.js: Holds reusable styling for different parts of the app to look consistent.
+ * customTrackerModal.js: Popup for adding new custom health trackers.
+ * Mindfulness.js: Displays health tracking graphs and options.
+ * TrackIntakeScreen.js: Screen for entering and editing health tracker data.
+ * useCustomTracker.js: Hook that handles the logic for creating and managing trackers.
+
+*************************************************************************************************/
 
 const Mindfulness = ({ navigation }) => {
   // Custom hook for managing trackers
@@ -63,31 +67,5 @@ const Mindfulness = ({ navigation }) => {
   );
 };
 
-// Styles for the component
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FFF7E0',
-    flex: 1
-  },
-  contentContainerStyle: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  graphContainer: {
-    marginBottom: 20,
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: '#D4AF37',
-    padding: 20,
-    margin: 10,
-    borderRadius: 15,
-    width: '90%'
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center'
-  },
-});
 
 export default Mindfulness;
