@@ -5,8 +5,7 @@ import BackButton from '../../components/backButton';
 import { styles } from './CommonStyles'; 
 
 /**
- * TrackIntakeScreen.js
- * 
+ * TrackIntakeScreen.js: Screen for entering and editing health tracker data.
  * This component is used to track the intake of various items (e.g., Creatine, Sleep, Water).
  * It allows users to add, edit, and delete entries for a specific tracker.
  * It uses a modal for input to add or edit the intake data.

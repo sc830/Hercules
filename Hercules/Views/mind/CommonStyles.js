@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-
+// CommonStyles.js: Holds reusable styling for different parts of the app to look consistent.
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF7E0',
@@ -22,8 +22,17 @@ export const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    textAlign: 'center'
-  },modalContainer: {
+    textAlign: 'center',
+    fontSize: 16
+  },
+  fullWidthButton: {
+    backgroundColor: '#D4AF37', // Use a color that matches your app's theme
+    padding: 15,
+    marginVertical: 10,
+    borderRadius: 15,
+    width: '100%', // Set to 100% of the modalView width
+  },
+  modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -67,6 +76,38 @@ export const styles = StyleSheet.create({
   listItemButton: {
     padding: 10,
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalView: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%', // You can adjust the width as needed
+    alignItems: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+  modalTextInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    marginVertical: 15,
+    width: '100%', // Set to 100% of the modalView width
+    fontSize: 16,
+  },
+  
 });
 
 
