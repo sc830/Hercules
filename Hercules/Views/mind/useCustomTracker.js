@@ -7,7 +7,21 @@ const useCustomTracker = (initialTrackers) => {
 
   const handleAddCustomTracker = () => {
     setModalVisible(true);
+
+    useEffect(() => {
+      // Placeholder for Firestore data fetching
+      // Fetch data for each tracker and update trackerData state
+      // Your teammate can implement the Firestore logic here
+  
+      // Example:
+      // fetchTrackerDataFromFirestore().then(data => setTrackerData(data));
+    }, []);
   };
+
+  const [trackerData, setTrackerData] = useState(initialTrackers.reduce((acc, tracker) => {
+    acc[tracker] = []; // Initially, data for each tracker is an empty array
+    return acc;
+  }, {}));
 
   const submitCustomTracker = () => {
     if (customTrackerName.trim()) {
@@ -25,6 +39,8 @@ const useCustomTracker = (initialTrackers) => {
     setCustomTrackerName,
     handleAddCustomTracker,
     submitCustomTracker,
+    trackerData,
+    setTrackerData,
   };
 };
 

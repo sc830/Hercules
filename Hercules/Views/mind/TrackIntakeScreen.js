@@ -1,8 +1,15 @@
 // This is the screen that comes up after clicking the graphs
-
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput, StyleSheet } from 'react-native';
 import BackButton from '../../components/backButton';
+
+/**
+ * TrackIntakeScreen.js
+ * 
+ * This component is used to track the intake of various items (e.g., Creatine, Sleep, Water).
+ * It allows users to add, edit, and delete entries for a specific tracker.
+ * It uses a modal for input to add or edit the intake data.
+ */
 
 const TrackIntakeScreen = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -10,15 +17,16 @@ const TrackIntakeScreen = ({ navigation, route }) => {
   const [itemList, setItemList] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
-
   // Extract itemType from route parameters
   const { itemType } = route.params;
 
+  // Handles the logic to open the modal for adding a new item
   const handleAddItem = () => {
     setModalVisible(true);
     setSelectedItem(null);
   };
 
+  // Saves the new or edited item to the list
   const handleSave = () => {
     if (selectedItem !== null) {
       const updatedList = itemList.map((m) => (m === selectedItem ? trackedItem : m));
@@ -31,6 +39,7 @@ const TrackIntakeScreen = ({ navigation, route }) => {
     setSelectedItem(null);
   };
 
+  // Deletes the selected item from the list
   const handleDelete = () => {
     const updatedList = itemList.filter((m) => m !== selectedItem);
     setItemList(updatedList);
@@ -38,15 +47,16 @@ const TrackIntakeScreen = ({ navigation, route }) => {
     setSelectedItem(null);
   };
 
+  // Handles editing an existing item
   const handleEdit = (m) => {
     setModalVisible(true);
     setSelectedItem(m);
     setItem(m);
   };
 
+  // Main component render
   return (
     <View style={{ flex: 1, backgroundColor: 'black' }}>
-      {/* Back button to navigate back from this screen */}
       <BackButton />
       <ScrollView>
         <View style={{ alignItems: 'center' }}>
@@ -66,29 +76,27 @@ const TrackIntakeScreen = ({ navigation, route }) => {
         ))}
       </ScrollView>
 
+      {/* Modal for adding or editing an item */}
       <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-          <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, width: '80%' }}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalView}>
             <TextInput
               style={{ borderWidth: 1, borderColor: 'black', borderRadius: 5, padding: 5 }}
               value={trackedItem}
               onChangeText={(text) => setItem(text)}
               placeholder={`Enter ${itemType} intake`}
             />
-            <TouchableOpacity onPress={handleSave} style={{ backgroundColor: 'purple', padding: 10, marginTop: 10, borderRadius: 5 }}>
-              <Text style={{ color: 'white', textAlign: 'center' }}>Save</Text>
+            <TouchableOpacity onPress={handleSave} style={styles.button}>
+              <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
             {selectedItem && (
-              <TouchableOpacity onPress={handleDelete} style={{ backgroundColor: 'red', padding: 10, marginTop: 10, borderRadius: 5 }}>
-                <Text style={{ color: 'white', textAlign: 'center' }}>Delete</Text>
+              <TouchableOpacity onPress={handleDelete} style={[styles.button, { backgroundColor: 'red' }]}>
+                <Text style={styles.buttonText}>Delete</Text>
               </TouchableOpacity>
             )}
-
             <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.button}>
               <Text style={styles.buttonText}>Close</Text>
             </TouchableOpacity>
-
-
           </View>
         </View>
       </Modal>
