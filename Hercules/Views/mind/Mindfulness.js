@@ -5,9 +5,18 @@ import useCustomTracker from './useCustomTracker';
 import CustomTrackerModal from './customTrackerModal';
 import GraphWithButton from '../../components/graph';
 
+/**
+ * Mindfulness.js
+ * This file defines the Mindfulness component.
+ * It utilizes the custom hook 'useCustomTracker' to manage trackers for different metrics like Creatine, Sleep, and Water.
+ * It renders graphs for each tracker and provides functionality to add custom trackers.
+ */
+
 const Mindfulness = ({ navigation }) => {
+  // Custom hook for managing trackers
   const {
     trackers,
+    trackerData,
     modalVisible,
     setModalVisible,
     customTrackerName,
@@ -16,26 +25,15 @@ const Mindfulness = ({ navigation }) => {
     submitCustomTracker,
   } = useCustomTracker(['Creatine', 'Sleep', 'Water']);
 
-  const dummyData = {
-    currentData: {
-      'Creatine': [5, 6, 7, 8, 9, 10, 2],
-      'Sleep': [7, 8, 6, 7, 9, 8, 9],
-      'Water': [20, 25, 30, 35, 40, 45, 47]
-    },
-  }
-  
-  const getDataForWeek = (trackerName) => {
-    // Return data for the tracker if it exists, otherwise return an array of zeroes
-    return dummyData.currentData[trackerName] || new Array(labels.length).fill(0);
-  };
-  
+  // Labels for the days of the week
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+  // Function to render graphs for each tracker
   const renderTrackers = () => {
     return trackers.map((tracker, index) => (
       <View key={index} style={styles.graphContainer}>
         <GraphWithButton
-          initialData={getDataForWeek(tracker)} // Pass the initial data here
+          initialData={trackerData[tracker] || []} // Use dynamic tracker data
           labels={labels}
           onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}
           trackerTitle={tracker}
@@ -44,6 +42,7 @@ const Mindfulness = ({ navigation }) => {
     ));
   };
 
+  // Main component render
   return (
     <View style={styles.container}>
       <BackButton />
@@ -64,7 +63,7 @@ const Mindfulness = ({ navigation }) => {
   );
 };
 
-// Styles
+// Styles for the component
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF7E0',
