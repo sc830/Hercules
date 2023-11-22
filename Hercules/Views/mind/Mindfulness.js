@@ -4,10 +4,23 @@ import BackButton from '../../components/backButton';
 import useCustomTracker from './useCustomTracker'; 
 import CustomTrackerModal from './customTrackerModal';
 import GraphWithButton from '../../components/graph';
+import { styles } from './CommonStyles'; 
+
+/*********************************************************************************************** //
+ * OVERVIEW OF ALL MINDFULNESS RELATED FILES
+ * CommonStyles.js: Holds reusable styling for different parts of the app to look consistent.
+ * customTrackerModal.js: Popup for adding new custom health trackers.
+ * Mindfulness.js: Displays health tracking graphs and options.
+ * TrackIntakeScreen.js: Screen for entering and editing health tracker data.
+ * useCustomTracker.js: Hook that handles the logic for creating and managing trackers.
+
+*************************************************************************************************/
 
 const Mindfulness = ({ navigation }) => {
+  // Custom hook for managing trackers
   const {
     trackers,
+    trackerData,
     modalVisible,
     setModalVisible,
     customTrackerName,
@@ -16,26 +29,15 @@ const Mindfulness = ({ navigation }) => {
     submitCustomTracker,
   } = useCustomTracker(['Creatine', 'Sleep', 'Water']);
 
-  const dummyData = {
-    currentData: {
-      'Creatine': [5, 6, 7, 8, 9, 10, 2],
-      'Sleep': [7, 8, 6, 7, 9, 8, 9],
-      'Water': [20, 25, 30, 35, 40, 45, 47]
-    },
-  }
-  
-  const getDataForWeek = (trackerName) => {
-    // Return data for the tracker if it exists, otherwise return an array of zeroes
-    return dummyData.currentData[trackerName] || new Array(labels.length).fill(0);
-  };
-  
+  // Labels for the days of the week
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+  // Function to render graphs for each tracker
   const renderTrackers = () => {
     return trackers.map((tracker, index) => (
       <View key={index} style={styles.graphContainer}>
         <GraphWithButton
-          initialData={getDataForWeek(tracker)} // Pass the initial data here
+          initialData={trackerData[tracker] || []} // Use dynamic tracker data
           labels={labels}
           onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}
           trackerTitle={tracker}
@@ -44,6 +46,7 @@ const Mindfulness = ({ navigation }) => {
     ));
   };
 
+  // Main component render
   return (
     <View style={styles.container}>
       <BackButton />
@@ -64,31 +67,5 @@ const Mindfulness = ({ navigation }) => {
   );
 };
 
-// Styles
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FFF7E0',
-    flex: 1
-  },
-  contentContainerStyle: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  graphContainer: {
-    marginBottom: 20,
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: '#D4AF37',
-    padding: 20,
-    margin: 10,
-    borderRadius: 15,
-    width: '90%'
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center'
-  },
-});
 
 export default Mindfulness;
