@@ -29,7 +29,7 @@ function containsSpecialChars(str) {
 }
 
 export const getUserID = () => {
-  return user ? user.uid : null;
+  return userid ? userid : null;
 };
 
 const signUp = async (email, password, username) => {

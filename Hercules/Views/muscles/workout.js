@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { getUserID, pullDocData } from '../../firebase/firebaseFunctions';
@@ -43,7 +43,7 @@ const WorkoutView = () => {
   
     fetchData();
   
-  }, [currentDate]);  // date dependency - runs again when date is updated
+  }, [currentDate]);  // date dependency - runs again when date is updated */
 
   const addSplit = () => {
     if (splitName) {
