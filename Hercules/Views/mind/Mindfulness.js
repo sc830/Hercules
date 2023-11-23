@@ -22,19 +22,21 @@ const Mindfulness = ({ navigation }) => {
 
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+  // In Mindfulness component, where you render the GraphWithButton
+
   const renderTrackers = () => {
     return trackers.map((tracker, index) => (
-      <View key={index} style={styles.graphContainer}>
-        <GraphWithButton
-          initialData={trackerData[tracker] || []}
-          labels={labels}
-          onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}
-          trackerTitle={trackerTitles[tracker]} // Pass the title from trackerTitles
-          onTitleChange={(newTitle) => updateTrackerTitle(tracker, newTitle)} // Pass the function to update the title
-        />
-      </View>
+      <GraphWithButton
+        key={index}
+        initialData={trackerData[tracker] || []}
+        labels={labels}
+        onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: trackerTitles[tracker] })}
+        trackerTitle={trackerTitles[tracker]}
+        onTitleChange={(newTitle) => updateTrackerTitle(tracker, newTitle)}
+      />
     ));
   };
+  
 
   return (
     <View style={styles.container}>

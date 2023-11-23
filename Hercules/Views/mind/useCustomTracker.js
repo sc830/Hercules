@@ -52,6 +52,7 @@ const useCustomTracker = (initialTrackers) => {
       [trackerName]: newTitle
     }));
   };
+  
 
   // Placeholder for data fetching logic, for future Firestore integration.
   useEffect(() => {
