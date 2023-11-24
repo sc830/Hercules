@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
 import BackButton from '../../components/backButton';
-import { styles } from './CommonStyles'; // Make sure the path to CommonStyles is correct
+import { styles } from './CommonStyles';
 
 const TrackIntakeScreen = ({ navigation, route }) => {
-  const { itemType } = route.params; // This should be the updated tracker title
+  const { itemType } = route.params; // This retrieves the updated tracker title
   const [inputValue, setInputValue] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [itemList, setItemList] = useState([]);
@@ -28,7 +28,7 @@ const TrackIntakeScreen = ({ navigation, route }) => {
     setInputValue('');
     setModalVisible(false);
     setSelectedItem(null);
-    // Here, you would also save the updated list to your backend or state management system
+    // Save the updated list to your backend or state management system
   };
 
   // Deletes the selected item from the list
@@ -37,7 +37,7 @@ const TrackIntakeScreen = ({ navigation, route }) => {
     setItemList(updatedList);
     setModalVisible(false);
     setSelectedItem(null);
-    // Here, you would also update the backend or state management system with the item removed
+    // Update the backend or state management system with the item removed
   };
 
   // Handles editing an existing item
@@ -47,7 +47,6 @@ const TrackIntakeScreen = ({ navigation, route }) => {
     setInputValue(item);
   };
 
-  // Main component render
   return (
     <View style={styles.container}>
       <BackButton onPress={() => navigation.goBack()} />
@@ -60,14 +59,13 @@ const TrackIntakeScreen = ({ navigation, route }) => {
             <View key={index} style={styles.listItem}>
               <Text style={styles.listItemText}>{item}</Text>
               <TouchableOpacity onPress={() => handleEdit(item)} style={styles.listItemButton}>
-                <Text>⚙️</Text> {/* Replace with an edit icon if you have one */}
+                <Text>Edit</Text>
               </TouchableOpacity>
             </View>
           ))}
         </View>
       </ScrollView>
 
-      {/* Modal for adding or editing an item */}
       <Modal
         animationType="slide"
         transparent={true}

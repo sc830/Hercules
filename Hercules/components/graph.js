@@ -1,28 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import moment from 'moment';
 
-const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle, onTitleChange }) => {
+const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle }) => {
   const [dataByWeek, setDataByWeek] = useState({});
   const [currentWeekStart, setCurrentWeekStart] = useState(moment().startOf('week').format('YYYY-MM-DD'));
-  const [isEditing, setIsEditing] = useState(false);
-  const [editableTitle, setEditableTitle] = useState(trackerTitle);
-
-  // Inline styles for date navigation
-  const navStyle = {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between', // This will space out your elements
-    marginBottom: 5,
-    width: '100%', // Ensure the width takes up the full container
-    paddingHorizontal: 20, // Add padding to prevent text from touching the edges
-  };
-
-  const dateTextStyle = {
-    fontSize: 14, // Adjust the font size as needed
-    fontWeight: 'bold',
-  };
 
   useEffect(() => {
     setDataByWeek(prevData => ({
@@ -56,76 +39,51 @@ const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle, onT
     handleWeekChange(nextWeekStart);
   };
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
-
-  const handleSubmitEditing = () => {
-    onTitleChange(editableTitle);
-    setIsEditing(false);
-  };
-
-  // Inline styles for editable text input
-  const textInputStyle = {
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    padding: 10,
-    minWidth: '80%', // Set a minimum width for the text input
-  };
-
-  // Inline styles for the title text
-  const titleTextStyle = {
-    marginTop: 8,
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center', // Ensure the title is centered
-  };
-
   const currentData = dataByWeek[currentWeekStart] || new Array(labels.length).fill(0);
 
   return (
     <View style={{ alignItems: 'center', width: '100%' }}>
-      {isEditing ? (
-        <TextInput
-          value={editableTitle}
-          onChangeText={setEditableTitle}
-          onEndEditing={handleSubmitEditing}
-          autoFocus={true}
-          style={textInputStyle}
-        />
-      ) : (
-        <TouchableOpacity onPress={handleEdit}>
-          <Text style={titleTextStyle}>{editableTitle}</Text>
-        </TouchableOpacity>
-      )}
+      <Text style={{ marginTop: 8, fontSize: 16, fontWeight: 'bold', textAlign: 'center' }}>
+        {trackerTitle}
+      </Text>
 
-      <View style={navStyle}>
-        <TouchableOpacity onPress={handlePreviousWeek}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
+        <TouchableOpacity onPress={handlePreviousWeek} style={{ padding: 10 }}>
           <Text>{"<"}</Text>
         </TouchableOpacity>
-        {/* Ensure that the date range text container has enough space */}
+
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
-          <Text style={[dateTextStyle, { textAlign: 'center' }]}>
+          <Text style={{ fontSize: 14, fontWeight: 'bold', textAlign: 'center' }}>
             {formatDateRange(currentWeekStart)}
           </Text>
         </View>
-        <TouchableOpacity onPress={handleNextWeek}>
+
+        <TouchableOpacity onPress={handleNextWeek} style={{ padding: 10 }}>
           <Text>{">"}</Text>
         </TouchableOpacity>
       </View>
+
       <TouchableOpacity onPress={onButtonPress} style={{ alignItems: 'center' }}>
         <LineChart
           data={{
             labels: labels,
             datasets: [{ data: currentData }],
           }}
-          width={300}
-          height={200}
+          width={300} // Adjust as necessary for your layout
+          height={200} // Adjust as necessary for your layout
           chartConfig={{
             backgroundGradientFrom: '#fff',
             backgroundGradientTo: '#fff',
             color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            strokeWidth: 2, // optional, default 3
+            barPercentage: 0.5,
+            useShadowColorFromDataset: false, // optional
+          }}
+          bezier
+          style={{
+            marginVertical: 8,
+            borderRadius: 16,
           }}
         />
       </TouchableOpacity>
