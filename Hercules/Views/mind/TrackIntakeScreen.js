@@ -1,8 +1,8 @@
 // This is the screen that comes up after clicking the graphs
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
 import BackButton from '../../components/backButton';
-import { styles } from './CommonStyles'; 
+import { styles } from './CommonStyles';
 
 /**
  * TrackIntakeScreen.js: Screen for entering and editing health tracker data.
@@ -12,13 +12,11 @@ import { styles } from './CommonStyles';
  */
 
 const TrackIntakeScreen = ({ navigation, route }) => {
+  const { itemType } = route.params; // This retrieves the updated tracker title
+  const [inputValue, setInputValue] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const [trackedItem, setItem] = useState('');
   const [itemList, setItemList] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
-
-  // Extract itemType from route parameters
-  const { itemType } = route.params;
 
   // Handles the logic to open the modal for adding a new item
   const handleAddItem = () => {
@@ -28,36 +26,38 @@ const TrackIntakeScreen = ({ navigation, route }) => {
 
   // Saves the new or edited item to the list
   const handleSave = () => {
+    let updatedList = itemList;
     if (selectedItem !== null) {
-      const updatedList = itemList.map((m) => (m === selectedItem ? trackedItem : m));
-      setItemList(updatedList);
+      updatedList = itemList.map((item) => (item === selectedItem ? inputValue : item));
     } else {
-      setItemList([...itemList, trackedItem]);
+      updatedList = [...itemList, inputValue];
     }
-    setItem('');
+    setItemList(updatedList);
+    setInputValue('');
     setModalVisible(false);
     setSelectedItem(null);
+    // Save the updated list to your backend or state management system
   };
 
   // Deletes the selected item from the list
   const handleDelete = () => {
-    const updatedList = itemList.filter((m) => m !== selectedItem);
+    const updatedList = itemList.filter((item) => item !== selectedItem);
     setItemList(updatedList);
     setModalVisible(false);
     setSelectedItem(null);
+    // Update the backend or state management system with the item removed
   };
 
   // Handles editing an existing item
-  const handleEdit = (m) => {
+  const handleEdit = (item) => {
     setModalVisible(true);
-    setSelectedItem(m);
-    setItem(m);
+    setSelectedItem(item);
+    setInputValue(item);
   };
 
-  // Main component render
   return (
     <View style={styles.container}>
-      <BackButton />
+      <BackButton onPress={() => navigation.goBack()} />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         <View style={{ alignItems: 'center' }}>
           <TouchableOpacity onPress={handleAddItem} style={styles.button}>
@@ -67,23 +67,27 @@ const TrackIntakeScreen = ({ navigation, route }) => {
             <View key={index} style={styles.listItem}>
               <Text style={styles.listItemText}>{item}</Text>
               <TouchableOpacity onPress={() => handleEdit(item)} style={styles.listItemButton}>
-                <Text>⚙️</Text> {/* Replace with an edit icon if you have one */}
+                <Text>⚙️</Text>
               </TouchableOpacity>
             </View>
           ))}
         </View>
       </ScrollView>
-  
 
-      {/* Modal for adding or editing an item */}
-      <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
         <View style={styles.modalContainer}>
           <View style={styles.modalView}>
             <TextInput
-              style={styles.textInput} // Define this style in CommonStyles if needed
-              value={trackedItem}
-              onChangeText={(text) => setItem(text)}
+              style={styles.modalTextInput}
+              value={inputValue}
+              onChangeText={setInputValue}
               placeholder={`Enter ${itemType} intake`}
+              autoFocus={true}
             />
             <TouchableOpacity onPress={handleSave} style={styles.button}>
               <Text style={styles.buttonText}>Save</Text>

@@ -26,14 +26,33 @@ const useCustomTracker = (initialTrackers) => {
     setModalVisible(true);
   };
 
-  // Function to submit a new custom tracker.
   const submitCustomTracker = () => {
     if (customTrackerName.trim()) {
       setTrackers(prevTrackers => [...prevTrackers, customTrackerName]);
+      // Update the tracker titles with the new tracker name
+      setTrackerTitles(prevTitles => ({
+        ...prevTitles,
+        [customTrackerName]: customTrackerName
+      }));
       setCustomTrackerName('');
       setModalVisible(false);
     }
   };
+  
+
+  // Function to rename trackers
+  const [trackerTitles, setTrackerTitles] = useState(initialTrackers.reduce((acc, tracker) => {
+    acc[tracker] = tracker; // Initialize title with the tracker name
+    return acc;
+  }, {}));
+
+  const updateTrackerTitle = (trackerName, newTitle) => {
+    setTrackerTitles(prevTitles => ({
+      ...prevTitles,
+      [trackerName]: newTitle
+    }));
+  };
+  
 
   // Placeholder for data fetching logic, for future Firestore integration.
   useEffect(() => {
@@ -52,6 +71,8 @@ const useCustomTracker = (initialTrackers) => {
     submitCustomTracker,
     trackerData,
     setTrackerData,
+    trackerTitles,
+    updateTrackerTitle,
   };
 };
 

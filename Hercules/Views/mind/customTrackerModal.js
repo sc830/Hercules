@@ -1,8 +1,3 @@
-// CustomTrackerModal.js
-import React from 'react';
-import { View, Text, TouchableOpacity, Modal, TextInput } from 'react-native';
-import { styles } from './CommonStyles'; // Importing common styles from CommonStyles.js
-
 /**
  * customTrackerModal.js: Popup for adding new custom health trackers.
  *
@@ -13,6 +8,10 @@ import { styles } from './CommonStyles'; // Importing common styles from CommonS
  *   setCustomTrackerName: Function to update the tracker name state.
  *   submitCustomTracker: Function to handle the submission of the new tracker.
  */
+import React from 'react';
+import { View, Text, TouchableOpacity, Modal, TextInput } from 'react-native';
+import { styles } from './CommonStyles';
+
 const CustomTrackerModal = ({
   modalVisible,
   setModalVisible,
@@ -20,7 +19,6 @@ const CustomTrackerModal = ({
   setCustomTrackerName,
   submitCustomTracker
 }) => {
-  // Handler to close the modal
   const closeModal = () => {
     setModalVisible(false);
   };
@@ -34,7 +32,6 @@ const CustomTrackerModal = ({
     >
       <View style={styles.modalContainer}>
         <View style={styles.modalView}>
-          {/* Input field for entering tracker name */}
           <TextInput
             style={styles.modalTextInput}
             onChangeText={setCustomTrackerName}
@@ -42,16 +39,14 @@ const CustomTrackerModal = ({
             placeholder="Enter custom tracker name"
             autoFocus={true}
           />
-          {/* Submit button */}
           <TouchableOpacity
-            style={[styles.button, styles.fullWidthButton]} // Combining common button with full-width style
+            style={[styles.button, styles.fullWidthButton]}
             onPress={submitCustomTracker}
           >
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
-          {/* Cancel button */}
           <TouchableOpacity
-            style={[styles.button, styles.fullWidthButton]} // Combining common button with full-width style
+            style={[styles.button, styles.fullWidthButton]}
             onPress={closeModal}
           >
             <Text style={styles.buttonText}>Cancel</Text>

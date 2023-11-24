@@ -1,10 +1,10 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import BackButton from '../../components/backButton';
-import useCustomTracker from './useCustomTracker'; 
-import CustomTrackerModal from './customTrackerModal';
+import useCustomTracker from './useCustomTracker';
+import CustomTrackerModal from './CustomTrackerModal'; 
 import GraphWithButton from '../../components/graph';
-import { styles } from './CommonStyles'; 
+import { styles } from './CommonStyles';
 
 /*********************************************************************************************** //
  * OVERVIEW OF ALL MINDFULNESS RELATED FILES
@@ -14,48 +14,68 @@ import { styles } from './CommonStyles';
  * TrackIntakeScreen.js: Screen for entering and editing health tracker data.
  * useCustomTracker.js: Hook that handles the logic for creating and managing trackers.
 
-*************************************************************************************************/
-
+**************************************************************************************************/
 const Mindfulness = ({ navigation }) => {
-  // Custom hook for managing trackers
   const {
     trackers,
     trackerData,
+    trackerTitles,
     modalVisible,
     setModalVisible,
     customTrackerName,
     setCustomTrackerName,
     handleAddCustomTracker,
     submitCustomTracker,
+    updateTrackerTitle,
   } = useCustomTracker(['Creatine', 'Sleep', 'Water']);
 
-  // Labels for the days of the week
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const [editingTracker, setEditingTracker] = useState(null);
 
-  // Function to render graphs for each tracker
-  const renderTrackers = () => {
-    return trackers.map((tracker, index) => (
-      <View key={index} style={styles.graphContainer}>
-        <GraphWithButton
-          initialData={trackerData[tracker] || []} // Use dynamic tracker data
-          labels={labels}
-          onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}
-          trackerTitle={tracker}
-        />
-      </View>
-    ));
+  // Function to handle starting the editing process for a tracker title
+  const startEditingTracker = (tracker) => {
+    setEditingTracker(tracker);
   };
 
-  // Main component render
+  // Function to handle finishing the editing process for a tracker title
+  const finishEditingTracker = (tracker, newTitle) => {
+    updateTrackerTitle(tracker, newTitle);
+    setEditingTracker(null);
+  };
+
   return (
     <View style={styles.container}>
       <BackButton />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
-        {renderTrackers()}
+      {trackers.map((tracker, index) => (
+        <View key={index}>
+          {editingTracker === tracker ? (
+            <TextInput
+              value={trackerTitles[tracker]}
+              onChangeText={(newTitle) => updateTrackerTitle(tracker, newTitle)}
+              onEndEditing={() => finishEditingTracker(tracker, trackerTitles[tracker])}
+              style={styles.textInput} // Define this style in your CommonStyles
+              autoFocus={true}
+              onBlur={() => finishEditingTracker(tracker, trackerTitles[tracker])}
+            />
+          ) : (
+            // The GraphWithButton component is the only place we render the tracker title
+            <GraphWithButton
+              initialData={trackerData[tracker] || []}
+              labels={labels}
+              onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: trackerTitles[tracker] })}
+              trackerTitle={trackerTitles[tracker]}
+              onTitleChange={() => startEditingTracker(tracker)}
+              editing={editingTracker === tracker} // Pass a prop to indicate if this tracker is being edited
+            />
+          )}
+        </View>
+      ))}
         <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
           <Text style={styles.buttonText}>Add a Custom Tracker</Text>
         </TouchableOpacity>
       </ScrollView>
+
       <CustomTrackerModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
@@ -66,6 +86,5 @@ const Mindfulness = ({ navigation }) => {
     </View>
   );
 };
-
 
 export default Mindfulness;
