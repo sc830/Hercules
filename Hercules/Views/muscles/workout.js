@@ -19,6 +19,7 @@ const WorkoutView = () => {
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
   const [showDeleteOption, setShowDeleteOption] = useState(-1);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +43,7 @@ const WorkoutView = () => {
       console.log(`Full Path: ${userPath + subPath}`);
 
       try {
-        const value = pullDocData((userPath+subPath), "pullValue");
+        const value = await pullDocData((userPath+subPath), "pullValue");
         console.log(value);
         
       } catch (error) {
