@@ -123,6 +123,12 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     // Add any other styling you want for the non-editable title here
   },
+  deleteButton: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 16,
+    backgroundColor: 'gray'
+  }
   
 });
 

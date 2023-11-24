@@ -39,6 +39,20 @@ const useCustomTracker = (initialTrackers) => {
     }
   };
   
+  // Function to delete a tracker with confirmation
+  const deleteTracker = (trackerName) => {
+    setTrackers(prevTrackers => prevTrackers.filter(tracker => tracker !== trackerName));
+    setTrackerData(prevData => {
+      const newData = { ...prevData };
+      delete newData[trackerName];
+      return newData;
+    });
+    setTrackerTitles(prevTitles => {
+      const newTitles = { ...prevTitles };
+      delete newTitles[trackerName];
+      return newTitles;
+    });
+  };
 
   // Function to rename trackers
   const [trackerTitles, setTrackerTitles] = useState(initialTrackers.reduce((acc, tracker) => {
@@ -73,6 +87,7 @@ const useCustomTracker = (initialTrackers) => {
     setTrackerData,
     trackerTitles,
     updateTrackerTitle,
+    deleteTracker,
   };
 };
 

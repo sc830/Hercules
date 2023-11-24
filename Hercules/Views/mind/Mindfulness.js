@@ -15,6 +15,7 @@ import { styles } from './CommonStyles';
  * useCustomTracker.js: Hook that handles the logic for creating and managing trackers.
 
 **************************************************************************************************/
+
 const Mindfulness = ({ navigation }) => {
   const {
     trackers,
@@ -27,14 +28,25 @@ const Mindfulness = ({ navigation }) => {
     handleAddCustomTracker,
     submitCustomTracker,
     updateTrackerTitle,
+    deleteTracker, 
   } = useCustomTracker(['Creatine', 'Sleep', 'Water']);
 
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const [editingTracker, setEditingTracker] = useState(null);
+  const [deleteConfirmation, setDeleteConfirmation] = useState('');
 
   // Function to handle starting the editing process for a tracker title
   const startEditingTracker = (tracker) => {
     setEditingTracker(tracker);
+  };
+
+  // Function to handle the deletion process for a tracker
+  const handleDeleteTracker = (trackerName) => {
+    if (deleteConfirmation === trackerName) {
+      deleteTracker(trackerName); // Use the destructured deleteTracker function here
+      setDeleteConfirmation('');
+      setEditingTracker(null);
+    }
   };
 
   // Function to handle finishing the editing process for a tracker title
@@ -47,30 +59,42 @@ const Mindfulness = ({ navigation }) => {
     <View style={styles.container}>
       <BackButton />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
-      {trackers.map((tracker, index) => (
-        <View key={index}>
-          {editingTracker === tracker ? (
-            <TextInput
-              value={trackerTitles[tracker]}
-              onChangeText={(newTitle) => updateTrackerTitle(tracker, newTitle)}
-              onEndEditing={() => finishEditingTracker(tracker, trackerTitles[tracker])}
-              style={styles.textInput} // Define this style in your CommonStyles
-              autoFocus={true}
-              onBlur={() => finishEditingTracker(tracker, trackerTitles[tracker])}
-            />
-          ) : (
-            // The GraphWithButton component is the only place we render the tracker title
-            <GraphWithButton
-              initialData={trackerData[tracker] || []}
-              labels={labels}
-              onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: trackerTitles[tracker] })}
-              trackerTitle={trackerTitles[tracker]}
-              onTitleChange={() => startEditingTracker(tracker)}
-              editing={editingTracker === tracker} // Pass a prop to indicate if this tracker is being edited
-            />
-          )}
-        </View>
-      ))}
+        {trackers.map((tracker, index) => (
+          <View key={tracker}>
+            {editingTracker === tracker ? (
+              <View>
+                <TextInput
+                  value={trackerTitles[tracker]}
+                  onChangeText={(newTitle) => updateTrackerTitle(tracker, newTitle)}
+                  onEndEditing={() => finishEditingTracker(tracker, trackerTitles[tracker])}
+                  style={styles.textInput} // Define this style in your CommonStyles
+                  autoFocus={true}
+                />
+                <TextInput
+                  value={deleteConfirmation}
+                  onChangeText={setDeleteConfirmation}
+                  placeholder="Type here to confirm deletion"
+                  style={styles.textInput} // Define this style in your CommonStyles
+                />
+                <TouchableOpacity
+                  onPress={() => handleDeleteTracker(tracker)}
+                  style={styles.deleteButton} // Define this style in your CommonStyles
+                >
+                  <Text style={styles.buttonText}>Delete Tracker</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <GraphWithButton
+                initialData={trackerData[tracker] || []}
+                labels={labels}
+                onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: trackerTitles[tracker] })}
+                trackerTitle={trackerTitles[tracker]}
+                onTitleChange={() => startEditingTracker(tracker)}
+                editing={editingTracker === tracker}
+              />
+            )}
+          </View>
+        ))}
         <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
           <Text style={styles.buttonText}>Add a Custom Tracker</Text>
         </TouchableOpacity>
