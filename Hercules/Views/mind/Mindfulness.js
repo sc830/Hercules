@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import BackButton from '../../components/backButton';
 import useCustomTracker from './useCustomTracker';
-import CustomTrackerModal from './CustomTrackerModal';
+import CustomTrackerModal from './customTrackerModal';
 import GraphWithButton from '../../components/graph';
 import { styles } from './CommonStyles';
 
@@ -17,45 +17,43 @@ const Mindfulness = ({ navigation }) => {
     setCustomTrackerName,
     handleAddCustomTracker,
     submitCustomTracker,
-    updateTrackerTitle,
-    deleteTracker,
-    // Removed finishEditingTracker from destructuring as it should be defined inside this component
+    updateTrackerTitle, // ensure this is defined in useCustomTracker
+    deleteTracker, // ensure this is defined in useCustomTracker
   } = useCustomTracker(['Creatine', 'Sleep', 'Water']);
 
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const [editingTracker, setEditingTracker] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
 
-  // Define finishEditingTracker here in the component
-  const finishEditingTracker = (tracker, newTitle) => {
-    updateTrackerTitle(tracker, newTitle);
-    setEditingTracker(null); // Exit editing mode
-  };
-
   const startEditingTracker = (tracker) => {
     setEditingTracker(tracker);
   };
 
-  const handleDeleteTracker = (trackerName) => {
-    if (deleteConfirmation === trackerName) {
-      deleteTracker(trackerName);
+  const handleDeleteTracker = (tracker) => {
+    if (deleteConfirmation === trackerTitles[tracker]) {
+      deleteTracker(tracker); // ensure deleteTracker is passed from useCustomTracker
       setDeleteConfirmation('');
       setEditingTracker(null);
     }
   };
 
+  const finishEditingTracker = (tracker, newTitle) => {
+    if (newTitle !== trackerTitles[tracker]) {
+      updateTrackerTitle(tracker, newTitle);
+    }
+    setEditingTracker(null);
+  };
   return (
     <View style={styles.container}>
       <BackButton />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
-        {trackers.map((tracker, index) => (
+        {trackers.map(tracker => (
           <View key={tracker}>
             {editingTracker === tracker ? (
               <View>
                 <TextInput
                   value={trackerTitles[tracker]}
                   onChangeText={(newTitle) => updateTrackerTitle(tracker, newTitle)}
-                  onEndEditing={() => finishEditingTracker(tracker, trackerTitles[tracker])}
                   style={styles.textInput}
                   autoFocus={true}
                 />
@@ -85,7 +83,6 @@ const Mindfulness = ({ navigation }) => {
                 onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: trackerTitles[tracker] })}
                 trackerTitle={trackerTitles[tracker]}
                 onTitleChange={() => startEditingTracker(tracker)}
-                editing={editingTracker === tracker}
               />
             )}
           </View>

@@ -57,7 +57,7 @@ const useCustomTracker = (initialTrackers) => {
 
   // Function to rename trackers
   const [trackerTitles, setTrackerTitles] = useState(initialTrackers.reduce((acc, tracker) => {
-    acc[tracker] = tracker; // Initialize title with the tracker name
+    acc[tracker] = tracker;
     return acc;
   }, {}));
 
@@ -93,10 +93,9 @@ const useCustomTracker = (initialTrackers) => {
     trackerData,
     setTrackerData,
     trackerTitles,
+    setTrackerTitles, // Make sure this is returned
     updateTrackerTitle,
-    finishEditingTracker,
     deleteTracker,
-    setEditingTracker,
   };
 };
 

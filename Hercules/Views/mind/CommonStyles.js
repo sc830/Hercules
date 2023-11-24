@@ -111,7 +111,8 @@ export const styles = StyleSheet.create({
   textInput: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 16
+    fontSize: 16,
+    backgroundColor: '#F0E68C',
   },
   editableTitle: {
     marginTop: 8,
@@ -134,6 +135,12 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     backgroundColor: '#D4AF37'
+  },
+  trackerBackground: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 16,
+    backgroundColor: '#D4AF38'
   }
   
 });
