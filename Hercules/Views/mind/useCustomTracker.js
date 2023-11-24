@@ -16,6 +16,7 @@ const useCustomTracker = (initialTrackers) => {
   // State for the name of a new tracker being added.
   const [customTrackerName, setCustomTrackerName] = useState('');
   // State for storing tracker data, initially empty.
+  const [editingTracker, setEditingTracker] = useState(null);
   const [trackerData, setTrackerData] = useState(initialTrackers.reduce((acc, tracker) => {
     acc[tracker] = [];
     return acc;
@@ -39,10 +40,24 @@ const useCustomTracker = (initialTrackers) => {
     }
   };
   
+  // Function to delete a tracker with confirmation
+  const deleteTracker = (trackerName) => {
+    setTrackers(prevTrackers => prevTrackers.filter(tracker => tracker !== trackerName));
+    setTrackerData(prevData => {
+      const newData = { ...prevData };
+      delete newData[trackerName];
+      return newData;
+    });
+    setTrackerTitles(prevTitles => {
+      const newTitles = { ...prevTitles };
+      delete newTitles[trackerName];
+      return newTitles;
+    });
+  };
 
   // Function to rename trackers
   const [trackerTitles, setTrackerTitles] = useState(initialTrackers.reduce((acc, tracker) => {
-    acc[tracker] = tracker; // Initialize title with the tracker name
+    acc[tracker] = tracker;
     return acc;
   }, {}));
 
@@ -51,6 +66,12 @@ const useCustomTracker = (initialTrackers) => {
       ...prevTitles,
       [trackerName]: newTitle
     }));
+  };
+  
+  // Finish editing tracker
+  const finishEditingTracker = (tracker, newTitle) => {
+    updateTrackerTitle(tracker, newTitle);
+    setEditingTracker(null); // This line exits the editing mode
   };
   
 
@@ -72,7 +93,9 @@ const useCustomTracker = (initialTrackers) => {
     trackerData,
     setTrackerData,
     trackerTitles,
+    setTrackerTitles, // Make sure this is returned
     updateTrackerTitle,
+    deleteTracker,
   };
 };
 
