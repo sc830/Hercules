@@ -43,6 +43,14 @@ const Mindfulness = ({ navigation }) => {
     }
     setEditingTracker(null);
   };
+   // Add a cancel function to reset the delete confirmation and editing state
+   const cancelEditDelete = () => {
+    setDeleteConfirmation('');
+    setEditingTracker(null);
+  };
+
+  // ... existing startEditingTracker, handleDeleteTracker, and finishEditingTracker functions
+
   return (
     <View style={styles.container}>
       <BackButton />
@@ -54,7 +62,7 @@ const Mindfulness = ({ navigation }) => {
                 <TextInput
                   value={trackerTitles[tracker]}
                   onChangeText={(newTitle) => updateTrackerTitle(tracker, newTitle)}
-                  style={styles.textInput}
+                  style={styles.trackerEdit}
                   autoFocus={true}
                 />
                 <TouchableOpacity
@@ -67,13 +75,19 @@ const Mindfulness = ({ navigation }) => {
                   value={deleteConfirmation}
                   onChangeText={setDeleteConfirmation}
                   placeholder="Type here to confirm deletion"
-                  style={styles.textInput}
+                  style={styles.trackerEdit}
                 />
                 <TouchableOpacity
                   onPress={() => handleDeleteTracker(tracker)}
                   style={styles.deleteButton}
                 >
                   <Text style={styles.buttonText}>Delete Tracker</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={cancelEditDelete}
+                  style={styles.deleteButton}
+                >
+                  <Text style={styles.buttonText}>Cancel</Text>
                 </TouchableOpacity>
               </View>
             ) : (

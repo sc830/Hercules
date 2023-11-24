@@ -125,10 +125,11 @@ export const styles = StyleSheet.create({
     // Add any other styling you want for the non-editable title here
   },
   deleteButton: {
-    color: 'black',
-    textAlign: 'center',
-    fontSize: 16,
-    backgroundColor: '#D4AF37'
+    backgroundColor: '#FF4500', // A red color for delete actions
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+    width: '100%',
   },
   confirmEditButton: {
     color: 'black',
@@ -141,7 +142,17 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     backgroundColor: '#D4AF38'
-  }
+  },
+  trackerEdit: {
+    backgroundColor: 'white', // Makes the input stand out from the background
+    borderColor: '#ddd', // Light grey border for some subtle definition
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    marginVertical: 5, // Adds space between the text input and other elements
+    width: '100%', // Full width to utilize space
+    fontSize: 16,
+  },
   
 });
 
