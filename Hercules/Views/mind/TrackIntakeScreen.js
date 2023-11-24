@@ -1,7 +1,15 @@
+// This is the screen that comes up after clicking the graphs
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
 import BackButton from '../../components/backButton';
 import { styles } from './CommonStyles';
+
+/**
+ * TrackIntakeScreen.js: Screen for entering and editing health tracker data.
+ * This component is used to track the intake of various items (e.g., Creatine, Sleep, Water).
+ * It allows users to add, edit, and delete entries for a specific tracker.
+ * It uses a modal for input to add or edit the intake data.
+ */
 
 const TrackIntakeScreen = ({ navigation, route }) => {
   const { itemType } = route.params; // This retrieves the updated tracker title
@@ -59,7 +67,7 @@ const TrackIntakeScreen = ({ navigation, route }) => {
             <View key={index} style={styles.listItem}>
               <Text style={styles.listItemText}>{item}</Text>
               <TouchableOpacity onPress={() => handleEdit(item)} style={styles.listItemButton}>
-                <Text>Edit</Text>
+                <Text>⚙️</Text>
               </TouchableOpacity>
             </View>
           ))}

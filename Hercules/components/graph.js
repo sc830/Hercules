@@ -3,7 +3,16 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import moment from 'moment';
 
-const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle }) => {
+// This file shows a graph of health tracker data and lets you change the graph's title by clicking a gear icon.
+
+const GraphWithButton = ({
+  initialData,
+  labels,
+  onButtonPress,
+  trackerTitle,
+  onTitleChange, // This prop should be passed in from the parent component
+  editing // This prop should also be passed in from the parent component
+}) => {
   const [dataByWeek, setDataByWeek] = useState({});
   const [currentWeekStart, setCurrentWeekStart] = useState(moment().startOf('week').format('YYYY-MM-DD'));
 
@@ -43,9 +52,16 @@ const GraphWithButton = ({ initialData, labels, onButtonPress, trackerTitle }) =
 
   return (
     <View style={{ alignItems: 'center', width: '100%' }}>
-      <Text style={{ marginTop: 8, fontSize: 16, fontWeight: 'bold', textAlign: 'center' }}>
-        {trackerTitle}
-      </Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 8 }}>
+        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
+          {trackerTitle}
+        </Text>
+        {!editing && ( // Use the editing prop to conditionally render the gear icon
+          <TouchableOpacity onPress={onTitleChange} style={{ padding: 5, marginLeft: 10 }}>
+            <Text style={{ fontSize: 16 }}>⚙️</Text> {/* Gear icon for editing */}
+          </TouchableOpacity>
+        )}
+      </View>
 
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
         <TouchableOpacity onPress={handlePreviousWeek} style={{ padding: 10 }}>
