@@ -2,19 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import BackButton from '../../components/backButton';
 import useCustomTracker from './useCustomTracker';
-import CustomTrackerModal from './CustomTrackerModal'; 
+import CustomTrackerModal from './CustomTrackerModal';
 import GraphWithButton from '../../components/graph';
 import { styles } from './CommonStyles';
-
-/*********************************************************************************************** //
- * OVERVIEW OF ALL MINDFULNESS RELATED FILES
- * CommonStyles.js: Holds reusable styling for different parts of the app to look consistent.
- * customTrackerModal.js: Popup for adding new custom health trackers.
- * Mindfulness.js: Displays health tracking graphs and options.
- * TrackIntakeScreen.js: Screen for entering and editing health tracker data.
- * useCustomTracker.js: Hook that handles the logic for creating and managing trackers.
-
-**************************************************************************************************/
 
 const Mindfulness = ({ navigation }) => {
   const {
@@ -28,31 +18,30 @@ const Mindfulness = ({ navigation }) => {
     handleAddCustomTracker,
     submitCustomTracker,
     updateTrackerTitle,
-    deleteTracker, 
+    deleteTracker,
+    // Removed finishEditingTracker from destructuring as it should be defined inside this component
   } = useCustomTracker(['Creatine', 'Sleep', 'Water']);
 
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const [editingTracker, setEditingTracker] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
 
-  // Function to handle starting the editing process for a tracker title
+  // Define finishEditingTracker here in the component
+  const finishEditingTracker = (tracker, newTitle) => {
+    updateTrackerTitle(tracker, newTitle);
+    setEditingTracker(null); // Exit editing mode
+  };
+
   const startEditingTracker = (tracker) => {
     setEditingTracker(tracker);
   };
 
-  // Function to handle the deletion process for a tracker
   const handleDeleteTracker = (trackerName) => {
     if (deleteConfirmation === trackerName) {
-      deleteTracker(trackerName); // Use the destructured deleteTracker function here
+      deleteTracker(trackerName);
       setDeleteConfirmation('');
       setEditingTracker(null);
     }
-  };
-
-  // Function to handle finishing the editing process for a tracker title
-  const finishEditingTracker = (tracker, newTitle) => {
-    updateTrackerTitle(tracker, newTitle);
-    setEditingTracker(null);
   };
 
   return (
@@ -67,18 +56,24 @@ const Mindfulness = ({ navigation }) => {
                   value={trackerTitles[tracker]}
                   onChangeText={(newTitle) => updateTrackerTitle(tracker, newTitle)}
                   onEndEditing={() => finishEditingTracker(tracker, trackerTitles[tracker])}
-                  style={styles.textInput} // Define this style in your CommonStyles
+                  style={styles.textInput}
                   autoFocus={true}
                 />
+                <TouchableOpacity
+                  onPress={() => finishEditingTracker(tracker, trackerTitles[tracker])}
+                  style={styles.confirmEditButton}
+                >
+                  <Text style={styles.buttonText}>Confirm Rename</Text>
+                </TouchableOpacity>
                 <TextInput
                   value={deleteConfirmation}
                   onChangeText={setDeleteConfirmation}
                   placeholder="Type here to confirm deletion"
-                  style={styles.textInput} // Define this style in your CommonStyles
+                  style={styles.textInput}
                 />
                 <TouchableOpacity
                   onPress={() => handleDeleteTracker(tracker)}
-                  style={styles.deleteButton} // Define this style in your CommonStyles
+                  style={styles.deleteButton}
                 >
                   <Text style={styles.buttonText}>Delete Tracker</Text>
                 </TouchableOpacity>

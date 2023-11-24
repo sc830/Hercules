@@ -16,6 +16,7 @@ const useCustomTracker = (initialTrackers) => {
   // State for the name of a new tracker being added.
   const [customTrackerName, setCustomTrackerName] = useState('');
   // State for storing tracker data, initially empty.
+  const [editingTracker, setEditingTracker] = useState(null);
   const [trackerData, setTrackerData] = useState(initialTrackers.reduce((acc, tracker) => {
     acc[tracker] = [];
     return acc;
@@ -67,6 +68,12 @@ const useCustomTracker = (initialTrackers) => {
     }));
   };
   
+  // Finish editing tracker
+  const finishEditingTracker = (tracker, newTitle) => {
+    updateTrackerTitle(tracker, newTitle);
+    setEditingTracker(null); // This line exits the editing mode
+  };
+  
 
   // Placeholder for data fetching logic, for future Firestore integration.
   useEffect(() => {
@@ -87,7 +94,9 @@ const useCustomTracker = (initialTrackers) => {
     setTrackerData,
     trackerTitles,
     updateTrackerTitle,
+    finishEditingTracker,
     deleteTracker,
+    setEditingTracker,
   };
 };
 

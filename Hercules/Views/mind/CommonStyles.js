@@ -127,7 +127,13 @@ export const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'center',
     fontSize: 16,
-    backgroundColor: 'gray'
+    backgroundColor: '#D4AF37'
+  },
+  confirmEditButton: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 16,
+    backgroundColor: '#D4AF37'
   }
   
 });
