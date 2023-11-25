@@ -48,14 +48,6 @@ useEffect(() => {
       
     }
 
-    /*try {
-      const value = await pullDocData((userPath+subPath), "pullValue");
-      console.log(value);
-      setFirestoreContent(value);
-    } catch (error) {
-      console.error('Error fetching data from Firestore:', error);
-    } */
-
   fetchData();
 
 }, [currentDate]);  // date dependency - runs again when date is updated */
@@ -152,12 +144,6 @@ return (
       <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
         <Text style={styles.buttonText}>+ Add Workout Day</Text>
       </TouchableOpacity>
-
-      {musclesDocs.map((docID) => (
-        <View key={docID} style={styles.displayFirestore}>
-          <Text style={styles.buttonText}>{docID}</Text>
-        </View>
-      ))}
   
       <Modal animationType="slide" transparent={true} visible={showModal}>
         <View style={styles.modalView}>
@@ -195,6 +181,17 @@ return (
       {splits.map((split, index) => (
         <View key={index} style={styles.splitContainer}>
           {/* Main button for navigation */}
+          <TouchableOpacity
+            style={styles.splitButton}
+            onPress={() => navigation.navigate('workoutList', { splitName: split })}
+            activeOpacity={0.7}
+          ></TouchableOpacity>
+        </View>
+      ))}
+
+      {musclesDocs.map((docID) => (
+        <View key={docID} style={styles.displayFirestore}>
+          {/* Display names pulled from Firestore */}
           <TouchableOpacity
             style={styles.splitButton}
             onPress={() => navigation.navigate('workoutList', { splitName: split })}
