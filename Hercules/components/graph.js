@@ -1,3 +1,4 @@
+//graph.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
@@ -62,6 +63,7 @@ const GraphWithButton = ({
           </TouchableOpacity>
         )}
       </View> 
+
 
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
         <TouchableOpacity onPress={handlePreviousWeek} style={{ padding: 10 }}>
