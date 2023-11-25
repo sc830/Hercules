@@ -183,15 +183,14 @@ const WorkoutView = () => {
         </View>
       </Modal>
 
-      <View style={styles.displayFirestore}>
-      {firestoreContent ? (
-        <TouchableOpacity style={styles.splitContainer}>
-          <Text style={styles.splitText}>{firestoreContent}</Text>
-        </TouchableOpacity>
-      ) : (
-        <Text>Nothing logged yet!</Text>
-      )}
-    </View>
+
+
+
+      <TouchableOpacity style={styles.displayFirestore} onPress={() => setShowModal(true)}>
+        <Text style={styles.buttonText}>{firestoreContent}</Text>
+      </TouchableOpacity>
+
+    
     </ScrollView>
     
   );
