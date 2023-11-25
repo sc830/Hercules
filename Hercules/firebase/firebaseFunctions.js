@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { collection, addDoc, doc, setDoc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc, getDoc, getDocs } from 'firebase/firestore';
 //import { db, authInstance } from './firebaseConfig';
 import { Alert } from 'react-native';
 
@@ -144,6 +144,22 @@ export const pullDocData = async(docPath, fieldName) => {
   catch (error) {
     throw new Error(error.message);
     return null;
+  }
+}
+
+export const pullDocNames = async(collectionPath) => {
+  let docsArray = [];
+  console.log("Catch:" + collectionPath);
+  try {
+    const querySnapshot = await getDocs(collection(db, collectionPath));
+
+    querySnapshot.forEach((doc) => {
+      docsArray.push(doc.id);
+    })
+    console.log("Catch 1:" + docsArray);
+    return docsArray;
+  } catch (error) {
+    console.error('Error fetching doc name data from Firestore:', error);
   }
 }
 
