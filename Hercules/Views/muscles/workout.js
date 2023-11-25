@@ -4,6 +4,7 @@ import { collection, doc, addDoc, getDoc, setDoc } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
 import { getUserID, pullDocData } from '../../firebase/firebaseFunctions';
 
+
 /**********************************************************************************************
  * This file contains all of the programming for the initial page which contains
  * the +Add Workout Day button. Go to workout.js and addRepsWeights.js for the later screens
@@ -19,7 +20,7 @@ const WorkoutView = () => {
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
   const [showDeleteOption, setShowDeleteOption] = useState(-1);
-  
+  const [firestoreContent, setFirestoreContent] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +46,7 @@ const WorkoutView = () => {
       try {
         const value = await pullDocData((userPath+subPath), "pullValue");
         console.log(value);
-        
+        setFirestoreContent(value);
       } catch (error) {
         console.error('Error fetching data from Firestore:', error);
       }
@@ -181,7 +182,18 @@ const WorkoutView = () => {
           }} />
         </View>
       </Modal>
+
+      <View style={styles.displayFirestore}>
+      {firestoreContent ? (
+        <TouchableOpacity style={styles.splitContainer}>
+          <Text style={styles.splitText}>{firestoreContent}</Text>
+        </TouchableOpacity>
+      ) : (
+        <Text>Nothing logged yet!</Text>
+      )}
+    </View>
     </ScrollView>
+    
   );
 };
 
@@ -208,6 +220,20 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 50,
     borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+  },
+  displayFirestore: {
+    backgroundColor: '#D4AF37', // Gold color
+    width: '90%',
+    height: 80,
+    borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
