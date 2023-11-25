@@ -1,0 +1,30 @@
+Title: Task Incompletion Report - "Add Ability to Edit or Remove a Mind Section Tracker"
+
+
+Report Prepared by: Kaleb Perez
+Task Assigned: "Add Ability to Edit or Remove a Mind Section Tracker"
+
+Introduction:
+
+This report serves to document the rationale behind the non-completion of the assigned task, which was to "Add Ability to Edit or Remove a Mind Section Tracker." It is essential to provide a clear understanding of the decision-making process regarding this task.
+
+Task Background:
+
+The task was originally assigned within the context of our project, aiming to incorporate functionality allowing users to edit or remove a mind section tracker.
+
+Rationale for Non-Completion:
+
+The primary reason for not completing this task is that a similar set of tasks was independently undertaken and successfully accomplished by another team member, Kacy. These tasks encompassed the addition of the desired functionality to edit or remove a mind section tracker. It was noted that these tasks were executed effectively and in a timely manner.
+
+Upon careful consideration, the team collectively recognized that proceeding with the originally assigned task would result in unnecessary duplication of effort and development resources. Given that the required functionality has already been implemented by Kacy, it was determined that reallocating resources to other project-related tasks would be more efficient and beneficial for the overall project.
+
+Conclusion:
+
+In conclusion, the decision not to proceed with the task of "Adding Ability to Edit or Remove a Mind Section Tracker" was made based on the following considerations:
+
+1. Redundancy: Similar tasks were successfully completed by another team member, rendering the original task redundant.
+
+2. Efficiency: To optimize project resources and efforts, it was decided to focus on tasks that would contribute more significantly to the project's success and adhere to project deadlines.
+
+This report provides a transparent account of the rationale behind the non-completion of the specified task and reinforces our commitment to effective project management and resource allocation.
+
