@@ -177,17 +177,6 @@ return (
           }} />
         </View>
       </Modal>
-  
-      {splits.map((split, index) => (
-        <View key={index} style={styles.splitContainer}>
-          {/* Main button for navigation */}
-          <TouchableOpacity
-            style={styles.splitButton}
-            onPress={() => navigation.navigate('workoutList', { splitName: split })}
-            activeOpacity={0.7}
-          ></TouchableOpacity>
-        </View>
-      ))}
 
       {musclesDocs.map((docID) => (
         <View key={docID} style={styles.displayFirestore}>
