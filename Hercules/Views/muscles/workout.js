@@ -104,15 +104,17 @@ const WorkoutView = () => {
 
           {/* Add the GraphWithButton for each split */}
           <GraphWithButton
-            trackerTitle={split}
-            initialData={[0, 0, 0]} // Replace with actual data
-            labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]} // Replace with actual labels
-            onButtonPress={() => {
-              // Log to see if this function is called
-              console.log(`Navigating to workoutList with split: ${split}`);
-              navigation.navigate('workoutList', { splitName: split });
-            }}
-          />
+  key={index}
+  trackerTitle={split}
+  initialData={[0, 0, 0]} // Replace with actual data
+  labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]} // Replace with actual labels
+  onButtonPress={() => {
+    // Log to see if this function is called
+    console.log(`Navigating to workoutList with split: ${split}`);
+    navigation.navigate('workoutList', { splitName: split });
+  }}
+/>
+
         </View>
       ))}
 
