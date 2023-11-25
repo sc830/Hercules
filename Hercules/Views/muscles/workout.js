@@ -177,30 +177,14 @@ return (
           }} />
         </View>
       </Modal>
-  
-      {splits.map((split, index) => (
-        <View key={index} style={styles.splitContainer}>
-          {/* Main button for navigation */}
-          <TouchableOpacity
-            style={styles.splitButton}
-            onPress={() => navigation.navigate('workoutList', { splitName: split })}
-            activeOpacity={0.7}
-          ></TouchableOpacity>
-        </View>
-      ))}
 
-      {musclesDocs.map((docID) => (
-        <View key={docID} style={styles.displayFirestore}>
-          {/* Display names pulled from Firestore */}
-          <TouchableOpacity
-            style={styles.splitButton}
-            onPress={() => navigation.navigate('workoutList', { splitName: split })}
-            activeOpacity={0.7}
-          ></TouchableOpacity>
-        </View>
-      ))}
-  
+      <TouchableOpacity style={styles.displayFirestore} onPress={() => setShowModal(true)}>
+        <Text style={styles.buttonText}>{firestoreContent}</Text>
+      </TouchableOpacity>
+
+
     </ScrollView>
+
   );
 };
 
