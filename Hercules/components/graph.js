@@ -58,10 +58,10 @@ const GraphWithButton = ({
         </Text>
         {!editing && ( // Use the editing prop to conditionally render the gear icon
           <TouchableOpacity onPress={onTitleChange} style={{ padding: 5, marginLeft: 10 }}>
-            <Text style={{ fontSize: 16 }}>⚙️</Text> {/* Gear icon for editing */}
+            <Text style={{ fontSize: 16 }}>⚙️</Text> 
           </TouchableOpacity>
         )}
-      </View>
+      </View> 
 
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
         <TouchableOpacity onPress={handlePreviousWeek} style={{ padding: 10 }}>
