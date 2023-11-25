@@ -22,6 +22,7 @@ const WorkoutView = () => {
   const [showDeleteOption, setShowDeleteOption] = useState(-1);
   const [firestoreContent, setFirestoreContent] = useState('');
   let { musclesDocs, munchiesDocs, mindDocs } = { musclesDocs: [], munchiesDocs: [], mindDocs: [] };
+  let { musclesOutput, munchiesOutput, mindOutput } = "";
 
 
 useEffect(() => {
@@ -43,8 +44,20 @@ useEffect(() => {
 
     musclesDocs = await pullDocNames(musclesPath);
     console.log("Catch 2:" + musclesDocs);
-    //munchiesDocs = pullDocNames(munchiesPath);
+    munchiesDocs = await pullDocNames(munchiesPath);
     //mindDocs = pullDocNames(mindPath);
+
+    for (let i = 0; i < munchiesDocs.length; i++) {
+      console.log(munchiesDocs[i]);
+      if (i > 0) {
+        munchiesOutput += munchiesDocs[i];
+        munchiesOutput += "\n";
+      }
+      else {
+        munchiesOutput = munchiesDocs[i];
+      }
+    }
+    console.log("Output: " + munchiesOutput);
       
     }
 
@@ -178,8 +191,8 @@ return (
         </View>
       </Modal>
 
-      <TouchableOpacity style={styles.displayFirestore} onPress={() => setShowModal(true)}>
-        <Text style={styles.buttonText}>{firestoreContent}</Text>
+      <TouchableOpacity style={styles.displayFirestore} onPress={() => navigation.navigate('workoutList')}>
+        <Text style={styles.buttonText}>{munchiesOutput}</Text>
       </TouchableOpacity>
 
 
