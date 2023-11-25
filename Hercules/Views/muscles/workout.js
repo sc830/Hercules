@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
+import { collection, doc, addDoc, getDoc, setDoc, getDocs } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
+import { getUserID, pullDocData, pullDocNames } from '../../firebase/firebaseFunctions';
+
 
 /**********************************************************************************************
  * This file contains all of the programming for the initial page which contains
@@ -17,47 +20,78 @@ const WorkoutView = () => {
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
   const [showDeleteOption, setShowDeleteOption] = useState(-1);
+  const [firestoreContent, setFirestoreContent] = useState('');
+  let { musclesDocs, munchiesDocs, mindDocs } = { musclesDocs: [], munchiesDocs: [], mindDocs: [] };
 
-  const addSplit = () => {
-    if (splitName) {
-      setSplits(prevSplits => [splitName, ...prevSplits]);
-      setSplitName('');
-      setShowModal(false);
-      setShowDeleteOption(-1);
+
+useEffect(() => {
+  const fetchData = async () => {
+    let testDate = new Date();
+    testDate.setDate(17);
+
+    const formattedDate = testDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+    const reformattedDate = formattedDate.replace(/\//g, '.');
+
+    const datePath = `userData/${getUserID()}/logs/${reformattedDate}`;
+    const musclesPath = `${datePath}/muscles`;
+    const munchiesPath = `${datePath}/munchies`;
+    const mindPath = `${datePath}/mind`;
+
+    musclesDocs = await pullDocNames(musclesPath);
+    console.log("Catch 2:" + musclesDocs);
+    //munchiesDocs = pullDocNames(munchiesPath);
+    //mindDocs = pullDocNames(mindPath);
+      
     }
-  };
 
-  const deleteSplit = (indexToDelete) => {
-    setSplits(splits.filter((_, index) => index !== indexToDelete));
-  };
+  fetchData();
 
-  const renameSplit = () => {
-    let updatedSplits = [...splits];
-    updatedSplits[renameIndex] = splitName;
-    setSplits(updatedSplits);
-    setShowRenameModal(false);
+}, [currentDate]);  // date dependency - runs again when date is updated */
+
+const addSplit = () => {
+  if (splitName) {
+    setSplits(prevSplits => [splitName, ...prevSplits]);
     setSplitName('');
-  };
+    setShowModal(false);
+    setShowDeleteOption(-1);
+  }
+};
 
-  const handleRenameOpen = (index, split) => {
-    setRenameIndex(index);
-    setSplitName(split);
-    setShowRenameModal(true);
-  };
+const deleteSplit = (indexToDelete) => {
+  setSplits(splits.filter((_, index) => index !== indexToDelete));
+};
 
-  const handleForward = () => {
-    const nextDate = new Date(currentDate);
-    nextDate.setDate(currentDate.getDate() + 1);
-    setCurrentDate(nextDate);
-  };
+const renameSplit = () => {
+  let updatedSplits = [...splits];
+  updatedSplits[renameIndex] = splitName;
+  setSplits(updatedSplits);
+  setShowRenameModal(false);
+  setSplitName('');
+};
 
-  const handleBack = () => {
-    const previousDate = new Date(currentDate);
-    previousDate.setDate(currentDate.getDate() - 1);
-    setCurrentDate(previousDate);
-  };
+const handleRenameOpen = (index, split) => {
+  setRenameIndex(index);
+  setSplitName(split);
+  setShowRenameModal(true);
+};
 
-  return (
+const handleForward = () => {
+  const nextDate = new Date(currentDate);
+  nextDate.setDate(currentDate.getDate() + 1);
+  setCurrentDate(nextDate);
+};
+
+const handleBack = () => {
+  const previousDate = new Date(currentDate);
+  previousDate.setDate(currentDate.getDate() - 1);
+  setCurrentDate(previousDate);
+};
+
+return (
     <ScrollView contentContainerStyle={styles.container} style={styles.scrollView}>
       <View style={styles.dateContainer}>
         <TouchableOpacity onPress={handleBack} style={styles.navButton}>
@@ -68,7 +102,7 @@ const WorkoutView = () => {
           <Text style={styles.navButtonText}>{">"}</Text>
         </TouchableOpacity>
       </View>
-
+  
       {splits.map((split, index) => (
         <View key={index} style={styles.splitContainer}>
           {/* Main button for navigation */}
@@ -79,21 +113,20 @@ const WorkoutView = () => {
           >
             <Text style={styles.splitText}>{split}</Text>
           </TouchableOpacity>
-
+  
           {/* Absolutely positioned settings button within the split container */}
           <TouchableOpacity
             style={styles.settingsButton}
             onPress={(e) => {
-              // Prevent this button's press from triggering the main button's onPress
               e.stopPropagation();
               setShowDeleteOption(index === showDeleteOption ? -1 : index);
               setRenameIndex(index === renameIndex ? -1 : index);
             }}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} // Increase touchable area for easier interaction
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
             <Text style={styles.settingsText}>⚙️</Text>
           </TouchableOpacity>
-
+  
           {/* Show delete and rename options */}
           {showDeleteOption === index && (
             <View style={styles.buttonRow}>
@@ -107,11 +140,11 @@ const WorkoutView = () => {
           )}
         </View>
       ))}
-
+  
       <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
         <Text style={styles.buttonText}>+ Add Workout Day</Text>
       </TouchableOpacity>
-
+  
       <Modal animationType="slide" transparent={true} visible={showModal}>
         <View style={styles.modalView}>
           <TextInput
@@ -126,7 +159,7 @@ const WorkoutView = () => {
           <Button title="Close" color="#D4AF37" onPress={() => setShowModal(false)} />
         </View>
       </Modal>
-
+  
       <Modal animationType="slide" transparent={true} visible={showRenameModal}>
         <View style={styles.modalView}>
           <TextInput
@@ -144,6 +177,29 @@ const WorkoutView = () => {
           }} />
         </View>
       </Modal>
+  
+      {splits.map((split, index) => (
+        <View key={index} style={styles.splitContainer}>
+          {/* Main button for navigation */}
+          <TouchableOpacity
+            style={styles.splitButton}
+            onPress={() => navigation.navigate('workoutList', { splitName: split })}
+            activeOpacity={0.7}
+          ></TouchableOpacity>
+        </View>
+      ))}
+
+      {musclesDocs.map((docID) => (
+        <View key={docID} style={styles.displayFirestore}>
+          {/* Display names pulled from Firestore */}
+          <TouchableOpacity
+            style={styles.splitButton}
+            onPress={() => navigation.navigate('workoutList', { splitName: split })}
+            activeOpacity={0.7}
+          ></TouchableOpacity>
+        </View>
+      ))}
+  
     </ScrollView>
   );
 };
@@ -171,6 +227,20 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 50,
     borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+  },
+  displayFirestore: {
+    backgroundColor: '#D4AF37', // Gold color
+    width: '90%',
+    height: 80,
+    borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
