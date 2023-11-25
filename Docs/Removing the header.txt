@@ -1,0 +1,46 @@
+Title: Task Report - "Remove Header from Workout Section"
+
+
+Report Prepared by: Kaleb Perez
+Task Assigned: "Remove Header from Workout Section"
+
+Introduction:
+
+This report outlines the status and challenges encountered during the execution of the task titled "Remove Header from Workout Section." It provides an overview of the task, the efforts made by multiple team members, and the decision to consider it a bug requiring more time than available in the current sprint.
+
+Task Background:
+
+The assigned task involved the removal of the header from the workout section of our project. According to the task description, it was estimated to take approximately one hour to complete.
+
+Efforts Made:
+
+In line with our commitment to meeting sprint goals and delivering high-quality work, multiple team members invested time and effort into tackling this task. Over the course of the sprint, several team members worked on the task for extended periods, with a cumulative effort exceeding six hours.
+
+Challenges Encountered:
+
+Despite our best efforts, the task "Remove Header from Workout Section" proved to be more complex than initially anticipated. Several challenges were encountered during its execution:
+
+1. Interdependencies: The header removal process revealed unforeseen interdependencies within the workout section, causing unintended issues in other parts of the system.
+
+2. Cross-browser Compatibility: Ensuring that the removal of the header did not affect the layout or functionality across various web browsers required additional time and testing.
+
+3. Unexpected Complexity: The structure of the existing codebase posed unanticipated complexities in cleanly removing the header without introducing errors or design inconsistencies.
+
+Decision:
+
+After careful consideration and evaluating the time already invested in the task, the team has reached a collective decision. Given the challenges faced and the time constraints of the current sprint, we have chosen to classify the task "Remove Header from Workout Section" as a bug rather than a simple feature implementation.
+
+This decision is based on the following factors:
+
+1. Time Investment: The cumulative time spent on this task greatly exceeds the initially estimated one-hour timeframe.
+
+2. Quality Assurance: Ensuring the removal of the header does not introduce new issues or negatively impact user experience requires additional testing and validation.
+
+3. Sprint Goals: In order to meet our sprint goals and maintain the overall project timeline, it is essential to prioritize tasks that can be completed within the sprint's time frame.
+
+Conclusion:
+
+In conclusion, the task "Remove Header from Workout Section" has been reclassified as a bug due to the complexities and challenges encountered during its execution. While it was estimated to take one hour, it has consumed over six hours of effort without reaching a satisfactory resolution.
+
+We remain committed to addressing this issue in a future sprint or as part of ongoing maintenance, where we can allocate the necessary time and resources to ensure a successful resolution without compromising the sprint's objectives.
+
