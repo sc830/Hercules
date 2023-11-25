@@ -9,6 +9,10 @@ const WorkoutView = () => {
   const [splitName, setSplitName] = useState('');
   const [splits, setSplits] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [renameIndex, setRenameIndex] = useState(-1);
+  const [showRenameModal, setShowRenameModal] = useState(false);
+  const [newSplitName, setNewSplitName] = useState('');
+  const [showDeleteOption, setShowDeleteOption] = useState(-1);
 
   const addSplit = () => {
     if (splitName.trim()) {
@@ -34,6 +38,26 @@ const WorkoutView = () => {
     setCurrentDate(previousDate);
   };
 
+  const handleRenameOpen = (index, split) => {
+    setRenameIndex(index);
+    setNewSplitName(split);
+    setShowRenameModal(true);
+  };
+
+  const renameSplit = () => {
+    let updatedSplits = [...splits];
+    updatedSplits[renameIndex] = newSplitName;
+    setSplits(updatedSplits);
+    setShowRenameModal(false);
+    setRenameIndex(-1);
+    setNewSplitName('');
+  };
+
+  const deleteSplit = (indexToDelete) => {
+    setSplits(splits.filter((_, index) => index !== indexToDelete));
+    setShowDeleteOption(-1);
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.dateContainer}>
@@ -47,19 +71,50 @@ const WorkoutView = () => {
       </View>
 
       {splits.map((split, index) => (
-        <GraphWithButton
-          key={index}
-          trackerTitle={split}
-          initialData={[0, 0, 0]} // Replace with actual data
-          labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]} // Replace with actual labels
-          onButtonPress={() => {
-            // Log to see if this function is called
-            console.log(`Navigating to workoutList with split: ${split}`);
-            navigation.navigate('workoutList', { splitName: split });
-          }}
-        />
-      ))}
+        <View key={index} style={styles.splitContainer}>
+          <View style={styles.splitHeader}>
+            <TouchableOpacity
+              style={styles.settingsButton}
+              onPress={() => setShowDeleteOption(index === showDeleteOption ? -1 : index)}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <Text style={styles.settingsText}>⚙️</Text>
+            </TouchableOpacity>
+            <View style={styles.splitInfo}>
+              <TouchableOpacity
+                style={styles.splitButton}
+                onPress={() => navigation.navigate('workoutList', { splitName: split })}
+                activeOpacity={0.7}
+              >
+                <Text style={styles.splitText}>{split}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
+          {showDeleteOption === index && (
+            <View style={styles.buttonRow}>
+              <TouchableOpacity onPress={() => deleteSplit(index)} style={styles.actionButton}>
+                <Text style={styles.actionButtonText}>Delete</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleRenameOpen(index, split)} style={styles.actionButton}>
+                <Text style={styles.actionButtonText}>Rename</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+
+          {/* Add the GraphWithButton for each split */}
+          <GraphWithButton
+            trackerTitle={split}
+            initialData={[0, 0, 0]} // Replace with actual data
+            labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]} // Replace with actual labels
+            onButtonPress={() => {
+              // Log to see if this function is called
+              console.log(`Navigating to workoutList with split: ${split}`);
+              navigation.navigate('workoutList', { splitName: split });
+            }}
+          />
+        </View>
+      ))}
 
       <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
         <Text style={styles.buttonText}>+ Add Workout Day</Text>
@@ -77,6 +132,22 @@ const WorkoutView = () => {
             <Text style={styles.buttonText}>Add Workout Day</Text>
           </TouchableOpacity>
           <Button title="Close" onPress={() => setShowModal(false)} />
+        </View>
+      </Modal>
+
+      {/* Rename Modal */}
+      <Modal animationType="slide" transparent={true} visible={showRenameModal}>
+        <View style={styles.modalView}>
+          <TextInput
+            style={styles.renameInput}
+            value={newSplitName}
+            onChangeText={setNewSplitName}
+            placeholder="Rename Workout Day"
+          />
+          <TouchableOpacity style={styles.addButton} onPress={renameSplit}>
+            <Text style={styles.buttonText}>Rename Workout Day</Text>
+          </TouchableOpacity>
+          <Button title="Close" onPress={() => setShowRenameModal(false)} />
         </View>
       </Modal>
     </ScrollView>
@@ -151,7 +222,59 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
   },
-  // ... any other styles you need
+  renameInput: {
+    width: '80%',
+    height: 50,
+    backgroundColor: 'white',
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    fontSize: 20,
+    borderRadius: 15,
+    color: '#303030',
+  },
+  splitContainer: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    width: '90%',
+    marginVertical: 10,
+  },
+  splitButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  settingsButton: {
+    backgroundColor: '#D4AF37',
+    padding: 10,
+    borderRadius: 5,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  },
+  settingsText: {
+    color: 'white',
+    fontSize: 18,
+  },
+  splitText: {
+    fontSize: 20,
+  },
+  splitHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+  },
+  actionButton: {
+    backgroundColor: '#D4AF37',
+    padding: 5,
+    borderRadius: 5,
+    marginRight: 5,
+  },
+  actionButtonText: {
+    color: 'white',
+    fontSize: 16,
+  },
 });
 
 export default WorkoutView;
