@@ -1,21 +1,33 @@
+// AppStyles.js
 import { StyleSheet } from 'react-native';
 
-// Define your styles here
 const AppStyles = StyleSheet.create({
+  // Styles for the bottom tab navigation
   tabBarStyle: {
-    backgroundColor: 'purple',
-    // Add other styling properties for the tab bar here
+    backgroundColor: 'white', // Background color of the tab bar
   },
   tabBarOptions: {
-    activeTintColor: 'gray',
-    inactiveTintColor: 'black',
-    // You can spread the tabBarStyle inside the object below if needed
+    activeTintColor: 'grey', // Text color of the selected tab
+    inactiveTintColor: 'black', // Text color of the unselected tabs
   },
+  tabBarLabelStyle: {
+    fontSize: 15, // Font size of the tab labels
+    //backgroundColor: 'red', // Background color of the tab bar (box around the words)
+    //fontWeight: 'bold', // Font weight for the tab labels
+  },
+  
+  // Styles for each stack navigator within the tabs
   stackScreenOptions: {
-    headerShown: false,
-    // Add other styling properties for the stack navigator here
+    backgroundColor: 'white', // Background color of the tab bar
+    headerShown: false, // Hides the header for all stack screens
+    headerStyle: {
+      backgroundColor: 'black', // Background color of the header (not shown in this case)
+    },
+    headerTintColor: 'white', // Color of the back button and title in the header
+    headerTitleStyle: {
+      fontWeight: 'bold', // Font weight for the header title
+    },
   },
 });
 
-// Export the styles as named exports
-export { AppStyles as default };
+export default AppStyles;

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -45,6 +46,7 @@ const MunchiesScreen = () => (
   </Stack.Navigator>
 );
 
+
 const MainTabs = () => {
   return (
     <Tab.Navigator
@@ -53,6 +55,7 @@ const MainTabs = () => {
         tabBarActiveTintColor: AppStyles.tabBarOptions.activeTintColor,
         tabBarInactiveTintColor: AppStyles.tabBarOptions.inactiveTintColor,
         tabBarStyle: AppStyles.tabBarStyle,
+        tabBarLabelStyle: AppStyles.tabBarLabelStyle, // Use centralized style for tab labels
       }}
     >
       <Tab.Screen name="Muscles" component={WorkoutStackNavigator} />
