@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import BackButton from '../../components/backButton';
 import useCustomTracker from './useCustomTracker';
 import CustomTrackerModal from './customTrackerModal';
 import GraphWithButton from '../../components/graph';
+import { getUserID, pullDocData, pullDocNames } from '../../firebase/firebaseFunctions';
 import { styles } from './CommonStyles';
 
 
@@ -36,8 +37,7 @@ const Mindfulness = ({ navigation }) => {
   const [editingTracker, setEditingTracker] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
   const [currentDate, setCurrentDate] = useState(new Date());
-  let mindDocs = [];
-  let mindValues = Array(7).fill(0);
+  let { mindDocs } = { mindDocs: [] };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,6 +61,7 @@ const Mindfulness = ({ navigation }) => {
         let reformattedMindDate = "";
         let mindDatePath = ``;
         for (let i = 0; i < mindDocs.length; i++) {
+          trackerData[mindDocs[i]] = [];
           for (let j = 0; j < 7; j++) {
             try {
               result = 0;
@@ -74,12 +75,14 @@ const Mindfulness = ({ navigation }) => {
               mindDatePath = `${userPath}/logs/${reformattedMindDate}/mind/`;
               result = await pullDocData(mindDatePath + mindDocs[i], "value");
               if (result != null) {
-                console.log(result + "  ");
+                console.log("Pulled from" + reformattedMindDate + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
+                trackerData[mindDocs[i]].push(result);
               }
             } catch (error) {
               console.error('Error fetching mind data from Firestore:', error);
             }
           }
+          console.log("Data for", mindDocs[i], trackerData[mindDocs[i]]);   // outputs info inside trackerData for each tracker
         }
       } catch (error) {
         console.error('Error in fetchData:', error);

@@ -28,14 +28,13 @@ useEffect(() => {
       let reformattedDate = formattedDate.replace(/\//g, '.');
 
       const userPath = `userData/${getUserID()}`;
-      const datePath = `${userPath}/logs/${formattedDate}`;
+      const datePath = `${userPath}/logs/${reformattedDate}`;
       const musclesPath = `${datePath}/muscles`;
       const munchiesPath = `${datePath}/munchies`;
       const mindPath = `${userPath}/mind`;
 
       musclesDocs = await pullDocNames(musclesPath);
       munchiesDocs = await pullDocNames(munchiesPath);
-      mindDocs = await pullDocNames(mindPath);
       
     } catch (error) {
       console.error('Error in fetchData:', error);
