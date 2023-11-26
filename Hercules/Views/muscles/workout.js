@@ -9,6 +9,7 @@ const WorkoutView = () => {
   const navigation = useNavigation();
   const [splits, setSplits] = useState([]); // Start with a default split for demonstration
   const [showModal, setShowModal] = useState(false); // State to control visibility of the 'add split' modal
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
   const [newSplitName, setNewSplitName] = useState('');
