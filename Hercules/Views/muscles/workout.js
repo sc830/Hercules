@@ -14,8 +14,7 @@ const WorkoutView = () => {
   const [newSplitName, setNewSplitName] = useState('');
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
   const [currentDate, setCurrentDate] = useState(new Date());
-  let { musclesDocs, munchiesDocs, mindDocs } = { musclesDocs: [], munchiesDocs: [], mindDocs: [] };
-  let mindValues = Array(7).fill(0);
+  let { musclesDocs, munchiesDocs} = { musclesDocs: [], munchiesDocs: []};
 
 
 useEffect(() => {
@@ -37,33 +36,7 @@ useEffect(() => {
       musclesDocs = await pullDocNames(musclesPath);
       munchiesDocs = await pullDocNames(munchiesPath);
       mindDocs = await pullDocNames(mindPath);
-
-      let result = 0;
-      let mindDate = new Date();
-      let formattedMindDate = "";
-      let reformattedMindDate = "";
-      let mindDatePath = ``;
-      for (let i = 0; i < mindDocs.length; i++) {
-        for (let j = 0; j < 7; j++) {
-          try {
-            result = 0;
-            mindDate.setDate(currentDate.getDate() - (7 - j));
-            formattedMindDate = mindDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-            });
-            reformattedMindDate = formattedMindDate.replace(/\//g, '.');
-            mindDatePath = `${userPath}/logs/${reformattedMindDate}/mind/`;
-            result = await pullDocData(mindDatePath + mindDocs[i], "value");
-            if (result != null) {
-              console.log(result + "  ");
-            }
-          } catch (error) {
-            console.error('Error fetching mind data from Firestore:', error);
-          }
-        }
-      }
+      
     } catch (error) {
       console.error('Error in fetchData:', error);
     }
