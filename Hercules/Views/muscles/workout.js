@@ -14,6 +14,7 @@ const WorkoutView = () => {
   const [newSplitName, setNewSplitName] = useState('');
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
   let { musclesDocs, munchiesDocs, mindDocs } = { musclesDocs: [], munchiesDocs: [], mindDocs: [] };
+  let mindValues = Array(7).fill(0);
 
 
 useEffect(() => {
@@ -32,11 +33,30 @@ useEffect(() => {
 
     const datePath = `userData/${getUserID()}/logs/${reformattedDate}`;
     const musclesPath = `${datePath}/muscles`;
+    const munchiesPath = `${datePath}/munchies`;
+    const mindPath = `${datePath}/mind`;
 
 
     musclesDocs = await pullDocNames(musclesPath);  // musclesDocs now contains the names of all workouts logged on this day.
 
     munchiesDocs = await pullDocNames(munchiesPath);  // munchiesDocs now contains the names of all workouts logged on <currentDate>
+
+    let result = 0;
+    for (let i = 0; i < mindDocs.length; i++) {   // runs for each element in mindDocs
+      mindValues = Array(7).fill(0);    // value array resets on each iteration
+      for (let j = 0; j < 7; j++) {
+        try {
+          result = 0;
+          result = await pullDocData(mindPath+mindDocs[i], value);    // data from userData/<userID>/logs/<date>/mind/<docName>
+          if (result != null) {
+            mindValues[j] = result;
+          }
+        }
+        catch (error) {
+          console.error('Error fetching doc name data from Firestore:', error);
+        }
+      }
+    }
 
     /*for (let i = 0; i < munchiesDocs.length; i++) {   // reformats munchiesDocs array into single string w/return between each item
       console.log(munchiesDocs[i]);                     // did this to resolve display problems but did not work
