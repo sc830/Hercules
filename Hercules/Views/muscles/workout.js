@@ -52,6 +52,12 @@ const addSplit = () => {
   setShowModal(false);
 };
 
+const handleRenameOpen = (index) => {
+  setRenameIndex(index);
+  setNewSplitName(splits[index]);
+  setShowRenameModal(true);
+};
+
 const renameSplit = () => {
   let updatedSplits = [...splits];
   updatedSplits[renameIndex] = newSplitName;
@@ -75,6 +81,7 @@ const cancelEditDelete = () => {
   setShowRenameModal(false);
   setShowModal(false);
 };
+
 
 return (
   <ScrollView contentContainerStyle={styles.container}>
