@@ -38,17 +38,20 @@ useEffect(() => {
     munchiesDocs = await pullDocNames(munchiesPath);  // munchiesDocs now contains the names of all workouts logged on <currentDate>
     mindDocs = await pullDocNames(mindPath);    // now contains names of all trackers that have been saved to Firestore
     console.log(mindDocs);
-/*
+
     let result = 0;
+    let mindDate = "";
     let mindDatePath = ``;
     for (let i = 0; i < mindDocs.length; i++) {   // runs for each element in mindDocs
       for (let j = 0; j < 7; j++) {
         try {
           result = 0;
-          mindDatePath = 
-          //result = await pullDocData(mindDatePath+mindDocs[i], value);    // data from userData/<userID>/logs/<date>/mind/<docName>
+          mindDate = formatFirestoreDate(currentDate-(7-j));
+          mindDatePath = `${userPath}/logs/${mindDate}/`;
+          result = await pullDocData(mindDatePath+mindDocs[i], "value");    // data from userData/<userID>/logs/<date>/mind/<docName>
           if (result != null) {
-            mindValues[j] = result;
+            console.log(result+"  ");
+            //mindValues[i][j] = result;
           }
         }
         catch (error) {
@@ -56,7 +59,7 @@ useEffect(() => {
         }
       }
     }
-*/
+
     /*for (let i = 0; i < munchiesDocs.length; i++) {   // reformats munchiesDocs array into single string w/return between each item
       console.log(munchiesDocs[i]);                     // did this to resolve display problems but did not work
       if (i > 0) {
