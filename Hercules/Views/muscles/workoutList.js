@@ -5,6 +5,7 @@ import BackButton from '../../components/backButton'; // Importing the BackButto
 import { saveWorkout } from '../../firebase/firebaseFunctions'; // Import your saveWorkout function
 
 const WorkoutList = ({ route }) => {
+  const { splitName } = route.params;
   const [workouts, setWorkouts] = useState([]);
   const [workoutName, setWorkoutName] = useState('');
   const [showRenameModal, setShowRenameModal] = useState(false);

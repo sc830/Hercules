@@ -84,7 +84,9 @@ const signUp = async (email, password, username) => {
     /*const workoutsData = {
      exampleField: 'Example Workouts Data'
     };
-    await setDoc(doc(db, 'workouts', user.uid), workoutsData);
+    const dtt = new Date();
+    await (doc(db, 'test',  user.uid, 'workouts'));
+    
 
     const mindData = {
       exampleField: 'Example Mind Data'
@@ -143,7 +145,13 @@ export const pullDocData = async(docPath, fieldName) => {
 const saveMeal = async (mealData, mealType) => {
   try {
     const dt = new Date();
-    const mealsCollectionRef = collection(db, 'userData', userid, 'munchies', mealType, dt.toISOString());
+    const year = dt.getFullYear();
+    const month = String(dt.getMonth() + 1).padStart(2, '0');
+    const day = String(dt.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    
+    const mealsCollectionRef = collection(db, 'userData', userid, 'munchies', mealType, formattedDate);
     await addDoc(mealsCollectionRef, mealData);
     return "Meal saved successfully";
   } catch (error) {
@@ -153,10 +161,15 @@ const saveMeal = async (mealData, mealType) => {
 
 export const saveWorkout = async ( workoutData, splitName) => {
   try {
-    const dt = new Date();
-    // Assuming you have a 'workouts' collection in Firestore
-    const userRef = collection(db, 'userData', userid, 'workouts', splitName,  dt.toISOString());
-    await userRef.add(workoutData);
+  const dt = new Date();
+  const year = dt.getFullYear();
+  const month = String(dt.getMonth() + 1).padStart(2, '0');
+  const day = String(dt.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
+
+// Assuming you have a 'workouts' collection in Firestore
+const workoutCollectionRef = collection(db, 'userData', userid, 'workouts', splitName, formattedDate);
+    await addDoc(workoutCollectionRef, workoutData);
     return { success: true, message: 'Workout saved successfully' };
   } catch (error) {
     return { success: false, error };
