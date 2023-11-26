@@ -2,27 +2,55 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import BackButton from '../../components/backButton'; // Importing the BackButton component
+import { saveWorkout } from '../../firebase/firebaseFunctions'; // Import your saveWorkout function
 
 const WorkoutList = ({ route }) => {
-  const { splitName } = route.params;
-  const navigation = useNavigation();
   const [workouts, setWorkouts] = useState([]);
   const [workoutName, setWorkoutName] = useState('');
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
   const [showDeleteOption, setShowDeleteOption] = useState(-1);
   const [showAddModal, setShowAddModal] = useState(false);
+  const navigation = useNavigation();
 
-  const addWorkout = () => {
+  const addWorkout = async () => {
     if (workoutName) {
-      setWorkouts(prevWorkouts => [...prevWorkouts, workoutName]);
+      const updatedWorkouts = [...workouts, workoutName];
+      setWorkouts(updatedWorkouts);
       setWorkoutName('');
       setShowAddModal(false);
+
+      // Save the workout data to Firebase
+      const workoutData = { name: workoutName, exercises: [] }; // Assuming an exercise list for each workout
+      try {
+        const saveResult = await saveWorkout(workoutData, splitName);
+        console.log(saveResult); // Output success message or handle accordingly
+      } catch (error) {
+        console.error('Error saving workout:', error.message); // Handle error
+      }
     }
   };
 
   const deleteWorkout = (indexToDelete) => {
     setWorkouts(workouts.filter((_, index) => index !== indexToDelete));
+  };
+
+  const handleSaveWorkout = async () => {
+  try {
+    const saveResult = await saveWorkout( workoutData, splitName);
+    console.log(saveResult); // Output success message or handle accordingly
+  } catch (error) {
+    console.error('Error saving workout:', error.message); // Handle error
+  }
+};
+
+  const handleAddExercise = () => {
+    // Logic to add a new exercise to workoutData
+    // For example:
+    const newExercise = {
+      name: 'New Exercise',
+      sets: [],
+    };
   };
 
   const handleRenameOpen = (index, workout) => {

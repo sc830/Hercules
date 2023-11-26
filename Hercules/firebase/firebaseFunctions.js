@@ -151,6 +151,18 @@ const saveMeal = async (mealData, mealType) => {
   }
 };
 
+export const saveWorkout = async ( workoutData, splitName) => {
+  try {
+    const dt = new Date();
+    // Assuming you have a 'workouts' collection in Firestore
+    const userRef = collection(db, 'userData', userid, 'workouts', splitName,  dt.toISOString());
+    await userRef.add(workoutData);
+    return { success: true, message: 'Workout saved successfully' };
+  } catch (error) {
+    return { success: false, error };
+  }
+};
+
 
 
 export { signUp, login, saveMeal };
