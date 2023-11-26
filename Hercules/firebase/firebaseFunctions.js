@@ -161,16 +161,6 @@ export const pullDocNames = async(collectionPath) => {
   }
 }
 
-export const formatFirestoreDate = async(date) => {
-  const formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
-  const reformattedDate = formattedDate.replace(/\//g, '.');
-  return reformattedDate;
-}
-
 const saveMeal = async (mealData, mealType) => {
   try {
     const dt = new Date();
