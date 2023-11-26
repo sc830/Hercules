@@ -35,7 +35,23 @@ useEffect(() => {
 
 
     musclesDocs = await pullDocNames(musclesPath);  // musclesDocs now contains the names of all workouts logged on this day.
+
+    munchiesDocs = await pullDocNames(munchiesPath);  // munchiesDocs now contains the names of all workouts logged on <currentDate>
+
+    /*for (let i = 0; i < munchiesDocs.length; i++) {   // reformats munchiesDocs array into single string w/return between each item
+      console.log(munchiesDocs[i]);                     // did this to resolve display problems but did not work
+      if (i > 0) {
+        munchiesOutput += munchiesDocs[i];
+        munchiesOutput += "\n";
+      }
+      else {
+        munchiesOutput = munchiesDocs[i];
+      }
     }
+    console.log("Output: " + munchiesOutput);
+      
+    }*/
+  }
 
   fetchData();
 
