@@ -5,7 +5,7 @@ import GraphWithButton from '../../components/graph';
 
 const WorkoutView = () => {
   const navigation = useNavigation();
-  const [splits, setSplits] = useState(['Test Split']); // Start with a default split for demonstration
+  const [splits, setSplits] = useState([]); // Start with a default split for demonstration
   const [showModal, setShowModal] = useState(false); // State to control visibility of the 'add split' modal
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
@@ -75,7 +75,7 @@ const WorkoutView = () => {
             style={styles.input}
             value={newSplitName}
             onChangeText={setNewSplitName}
-            placeholder="Enter Workout Day Name"
+            placeholder="Enter the Name of Your Workout Day"
           />
           <TouchableOpacity style={styles.addButton} onPress={addSplit}>
             <Text style={styles.buttonText}>Add Workout Day</Text>
