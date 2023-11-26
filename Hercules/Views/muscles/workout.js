@@ -47,14 +47,14 @@ useEffect(() => {
         for (let j = 0; j < 7; j++) {
           try {
             result = 0;
-            mindDate = currentDate - (7 - j);
+            mindDate.setDate(currentDate.getDate() - (7 - j));
             formattedMindDate = mindDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
               year: 'numeric',
               month: '2-digit',
               day: '2-digit',
             });
             reformattedMindDate = formattedDate.replace(/\//g, '.');
-            mindDatePath = `${userPath}/logs/${mindDate}/`;
+            mindDatePath = `${userPath}/logs/mind/${reformattedMindDate}/`;
             result = await pullDocData(mindDatePath + mindDocs[i], "value");
             if (result != null) {
               console.log(result + "  ");
