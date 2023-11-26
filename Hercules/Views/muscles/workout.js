@@ -34,6 +34,8 @@ useEffect(() => {
     const musclesPath = `${datePath}/muscles`;
 
 
+    musclesDocs = await pullDocNames(musclesPath);  // musclesDocs now contains the names of all workouts logged on this day.
+
     munchiesDocs = await pullDocNames(munchiesPath);  // munchiesDocs now contains the names of all workouts logged on <currentDate>
 
     /*for (let i = 0; i < munchiesDocs.length; i++) {   // reformats munchiesDocs array into single string w/return between each item
