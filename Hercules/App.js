@@ -1,6 +1,6 @@
 import React from 'react';
 import { getFirestore } from "firebase/firestore";
-import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, doc, addDoc, getDoc, setDoc } from "firebase/firestore";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { initializeApp } from "firebase/app";
 import { AppRegistry } from 'react-native';
