@@ -14,7 +14,6 @@ const WorkoutView = () => {
   const [renameIndex, setRenameIndex] = useState(-1);
   const [newSplitName, setNewSplitName] = useState('');
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
-  const [currentDate, setCurrentDate] = useState(new Date());
   let { musclesDocs, munchiesDocs, mindDocs } = { musclesDocs: [], munchiesDocs: [], mindDocs: [] };
   let mindValues = Array(7).fill(0);
 
@@ -30,7 +29,7 @@ useEffect(() => {
       let reformattedDate = formattedDate.replace(/\//g, '.');
 
       const userPath = `userData/${getUserID()}`;
-      const datePath = `${userPath}/logs/${formattedDate}`;
+      const datePath = `${userPath}/logs/${reformattedDate}`;
       const musclesPath = `${datePath}/muscles`;
       const munchiesPath = `${datePath}/munchies`;
       const mindPath = `${userPath}/mind`;
