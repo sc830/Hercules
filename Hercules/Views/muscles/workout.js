@@ -25,11 +25,13 @@ const WorkoutView = () => {
 
 
 useEffect(() => {
+  // useEffect runs upon load and when currentDate changes.
   const fetchData = async () => {
-    let testDate = new Date();
-    testDate.setDate(17);
+    /*let testDate = new Date();
+    testDate.setDate(17);   // use this when testing with Shelby's account data
+    */
 
-    const formattedDate = testDate.toLocaleDateString('en-US', {
+    const formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
@@ -38,19 +40,15 @@ useEffect(() => {
 
     const datePath = `userData/${getUserID()}/logs/${reformattedDate}`;
     const musclesPath = `${datePath}/muscles`;
-    const munchiesPath = `${datePath}/munchies`;
-    const mindPath = `${datePath}/mind`;
 
-    musclesDocs = await pullDocNames(musclesPath);
-    console.log("Catch 2:" + musclesDocs);
-    //munchiesDocs = pullDocNames(munchiesPath);
-    //mindDocs = pullDocNames(mindPath);
-      
+
+    musclesDocs = await pullDocNames(musclesPath);  // musclesDocs now contains the names of all workouts logged on this day.
     }
 
   fetchData();
 
-}, [currentDate]);  // date dependency - runs again when date is updated */
+}, [currentDate]);  // date dependency - runs again when date is updated
+// see Shelby's drafted displays in earlier commits to this branch
 
 const addSplit = () => {
   if (splitName) {
@@ -177,17 +175,6 @@ return (
           }} />
         </View>
       </Modal>
-
-      {musclesDocs.map((docID) => (
-        <View key={docID} style={styles.displayFirestore}>
-          {/* Display names pulled from Firestore */}
-          <TouchableOpacity
-            style={styles.splitButton}
-            onPress={() => navigation.navigate('workoutList', { splitName: split })}
-            activeOpacity={0.7}
-          ></TouchableOpacity>
-        </View>
-      ))}
   
     </ScrollView>
   );
@@ -225,7 +212,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
   },
-  displayFirestore: {
+  displayFirestore: {   // rounded rectangle shape
     backgroundColor: '#D4AF37', // Gold color
     width: '90%',
     height: 80,
