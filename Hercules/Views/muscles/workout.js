@@ -13,70 +13,64 @@ const WorkoutView = () => {
   const [renameIndex, setRenameIndex] = useState(-1);
   const [newSplitName, setNewSplitName] = useState('');
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
+  const [currentDate, setCurrentDate] = useState(new Date());
   let { musclesDocs, munchiesDocs, mindDocs } = { musclesDocs: [], munchiesDocs: [], mindDocs: [] };
   let mindValues = Array(7).fill(0);
 
 
 useEffect(() => {
-  // useEffect runs upon load and when currentDate changes.
   const fetchData = async () => {
-    /*let testDate = new Date();
-    testDate.setDate(17);   // use this when testing with Shelby's account data
-    */
+    try {
+      let formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
+      let reformattedDate = formattedDate.replace(/\//g, '.');
 
-    const formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
-    const reformattedDate = formattedDate.replace(/\//g, '.');
+      const userPath = `userData/${getUserID()}`;
+      const datePath = `${userPath}/logs/${formattedDate}`;
+      const musclesPath = `${datePath}/muscles`;
+      const munchiesPath = `${datePath}/munchies`;
+      const mindPath = `${userPath}/mind`;
 
-    const datePath = `userData/${getUserID()}/logs/${reformattedDate}`;
-    const musclesPath = `${datePath}/muscles`;
-    const munchiesPath = `${datePath}/munchies`;
-    const mindPath = `${datePath}/mind`;
+      musclesDocs = await pullDocNames(musclesPath);
+      munchiesDocs = await pullDocNames(munchiesPath);
+      mindDocs = await pullDocNames(mindPath);
 
-
-    musclesDocs = await pullDocNames(musclesPath);  // musclesDocs now contains the names of all workouts logged on this day.
-
-    munchiesDocs = await pullDocNames(munchiesPath);  // munchiesDocs now contains the names of all workouts logged on <currentDate>
-
-    let result = 0;
-    for (let i = 0; i < mindDocs.length; i++) {   // runs for each element in mindDocs
-      mindValues = Array(7).fill(0);    // value array resets on each iteration
-      for (let j = 0; j < 7; j++) {
-        try {
-          result = 0;
-          result = await pullDocData(mindPath+mindDocs[i], value);    // data from userData/<userID>/logs/<date>/mind/<docName>
-          if (result != null) {
-            mindValues[j] = result;
+      let result = 0;
+      let mindDate = new Date();
+      let formattedMindDate = "";
+      let reformattedMindDate = "";
+      let mindDatePath = ``;
+      for (let i = 0; i < mindDocs.length; i++) {
+        for (let j = 0; j < 7; j++) {
+          try {
+            result = 0;
+            mindDate.setDate(currentDate.getDate() - (7 - j));
+            formattedMindDate = mindDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            });
+            reformattedMindDate = formattedMindDate.replace(/\//g, '.');
+            mindDatePath = `${userPath}/logs/${reformattedMindDate}/mind/`;
+            result = await pullDocData(mindDatePath + mindDocs[i], "value");
+            if (result != null) {
+              console.log(result + "  ");
+            }
+          } catch (error) {
+            console.error('Error fetching mind data from Firestore:', error);
           }
         }
-        catch (error) {
-          console.error('Error fetching doc name data from Firestore:', error);
-        }
       }
+    } catch (error) {
+      console.error('Error in fetchData:', error);
     }
-
-    /*for (let i = 0; i < munchiesDocs.length; i++) {   // reformats munchiesDocs array into single string w/return between each item
-      console.log(munchiesDocs[i]);                     // did this to resolve display problems but did not work
-      if (i > 0) {
-        munchiesOutput += munchiesDocs[i];
-        munchiesOutput += "\n";
-      }
-      else {
-        munchiesOutput = munchiesDocs[i];
-      }
-    }
-    console.log("Output: " + munchiesOutput);
-      
-    }*/
-  }
+  };
 
   fetchData();
-
-}, [currentDate]);  // date dependency - runs again when date is updated
-// see Shelby's drafted displays in earlier commits to this branch
+}, [currentDate]);
 
 const addSplit = () => {
   if (newSplitName.trim()) {
