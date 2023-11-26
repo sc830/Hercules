@@ -53,8 +53,8 @@ useEffect(() => {
               month: '2-digit',
               day: '2-digit',
             });
-            reformattedMindDate = formattedDate.replace(/\//g, '.');
-            mindDatePath = `${userPath}/logs/mind/${reformattedMindDate}/`;
+            reformattedMindDate = formattedMindDate.replace(/\//g, '.');
+            mindDatePath = `${userPath}/logs/${reformattedMindDate}/mind/`;
             result = await pullDocData(mindDatePath + mindDocs[i], "value");
             if (result != null) {
               console.log(result + "  ");
