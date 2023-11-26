@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { collection, addDoc, doc, setDoc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc, getDoc, getDocs } from 'firebase/firestore';
 //import { db, authInstance } from './firebaseConfig';
 import { Alert } from 'react-native';
 
@@ -27,6 +27,10 @@ function containsSpecialChars(str) {
   const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
   return specialChars.test(str);
 }
+
+export const getUserID = () => {
+  return userid ? userid : null;
+};
 
 const signUp = async (email, password, username) => {
   
@@ -135,10 +139,29 @@ export const pullDocData = async(docPath, fieldName) => {
       let fieldData = docPoint.get(fieldName);
       return fieldData;
     }
+    else {
+      console.log('No such doc');
+    }
   }
   catch (error) {
     throw new Error(error.message);
     return null;
+  }
+}
+
+export const pullDocNames = async(collectionPath) => {
+  let docsArray = [];
+  console.log("Catch:" + collectionPath);
+  try {
+    const querySnapshot = await getDocs(collection(db, collectionPath));
+
+    querySnapshot.forEach((doc) => {
+      docsArray.push(doc.id);
+    })
+    console.log("Catch 1:" + docsArray);
+    return docsArray;
+  } catch (error) {
+    console.error('Error fetching doc name data from Firestore:', error);
   }
 }
 
