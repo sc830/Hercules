@@ -1,58 +1,122 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import BackButton from '../../components/backButton';
-import useCustomTracker from './useCustomTracker'; 
+import useCustomTracker from './useCustomTracker';
 import CustomTrackerModal from './customTrackerModal';
 import GraphWithButton from '../../components/graph';
+import { styles } from './CommonStyles';
+
+
+/*********************************************************************************************** //
+ * OVERVIEW OF ALL MINDFULNESS RELATED FILES
+ * CommonStyles.js: Holds reusable styling for different parts of the app to look consistent.
+ * customTrackerModal.js: Popup for adding new custom health trackers.
+ * Mindfulness.js: Displays health tracking graphs and options.
+ * TrackIntakeScreen.js: Screen for entering and editing health tracker data.
+ * useCustomTracker.js: Hook that handles the logic for creating and managing trackers.
+
+**************************************************************************************************/
 
 const Mindfulness = ({ navigation }) => {
   const {
     trackers,
+    trackerData,
+    trackerTitles,
     modalVisible,
     setModalVisible,
     customTrackerName,
     setCustomTrackerName,
     handleAddCustomTracker,
     submitCustomTracker,
+    updateTrackerTitle, // ensure this is defined in useCustomTracker
+    deleteTracker, // ensure this is defined in useCustomTracker
   } = useCustomTracker(['Creatine', 'Sleep', 'Water']);
 
-  const dummyData = {
-    currentData: {
-      'Creatine': [5, 6, 7, 8, 9, 10, 2],
-      'Sleep': [7, 8, 6, 7, 9, 8, 9],
-      'Water': [20, 25, 30, 35, 40, 45, 47]
-    },
-  }
-  
-  const getDataForWeek = (trackerName) => {
-    // Return data for the tracker if it exists, otherwise return an array of zeroes
-    return dummyData.currentData[trackerName] || new Array(labels.length).fill(0);
-  };
-  
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const [editingTracker, setEditingTracker] = useState(null);
+  const [deleteConfirmation, setDeleteConfirmation] = useState('');
 
-  const renderTrackers = () => {
-    return trackers.map((tracker, index) => (
-      <View key={index} style={styles.graphContainer}>
-        <GraphWithButton
-          initialData={getDataForWeek(tracker)} // Pass the initial data here
-          labels={labels}
-          onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: tracker })}
-          trackerTitle={tracker}
-        />
-      </View>
-    ));
+  const startEditingTracker = (tracker) => {
+    setEditingTracker(tracker);
   };
+
+  const handleDeleteTracker = (tracker) => {
+    if (deleteConfirmation === trackerTitles[tracker]) {
+      deleteTracker(tracker); // ensure deleteTracker is passed from useCustomTracker
+      setDeleteConfirmation('');
+      setEditingTracker(null);
+    }
+  };
+
+  const finishEditingTracker = (tracker, newTitle) => {
+    if (newTitle !== trackerTitles[tracker]) {
+      updateTrackerTitle(tracker, newTitle);
+    }
+    setEditingTracker(null);
+  };
+   // Add a cancel function to reset the delete confirmation and editing state
+   const cancelEditDelete = () => {
+    setDeleteConfirmation('');
+    setEditingTracker(null);
+  };
+
+  // ... existing startEditingTracker, handleDeleteTracker, and finishEditingTracker functions
 
   return (
     <View style={styles.container}>
       <BackButton />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
-        {renderTrackers()}
+        {trackers.map(tracker => (
+          <View key={tracker}>
+            {editingTracker === tracker ? (
+              <View>
+                <TextInput
+                  value={trackerTitles[tracker]}
+                  onChangeText={(newTitle) => updateTrackerTitle(tracker, newTitle)}
+                  style={styles.trackerEdit}
+                  autoFocus={true}
+                />
+                <TouchableOpacity
+                  onPress={() => finishEditingTracker(tracker, trackerTitles[tracker])}
+                  style={styles.confirmEditButton}
+                >
+                  <Text style={styles.buttonText}>Confirm Rename</Text>
+                </TouchableOpacity>
+                <TextInput
+                  value={deleteConfirmation}
+                  onChangeText={setDeleteConfirmation}
+                  placeholder="Enter name to confirm deletion"
+                  style={styles.trackerEdit}
+                />
+                <TouchableOpacity
+                  onPress={() => handleDeleteTracker(tracker)}
+                  style={styles.deleteButton}
+                >
+                  <Text style={styles.buttonText}>Delete Tracker</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={cancelEditDelete}
+                  style={styles.deleteButton}
+                >
+                  <Text style={styles.buttonText}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <GraphWithButton
+                initialData={trackerData[tracker] || []}
+                labels={labels}
+                onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: trackerTitles[tracker] })}
+                trackerTitle={trackerTitles[tracker]}
+                onTitleChange={() => startEditingTracker(tracker)}
+              />
+            )}
+          </View>
+        ))}
         <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
           <Text style={styles.buttonText}>Add a Custom Tracker</Text>
         </TouchableOpacity>
       </ScrollView>
+
       <CustomTrackerModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
@@ -63,32 +127,5 @@ const Mindfulness = ({ navigation }) => {
     </View>
   );
 };
-
-// Styles
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FFF7E0',
-    flex: 1
-  },
-  contentContainerStyle: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  graphContainer: {
-    marginBottom: 20,
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: '#D4AF37',
-    padding: 20,
-    margin: 10,
-    borderRadius: 15,
-    width: '90%'
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center'
-  },
-});
 
 export default Mindfulness;

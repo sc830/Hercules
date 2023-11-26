@@ -1,0 +1,35 @@
+Title: Report - Infeasibility of Creating a Graphic Rating for Food Ingredient Quality
+
+
+Report Prepared by: Kaleb Perez and Aaron Parks
+
+Introduction:
+
+This report outlines the reasons behind the decision to deem the creation of a graphic rating system for food ingredient quality as unfeasible at this point in time. Both Kaleb Perez and Aaron Parks have collectively evaluated the technical challenges and limitations, primarily concerning the back-end implementation and API key integration, which currently hinder our ability to complete this task effectively.
+
+Task Background:
+
+The task assigned was to develop a graphic rating system for food ingredient quality, which would allow users to visually assess the quality of ingredients used in our food products. The initial concept was to present this information in an intuitive and user-friendly graphical format.
+
+Challenges Identified:
+
+1. Back-End Implementation:
+
+   One of the foremost challenges encountered was the back-end implementation required to support the graphic rating system. This system would need to integrate seamlessly with our existing database and infrastructure to store and retrieve ingredient quality data. Unfortunately, our current back-end architecture is not adequately prepared to accommodate this specific functionality.
+
+2. API Key Implementation:
+
+   To ensure the accuracy and reliability of ingredient quality data, we had planned to integrate external data sources and APIs. However, during the development process, it became evident that the implementation of API keys and the necessary security measures were not up to the required standard. This posed a significant risk in terms of data integrity and user experience.
+
+3. Time and Resource Allocation:
+
+   Given the technical complexities and limitations mentioned above, both Kaleb Perez and Aaron Parks believe that our efforts would be better spent elsewhere, focusing on tasks that align more closely with our current capabilities and project goals. The amount of time and resources required to overcome the challenges related to the back-end implementation and API key integration far exceeded the initial estimation.
+
+Conclusion:
+
+In light of the aforementioned challenges and limitations, we have collectively decided that pursuing the creation of a graphic rating system for food ingredient quality is currently infeasible. The technical hurdles associated with back-end integration and API key implementation, as well as the substantial time investment required, make it impractical within our project's current scope and timeline.
+
+Moving forward, we recommend revisiting this task when our back-end infrastructure is better equipped to handle the necessary functionalities and when API key implementation meets the required security standards. In the meantime, we will redirect our efforts toward tasks that are better aligned with our project's objectives and available resources.
+
+We appreciate your understanding of this decision and remain committed to delivering high-quality results within the constraints of our project.
+
