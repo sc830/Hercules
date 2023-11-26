@@ -5,42 +5,21 @@ import GraphWithButton from '../../components/graph';
 
 const WorkoutView = () => {
   const navigation = useNavigation();
-  const [showModal, setShowModal] = useState(false);
-  const [splitName, setSplitName] = useState('');
-  const [splits, setSplits] = useState([]);
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [renameIndex, setRenameIndex] = useState(-1);
+  // Starting with a mock split for testing purposes
+  const [splits, setSplits] = useState(['Test Split']);
   const [showRenameModal, setShowRenameModal] = useState(false);
+  const [renameIndex, setRenameIndex] = useState(-1);
   const [newSplitName, setNewSplitName] = useState('');
-  const [showDeleteOption, setShowDeleteOption] = useState(-1);
+  const [deleteConfirmation, setDeleteConfirmation] = useState('');
 
-  const addSplit = () => {
-    if (splitName.trim()) {
-      setSplits(prevSplits => [...prevSplits, splitName]);
-      setSplitName('');
-      setShowModal(false);
-    }
+  // Function to add a new split
+  const addSplit = (name) => {
+    setSplits([...splits, name]);
   };
 
-  const handleSplitNameChange = (text) => {
-    setSplitName(text);
-  };
-
-  const handleForward = () => {
-    const nextDate = new Date(currentDate);
-    nextDate.setDate(currentDate.getDate() + 1);
-    setCurrentDate(nextDate);
-  };
-
-  const handleBack = () => {
-    const previousDate = new Date(currentDate);
-    previousDate.setDate(currentDate.getDate() - 1);
-    setCurrentDate(previousDate);
-  };
-
-  const handleRenameOpen = (index, split) => {
+  const handleRenameOpen = (index) => {
     setRenameIndex(index);
-    setNewSplitName(split);
+    setNewSplitName(splits[index]);
     setShowRenameModal(true);
   };
 
@@ -53,91 +32,39 @@ const WorkoutView = () => {
     setNewSplitName('');
   };
 
-  const deleteSplit = (indexToDelete) => {
-    setSplits(splits.filter((_, index) => index !== indexToDelete));
-    setShowDeleteOption(-1);
+  const handleDeleteSplit = () => {
+    if (deleteConfirmation === splits[renameIndex]) {
+      setSplits(splits.filter((_, index) => index !== renameIndex));
+      setDeleteConfirmation('');
+      setShowRenameModal(false);
+    }
+  };
+
+  const cancelEditDelete = () => {
+    setDeleteConfirmation('');
+    setShowRenameModal(false);
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.dateContainer}>
-        <TouchableOpacity onPress={handleBack} style={styles.navButton}>
-          <Text style={styles.navButtonText}>{"<"}</Text>
-        </TouchableOpacity>
-        <Text>{currentDate.toDateString()}</Text>
-        <TouchableOpacity onPress={handleForward} style={styles.navButton}>
-          <Text style={styles.navButtonText}>{">"}</Text>
-        </TouchableOpacity>
-      </View>
-
       {splits.map((split, index) => (
         <View key={index} style={styles.splitContainer}>
-          <View style={styles.splitHeader}>
-            <TouchableOpacity
-              style={styles.settingsButton}
-              onPress={() => setShowDeleteOption(index === showDeleteOption ? -1 : index)}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            >
-              <Text style={styles.settingsText}>⚙️</Text>
-            </TouchableOpacity>
-            <View style={styles.splitInfo}>
-              <TouchableOpacity
-                style={styles.splitButton}
-                onPress={() => navigation.navigate('workoutList', { splitName: split })}
-                activeOpacity={0.7}
-              >
-                <Text style={styles.splitText}>{split}</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {showDeleteOption === index && (
-            <View style={styles.buttonRow}>
-              <TouchableOpacity onPress={() => deleteSplit(index)} style={styles.actionButton}>
-                <Text style={styles.actionButtonText}>Delete</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleRenameOpen(index, split)} style={styles.actionButton}>
-                <Text style={styles.actionButtonText}>Rename</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-
-          {/* Add the GraphWithButton for each split */}
           <GraphWithButton
-  key={index}
-  trackerTitle={split}
-  initialData={[0, 0, 0]} // Replace with actual data
-  labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]} // Replace with actual labels
-  onButtonPress={() => {
-    // Log to see if this function is called
-    console.log(`Navigating to workoutList with split: ${split}`);
-    navigation.navigate('workoutList', { splitName: split });
-  }}
-/>
-
+            trackerTitle={split}
+            initialData={[0, 0, 0]} // Replace with actual data
+            labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]} // Replace with actual labels
+            onButtonPress={() => navigation.navigate('workoutList', { splitName: split })}
+            onTitleChange={() => handleRenameOpen(index)}
+          />
         </View>
       ))}
 
-      <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
-        <Text style={styles.buttonText}>+ Add Workout Day</Text>
+      {/* Temporary Button to Add a Split for Testing */}
+      <TouchableOpacity style={styles.addButton} onPress={() => addSplit('New Split')}>
+        <Text style={styles.buttonText}>+ Add Test Split</Text>
       </TouchableOpacity>
 
-      <Modal animationType="slide" transparent={true} visible={showModal}>
-        <View style={styles.modalView}>
-          <TextInput
-            style={styles.input}
-            value={splitName}
-            onChangeText={handleSplitNameChange}
-            placeholder="Enter Workout Day Name"
-          />
-          <TouchableOpacity style={styles.addButton} onPress={addSplit}>
-            <Text style={styles.buttonText}>Add Workout Day</Text>
-          </TouchableOpacity>
-          <Button title="Close" onPress={() => setShowModal(false)} />
-        </View>
-      </Modal>
-
-      {/* Rename Modal */}
+      {/* Rename/Delete Modal */}
       <Modal animationType="slide" transparent={true} visible={showRenameModal}>
         <View style={styles.modalView}>
           <TextInput
@@ -146,10 +73,21 @@ const WorkoutView = () => {
             onChangeText={setNewSplitName}
             placeholder="Rename Workout Day"
           />
-          <TouchableOpacity style={styles.addButton} onPress={renameSplit}>
-            <Text style={styles.buttonText}>Rename Workout Day</Text>
+          <TouchableOpacity style={styles.actionButton} onPress={renameSplit}>
+            <Text style={styles.actionButtonText}>Confirm Rename</Text>
           </TouchableOpacity>
-          <Button title="Close" onPress={() => setShowRenameModal(false)} />
+          <TextInput
+            style={styles.renameInput}
+            value={deleteConfirmation}
+            onChangeText={setDeleteConfirmation}
+            placeholder="Enter name to confirm deletion"
+          />
+          <TouchableOpacity style={styles.actionButton} onPress={handleDeleteSplit}>
+            <Text style={styles.actionButtonText}>Delete Tracker</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton} onPress={cancelEditDelete}>
+            <Text style={styles.actionButtonText}>Cancel</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
     </ScrollView>
