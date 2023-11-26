@@ -6,11 +6,9 @@ import { getUserID, pullDocData, pullDocNames } from '../../firebase/firebaseFun
 import GraphWithButton from '../../components/graph';
 
 const WorkoutView = () => {
-  const navigation = useNavigation(); /* allows us to navigate to the workout.js file and from there the addRepsWeights.js file */
-  const [showModal, setShowModal] = useState(false);
-  const [splitName, setSplitName] = useState('');
-  const [splits, setSplits] = useState([]);
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const navigation = useNavigation();
+  const [splits, setSplits] = useState([]); // Start with a default split for demonstration
+  const [showModal, setShowModal] = useState(false); // State to control visibility of the 'add split' modal
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
   const [newSplitName, setNewSplitName] = useState('');
