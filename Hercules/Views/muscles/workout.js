@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { collection, doc, addDoc, getDoc, setDoc, getDocs } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
-import { getUserID, pullDocData, pullDocNames } from '../../firebase/firebaseFunctions';
+import { getUserID, pullDocData, pullDocNames, formatFirestoreDate } from '../../firebase/firebaseFunctions';
 import GraphWithButton from '../../components/graph';
 
 const WorkoutView = () => {
@@ -25,43 +25,38 @@ useEffect(() => {
     testDate.setDate(17);   // use this when testing with Shelby's account data
     */
 
-    const formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
-    const reformattedDate = formattedDate.replace(/\//g, '.');
+    let formattedDate = formatFirestoreDate(currentDate);
 
     const userPath = `userData/${getUserID()}`;
-    const datePath = `${userPath}/logs/${reformattedDate}`;
+    const datePath = `${userPath}/logs/${formattedDate}`;
     const musclesPath = `${datePath}/muscles`;
     const munchiesPath = `${datePath}/munchies`;
     const mindPath = `${userPath}/mind`;
-    const mindDatePath = `${datePath}/mind/`;
 
 
     musclesDocs = await pullDocNames(musclesPath);  // musclesDocs now contains the names of all workouts logged on this day.
     munchiesDocs = await pullDocNames(munchiesPath);  // munchiesDocs now contains the names of all workouts logged on <currentDate>
     mindDocs = await pullDocNames(mindPath);    // now contains names of all trackers that have been saved to Firestore
     console.log(mindDocs);
-
-    /*
+/*
     let result = 0;
+    let mindDatePath = ``;
     for (let i = 0; i < mindDocs.length; i++) {   // runs for each element in mindDocs
       for (let j = 0; j < 7; j++) {
         try {
           result = 0;
-          result = await pullDocData(mindDatePath+mindDocs[i], value);    // data from userData/<userID>/logs/<date>/mind/<docName>
+          mindDatePath = 
+          //result = await pullDocData(mindDatePath+mindDocs[i], value);    // data from userData/<userID>/logs/<date>/mind/<docName>
           if (result != null) {
             mindValues[j] = result;
           }
         }
         catch (error) {
-          console.error('Error fetching doc name data from Firestore:', error);
+          console.error('Error fetching mind data from Firestore:', error);
         }
       }
     }
-    */
+*/
     /*for (let i = 0; i < munchiesDocs.length; i++) {   // reformats munchiesDocs array into single string w/return between each item
       console.log(munchiesDocs[i]);                     // did this to resolve display problems but did not work
       if (i > 0) {
