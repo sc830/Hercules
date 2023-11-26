@@ -80,6 +80,7 @@ const GraphWithButton = ({
           <Text>{">"}</Text>
         </TouchableOpacity>
       </View>
+      <View style={{ alignItems: 'center', width: '300', backgroundColor: 'white', borderRadius: 16 }}>
 
       <TouchableOpacity onPress={onButtonPress} style={{ alignItems: 'center' }}>
         <LineChart
@@ -90,8 +91,8 @@ const GraphWithButton = ({
           width={300} // Adjust as necessary for your layout
           height={200} // Adjust as necessary for your layout
           chartConfig={{
-            backgroundGradientFrom: '#fff',
-            backgroundGradientTo: '#fff',
+            backgroundGradientFrom: 'white', // background color
+            backgroundGradientTo: 'white',  // background color
             color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
             strokeWidth: 2, // optional, default 3
@@ -105,6 +106,7 @@ const GraphWithButton = ({
           }}
         />
       </TouchableOpacity>
+      </View>
     </View>
   );
 };

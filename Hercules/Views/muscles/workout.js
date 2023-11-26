@@ -86,7 +86,7 @@ const WorkoutView = () => {
 
       {/* Rename/Delete Modal */}
       <Modal animationType="slide" transparent={true} visible={showRenameModal}>
-        <View style={styles.modalView}>
+        <View style={styles.editPanel}>
           <TextInput
             style={styles.renameInput}
             value={newSplitName}
@@ -102,11 +102,11 @@ const WorkoutView = () => {
             onChangeText={setDeleteConfirmation}
             placeholder="Enter name to confirm deletion"
           />
-          <TouchableOpacity style={styles.actionButton} onPress={handleDeleteSplit}>
-            <Text style={styles.actionButtonText}>Delete Workout Day</Text>
+          <TouchableOpacity style={styles.cancelButton} onPress={handleDeleteSplit}>
+            <Text style={styles.cancelButton}>Delete Workout Day</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton} onPress={cancelEditDelete}>
-            <Text style={styles.actionButtonText}>Cancel</Text>
+          <TouchableOpacity style={styles.cancelButton} onPress={cancelEditDelete}>
+            <Text style={styles.cancelButton}>Cancel</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -236,6 +236,32 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
   },
+  cancelButton: {
+    backgroundColor: '#FF4500', // A red color for delete actions
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+    width: '100%',
+    color: 'white',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  editPanel: {
+    backgroundColor: '#FFF7E0',
+    padding: 10,
+    borderRadius: 5,
+    width: '40%', // Adjust the width as per your design
+    alignSelf: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+  },
+
 });
 
 export default WorkoutView;
