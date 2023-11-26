@@ -85,7 +85,7 @@ const Mindfulness = ({ navigation }) => {
                 <TextInput
                   value={deleteConfirmation}
                   onChangeText={setDeleteConfirmation}
-                  placeholder="Type here to confirm deletion"
+                  placeholder="Enter name to confirm deletion"
                   style={styles.trackerEdit}
                 />
                 <TouchableOpacity
