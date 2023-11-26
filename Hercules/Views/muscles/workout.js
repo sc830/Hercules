@@ -5,16 +5,19 @@ import GraphWithButton from '../../components/graph';
 
 const WorkoutView = () => {
   const navigation = useNavigation();
-  // Starting with a mock split for testing purposes
-  const [splits, setSplits] = useState(['Test Split']);
+  const [splits, setSplits] = useState(['Test Split']); // Start with a default split for demonstration
+  const [showModal, setShowModal] = useState(false); // State to control visibility of the 'add split' modal
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
   const [newSplitName, setNewSplitName] = useState('');
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
 
-  // Function to add a new split
-  const addSplit = (name) => {
-    setSplits([...splits, name]);
+  const addSplit = () => {
+    if (newSplitName.trim()) {
+      setSplits([...splits, newSplitName]);
+      setNewSplitName('');
+    }
+    setShowModal(false);
   };
 
   const handleRenameOpen = (index) => {
@@ -42,7 +45,9 @@ const WorkoutView = () => {
 
   const cancelEditDelete = () => {
     setDeleteConfirmation('');
+    setNewSplitName('');
     setShowRenameModal(false);
+    setShowModal(false);
   };
 
   return (
@@ -59,10 +64,25 @@ const WorkoutView = () => {
         </View>
       ))}
 
-      {/* Temporary Button to Add a Split for Testing */}
-      <TouchableOpacity style={styles.addButton} onPress={() => addSplit('New Split')}>
-        <Text style={styles.buttonText}>+ Add Test Split</Text>
+      <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
+        <Text style={styles.buttonText}>+ Add Workout Day</Text>
       </TouchableOpacity>
+
+      {/* Add Workout Day Modal */}
+      <Modal animationType="slide" transparent={true} visible={showModal}>
+        <View style={styles.modalView}>
+          <TextInput
+            style={styles.input}
+            value={newSplitName}
+            onChangeText={setNewSplitName}
+            placeholder="Enter Workout Day Name"
+          />
+          <TouchableOpacity style={styles.addButton} onPress={addSplit}>
+            <Text style={styles.buttonText}>Add Workout Day</Text>
+          </TouchableOpacity>
+          <Button title="Close" onPress={cancelEditDelete} />
+        </View>
+      </Modal>
 
       {/* Rename/Delete Modal */}
       <Modal animationType="slide" transparent={true} visible={showRenameModal}>
@@ -83,7 +103,7 @@ const WorkoutView = () => {
             placeholder="Enter name to confirm deletion"
           />
           <TouchableOpacity style={styles.actionButton} onPress={handleDeleteSplit}>
-            <Text style={styles.actionButtonText}>Delete Tracker</Text>
+            <Text style={styles.actionButtonText}>Delete Workout Day</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton} onPress={cancelEditDelete}>
             <Text style={styles.actionButtonText}>Cancel</Text>
@@ -93,6 +113,7 @@ const WorkoutView = () => {
     </ScrollView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
