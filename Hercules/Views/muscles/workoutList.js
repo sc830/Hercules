@@ -5,7 +5,7 @@ import BackButton from '../../components/backButton'; // Importing the BackButto
 import { saveWorkout } from '../../firebase/firebaseFunctions'; // Import your saveWorkout function
 
 const WorkoutList = ({ route }) => {
-  const { splitName } = route.params;
+  const { splitName, currentDate } = route.params;
   const [workouts, setWorkouts] = useState([]);
   const [workoutName, setWorkoutName] = useState('');
   const [showRenameModal, setShowRenameModal] = useState(false);
@@ -24,7 +24,13 @@ const WorkoutList = ({ route }) => {
       // Save the workout data to Firebase
       const workoutData = { name: workoutName, exercises: [] }; // Assuming an exercise list for each workout
       try {
-        const saveResult = await saveWorkout(workoutData, splitName);
+        const formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        });
+        const reformattedDate = formattedDate.replace(/\//g, '.');
+        const saveResult = await saveWorkout(workoutData, splitName, workoutName, reformattedDate);
         console.log(saveResult); // Output success message or handle accordingly
       } catch (error) {
         console.error('Error saving workout:', error.message); // Handle error
@@ -75,7 +81,7 @@ const WorkoutList = ({ route }) => {
         <View key={index} style={styles.workoutContainer}>
           <TouchableOpacity
             style={styles.workoutButton}
-            onPress={() => navigation.navigate('addRepsWeights', { workoutName: workout })}
+            onPress={() => navigation.navigate('addRepsWeights', { workoutName: workout, currentDate: currentDate })}
           >
             <Text style={styles.workoutText}>{workout}</Text>
             <TouchableOpacity

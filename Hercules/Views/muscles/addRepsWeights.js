@@ -8,15 +8,19 @@ import {
   ScrollView,
 } from 'react-native';
 import BackButton from '../../components/backButton'; // Make sure this import path is correct
+import { addSetToWorkout } from '../../firebase/firebaseFunctions'; // Update this import path
+
 
 const AddRepsWeights = ({ route, navigation }) => {
-  const { workoutName } = route.params;
+  const { workoutName, currentDate } = route.params;
   const [sets, setSets] = useState([]);
   const [currentReps, setCurrentReps] = useState('');
   const [currentWeight, setCurrentWeight] = useState('');
   const [recommendedIncrease, setRecommendedIncrease] = useState([]);
 
-  const addSet = () => {
+  
+
+  const addSet = async () => {
     if (currentReps && currentWeight) {
       const newSet = {
         reps: currentReps,
@@ -25,6 +29,24 @@ const AddRepsWeights = ({ route, navigation }) => {
       setSets([...sets, newSet]);
       setCurrentReps('');
       setCurrentWeight('');
+
+      // Add the set to the workout in Firebase
+
+      const formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
+      const reformattedDate = formattedDate.replace(/\//g, '.');
+      const date = currentDate; // Update this with the relevant date
+      const setId = sets.length.toString(); // Generate a unique set ID (you might want a better way to do this)
+      
+      const addSetResult = await addSetToWorkout(reformattedDate, workoutName, setId, newSet);
+      if (addSetResult.success) {
+        console.log('Set added to workout successfully');
+      } else {
+        console.error('Failed to add set to workout:', addSetResult.error);
+      }
     }
   };
 
