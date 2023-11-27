@@ -42,40 +42,34 @@ const Mindfulness = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-        });
-        let reformattedDate = formattedDate.replace(/\//g, '.');
   
         const userPath = `userData/${getUserID()}`;
-        const datePath = `${userPath}/logs/${reformattedDate}`;
+        let datePath = `${userPath}/logs/${todaysDateReformatted}`;
         const mindPath = `${userPath}/mind`;
 
         mindDocs = await pullDocNames(mindPath);
   
         let result = 0;
-        let mindDate = new Date();
-        let formattedMindDate = "";
-        let reformattedMindDate = "";
-        let mindDatePath = ``;
+        let dateTraverse = new Date();    // starts at current date
+        let formattedDate = "";
+        let reformattedDate = "";
+        datePath = ``;
         for (let i = 0; i < mindDocs.length; i++) {
           trackerData[mindDocs[i]] = [];
           for (let j = 0; j < 7; j++) {
             try {
               result = 0;
-              mindDate.setDate(currentDate.getDate() - (7 - j));
-              formattedMindDate = mindDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+              dateTraverse.setDate(currentDate.getDate() - (7 - j));
+              formattedDate = dateTraverse.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit',
               });
-              reformattedMindDate = formattedMindDate.replace(/\//g, '.');
-              mindDatePath = `${userPath}/logs/${reformattedMindDate}/mind/`;
-              result = await pullDocData(mindDatePath + mindDocs[i], "value");
+              todaysDateReformatted = formattedDate.replace(/\//g, '.');
+              datePath = `${userPath}/logs/${todaysDateReformatted}/mind/`;
+              result = await pullDocData(datePath + mindDocs[i], "value");
               if (result != null) {
-                console.log("Pulled from" + reformattedMindDate + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
+                console.log("Pulled from" + todaysDateReformatted + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
                 trackerData[mindDocs[i]].push(result);
               }
             } catch (error) {
