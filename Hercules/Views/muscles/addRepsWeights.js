@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import BackButton from '../../components/backButton'; // Make sure this import path is correct
 import { addSetToWorkout } from '../../firebase/firebaseFunctions'; // Update this import path
+import { getUserID, pullDocData, pullDocNames } from '../../firebase/firebaseFunctions';
+
 
 
 const AddRepsWeights = ({ route, navigation }) => {
@@ -17,6 +19,37 @@ const AddRepsWeights = ({ route, navigation }) => {
   const [currentReps, setCurrentReps] = useState('');
   const [currentWeight, setCurrentWeight] = useState('');
   const [recommendedIncrease, setRecommendedIncrease] = useState([]);
+  let { musclesDocs } = { musclesDocs: [] };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userPath = `userData/${getUserID()}`;
+        const musclesPath = `${userPath}/muscles`;
+        let datePath = ``;
+
+        musclesDocs = await pullDocNames(musclesPath);      // this holds names of all previously logged workouts
+  
+        let result = 0;
+        let traverseDate = new Date();
+        let formattedtraverseDate = "";
+        let reformattedtraverseDate = "";
+        datePath = ``;
+        for (let i = 0; i < musclesDocs.length; i++) {
+            try {
+              
+            } catch (error) {
+              console.error('Error fetching mind data from Firestore:', error);
+            }
+          }
+          console.log("Data for", musclesDocs[i], trackerData[musclesDocs[i]]);   // outputs info inside trackerData for each workout
+      } catch (error) {
+        console.error('Error in fetchData (muscles):', error);
+      }
+    };
+  
+    fetchData();
+  }, [currentDate]);
 
   
 
@@ -39,7 +72,7 @@ const AddRepsWeights = ({ route, navigation }) => {
       });
       const reformattedDate = formattedDate.replace(/\//g, '.');
       const date = currentDate; // Update this with the relevant date
-      const setId = sets.length.toString(); // Generate a unique set ID (you might want a better way to do this)
+      const setId = "Set " + (sets.length.toString())+1; // Generate a unique set ID (you might want a better way to do this)
       
       const addSetResult = await addSetToWorkout(reformattedDate, workoutName, setId, newSet);
       if (addSetResult.success) {

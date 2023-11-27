@@ -20,12 +20,11 @@ const WorkoutView = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-  
         const userPath = `userData/${getUserID()}`;
         const musclesPath = `${userPath}/muscles`;
         let datePath = ``;
 
-        musclesDocs = await pullDocNames(musclesPath);
+        musclesDocs = await pullDocNames(musclesPath);      // this holds names of all previously logged workouts
   
         let result = 0;
         let traverseDate = new Date();
@@ -54,7 +53,7 @@ const WorkoutView = () => {
               console.error('Error fetching mind data from Firestore:', error);
             }
           }
-          console.log("Data for", musclesDocs[i], trackerData[musclesDocs[i]]);   // outputs info inside trackerData for each tracker
+          console.log("Data for", musclesDocs[i], trackerData[musclesDocs[i]]);   // outputs info inside trackerData for each workout
         }
       } catch (error) {
         console.error('Error in fetchData (muscles):', error);
