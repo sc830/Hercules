@@ -1,12 +1,16 @@
 {
+  "homepage": "https://kacysgit.github.io/ColorCatalog/",
   "name": "Hercules",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
+    "deploy": "gh-pages -d web-build",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build": "npx expo export:web",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
