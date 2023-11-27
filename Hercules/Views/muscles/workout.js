@@ -17,32 +17,52 @@ const WorkoutView = () => {
   let { musclesDocs, munchiesDocs} = { musclesDocs: [], munchiesDocs: []};
 
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      let formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-      });
-      let reformattedDate = formattedDate.replace(/\//g, '.');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+  
+        const userPath = `userData/${getUserID()}`;
+        const musclesPath = `${userPath}/muscles`;
+        let datePath = ``;
 
-      const userPath = `userData/${getUserID()}`;
-      const datePath = `${userPath}/logs/${reformattedDate}`;
-      const musclesPath = `${datePath}/muscles`;
-      const munchiesPath = `${datePath}/munchies`;
-      const mindPath = `${userPath}/mind`;
-
-      musclesDocs = await pullDocNames(musclesPath);
-      munchiesDocs = await pullDocNames(munchiesPath);
-      
-    } catch (error) {
-      console.error('Error in fetchData:', error);
-    }
-  };
-
-  fetchData();
-}, [currentDate]);
+        musclesDocs = await pullDocNames(musclesPath);
+  
+        let result = 0;
+        let traverseDate = new Date();
+        let formattedtraverseDate = "";
+        let reformattedtraverseDate = "";
+        datePath = ``;
+        for (let i = 0; i < musclesDocs.length; i++) {
+          trackerData[musclesDocs[i]] = [];
+          for (let j = 0; j < 7; j++) {
+            try {
+              result = 0;
+              traverseDate.setDate(currentDate.getDate() - (7 - j));
+              formattedtraverseDate = traverseDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              });
+              reformattedtraverseDate = formattedtraverseDate.replace(/\//g, '.');
+              datePath = `${userPath}/logs/${reformattedtraverseDate}/mind/`;
+              result = await pullDocData(datePath + musclesDocs[i], "value");
+              if (result != null) {
+                console.log("Pulled from" + reformattedtraverseDate + ": " + result + "  for " + musclesDocs[i]);   // console logs the data point pulled from date/tracker
+                trackerData[musclesDocs[i]].push(result);
+              }
+            } catch (error) {
+              console.error('Error fetching mind data from Firestore:', error);
+            }
+          }
+          console.log("Data for", musclesDocs[i], trackerData[musclesDocs[i]]);   // outputs info inside trackerData for each tracker
+        }
+      } catch (error) {
+        console.error('Error in fetchData (muscles):', error);
+      }
+    };
+  
+    fetchData();
+  }, [currentDate]);
 
 const addSplit = () => {
   if (newSplitName.trim()) {
