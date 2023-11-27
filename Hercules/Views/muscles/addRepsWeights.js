@@ -19,32 +19,43 @@ const AddRepsWeights = ({ route, navigation }) => {
   const [currentReps, setCurrentReps] = useState('');
   const [currentWeight, setCurrentWeight] = useState('');
   const [recommendedIncrease, setRecommendedIncrease] = useState([]);
-  let { musclesDocs } = { musclesDocs: [] };
+  let { setsDocs, results } = { setsDocs: [], results: {} };    // results is object containing set data, where index 0 = Set 1, index 1 = Set 2, etc.
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userPath = `userData/${getUserID()}`;
-        const musclesPath = `${userPath}/muscles`;
-        let datePath = ``;
+        let formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        });
+        let reformattedDate = formattedDate.replace(/\//g, '.');
 
-        musclesDocs = await pullDocNames(musclesPath);      // this holds names of all previously logged workouts
+        const userPath = `userData/${getUserID()}`;
+        const setsPath = `${userPath}/logs/${reformattedDate}/muscles/${workoutName}`;
+
+        setsDocs = await pullDocNames(setsPath);      // this holds names of all previously logged workouts
   
-        let result = 0;
-        let traverseDate = new Date();
-        let formattedtraverseDate = "";
-        let reformattedtraverseDate = "";
-        datePath = ``;
-        for (let i = 0; i < musclesDocs.length; i++) {
+        let weightResult = 0;
+        let repsResult = 0;
+        let setString = "";
+
+        for (let i = 0; i < setsDocs.length; i++) { // setsDocs.length = number of sets logged for this workout
+          setString = `Set: ${i+1}`;    // 
             try {
-              
+              weightResult = pullDocData(setsDocs+setString, "weight");
+              repsResult = pullDocData(setsDocs+setString, "reps");
+              if (result != null) {
+                results[setsDocs[i]] = results[setsDocs[i]] || []; // check if object key exists
+                results[setsDocs[i]].push(weightResult, repsResult);
+              }
             } catch (error) {
               console.error('Error fetching mind data from Firestore:', error);
             }
           }
-          console.log("Data for", musclesDocs[i], trackerData[musclesDocs[i]]);   // outputs info inside trackerData for each workout
+          console.log("Data for", setsDocs[i], results[setsDocs[i]]);   // outputs info inside trackerData for each workout
       } catch (error) {
-        console.error('Error in fetchData (muscles):', error);
+        console.error('Error in fetchData (sets):', error);
       }
     };
   
