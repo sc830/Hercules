@@ -92,7 +92,7 @@ return (
           trackerTitle={split}
           initialData={[0, 0, 0]} // Replace with actual data
           labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]} // Replace with actual labels
-          onButtonPress={() => navigation.navigate('workoutList', { splitName: split })}
+          onButtonPress={() => navigation.navigate('workoutList', { splitName: split, currentDate: currentDate })}
           onTitleChange={() => handleRenameOpen(index)}
         />
       </View>

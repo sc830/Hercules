@@ -87,7 +87,9 @@ const signUp = async (email, password, username) => {
     /*const workoutsData = {
      exampleField: 'Example Workouts Data'
     };
-    await setDoc(doc(db, 'workouts', user.uid), workoutsData);
+    const dtt = new Date();
+    await (doc(db, 'test',  user.uid, 'workouts'));
+    
 
     const mindData = {
       exampleField: 'Example Mind Data'
@@ -164,7 +166,13 @@ export const pullDocNames = async(collectionPath) => {
 const saveMeal = async (mealData, mealType) => {
   try {
     const dt = new Date();
-    const mealsCollectionRef = collection(db, 'userData', userid, 'munchies', mealType, dt.toISOString());
+    const year = dt.getFullYear();
+    const month = String(dt.getMonth() + 1).padStart(2, '0');
+    const day = String(dt.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    
+    const mealsCollectionRef = collection(db, 'userData', userid, 'munchies', mealType, formattedDate);
     await addDoc(mealsCollectionRef, mealData);
     return "Meal saved successfully";
   } catch (error) {
@@ -172,6 +180,46 @@ const saveMeal = async (mealData, mealType) => {
   }
 };
 
+export const saveWorkout = async ( workoutData, splitName, workoutName, date) => {
+  try {
+  const dt = new Date();
+  const year = dt.getFullYear();
+  const month = String(dt.getMonth() + 1).padStart(2, '0');
+  const day = String(dt.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
+
+// Assuming you have a 'workouts' collection in Firestore
+await setDoc(doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName,), {
+  workout: workoutName,
+  set1reps: 'reps',
+  set1weight: 'weight',
+});
+
+// const workoutCollectionRef = collection(db, 'userData', userid, 'logs', workoutName, formattedDate);
+//     await setDoc(workoutCollectionRef, workoutData);
+    return { success: true, message: 'Workout saved successfully' };
+  } catch (error) {
+    return { success: false, error };
+  }
+};
+
+export const addSetToWorkout = async (date, workoutName, setId, set) => {
+  try {
+    const workoutRef = doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName);
+console.log('getting ref');
+    const workoutSnapshot = await getDoc(workoutRef);
+    console.log('ref worked');
+    if (workoutSnapshot.exists()) {
+      await setDoc(doc(workoutRef, 'sets', setId), set);
+      return { success: true, message: 'Set added to workout successfully' };
+    } else {
+      throw new Error('Workout not found');
+    }
+  } catch (error) {
+    console.error('Error adding set to workout:', error);
+    return { success: false, error: error.message };
+  }
+};
 
 
 export { signUp, login, saveMeal };
