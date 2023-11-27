@@ -14,7 +14,6 @@ const WorkoutView = () => {
   const [renameIndex, setRenameIndex] = useState(-1);
   const [newSplitName, setNewSplitName] = useState('');
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
-  const [currentDate, setCurrentDate] = useState(new Date());
   let { musclesDocs, munchiesDocs} = { musclesDocs: [], munchiesDocs: []};
 
 
