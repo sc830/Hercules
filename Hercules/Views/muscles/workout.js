@@ -32,8 +32,8 @@ const WorkoutView = () => {
         let formattedtraverseDate = "";
         let reformattedtraverseDate = "";
         datePath = ``;
-        for (let i = 0; i < mindDocs.length; i++) {
-          trackerData[mindDocs[i]] = [];
+        for (let i = 0; i < musclesDocs.length; i++) {
+          trackerData[musclesDocs[i]] = [];
           for (let j = 0; j < 7; j++) {
             try {
               result = 0;
@@ -45,16 +45,16 @@ const WorkoutView = () => {
               });
               reformattedtraverseDate = formattedtraverseDate.replace(/\//g, '.');
               datePath = `${userPath}/logs/${reformattedtraverseDate}/mind/`;
-              result = await pullDocData(datePath + mindDocs[i], "value");
+              result = await pullDocData(datePath + musclesDocs[i], "value");
               if (result != null) {
-                console.log("Pulled from" + reformattedtraverseDate + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
-                trackerData[mindDocs[i]].push(result);
+                console.log("Pulled from" + reformattedtraverseDate + ": " + result + "  for " + musclesDocs[i]);   // console logs the data point pulled from date/tracker
+                trackerData[musclesDocs[i]].push(result);
               }
             } catch (error) {
               console.error('Error fetching mind data from Firestore:', error);
             }
           }
-          console.log("Data for", mindDocs[i], trackerData[mindDocs[i]]);   // outputs info inside trackerData for each tracker
+          console.log("Data for", musclesDocs[i], trackerData[musclesDocs[i]]);   // outputs info inside trackerData for each tracker
         }
       } catch (error) {
         console.error('Error in fetchData (muscles):', error);
