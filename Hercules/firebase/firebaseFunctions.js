@@ -70,7 +70,7 @@ const signUp = async (email, password, username) => {
     userid = user.uid;
     const dt = new Date();
 
-    await setDoc(doc(db, 'userData', user.uid), {
+    await setDoc(doc(db, 'UserData', user.uid), {
       username: username,
       email: email,
       last_login: dt.toISOString(),
@@ -117,7 +117,7 @@ const login = async (email, password) => {
 
     const dt = new Date();
 
-    await setDoc(doc(db, 'userData', user.uid), {
+    await setDoc(doc(db, 'UserData', user.uid), {
       last_login: dt.toISOString(),
     });
 
@@ -172,7 +172,7 @@ const saveMeal = async (mealData, mealType) => {
     const formattedDate = `${year}-${month}-${day}`;
 
     
-    const mealsCollectionRef = collection(db, 'userData', userid, 'munchies', mealType, formattedDate);
+    const mealsCollectionRef = collection(db, 'UserData', userid, 'munchies', mealType, formattedDate);
     await addDoc(mealsCollectionRef, mealData);
     return "Meal saved successfully";
   } catch (error) {
@@ -199,11 +199,11 @@ export const saveWorkout = async ( workoutData, splitName, workoutName, date) =>
     }
 
 // Assuming you have a 'workouts' collection in Firestore
-await setDoc(doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName,), {
+await setDoc(doc(db, 'UserData', userid, 'logs', date, 'muscles', workoutName,), {
   workout: workoutName,
 });
 
-// const workoutCollectionRef = collection(db, 'userData', userid, 'logs', workoutName, formattedDate);
+// const workoutCollectionRef = collection(db, 'UserData', userid, 'logs', workoutName, formattedDate);
 //     await setDoc(workoutCollectionRef, workoutData);
     return { success: true, message: 'Workout saved successfully' };
   } catch (error) {
@@ -213,7 +213,8 @@ await setDoc(doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName,),
 
 export const addSetToWorkout = async (date, workoutName, setId, set) => {
   try {
-    const workoutRef = doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName);
+    const workoutRef = doc(db, 'UserData', userid, 'logs', date, 'muscles', workoutName);
+console.log('getting ref');
     const workoutSnapshot = await getDoc(workoutRef);
     console.log('ref worked');
     if (workoutSnapshot.exists()) {
@@ -236,8 +237,8 @@ export const savemind = async (mindInfoName, date) => {
     const day = String(dt.getDate()).padStart(2, '0');
     const formattedDate = `${year}-${month}-${day}`;
 
-    //const mindCollectionRef = collection(db, 'userData', userid, 'logs', date, 'mind', mindInfoName);
-    await setDoc(doc(db, 'userData', userid, 'logs', date, 'mind', mindInfoName,), {
+    //const mindCollectionRef = collection(db, 'UserData', userid, 'logs', date, 'mind', mindInfoName);
+    await setDoc(doc(db, 'UserData', userid, 'logs', date, 'mind', mindInfoName,), {
       workout: mindInfoName,
       // Add any other relevant fields here
     });
@@ -250,7 +251,7 @@ export const savemind = async (mindInfoName, date) => {
 
 export const adddatatomind = async (date, mindName, data, number) => {
   try {
-    const mindRef = doc(db, 'userData', userid, 'logs', date, 'mind', mindName);
+    const mindRef = doc(db, 'UserData', userid, 'logs', date, 'mind', mindName);
 console.log('getting ref');
     const mindSnapshot = await getDoc(mindRef);
     console.log('ref worked');
