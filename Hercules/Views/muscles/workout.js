@@ -31,11 +31,8 @@ useEffect(() => {
       const userPath = `userData/${getUserID()}`;
       const datePath = `${userPath}/logs/${reformattedDate}`;
       const musclesPath = `${datePath}/muscles`;
-      const munchiesPath = `${datePath}/munchies`;
-      const mindPath = `${userPath}/mind`;
 
       musclesDocs = await pullDocNames(musclesPath);
-      munchiesDocs = await pullDocNames(munchiesPath);
       
     } catch (error) {
       console.error('Error in fetchData:', error);
