@@ -43,8 +43,8 @@ const AddRepsWeights = ({ route, navigation }) => {
         for (let i = 0; i < setsDocs.length; i++) { // setsDocs.length = number of sets logged for this workout
           setString = `Set: ${i+1}`;    // 
             try {
-              weightResult = pullDocData(setsDocs+setString, "weight");
-              repsResult = pullDocData(setsDocs+setString, "reps");
+              weightResult = pullDocData(setsPath+setString, "weight");
+              repsResult = pullDocData(setsPath+setString, "reps");
               console.log(`workoutName: ${workoutName}   weightResult: ${weightResult}   repsResult: ${repsResult}`);
               if (result != null) {
                 results[setsDocs[i]] = results[setsDocs[i]] || []; // check if object key exists
