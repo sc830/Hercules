@@ -31,7 +31,7 @@ const Mindfulness = ({ navigation }) => {
     submitCustomTracker,
     updateTrackerTitle, // ensure this is defined in useCustomTracker
     deleteTracker, // ensure this is defined in useCustomTracker
-  } = useCustomTracker(['Creatine', 'Sleep', 'Water']);
+  } = useCustomTracker(['Creatine', 'Sleep', 'Water', 'Steroids']);
 
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const [editingTracker, setEditingTracker] = useState(null);
