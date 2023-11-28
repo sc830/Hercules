@@ -5,7 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // Import your screen components here
 import Workout from '../muscles/workout';
-import workoutList from '../muscles/workoutList';
 import addRepsWeights from '../muscles/addRepsWeights';
 import Munchies from '../munchies/Munchies';
 import BreakfastScreen from '../munchies/BreakfastScreen';
@@ -24,7 +23,6 @@ const Stack = createStackNavigator();
 const WorkoutStackNavigator = () => (
   <Stack.Navigator screenOptions={AppStyles.stackScreenOptions}>
     <Stack.Screen name="Workout" component={Workout} />
-    <Stack.Screen name="workoutList" component={workoutList} />
     <Stack.Screen name="addRepsWeights" component={addRepsWeights} />
   </Stack.Navigator>
 );
