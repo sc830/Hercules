@@ -46,7 +46,6 @@ const AddRepsWeights = ({ route, navigation }) => {
             try {
               weightResult = await pullDocData(`${setsPath}/${setString}`, "weight");
               repsResult = await pullDocData(`${setsPath}/${setString}`, "reps");
-              console.log(`workoutName: ${workoutName}   weightResult: ${weightResult}   repsResult: ${repsResult}`);
               if (weightResult != null && repsResult != null) {
                 results[setsDocs[i]] = results[setsDocs[i]] || []; // check if object key exists
                 results[setsDocs[i]].push(weightResult, repsResult);
@@ -58,7 +57,6 @@ const AddRepsWeights = ({ route, navigation }) => {
             } catch (error) {
               console.error('Error fetching reps/weight data from Firestore:', error);
             }
-            console.log("Data for", setsDocs[i], results[setsDocs[i]]);   // outputs info inside results[] for each workout
           }
           setSets(updatedSets);
       } catch (error) {
@@ -92,7 +90,7 @@ const AddRepsWeights = ({ route, navigation }) => {
       const date = currentDate; // Update this with the relevant date
       const setId = "Set " + (sets.length + 1).toString();
       
-      const addSetResult = await addSetToWorkout(reformattedDate, workoutName, setId, newSet);
+      const addSetResult = await addSetToWorkout(reformattedDate, workoutName, setId+1, newSet);
       if (addSetResult.success) {
         console.log('Set added to workout successfully');
       } else {

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
 import BackButton from '../../components/backButton';
 import { styles } from './CommonStyles';
+import { adddatatomind } from '../../firebase/firebaseFunctions';
+
 
 /**
  * TrackIntakeScreen.js: Screen for entering and editing health tracker data.
@@ -12,11 +14,12 @@ import { styles } from './CommonStyles';
  */
 
 const TrackIntakeScreen = ({ navigation, route }) => {
-  const { itemType } = route.params; // This retrieves the updated tracker title
+  const { itemType, currentDate } = route.params; // This retrieves the updated tracker title
   const [inputValue, setInputValue] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [itemList, setItemList] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+
 
   // Handles the logic to open the modal for adding a new item
   const handleAddItem = () => {
@@ -25,18 +28,39 @@ const TrackIntakeScreen = ({ navigation, route }) => {
   };
 
   // Saves the new or edited item to the list
-  const handleSave = () => {
-    let updatedList = itemList;
-    if (selectedItem !== null) {
-      updatedList = itemList.map((item) => (item === selectedItem ? inputValue : item));
-    } else {
-      updatedList = [...itemList, inputValue];
+  const handleSave = async () => {
+    try {
+      let updatedList = itemList;
+      if (selectedItem !== null) {
+        updatedList = itemList.map((item) => (item === selectedItem ? inputValue : item));
+      } else {
+        updatedList = [...itemList, inputValue];
+      }
+
+      // Update Firebase using adddatatomind function
+      const formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
+      const reformattedDate = formattedDate.replace(/\//g, '.');
+      const number = itemList.length.toString();
+      const data = updatedList[number]; // Set the data you want to save
+      const result = await adddatatomind(reformattedDate, itemType, data,number);
+
+      if (result.success) {
+        // Update local state or perform any necessary actions upon successful save
+        setItemList(updatedList);
+        setInputValue('');
+        setModalVisible(false);
+        setSelectedItem(null);
+      } else {
+        // Handle error if needed
+        console.error('Error saving item:', result.error);
+      }
+    } catch (error) {
+      console.error('Error handling save:', error);
     }
-    setItemList(updatedList);
-    setInputValue('');
-    setModalVisible(false);
-    setSelectedItem(null);
-    // Save the updated list to your backend or state management system
   };
 
   // Deletes the selected item from the list
