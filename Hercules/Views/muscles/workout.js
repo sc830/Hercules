@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { saveWorkout } from '../../firebase/firebaseFunctions';
+import { saveWorkout, getUserID, pullDocData, pullDocNames } from '../../firebase/firebaseFunctions';
 
 const WorkoutView = () => {
   const navigation = useNavigation();
@@ -19,9 +19,30 @@ const WorkoutView = () => {
   const [renameIndexWorkout, setRenameIndexWorkout] = useState(-1);
   const [showDeleteOptionWorkout, setShowDeleteOptionWorkout] = useState(-1);
   const [showAddModalWorkout, setShowAddModalWorkout] = useState(false);
+  let { musclesDocs } = { musclesDocs: [] };
 
   useEffect(() => {
-    // Existing fetchData logic...
+    const fetchData = async () => {
+      try {
+        let formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        });
+        let reformattedDate = formattedDate.replace(/\//g, '.');
+
+        const userPath = `userData/${getUserID()}`;
+        const datePath = `${userPath}/logs/${reformattedDate}/muscles`;
+
+        musclesDocs = await pullDocNames(datePath);
+        console.log(`Docs content: ${musclesDocs}`);
+        
+      } catch (error) {
+        console.error('Error in fetchData:', error);
+      }
+    };
+
+    fetchData();
   }, [currentDate]);
 
   const addSplit = () => {
