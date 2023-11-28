@@ -93,7 +93,7 @@ const Mindfulness = ({ navigation }) => {
               thisPath = `${datePath}/${mindDocs[i]}`;
               result = await pullDocData(thisPath, "value");
               if (result != null) {
-                console.log("Pulled from" + reformattedDate + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
+                //console.log("Pulled from " + reformattedDate + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
                 trackerData[mindDocs[i]].push(result);
               }
             } catch (error) {
