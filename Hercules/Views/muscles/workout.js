@@ -226,12 +226,12 @@ const WorkoutView = () => {
         {musclesDocs.map((doc, index) => (
           <TouchableOpacity
             key={index}
-            style={styles.workoutButton}  // Define a new style for the button
+            style={styles.workoutButtonLite}  // Define a new style for the button
             onPress={() => {
               // Handle button press if needed
             }}
           >
-            <Text style={styles.workoutText}>{doc}</Text>
+            <Text style={styles.workoutTextLite}>{doc}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -297,6 +297,20 @@ const styles = StyleSheet.create({
   workoutButton: {
     backgroundColor: '#D4AF37', // Gold color
     width: '90%',
+    height: 60,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+    elevation: 3, // Adds a drop shadow on Android
+    shadowColor: '#000', // Adds a shadow on iOS
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+  },
+  workoutButtonLite: {
+    backgroundColor: '#D4AF37', // gold color
+    width: '80%',           // smaller than main button
     height: 60,
     borderRadius: 10,
     justifyContent: 'center',
@@ -436,6 +450,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: '600', // Semi-bold
+  },
+  workoutTextLite: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: '600', // Semi- bold
   },
 });
 
