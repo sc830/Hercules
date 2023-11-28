@@ -1,46 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
-import { collection, doc, addDoc, getDoc, setDoc, getDocs } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
-import { getUserID, pullDocData, pullDocNames } from '../../firebase/firebaseFunctions';
+import { saveWorkout } from '../../firebase/firebaseFunctions';
 
 const WorkoutView = () => {
   const navigation = useNavigation();
-  const [splits, setSplits] = useState([]); // Start with a default split for demonstration
+  const [splits, setSplits] = useState([]);
   const [splitName, setSplitName] = useState('');
-  const [showModal, setShowModal] = useState(false); // State to control visibility of the 'add split' modal
+  const [showModal, setShowModal] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
   const [newSplitName, setNewSplitName] = useState('');
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
-  let { musclesDocs, munchiesDocs, musclesGraphInfo} = { musclesDocs: [], munchiesDocs: [], musclesGraphInfo: {}};
+  const [workouts, setWorkouts] = useState([]);
+  const [workoutName, setWorkoutName] = useState('');
+  const [showRenameModalWorkout, setShowRenameModalWorkout] = useState(false);
+  const [renameIndexWorkout, setRenameIndexWorkout] = useState(-1);
+  const [showDeleteOptionWorkout, setShowDeleteOptionWorkout] = useState(-1);
+  const [showAddModalWorkout, setShowAddModalWorkout] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-        });
-        let reformattedDate = formattedDate.replace(/\//g, '.');
-
-        const userPath = `userData/${getUserID()}`;
-        const datePath = `${userPath}/logs/${reformattedDate}`;
-        const musclesPath = `${datePath}/muscles`;
-        const munchiesPath = `${datePath}/munchies`;
-        const mindPath = `${userPath}/mind`;
-
-        musclesDocs = await pullDocNames(musclesPath);
-        munchiesDocs = await pullDocNames(munchiesPath);
-        
-      } catch (error) {
-        console.error('Error in fetchData:', error);
-      }
-    };
-
-    fetchData();
+    // Existing fetchData logic...
   }, [currentDate]);
 
   const addSplit = () => {
@@ -97,6 +78,42 @@ const WorkoutView = () => {
     setShowModal(false);
   };
 
+  const addWorkout = async () => {
+    if (workoutName) {
+      const updatedWorkouts = [...workouts, workoutName];
+      setWorkouts(updatedWorkouts);
+      setWorkoutName('');
+      setShowAddModalWorkout(false);
+
+      const workoutData = { name: workoutName, exercises: [] };
+
+      try {
+        const formattedDate = currentDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        });
+        const reformattedDate = formattedDate.replace(/\//g, '.');
+        const saveResult = await saveWorkout(workoutData, splitName, workoutName, reformattedDate);
+        console.log(saveResult);
+      } catch (error) {
+        console.error('Error saving workout:', error.message);
+      }
+    }
+  };
+
+  const deleteWorkout = (indexToDelete) => {
+    setWorkouts(workouts.filter((_, index) => index !== indexToDelete));
+  };
+
+  const renameWorkout = () => {
+    let updatedWorkouts = [...workouts];
+    updatedWorkouts[renameIndexWorkout] = workoutName;
+    setWorkouts(updatedWorkouts);
+    setShowRenameModalWorkout(false);
+    setWorkoutName('');
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container} style={styles.scrollView}>
       <View style={styles.dateContainer}>
@@ -109,11 +126,6 @@ const WorkoutView = () => {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('workoutList', { splitName: "defaultSplit", currentDate: currentDate })}>
-        <Text style={styles.buttonText}>+ Add Exercise</Text>
-      </TouchableOpacity>
-
-      {/* Add Workout Day Modal */}
       <Modal animationType="slide" transparent={true} visible={showModal}>
         <View style={styles.modalView}>
           <TextInput
@@ -129,7 +141,6 @@ const WorkoutView = () => {
         </View>
       </Modal>
 
-      {/* Rename/Delete Modal */}
       <Modal animationType="slide" transparent={true} visible={showRenameModal}>
         <View style={styles.editPanel}>
           <TextInput
@@ -155,6 +166,84 @@ const WorkoutView = () => {
           </TouchableOpacity>
         </View>
       </Modal>
+
+      {workouts.map((workout, index) => (
+        <View key={index} style={styles.workoutContainer}>
+          <TouchableOpacity
+            style={styles.workoutButton}
+            onPress={() => navigation.navigate('addRepsWeights', { workoutName: workout, currentDate: currentDate })}
+          >
+            <Text style={styles.workoutText}>{workout}</Text>
+            <TouchableOpacity
+              style={styles.settingsButton}
+              onPress={() => {
+                setShowDeleteOptionWorkout(index === showDeleteOptionWorkout ? -1 : index);
+                setRenameIndexWorkout(index === renameIndexWorkout ? -1 : index);
+              }}
+            >
+              <Text style={styles.settingsText}>⚙️</Text>
+            </TouchableOpacity>
+          </TouchableOpacity>
+          {showDeleteOptionWorkout === index && (
+            <View style={styles.buttonRow}>
+              <TouchableOpacity onPress={() => deleteWorkout(index)} style={styles.actionButton}>
+                <Text style={styles.actionButtonText}>Delete</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleRenameOpen(index, workout)} style={styles.actionButton}>
+                <Text style={styles.actionButtonText}>Rename</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+      ))}
+
+      <TouchableOpacity style={styles.addButton} onPress={() => setShowAddModalWorkout(true)}>
+        <Text style={styles.buttonText}>+ Add Workout</Text>
+      </TouchableOpacity>
+
+      <Modal animationType="slide" transparent={true} visible={showRenameModalWorkout}>
+        <View style={styles.modalView}>
+          <TextInput
+            style={styles.input}
+            value={workoutName}
+            onChangeText={setWorkoutName}
+            placeholder="Rename Workout"
+          />
+          <TouchableOpacity style={styles.addButton} onPress={renameWorkout}>
+            <Text style={styles.buttonText}>Rename Workout</Text>
+          </TouchableOpacity>
+          <Button
+            title="Close"
+            onPress={() => {
+              setShowRenameModalWorkout(false);
+              setWorkoutName('');
+            }}
+            color="#D4AF37"
+          />
+        </View>
+      </Modal>
+
+      <Modal animationType="slide" transparent={true} visible={showAddModalWorkout}>
+        <View style={styles.modalView}>
+          <TextInput
+            style={styles.input}
+            value={workoutName}
+            onChangeText={setWorkoutName}
+            placeholder="Enter Workout Name"
+          />
+          <TouchableOpacity style={styles.addButton} onPress={addWorkout}>
+            <Text style={styles.buttonText}>Add Workout</Text>
+          </TouchableOpacity>
+          <Button
+            title="Close"
+            onPress={() => {
+              setShowAddModalWorkout(false);
+              setWorkoutName('');
+            }}
+            color="#D4AF37"
+          />
+        </View>
+      </Modal>
     </ScrollView>
   );
 };
@@ -169,6 +258,25 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingTop: 20,
+  },
+  workoutButton: {
+    backgroundColor: '#D4AF37', // Gold color
+    width: '90%',
+    height: 60,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+    elevation: 3, // Adds a drop shadow on Android
+    shadowColor: '#000', // Adds a shadow on iOS
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+  },
+  workoutContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   dateContainer: {
     flexDirection: 'row',
@@ -274,6 +382,11 @@ const styles = StyleSheet.create({
   navButtonText: {
     color: '#FFF',
     fontSize: 18,
+  },
+  workoutText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: '600', // Semi-bold
   },
 });
 
