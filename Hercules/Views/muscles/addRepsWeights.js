@@ -51,7 +51,7 @@ const AddRepsWeights = ({ route, navigation }) => {
                 results[setsDocs[i]].push(weightResult, repsResult);
               }
             } catch (error) {
-              console.error('Error fetching mind data from Firestore:', error);
+              console.error('Error fetching reps/weight data from Firestore:', error);
             }
             console.log("Data for", setsDocs[i], results[setsDocs[i]]);   // outputs info inside results[] for each workout
           }
