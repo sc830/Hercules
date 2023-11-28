@@ -14,7 +14,7 @@ const WorkoutView = () => {
   const [renameIndex, setRenameIndex] = useState(-1);
   const [newSplitName, setNewSplitName] = useState('');
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
-  let { musclesDocs, munchiesDocs} = { musclesDocs: [], munchiesDocs: []};
+  let { musclesDocs, munchiesDocs, musclesGraphInfo} = { musclesDocs: [], munchiesDocs: [], musclesGraphInfo: {}};
 
   useEffect(() => {
     const fetchData = async () => {
