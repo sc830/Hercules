@@ -55,6 +55,8 @@ const Mindfulness = ({ navigation }) => {
 
         // Set the initial state of useCustomTracker with the tracker objects
         setTrackers(initialTrackers);
+        setTrackerTitles(mindDocs);
+
       } catch (error) {
         console.error('Error in fetchData:', error);
       }
@@ -108,6 +110,7 @@ const Mindfulness = ({ navigation }) => {
     };
 
     fetchMindData();
+    console.log('Trackers:', trackers);
   }, [mindDocs, currentDate, trackerData]);
 
   const startEditingTracker = (tracker) => {
@@ -191,7 +194,7 @@ const Mindfulness = ({ navigation }) => {
                     itemType: trackerTitles[tracker],
                   })
                 }
-                trackerTitle={trackerTitles[tracker]}
+                trackerTitle={tracker.title.charAt(0).toUpperCase() + tracker.title.slice(1)}
                 onTitleChange={() => startEditingTracker(index)}
               />
             )}
