@@ -60,15 +60,16 @@ const Mindfulness = ({ navigation }) => {
           for (let j = 0; j < 7; j++) {
             try {
               result = 0;
+              dateTraverse = new Date(currentDate);
               dateTraverse.setDate(currentDate.getDate() - (7 - j));
               formattedDate = dateTraverse.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit',
               });
-              todaysDateReformatted = formattedDate.replace(/\//g, '.');
-              datePath = `${userPath}/logs/${todaysDateReformatted}/mind/`;
-              result = await pullDocData(datePath + mindDocs[i], "value");
+              reformattedDate = formattedDate.replace(/\//g, '.');
+              datePath = `${userPath}/logs/${reformattedDate}/mind`;
+              result = await pullDocData(`${datePath}/${mindDocs[i]}`, "value");
               if (result != null) {
                 console.log("Pulled from" + todaysDateReformatted + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
                 trackerData[mindDocs[i]].push(result);
@@ -85,7 +86,11 @@ const Mindfulness = ({ navigation }) => {
     };
   
     fetchData();
-  }, [currentDate]);
+  }, [currentDate], [mindDocs]);
+
+  useEffect(() => {   
+    console.log(mindDocs);
+  }, [mindDocs]); // This will log the updated mindDocs when it changes
 
   const startEditingTracker = (tracker) => {
     setEditingTracker(tracker);
