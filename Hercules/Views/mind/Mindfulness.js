@@ -136,7 +136,6 @@ const Mindfulness = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <BackButton />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         <TouchableOpacity
           onPress={handleAddCustomTracker}
