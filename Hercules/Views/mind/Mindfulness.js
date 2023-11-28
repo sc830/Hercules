@@ -55,6 +55,7 @@ const Mindfulness = ({ navigation }) => {
         let formattedDate = "";
         let reformattedDate = "";
         datePath = ``;
+        console.log("Length: " + mindDocs.length);
         for (let i = 0; i < mindDocs.length; i++) {
           trackerData[mindDocs[i]] = [];
           for (let j = 0; j < 7; j++) {
@@ -69,9 +70,11 @@ const Mindfulness = ({ navigation }) => {
               });
               reformattedDate = formattedDate.replace(/\//g, '.');
               datePath = `${userPath}/logs/${reformattedDate}/mind`;
-              result = await pullDocData(`${datePath}/${mindDocs[i]}`, "value");
+              thisPath = `${datePath}/${mindDocs[i]}`;
+              console.log(thisPath);
+              result = await pullDocData(thisPath, "value");
               if (result != null) {
-                console.log("Pulled from" + todaysDateReformatted + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
+                console.log("Pulled from" + reformattedDate + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
                 trackerData[mindDocs[i]].push(result);
               }
             } catch (error) {
@@ -86,7 +89,7 @@ const Mindfulness = ({ navigation }) => {
     };
   
     fetchData();
-  }, [currentDate], [mindDocs]);
+  }, [currentDate, mindDocs]);
 
   useEffect(() => {   
     console.log(mindDocs);
