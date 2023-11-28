@@ -39,6 +39,7 @@ const AddRepsWeights = ({ route, navigation }) => {
         let weightResult = 0;
         let repsResult = 0;
         let setString = "";
+        let updatedSets = [];
 
         for (let i = 0; i < setsDocs.length; i++) { // setsDocs.length = number of sets logged for this workout
           setString = `Set ${i+1}`;    // 
@@ -49,12 +50,17 @@ const AddRepsWeights = ({ route, navigation }) => {
               if (weightResult != null && repsResult != null) {
                 results[setsDocs[i]] = results[setsDocs[i]] || []; // check if object key exists
                 results[setsDocs[i]].push(weightResult, repsResult);
+                updatedSets.push({
+                  reps: repsResult,
+                  weight: weightResult,
+                });
               }
             } catch (error) {
               console.error('Error fetching reps/weight data from Firestore:', error);
             }
             console.log("Data for", setsDocs[i], results[setsDocs[i]]);   // outputs info inside results[] for each workout
           }
+          setSets(updatedSets);
       } catch (error) {
         console.error('Error in fetchData (sets):', error);
       }
