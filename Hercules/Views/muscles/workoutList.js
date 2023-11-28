@@ -1,39 +1,46 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import BackButton from '../../components/backButton'; // Importing the BackButton component
-import { saveWorkout } from '../../firebase/firebaseFunctions'; // Import your saveWorkout function
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import BackButton from '../../components/backButton';
+import { saveWorkout } from '../../firebase/firebaseFunctions';
 
-const WorkoutList = ({ route }) => {
-  const { splitName, currentDate } = route.params;
+const WorkoutList = ( { route } ) => {
   const [workouts, setWorkouts] = useState([]);
   const [workoutName, setWorkoutName] = useState('');
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(-1);
   const [showDeleteOption, setShowDeleteOption] = useState(-1);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
   const navigation = useNavigation();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (route.params && route.params.showAddModal) {
+        // If showAddModal is set in route params, show the modal
+        setShowAddModal(true);
+      }
+    }, [route.params]));
+  
 
   const addWorkout = async () => {
     if (workoutName) {
-      const updatedWorkouts = [...workouts, workoutName];
+      const updatedWorkouts = [...workouts, { name: workoutName, exercises: [] }];
       setWorkouts(updatedWorkouts);
       setWorkoutName('');
       setShowAddModal(false);
 
-      // Save the workout data to Firebase
-      const workoutData = { name: workoutName, exercises: [] }; // Assuming an exercise list for each workout
       try {
-        const formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+        const formattedDate = currentDate.toLocaleDateString('en-US', {
           year: 'numeric',
           month: '2-digit',
           day: '2-digit',
         });
         const reformattedDate = formattedDate.replace(/\//g, '.');
-        const saveResult = await saveWorkout(workoutData, splitName, workoutName, reformattedDate);
-        console.log(saveResult); // Output success message or handle accordingly
+        const saveResult = await saveWorkout({ name: workoutName, exercises: [] }, reformattedDate);
+        console.log(saveResult);
       } catch (error) {
-        console.error('Error saving workout:', error.message); // Handle error
+        console.error('Error saving workout:', error.message);
       }
     }
   };
@@ -42,33 +49,28 @@ const WorkoutList = ({ route }) => {
     setWorkouts(workouts.filter((_, index) => index !== indexToDelete));
   };
 
-  const handleSaveWorkout = async () => {
-  try {
-    const saveResult = await saveWorkout( workoutData, splitName);
-    console.log(saveResult); // Output success message or handle accordingly
-  } catch (error) {
-    console.error('Error saving workout:', error.message); // Handle error
-  }
-};
-
-  const handleAddExercise = () => {
-    // Logic to add a new exercise to workoutData
-    // For example:
+  const handleAddExercise = (index) => {
     const newExercise = {
       name: 'New Exercise',
       sets: [],
     };
+
+    const updatedWorkouts = [...workouts];
+    updatedWorkouts[index].exercises.push(newExercise);
+    setWorkouts(updatedWorkouts);
+
+    navigation.navigate('addRepsWeights', { workoutName: workouts[index].name, currentDate: currentDate });
   };
 
   const handleRenameOpen = (index, workout) => {
     setRenameIndex(index);
-    setWorkoutName(workout);
+    setWorkoutName(workout.name);
     setShowRenameModal(true);
   };
 
   const renameWorkout = () => {
     let updatedWorkouts = [...workouts];
-    updatedWorkouts[renameIndex] = workoutName;
+    updatedWorkouts[renameIndex].name = workoutName;
     setWorkouts(updatedWorkouts);
     setShowRenameModal(false);
     setWorkoutName('');
@@ -81,9 +83,9 @@ const WorkoutList = ({ route }) => {
         <View key={index} style={styles.workoutContainer}>
           <TouchableOpacity
             style={styles.workoutButton}
-            onPress={() => navigation.navigate('addRepsWeights', { workoutName: workout, currentDate: currentDate })}
+            onPress={() => handleAddExercise(index)}
           >
-            <Text style={styles.workoutText}>{workout}</Text>
+            <Text style={styles.workoutText}>{workout.name}</Text>
             <TouchableOpacity
               style={styles.settingsButton}
               onPress={() => {
@@ -126,7 +128,7 @@ const WorkoutList = ({ route }) => {
               setShowRenameModal(false);
               setWorkoutName('');
             }}
-            color="#D4AF37" // Set the color to gold
+            color="#D4AF37"
           />
         </View>
       </Modal>
@@ -147,7 +149,7 @@ const WorkoutList = ({ route }) => {
               setShowAddModal(false);
               setWorkoutName('');
             }}
-            color="#D4AF37" // Set the color to gold
+            color="#D4AF37"
           />
         </View>
       </Modal>
@@ -159,18 +161,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#FFF7E0', // A light gold background
+    backgroundColor: '#FFF7E0',
   },
   workoutButton: {
-    backgroundColor: '#D4AF37', // Gold color
+    backgroundColor: '#D4AF37',
     width: '90%',
     height: 60,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 15,
-    elevation: 3, // Adds a drop shadow on Android
-    shadowColor: '#000', // Adds a shadow on iOS
+    elevation: 3,
+    shadowColor: '#000',
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
@@ -178,7 +180,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 18,
-    fontWeight: '600', // Semi-bold
+    fontWeight: '600',
   },
   workoutContainer: {
     width: '100%',
@@ -186,7 +188,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   addButton: {
-    backgroundColor: '#D4AF37', // Gold color
+    backgroundColor: '#D4AF37',
     width: '90%',
     height: 50,
     borderRadius: 10,
@@ -199,7 +201,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 247, 224, 0.95)', // Translucent light gold background
+    backgroundColor: 'rgba(255, 247, 224, 0.95)',
   },
   input: {
     width: '80%',
@@ -210,7 +212,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#D4AF37', // Gold color border
+    borderColor: '#D4AF37',
   },
   settingsButton: {
     position: 'absolute',

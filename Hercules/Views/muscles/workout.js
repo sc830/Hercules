@@ -109,19 +109,7 @@ const WorkoutView = () => {
         </TouchableOpacity>
       </View>
 
-      {splits.map((split, index) => (
-        <View key={index} style={styles.splitContainer}>
-          <GraphWithButton
-            trackerTitle={split}
-            initialData={[0, 0, 0]} // Replace with actual data
-            labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]} // Replace with actual labels
-            onButtonPress={() => navigation.navigate('workoutList', { splitName: split })}
-            onTitleChange={() => handleRenameOpen(index)}
-          />
-        </View>
-      ))}
-
-      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('workoutList')}>
+      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('workoutList', { showAddModal: true })}>
         <Text style={styles.buttonText}>+ Add Exercise</Text>
       </TouchableOpacity>
 
