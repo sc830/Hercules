@@ -191,8 +191,6 @@ export const saveWorkout = async ( workoutData, splitName, workoutName, date) =>
 // Assuming you have a 'workouts' collection in Firestore
 await setDoc(doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName,), {
   workout: workoutName,
-  set1reps: 'reps',
-  set1weight: 'weight',
 });
 
 // const workoutCollectionRef = collection(db, 'userData', userid, 'logs', workoutName, formattedDate);
@@ -220,6 +218,47 @@ console.log('getting ref');
     return { success: false, error: error.message };
   }
 };
+
+export const savemind = async (mindInfoName, date) => {
+  try {
+    const dt = new Date();
+    const year = dt.getFullYear();
+    const month = String(dt.getMonth() + 1).padStart(2, '0');
+    const day = String(dt.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    //const mindCollectionRef = collection(db, 'userData', userid, 'logs', date, 'mind', mindInfoName);
+    await setDoc(doc(db, 'userData', userid, 'logs', date, 'mind', mindInfoName,), {
+      workout: mindInfoName,
+      // Add any other relevant fields here
+    });
+
+    return { success: true, message: 'Mind data saved successfully' };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const adddatatomind = async (date, mindName, data, number) => {
+  try {
+    const mindRef = doc(db, 'userData', userid, 'logs', date, 'mind', mindName);
+console.log('getting ref');
+    const mindSnapshot = await getDoc(mindRef);
+    console.log('ref worked');
+    if (mindSnapshot.exists()) {
+      await setDoc(doc(mindRef,'intakes', number), {
+        amount: data,
+      });
+      return { success: true, message: 'data added to mind successfully' };
+    } else {
+      throw new Error('mind not found');
+    }
+  } catch (error) {
+    console.error('Error adding data to mind:', error);
+    return { success: false, error: error.message };
+  }
+};
+
 
 
 export { signUp, login, saveMeal };

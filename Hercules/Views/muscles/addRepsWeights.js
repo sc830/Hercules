@@ -41,7 +41,7 @@ const AddRepsWeights = ({ route, navigation }) => {
       const date = currentDate; // Update this with the relevant date
       const setId = sets.length.toString(); // Generate a unique set ID (you might want a better way to do this)
       
-      const addSetResult = await addSetToWorkout(reformattedDate, workoutName, setId, newSet);
+      const addSetResult = await addSetToWorkout(reformattedDate, workoutName, setId+1, newSet);
       if (addSetResult.success) {
         console.log('Set added to workout successfully');
       } else {
