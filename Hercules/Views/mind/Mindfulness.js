@@ -1,90 +1,116 @@
+// Mindfulness.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  TextInput,
+} from 'react-native';
 import BackButton from '../../components/backButton';
 import useCustomTracker from './useCustomTracker';
 import CustomTrackerModal from './customTrackerModal';
 import GraphWithButton from '../../components/graph';
-import { getUserID, pullDocData, pullDocNames } from '../../firebase/firebaseFunctions';
+import {
+  getUserID,
+  pullDocData,
+  pullDocNames,
+} from '../../firebase/firebaseFunctions';
 import { styles } from './CommonStyles';
 
-
-/*********************************************************************************************** //
- * OVERVIEW OF ALL MINDFULNESS RELATED FILES
- * CommonStyles.js: Holds reusable styling for different parts of the app to look consistent.
- * customTrackerModal.js: Popup for adding new custom health trackers.
- * Mindfulness.js: Displays health tracking graphs and options.
- * TrackIntakeScreen.js: Screen for entering and editing health tracker data.
- * useCustomTracker.js: Hook that handles the logic for creating and managing trackers.
-
-**************************************************************************************************/
-
 const Mindfulness = ({ navigation }) => {
+  const userID = getUserID();
+  const mindPath = `userData/${userID}/mind`;
+
   const {
-    trackers,   // array of strings representing tracker names, [sleep, creatine, protein, carbs]
-    trackerData,    // 
-    trackerTitles,   // [sleep, creatine, protein, carbs]
+    trackers,
+    trackerData,
+    trackerTitles,
     modalVisible,
     setModalVisible,
     customTrackerName,
     setCustomTrackerName,
     handleAddCustomTracker,
     submitCustomTracker,
-    updateTrackerTitle, // ensure this is defined in useCustomTracker
-    deleteTracker, // ensure this is defined in useCustomTracker
-  } = useCustomTracker(['Creatine', 'Sleep', 'Water', 'Steroids']);
+    updateTrackerTitle,
+    deleteTracker,
+    setTrackers
+  } = useCustomTracker([]);
 
   const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const [editingTracker, setEditingTracker] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
   const [currentDate, setCurrentDate] = useState(new Date());
-  let { mindDocs } = { mindDocs: [] };
+  const [mindDocs, setMindDocs] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-  
-        const userPath = `userData/${getUserID()}`;
-        let datePath = `${userPath}/logs/${todaysDateReformatted}`;
-        const mindPath = `${userPath}/mind`;
+        let newMindDocs = await pullDocNames(mindPath);
+        setMindDocs(newMindDocs);
+        const initialTrackers = newMindDocs.map(tracker => ({
+          title: tracker,
+          data: [],
+        }));
 
-        mindDocs = await pullDocNames(mindPath);
-  
-        let result = 0;
-        let dateTraverse = new Date();    // starts at current date
-        let formattedDate = "";
-        let reformattedDate = "";
-        datePath = ``;
+        // Set the initial state of useCustomTracker with the tracker objects
+        setTrackers(initialTrackers);
+        setTrackerTitles(mindDocs);
+
+      } catch (error) {
+        console.error('Error in fetchData:', error);
+      }
+    };
+
+    fetchData();
+  }, [currentDate, mindPath, setTrackers]);
+
+  useEffect(() => {
+    const userPath = `userData/${getUserID()}`;
+
+    let result = 0;
+    let dateTraverse = new Date();    // starts at current date
+    let formattedDate = "";
+    let reformattedDate = "";
+    let thisPath = "";
+    let datePath = ``;
+    const fetchMindData = async () => {
+      try {
         for (let i = 0; i < mindDocs.length; i++) {
           trackerData[mindDocs[i]] = [];
           for (let j = 0; j < 7; j++) {
             try {
               result = 0;
+              dateTraverse = new Date(currentDate);
               dateTraverse.setDate(currentDate.getDate() - (7 - j));
-              formattedDate = dateTraverse.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+              formattedDate = dateTraverse.toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit',
               });
-              todaysDateReformatted = formattedDate.replace(/\//g, '.');
-              datePath = `${userPath}/logs/${todaysDateReformatted}/mind/`;
-              result = await pullDocData(datePath + mindDocs[i], "value");
+              reformattedDate = formattedDate.replace(/\//g, '.');
+              datePath = `${userPath}/logs/${reformattedDate}/mind`;
+              thisPath = `${datePath}/${mindDocs[i]}`;
+              result = await pullDocData(thisPath, "value");
               if (result != null) {
-                console.log("Pulled from" + todaysDateReformatted + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
+                //console.log("Pulled from " + reformattedDate + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
                 trackerData[mindDocs[i]].push(result);
               }
             } catch (error) {
               console.error('Error fetching mind data from Firestore:', error);
             }
           }
-          console.log("Data for", mindDocs[i], trackerData[mindDocs[i]]);   // outputs info inside trackerData for each tracker
+          console.log("Data for", mindDocs[i], trackerData[mindDocs[i]]);
         }
       } catch (error) {
-        console.error('Error in fetchData:', error);
+        console.error('Error in fetchMindData:', error);
       }
     };
-  
-    fetchData();
-  }, [currentDate]);
+
+    fetchMindData();
+    console.log('Trackers:', trackers);
+    console.log('Final Tracker Data:', trackerData);
+  }, [mindDocs, currentDate, trackerData]);
 
   const startEditingTracker = (tracker) => {
     setEditingTracker(tracker);
@@ -92,7 +118,7 @@ const Mindfulness = ({ navigation }) => {
 
   const handleDeleteTracker = (tracker) => {
     if (deleteConfirmation === trackerTitles[tracker]) {
-      deleteTracker(tracker); // ensure deleteTracker is passed from useCustomTracker
+      deleteTracker(tracker);
       setDeleteConfirmation('');
       setEditingTracker(null);
     }
@@ -104,30 +130,37 @@ const Mindfulness = ({ navigation }) => {
     }
     setEditingTracker(null);
   };
-   // Add a cancel function to reset the delete confirmation and editing state
-   const cancelEditDelete = () => {
+
+  const cancelEditDelete = () => {
     setDeleteConfirmation('');
     setEditingTracker(null);
   };
 
-  // ... existing startEditingTracker, handleDeleteTracker, and finishEditingTracker functions
-
   return (
     <View style={styles.container}>
-      <BackButton />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
-        {trackers.map(tracker => (
+        <TouchableOpacity
+          onPress={handleAddCustomTracker}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Add a Custom Tracker</Text>
+        </TouchableOpacity>
+        {trackers.map((tracker, index) => (
           <View key={tracker}>
-            {editingTracker === tracker ? (
+            {editingTracker === index ? (
               <View>
                 <TextInput
                   value={trackerTitles[tracker]}
-                  onChangeText={(newTitle) => updateTrackerTitle(tracker, newTitle)}
+                  onChangeText={(newTitle) =>
+                    updateTrackerTitle(tracker, newTitle)
+                  }
                   style={styles.trackerEdit}
                   autoFocus={true}
                 />
                 <TouchableOpacity
-                  onPress={() => finishEditingTracker(tracker, trackerTitles[tracker])}
+                  onPress={() =>
+                    finishEditingTracker(index, trackerTitles[tracker])
+                  }
                   style={styles.confirmEditButton}
                 >
                   <Text style={styles.buttonText}>Confirm Rename</Text>
@@ -139,7 +172,7 @@ const Mindfulness = ({ navigation }) => {
                   style={styles.trackerEdit}
                 />
                 <TouchableOpacity
-                  onPress={() => handleDeleteTracker(tracker)}
+                  onPress={() => handleDeleteTracker(index)}
                   style={styles.deleteButton}
                 >
                   <Text style={styles.buttonText}>Delete Tracker</Text>
@@ -155,16 +188,18 @@ const Mindfulness = ({ navigation }) => {
               <GraphWithButton
                 initialData={trackerData[tracker] || []}
                 labels={labels}
-                onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: trackerTitles[tracker], currentDate: currentDate })}
-                trackerTitle={trackerTitles[tracker]}
-                onTitleChange={() => startEditingTracker(tracker)}
+                onButtonPress={() =>
+                  navigation.navigate('TrackIntakeScreen', {
+                    itemType: trackerTitles[tracker],
+                  })
+                }
+                trackerTitle={tracker.title.charAt(0).toUpperCase() + tracker.title.slice(1)}
+                onTitleChange={() => startEditingTracker(index)}
               />
             )}
           </View>
         ))}
-        <TouchableOpacity onPress={handleAddCustomTracker} style={styles.button}>
-          <Text style={styles.buttonText}>Add a Custom Tracker</Text>
-        </TouchableOpacity>
+        
       </ScrollView>
 
       <CustomTrackerModal

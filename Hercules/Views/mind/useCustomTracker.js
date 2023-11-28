@@ -27,6 +27,7 @@ const useCustomTracker = (initialTrackers) => {
     setModalVisible(true);
   };
 
+  // Function to handle the submission of a new custom tracker.
   const submitCustomTracker = () => {
     if (customTrackerName.trim()) {
       setTrackers(prevTrackers => [...prevTrackers, customTrackerName]);
@@ -39,8 +40,8 @@ const useCustomTracker = (initialTrackers) => {
       setModalVisible(false);
     }
   };
-  
-  // Function to delete a tracker with confirmation
+
+  // Function to delete a tracker with confirmation.
   const deleteTracker = (trackerName) => {
     setTrackers(prevTrackers => prevTrackers.filter(tracker => tracker !== trackerName));
     setTrackerData(prevData => {
@@ -55,7 +56,7 @@ const useCustomTracker = (initialTrackers) => {
     });
   };
 
-  // Function to rename trackers
+  // Function to rename trackers.
   const [trackerTitles, setTrackerTitles] = useState(initialTrackers.reduce((acc, tracker) => {
     acc[tracker] = tracker;
     return acc;
@@ -67,13 +68,12 @@ const useCustomTracker = (initialTrackers) => {
       [trackerName]: newTitle
     }));
   };
-  
-  // Finish editing tracker
+
+  // Finish editing tracker.
   const finishEditingTracker = (tracker, newTitle) => {
     updateTrackerTitle(tracker, newTitle);
     setEditingTracker(null); // This line exits the editing mode
   };
-  
 
   // Placeholder for data fetching logic, for future Firestore integration.
   useEffect(() => {
@@ -84,6 +84,7 @@ const useCustomTracker = (initialTrackers) => {
 
   return {
     trackers,
+    setTrackers,
     modalVisible,
     setModalVisible,
     customTrackerName,
@@ -96,6 +97,8 @@ const useCustomTracker = (initialTrackers) => {
     setTrackerTitles, // Make sure this is returned
     updateTrackerTitle,
     deleteTracker,
+    finishEditingTracker,
+    editingTracker,
   };
 };
 

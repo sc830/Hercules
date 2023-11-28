@@ -138,9 +138,6 @@ export const pullDocData = async(docPath, fieldName) => {
       let fieldData = docPoint.get(fieldName);
       return fieldData;
     }
-    else {
-      console.log('No such doc');
-    }
   }
   catch (error) {
     throw new Error(error.message);
