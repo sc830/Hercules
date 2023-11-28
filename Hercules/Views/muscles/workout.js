@@ -37,14 +37,14 @@ const WorkoutView = () => {
           for (let j = 0; j < 7; j++) {
             try {
               result = 0;
-              traverseDate.setDate(currentDate.getDate() - (7 - j));
+              traverseDate.setDate(currentDate.getDate() - (6 - j));
               formattedtraverseDate = traverseDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit',
               });
               reformattedtraverseDate = formattedtraverseDate.replace(/\//g, '.');
-              datePath = `${userPath}/logs/${reformattedtraverseDate}/mind/`;
+              datePath = `${userPath}/logs/${reformattedtraverseDate}/muscles/`;
               result = await pullDocData(datePath + musclesDocs[i], "value");
               if (result != null) {
                 console.log("Pulled from" + reformattedtraverseDate + ": " + result + "  for " + musclesDocs[i]);   // console logs the data point pulled from date/tracker
