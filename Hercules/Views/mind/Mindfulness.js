@@ -40,23 +40,34 @@ const Mindfulness = ({ navigation }) => {
   const [mindDocs, setMindDocs] = useState([]);
 
   useEffect(() => {
+
     const fetchData = async () => {
       try {
-  
         const userPath = `userData/${getUserID()}`;
-        let datePath = ``;
         const mindPath = `${userPath}/mind`;
-
-        let docs = await pullDocNames(mindPath);
-        setMindDocs(docs);
   
-        let result = 0;
-        let dateTraverse = new Date();    // starts at current date
-        let formattedDate = "";
-        let reformattedDate = "";
-        let thisPath = "";
-        datePath = ``;
-        console.log("Length: " + mindDocs.length);
+        let newMindDocs = await pullDocNames(mindPath);
+        setMindDocs(newMindDocs);
+      } catch (error) {
+        console.error('Error in fetchData:', error);
+      }
+    };
+  
+    fetchData();
+  }, [currentDate]);
+  
+  useEffect(() => {
+    const userPath = `userData/${getUserID()}`;
+
+    let result = 0;
+    let dateTraverse = new Date();    // starts at current date
+    let formattedDate = "";
+    let reformattedDate = "";
+    let thisPath = "";
+    let datePath = ``;
+    console.log("Length: " + mindDocs.length);
+    const fetchMindData = async () => {
+      try {
         for (let i = 0; i < mindDocs.length; i++) {
           trackerData[mindDocs[i]] = [];
           for (let j = 0; j < 7; j++) {
@@ -64,7 +75,7 @@ const Mindfulness = ({ navigation }) => {
               result = 0;
               dateTraverse = new Date(currentDate);
               dateTraverse.setDate(currentDate.getDate() - (7 - j));
-              formattedDate = dateTraverse.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+              formattedDate = dateTraverse.toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit',
@@ -82,19 +93,16 @@ const Mindfulness = ({ navigation }) => {
               console.error('Error fetching mind data from Firestore:', error);
             }
           }
-          console.log("Data for", mindDocs[i], trackerData[mindDocs[i]]);   // outputs info inside trackerData for each tracker
+          console.log("Data for", mindDocs[i], trackerData[mindDocs[i]]);
         }
       } catch (error) {
-        console.error('Error in fetchData:', error);
+        console.error('Error in fetchMindData:', error);
       }
     };
   
-    fetchData();
-  }, [currentDate, mindDocs]);
-
-  useEffect(() => {   
-    console.log(mindDocs);
-  }, [mindDocs]); // This will log the updated mindDocs when it changes
+    fetchMindData();
+  }, [mindDocs]);
+  
 
   const startEditingTracker = (tracker) => {
     setEditingTracker(tracker);
