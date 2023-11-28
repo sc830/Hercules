@@ -189,11 +189,22 @@ export const saveWorkout = async ( workoutData, splitName, workoutName, date) =>
   const formattedDate = `${year}-${month}-${day}`;
 
 // Assuming you have a 'workouts' collection in Firestore
-await setDoc(doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName,), {
+await setDoc(doc(db, 'userData', userid, 'logs', formattedDate, 'muscles', workoutName,), {
   workout: workoutName,
   set1reps: 'reps',
   set1weight: 'weight',
 });
+
+try {
+  await setDoc(doc(db, 'userData', userid, 'muscles', workoutName), {});
+  console.log('Document created successfully.');
+} catch (error) {
+  if (error.code === 'already-exists') {
+    console.log('Document already exists.');
+  } else {
+    console.error('Error creating document:', error);
+  }
+}
 
 // const workoutCollectionRef = collection(db, 'userData', userid, 'logs', workoutName, formattedDate);
 //     await setDoc(workoutCollectionRef, workoutData);
