@@ -85,8 +85,8 @@ const cancelEditDelete = () => {
 return (
   <ScrollView contentContainerStyle={styles.container}>
 
-    <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
-      <Text style={styles.buttonText}>+ Add Workout</Text>
+    <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('workoutList', { splitName: 'DefaultSplit' })}>
+      <Text style={styles.buttonText}>+ Add Exercise</Text>
     </TouchableOpacity>
 
     {/* Add Workout Day Modal */}
@@ -99,7 +99,7 @@ return (
           placeholder="Enter the Name of Your Workout Day"
         />
         <TouchableOpacity style={styles.addButton} onPress={addSplit}>
-          <Text style={styles.buttonText}>Add Workout Day</Text>
+          <Text style={styles.buttonText}>Add Workout</Text>
         </TouchableOpacity>
         <Button title="Close" onPress={cancelEditDelete} />
       </View>
