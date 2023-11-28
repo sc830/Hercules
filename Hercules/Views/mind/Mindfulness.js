@@ -155,7 +155,7 @@ const Mindfulness = ({ navigation }) => {
               <GraphWithButton
                 initialData={trackerData[tracker] || []}
                 labels={labels}
-                onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: trackerTitles[tracker] })}
+                onButtonPress={() => navigation.navigate('TrackIntakeScreen', { itemType: trackerTitles[tracker], currentDate: currentDate })}
                 trackerTitle={trackerTitles[tracker]}
                 onTitleChange={() => startEditingTracker(tracker)}
               />
