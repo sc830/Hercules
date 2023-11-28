@@ -183,12 +183,12 @@ const saveMeal = async (mealData, mealType) => {
 export const saveWorkout = async ( workoutData, splitName, workoutName, date) => {
   try {
     try {
-      await setDoc(doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName,), {    // save to logs/<date>
+      await setDoc(doc(db, 'UserData', userid, 'logs', date, 'muscles', workoutName,), {    // save to logs/<date>
         workout: workoutName,
         set1reps: 'reps',
         set1weight: 'weight',
       });
-      await setDoc(doc(db, 'userData', userid, 'muscles', workoutName), {});    // save to main 'muscles' folder
+      await setDoc(doc(db, 'UserData', userid, 'muscles', workoutName), {});    // save to main 'muscles' folder
       console.log('Document created successfully.');
     } catch (error) {
       if (error.code === 'already-exists') {
@@ -218,7 +218,7 @@ console.log('getting ref');
     const workoutSnapshot = await getDoc(workoutRef);
     console.log('ref worked');
     if (workoutSnapshot.exists()) {
-      await setDoc(doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName, 'sets', setId), set);
+      await setDoc(doc(db, 'UserData', userid, 'logs', date, 'muscles', workoutName, 'sets', setId), set);
       return { success: true, message: 'Set added to workout successfully' };
     } else {
       throw new Error('Workout not found');
