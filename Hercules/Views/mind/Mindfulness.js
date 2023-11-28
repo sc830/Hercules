@@ -138,6 +138,12 @@ const Mindfulness = ({ navigation }) => {
     <View style={styles.container}>
       <BackButton />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
+        <TouchableOpacity
+          onPress={handleAddCustomTracker}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Add a Custom Tracker</Text>
+        </TouchableOpacity>
         {trackers.map((tracker, index) => (
           <View key={tracker}>
             {editingTracker === index ? (
@@ -192,12 +198,7 @@ const Mindfulness = ({ navigation }) => {
             )}
           </View>
         ))}
-        <TouchableOpacity
-          onPress={handleAddCustomTracker}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Add a Custom Tracker</Text>
-        </TouchableOpacity>
+        
       </ScrollView>
 
       <CustomTrackerModal
