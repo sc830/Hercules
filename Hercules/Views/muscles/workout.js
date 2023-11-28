@@ -19,7 +19,7 @@ const WorkoutView = () => {
   const [renameIndexWorkout, setRenameIndexWorkout] = useState(-1);
   const [showDeleteOptionWorkout, setShowDeleteOptionWorkout] = useState(-1);
   const [showAddModalWorkout, setShowAddModalWorkout] = useState(false);
-  let { musclesDocs } = { musclesDocs: [] };
+  const [musclesDocs, setMusclesDocs] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +34,8 @@ const WorkoutView = () => {
         const userPath = `userData/${getUserID()}`;
         const datePath = `${userPath}/logs/${reformattedDate}/muscles`;
 
-        musclesDocs = await pullDocNames(datePath);
+        const docs = await pullDocNames(datePath);
+        setMusclesDocs(docs);
         console.log(`Docs content: ${musclesDocs}`);
         
       } catch (error) {
@@ -222,6 +223,15 @@ const WorkoutView = () => {
         <Text style={styles.buttonText}>+ Add Workout</Text>
       </TouchableOpacity>
 
+      <View style={styles.workoutDisplayContainer}>
+        <Text style={styles.sectionHeader}>Muscles Docs:</Text>
+        {musclesDocs.map((doc, index) => (
+          <Text key={index} style={styles.displayText}>
+            {doc}
+          </Text>
+        ))}
+      </View>
+
       <Modal animationType="slide" transparent={true} visible={showRenameModalWorkout}>
         <View style={styles.modalView}>
           <TextInput
@@ -322,6 +332,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
+    fontSize: 20,
+    fontWeight: '600',
+  },
+  displayText: {
+    color: 'black',
     fontSize: 20,
     fontWeight: '600',
   },
