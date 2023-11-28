@@ -46,7 +46,7 @@ const AddRepsWeights = ({ route, navigation }) => {
               weightResult = await pullDocData(`${setsPath}/${setString}`, "weight");
               repsResult = await pullDocData(`${setsPath}/${setString}`, "reps");
               console.log(`workoutName: ${workoutName}   weightResult: ${weightResult}   repsResult: ${repsResult}`);
-              if (result != null) {
+              if (weightResult != null && repsResult != null) {
                 results[setsDocs[i]] = results[setsDocs[i]] || []; // check if object key exists
                 results[setsDocs[i]].push(weightResult, repsResult);
               }
