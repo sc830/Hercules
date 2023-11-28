@@ -39,22 +39,26 @@ const AddRepsWeights = ({ route, navigation }) => {
         let weightResult = 0;
         let repsResult = 0;
         let setString = "";
+        let updatedSets = [];
 
         for (let i = 0; i < setsDocs.length; i++) { // setsDocs.length = number of sets logged for this workout
-          setString = `Set: ${i+1}`;    // 
+          setString = `Set ${i+1}`;    // 
             try {
-              weightResult = pullDocData(setsDocs+setString, "weight");
-              repsResult = pullDocData(setsDocs+setString, "reps");
-              console.log(`workoutName: ${workoutName}   weightResult: ${weightResult}   repsResult: ${repsResult}`);
-              if (result != null) {
+              weightResult = await pullDocData(`${setsPath}/${setString}`, "weight");
+              repsResult = await pullDocData(`${setsPath}/${setString}`, "reps");
+              if (weightResult != null && repsResult != null) {
                 results[setsDocs[i]] = results[setsDocs[i]] || []; // check if object key exists
                 results[setsDocs[i]].push(weightResult, repsResult);
+                updatedSets.push({
+                  reps: repsResult,
+                  weight: weightResult,
+                });
               }
             } catch (error) {
               console.error('Error fetching reps/weight data from Firestore:', error);
             }
-            console.log("Data for", setsDocs[i], results[setsDocs[i]]);   // outputs info inside results[] for each workout
           }
+          setSets(updatedSets);
       } catch (error) {
         console.error('Error in fetchData (sets):', error);
       }
@@ -84,7 +88,7 @@ const AddRepsWeights = ({ route, navigation }) => {
       });
       const reformattedDate = formattedDate.replace(/\//g, '.');
       const date = currentDate; // Update this with the relevant date
-      const setId = "Set " + (sets.length.toString())+1; // Generate a unique set ID (you might want a better way to do this)
+      const setId = "Set " + (sets.length + 1).toString();
       
       const addSetResult = await addSetToWorkout(reformattedDate, workoutName, setId, newSet);
       if (addSetResult.success) {
