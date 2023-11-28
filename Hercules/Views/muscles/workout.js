@@ -43,44 +43,59 @@ const WorkoutView = () => {
     fetchData();
   }, [currentDate]);
 
-    const addSplit = () => {
-      if (splitName) {
-        setSplits(prevSplits => [splitName, ...prevSplits]);
-        setSplitName('');
-        setShowModal(false);
-        setShowDeleteOption(-1);
-      }
-    };
-
-    const deleteSplit = (indexToDelete) => {
-      setSplits(splits.filter((_, index) => index !== indexToDelete));
-    };
-
-    const renameSplit = () => {
-      let updatedSplits = [...splits];
-      updatedSplits[renameIndex] = splitName;
-      setSplits(updatedSplits);
-      setShowRenameModal(false);
+  const addSplit = () => {
+    if (splitName) {
+      setSplits(prevSplits => [splitName, ...prevSplits]);
       setSplitName('');
-    };
+      setShowModal(false);
+      setShowDeleteOption(-1);
+    }
+  };
 
-    const handleRenameOpen = (index, split) => {
-      setRenameIndex(index);
-      setSplitName(split);
-      setShowRenameModal(true);
-    };
+  const deleteSplit = (indexToDelete) => {
+    setSplits(splits.filter((_, index) => index !== indexToDelete));
+  };
 
-    const handleForward = () => {
-      const nextDate = new Date(currentDate);
-      nextDate.setDate(currentDate.getDate() + 1);
-      setCurrentDate(nextDate);
-    };
+  const renameSplit = () => {
+    let updatedSplits = [...splits];
+    updatedSplits[renameIndex] = splitName;
+    setSplits(updatedSplits);
+    setShowRenameModal(false);
+    setSplitName('');
+  };
 
-    const handleBack = () => {
-      const previousDate = new Date(currentDate);
-      previousDate.setDate(currentDate.getDate() - 1);
-      setCurrentDate(previousDate);
-    };
+  const handleRenameOpen = (index, split) => {
+    setRenameIndex(index);
+    setSplitName(split);
+    setShowRenameModal(true);
+  };
+
+  const handleForward = () => {
+    const nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + 1);
+    setCurrentDate(nextDate);
+  };
+
+  const handleBack = () => {
+    const previousDate = new Date(currentDate);
+    previousDate.setDate(currentDate.getDate() - 1);
+    setCurrentDate(previousDate);
+  };
+
+  const handleDeleteSplit = () => {
+    if (deleteConfirmation === splits[renameIndex]) {
+      setSplits(splits.filter((_, index) => index !== renameIndex));
+      setDeleteConfirmation('');
+      setShowRenameModal(false);
+    }
+  };
+
+  const cancelEditDelete = () => {
+    setDeleteConfirmation('');
+    setNewSplitName('');
+    setShowRenameModal(false);
+    setShowModal(false);
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container} style={styles.scrollView}>
@@ -172,7 +187,6 @@ const WorkoutView = () => {
     </ScrollView>
   );
 };
-
 
 const styles = StyleSheet.create({
   scrollView: {
