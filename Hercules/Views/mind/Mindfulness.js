@@ -74,7 +74,6 @@ const Mindfulness = ({ navigation }) => {
     let reformattedDate = "";
     let thisPath = "";
     let datePath = ``;
-    console.log("Length: " + mindDocs.length);
     const fetchMindData = async () => {
       try {
         for (let i = 0; i < mindDocs.length; i++) {
@@ -92,7 +91,6 @@ const Mindfulness = ({ navigation }) => {
               reformattedDate = formattedDate.replace(/\//g, '.');
               datePath = `${userPath}/logs/${reformattedDate}/mind`;
               thisPath = `${datePath}/${mindDocs[i]}`;
-              console.log(thisPath);
               result = await pullDocData(thisPath, "value");
               if (result != null) {
                 console.log("Pulled from" + reformattedDate + ": " + result + "  for " + mindDocs[i]);   // console logs the data point pulled from date/tracker
