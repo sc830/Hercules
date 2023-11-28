@@ -109,6 +109,7 @@ const Mindfulness = ({ navigation }) => {
 
     fetchMindData();
     console.log('Trackers:', trackers);
+    console.log('Final Tracker Data:', trackerData);
   }, [mindDocs, currentDate, trackerData]);
 
   const startEditingTracker = (tracker) => {
