@@ -36,7 +36,6 @@ const WorkoutView = () => {
 
         const docs = await pullDocNames(datePath);
         setMusclesDocs(docs);
-        console.log(`Docs content: ${musclesDocs}`);
         
       } catch (error) {
         console.error('Error in fetchData:', error);
@@ -223,12 +222,17 @@ const WorkoutView = () => {
         <Text style={styles.buttonText}>+ Add Workout</Text>
       </TouchableOpacity>
 
-      <View style={styles.workoutDisplayContainer}>
-        <Text style={styles.sectionHeader}>Muscles Docs:</Text>
+      <View style={styles.workoutContainer}>
         {musclesDocs.map((doc, index) => (
-          <Text key={index} style={styles.displayText}>
-            {doc}
-          </Text>
+          <TouchableOpacity
+            key={index}
+            style={styles.workoutButton}  // Define a new style for the button
+            onPress={() => {
+              // Handle button press if needed
+            }}
+          >
+            <Text style={styles.workoutText}>{doc}</Text>
+          </TouchableOpacity>
         ))}
       </View>
 
@@ -330,13 +334,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
   },
+  workoutDisplayButton: {
+    backgroundColor: '#D4AF37', // Gold color
+    width: '90%',
+    height: 60,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+    elevation: 3, // Adds a drop shadow on Android
+    shadowColor: '#000', // Adds a shadow on iOS
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+  },
   buttonText: {
     color: 'white',
-    fontSize: 20,
-    fontWeight: '600',
-  },
-  displayText: {
-    color: 'black',
     fontSize: 20,
     fontWeight: '600',
   },
