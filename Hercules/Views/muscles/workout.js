@@ -14,17 +14,18 @@ const WorkoutView = () => {
   const [renameIndex, setRenameIndex] = useState(-1);
   const [newSplitName, setNewSplitName] = useState('');
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
-  let { musclesDocs, munchiesDocs} = { musclesDocs: [], munchiesDocs: []};
+  let { musclesDocs, munchiesDocs, musclesGraphInfo} = { musclesDocs: [], munchiesDocs: [], musclesGraphInfo: {}};
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+  
         const userPath = `userData/${getUserID()}`;
         const musclesPath = `${userPath}/muscles`;
         let datePath = ``;
 
-        musclesDocs = await pullDocNames(musclesPath);      // this holds names of all previously logged workouts
+        musclesDocs = await pullDocNames(musclesPath);      // this holds 
   
         let result = 0;
         let traverseDate = new Date();
@@ -32,7 +33,7 @@ const WorkoutView = () => {
         let reformattedtraverseDate = "";
         datePath = ``;
         for (let i = 0; i < musclesDocs.length; i++) {
-          trackerData[musclesDocs[i]] = [];
+          musclesGraphInfo[musclesDocs[i]] = [];
           for (let j = 0; j < 7; j++) {
             try {
               result = 0;
@@ -47,13 +48,13 @@ const WorkoutView = () => {
               result = await pullDocData(datePath + musclesDocs[i], "value");
               if (result != null) {
                 console.log("Pulled from" + reformattedtraverseDate + ": " + result + "  for " + musclesDocs[i]);   // console logs the data point pulled from date/tracker
-                trackerData[musclesDocs[i]].push(result);
+                musclesGraphInfo[musclesDocs[i]].push(result);
               }
             } catch (error) {
               console.error('Error fetching mind data from Firestore:', error);
             }
           }
-          console.log("Data for", musclesDocs[i], trackerData[musclesDocs[i]]);   // outputs info inside trackerData for each workout
+          console.log("Data for", musclesDocs[i], musclesGraphInfo[musclesDocs[i]]);   // outputs info inside musclesGraphInfo for each tracker
         }
       } catch (error) {
         console.error('Error in fetchData (muscles):', error);

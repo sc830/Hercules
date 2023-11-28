@@ -32,7 +32,7 @@ const AddRepsWeights = ({ route, navigation }) => {
         let reformattedDate = formattedDate.replace(/\//g, '.');
 
         const userPath = `userData/${getUserID()}`;
-        const setsPath = `${userPath}/logs/${reformattedDate}/muscles/${workoutName}`;
+        const setsPath = `${userPath}/logs/${reformattedDate}/muscles/${workoutName}/sets`;
 
         setsDocs = await pullDocNames(setsPath);      // this holds names of all previously logged workouts
   
@@ -45,6 +45,7 @@ const AddRepsWeights = ({ route, navigation }) => {
             try {
               weightResult = pullDocData(setsDocs+setString, "weight");
               repsResult = pullDocData(setsDocs+setString, "reps");
+              console.log(`workoutName: ${workoutName}   weightResult: ${weightResult}   repsResult: ${repsResult}`);
               if (result != null) {
                 results[setsDocs[i]] = results[setsDocs[i]] || []; // check if object key exists
                 results[setsDocs[i]].push(weightResult, repsResult);
@@ -52,8 +53,8 @@ const AddRepsWeights = ({ route, navigation }) => {
             } catch (error) {
               console.error('Error fetching mind data from Firestore:', error);
             }
+            console.log("Data for", setsDocs[i], results[setsDocs[i]]);   // outputs info inside results[] for each workout
           }
-          console.log("Data for", setsDocs[i], results[setsDocs[i]]);   // outputs info inside trackerData for each workout
       } catch (error) {
         console.error('Error in fetchData (sets):', error);
       }
