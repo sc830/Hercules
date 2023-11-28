@@ -37,7 +37,7 @@ const Mindfulness = ({ navigation }) => {
   const [editingTracker, setEditingTracker] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState('');
   const [currentDate, setCurrentDate] = useState(new Date());
-  let { mindDocs } = { mindDocs: [] };
+  const [mindDocs, setMindDocs] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +47,8 @@ const Mindfulness = ({ navigation }) => {
         let datePath = ``;
         const mindPath = `${userPath}/mind`;
 
-        mindDocs = await pullDocNames(mindPath);
+        let docs = await pullDocNames(mindPath);
+        setMindDocs(docs);
   
         let result = 0;
         let dateTraverse = new Date();    // starts at current date
