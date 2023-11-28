@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import BackButton from '../../components/backButton'; // Make sure this import path is correct
 import { addSetToWorkout } from '../../firebase/firebaseFunctions'; // Update this import path
+import { getUserID, pullDocData, pullDocNames } from '../../firebase/firebaseFunctions';
+
 
 
 const AddRepsWeights = ({ route, navigation }) => {
@@ -17,6 +19,53 @@ const AddRepsWeights = ({ route, navigation }) => {
   const [currentReps, setCurrentReps] = useState('');
   const [currentWeight, setCurrentWeight] = useState('');
   const [recommendedIncrease, setRecommendedIncrease] = useState([]);
+  let { setsDocs, results } = { setsDocs: [], results: {} };    // results is object containing set data, where index 0 = Set 1, index 1 = Set 2, etc.
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let formattedDate = currentDate.toLocaleDateString('en-US', { // if using test data on 11.17.2023, replace currentDate with testDate
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        });
+        let reformattedDate = formattedDate.replace(/\//g, '.');
+
+        const userPath = `userData/${getUserID()}`;
+        const setsPath = `${userPath}/logs/${reformattedDate}/muscles/${workoutName}/sets`;
+
+        setsDocs = await pullDocNames(setsPath);      // this holds names of all previously logged workouts
+  
+        let weightResult = 0;
+        let repsResult = 0;
+        let setString = "";
+        let updatedSets = [];
+
+        for (let i = 0; i < setsDocs.length; i++) { // setsDocs.length = number of sets logged for this workout
+          setString = `Set ${i+1}`;    // 
+            try {
+              weightResult = await pullDocData(`${setsPath}/${setString}`, "weight");
+              repsResult = await pullDocData(`${setsPath}/${setString}`, "reps");
+              if (weightResult != null && repsResult != null) {
+                results[setsDocs[i]] = results[setsDocs[i]] || []; // check if object key exists
+                results[setsDocs[i]].push(weightResult, repsResult);
+                updatedSets.push({
+                  reps: repsResult,
+                  weight: weightResult,
+                });
+              }
+            } catch (error) {
+              console.error('Error fetching reps/weight data from Firestore:', error);
+            }
+          }
+          setSets(updatedSets);
+      } catch (error) {
+        console.error('Error in fetchData (sets):', error);
+      }
+    };
+  
+    fetchData();
+  }, [currentDate]);
 
   
 
@@ -39,7 +88,7 @@ const AddRepsWeights = ({ route, navigation }) => {
       });
       const reformattedDate = formattedDate.replace(/\//g, '.');
       const date = currentDate; // Update this with the relevant date
-      const setId = sets.length.toString(); // Generate a unique set ID (you might want a better way to do this)
+      const setId = "Set " + (sets.length + 1).toString();
       
       const addSetResult = await addSetToWorkout(reformattedDate, workoutName, setId+1, newSet);
       if (addSetResult.success) {

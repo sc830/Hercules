@@ -182,11 +182,21 @@ const saveMeal = async (mealData, mealType) => {
 
 export const saveWorkout = async ( workoutData, splitName, workoutName, date) => {
   try {
-  const dt = new Date();
-  const year = dt.getFullYear();
-  const month = String(dt.getMonth() + 1).padStart(2, '0');
-  const day = String(dt.getDate()).padStart(2, '0');
-  const formattedDate = `${year}-${month}-${day}`;
+    try {
+      await setDoc(doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName,), {    // save to logs/<date>
+        workout: workoutName,
+        set1reps: 'reps',
+        set1weight: 'weight',
+      });
+      await setDoc(doc(db, 'userData', userid, 'muscles', workoutName), {});    // save to main 'muscles' folder
+      console.log('Document created successfully.');
+    } catch (error) {
+      if (error.code === 'already-exists') {
+        console.log('Document already exists.');
+      } else {
+        console.error('Error creating document:', error);
+      }
+    }
 
 // Assuming you have a 'workouts' collection in Firestore
 await setDoc(doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName,), {
@@ -204,11 +214,10 @@ await setDoc(doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName,),
 export const addSetToWorkout = async (date, workoutName, setId, set) => {
   try {
     const workoutRef = doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName);
-console.log('getting ref');
     const workoutSnapshot = await getDoc(workoutRef);
     console.log('ref worked');
     if (workoutSnapshot.exists()) {
-      await setDoc(doc(workoutRef, 'sets', setId), set);
+      await setDoc(doc(db, 'userData', userid, 'logs', date, 'muscles', workoutName, 'sets', setId), set);
       return { success: true, message: 'Set added to workout successfully' };
     } else {
       throw new Error('Workout not found');
