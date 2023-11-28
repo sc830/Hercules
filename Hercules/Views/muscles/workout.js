@@ -121,8 +121,8 @@ const WorkoutView = () => {
         </View>
       ))}
 
-      <TouchableOpacity style={styles.addButton} onPress={() => setShowModal(true)}>
-        <Text style={styles.buttonText}>+ Add Workout Day</Text>
+      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('workoutList')}>
+        <Text style={styles.buttonText}>+ Add Exercise</Text>
       </TouchableOpacity>
 
       {/* Add Workout Day Modal */}
