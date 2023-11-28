@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/ColorCatalog/static/js/main.421b5da1.js",
+    "static/js/694.7558c29f.js": "/ColorCatalog/static/js/694.7558c29f.js",
+    "static/media/Ionicons.ttf": "/ColorCatalog/static/media/Ionicons.3517aeaa34b2f8cd8eef.ttf",
+    "static/media/buff.png": "/ColorCatalog/static/media/buff.216a279dee6ca5c05e0d.png",
+    "favicon.ico": "/ColorCatalog/favicon.ico",
+    "index.html": "/ColorCatalog/index.html",
+    "favicon-32.png": "/ColorCatalog/favicon-32.png",
+    "favicon-16.png": "/ColorCatalog/favicon-16.png",
+    "serve.json": "/ColorCatalog/serve.json",
+    "manifest.json": "/ColorCatalog/manifest.json",
+    "main.421b5da1.js.map": "/ColorCatalog/static/js/main.421b5da1.js.map",
+    "694.7558c29f.js.map": "/ColorCatalog/static/js/694.7558c29f.js.map"
+  },
+  "entrypoints": [
+    "static/js/694.7558c29f.js",
+    "static/js/main.421b5da1.js"
+  ]
+}
