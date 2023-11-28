@@ -161,7 +161,7 @@ const WorkoutView = () => {
           <Button title="Close" onPress={cancelEditDelete} />
         </View>
       </Modal>
-      
+
       <TouchableOpacity style={styles.addButton} onPress={() => setShowAddModalWorkout(true)}>
         <Text style={styles.buttonText}>+ Add Exercise</Text>
       </TouchableOpacity>
@@ -283,21 +283,7 @@ const styles = StyleSheet.create({
   },
   workoutButton: {
     backgroundColor: '#D4AF37', // Gold color
-    width: '90%',
-    height: 60,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 15,
-    elevation: 3, // Adds a drop shadow on Android
-    shadowColor: '#000', // Adds a shadow on iOS
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-  },
-  workoutButtonLite: {
-    backgroundColor: '#D4AF37', // gold color
-    width: '80%',           // smaller than main button
+    width: '80%',
     height: 60,
     borderRadius: 10,
     justifyContent: 'center',
@@ -437,11 +423,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: '600', // Semi-bold
-  },
-  workoutTextLite: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: '600', // Semi- bold
   },
 });
 
