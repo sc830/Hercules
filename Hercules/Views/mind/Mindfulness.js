@@ -44,7 +44,7 @@ const Mindfulness = ({ navigation }) => {
       try {
   
         const userPath = `userData/${getUserID()}`;
-        let datePath = `${userPath}/logs/${todaysDateReformatted}`;
+        let datePath = ``;
         const mindPath = `${userPath}/mind`;
 
         mindDocs = await pullDocNames(mindPath);
