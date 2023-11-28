@@ -54,6 +54,7 @@ const Mindfulness = ({ navigation }) => {
         let dateTraverse = new Date();    // starts at current date
         let formattedDate = "";
         let reformattedDate = "";
+        let thisPath = "";
         datePath = ``;
         console.log("Length: " + mindDocs.length);
         for (let i = 0; i < mindDocs.length; i++) {
