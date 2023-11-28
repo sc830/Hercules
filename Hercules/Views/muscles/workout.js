@@ -35,10 +35,10 @@ const WorkoutView = () => {
         const datePath = `${userPath}/logs/${reformattedDate}/muscles`;
 
         const docs = await pullDocNames(datePath);
-        setMusclesDocs(docs);
+        setWorkouts(docs);
         
       } catch (error) {
-        console.error('Error in fetchData:', error);
+        console.error('Error in fetchData (muscles):', error);
       }
     };
 
@@ -161,6 +161,11 @@ const WorkoutView = () => {
           <Button title="Close" onPress={cancelEditDelete} />
         </View>
       </Modal>
+      
+      <TouchableOpacity style={styles.addButton} onPress={() => setShowAddModalWorkout(true)}>
+        <Text style={styles.buttonText}>+ Add Exercise</Text>
+      </TouchableOpacity>
+
 
       <Modal animationType="slide" transparent={true} visible={showRenameModal}>
         <View style={styles.editPanel}>
@@ -217,24 +222,6 @@ const WorkoutView = () => {
           )}
         </View>
       ))}
-
-      <TouchableOpacity style={styles.addButton} onPress={() => setShowAddModalWorkout(true)}>
-        <Text style={styles.buttonText}>+ Add Workout</Text>
-      </TouchableOpacity>
-
-      <View style={styles.workoutContainer}>
-        {musclesDocs.map((doc, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.workoutButtonLite}  // Define a new style for the button
-            onPress={() => {
-              // Handle button press if needed
-            }}
-          >
-            <Text style={styles.workoutTextLite}>{doc}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
 
       <Modal animationType="slide" transparent={true} visible={showRenameModalWorkout}>
         <View style={styles.modalView}>
