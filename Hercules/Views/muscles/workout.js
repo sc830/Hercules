@@ -109,7 +109,7 @@ const WorkoutView = () => {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('workoutList', { showAddModal: true })}>
+      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('workoutList', { splitName: "defaultSplit", currentDate: currentDate })}>
         <Text style={styles.buttonText}>+ Add Exercise</Text>
       </TouchableOpacity>
 
