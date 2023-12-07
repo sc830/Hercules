@@ -34,9 +34,6 @@ List of ready features:
 - Nutrition tracking with analytics for food nutrition.
 - Mindfulness section for tracking meditation and water intake.
 
-### Screenshots ###
-Kacy added a screenshot titled "kalebs code.jpg" to the Docs folder to recap the work she did to make it easier to understand how it runs.
-
 ### Project Status ###
 Project is completed for the purpose of our coursework. While we did not complete all features we aimed to incorporate, we successfully created a MVP with some bugs.
 
