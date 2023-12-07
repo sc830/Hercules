@@ -1,6 +1,9 @@
 # README #
 Development Team: Shelby Cumings, Julio Cantu, Kaleb Perez, Kacy Metcalf, Aaron Parks
 
+### Summary ###
+This project was a collaborative effort with a small software development team and was an amazing learning experience. I gained proficiency in many new technologies, including React Native, Google Cloud, Firebase, and Firestore. I learned a lot about working with a team, including how to plan our sprints, divide work effectively for simultaneous progress, and utilizing sprint retrospectives to improve our plan for the next sprint. Over the course of the project, our teamwork improved dramatically, as well as our efficiency, time management, and our product.
+
 ### Project Name: Hercules ###
 
 ### General Information ###
@@ -8,11 +11,12 @@ The Hercules App is a mobile application developed using React Native and Visual
 It serves as a comprehensive fitness and wellness tool, allowing users to track their workouts, store workout data, visualize their progress, 
 monitor nutrition and food intake, and engage in mindfulness activities. This app aims to make fitness and wellness management more convenient and accessible.
 
-## Technologies ##
-* React.Native
-* JavaScript
-* CSS
-* Firebase
+### Technologies ###
+This project utilizes React Native, Axios, Google Firestore, Edamam API, and CSS.
+
+### How To Run ###
+Install the following libraries: axios, firebase, firebase-tools, moment, expo.
+Open a terminal and enter command "npm run web". Application will open on a local host.
 
 ### Mission ###
 The Hercules App addresses the need for individuals to have a single platform for tracking their fitness progress, 
